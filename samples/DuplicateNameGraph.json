@@ -1,0 +1,76 @@
+{
+    "nodes": [
+        {
+            "name": "InputNode",
+            "code": "InputNode",
+            "inputs": {},
+            "outputs": {
+                "test": "Double"
+            },
+            "desc": "Outputs 3.14"
+        },
+        {
+            "name": "AlgorithmNode",
+            "code": "AlgorithmNode",
+            "inputs": {
+                "testin": "Double"
+            },
+            "outputs": {
+                "testout": "Double"
+            },
+            "desc": "Divide input by 2."
+        },
+        {
+            "name": "AlgorithmNode",
+            "code": "AlgorithmNode",
+            "inputs": {
+                "testin": "Double"
+            },
+            "outputs": {
+                "testout": "Double"
+            },
+            "desc": "Divide input by 2."
+        },
+        {
+            "name": "OutputNode",
+            "code": "OutputNode",
+            "inputs": {
+                "testres": "Double"
+            },
+            "outputs": {},
+            "desc": "Print output."
+        }
+    ],
+    "connections": [
+        {
+            "input": {
+                "node": "InputNode",
+                "output": "test"
+            },
+            "output": {
+                "node": "AlgorithmNode",
+                "input": "testin"
+            }
+        },
+        {
+            "input": {
+                "node": "AlgorithmNode",
+                "output": "testout"
+            },
+            "output": {
+                "node": "AlgorithmNode",
+                "input": "testin"
+            }
+        },
+        {
+            "input": {
+                "node": "AlgorithmNode",
+                "output": "testout"
+            },
+            "output": {
+                "node": "OutputNode",
+                "input": "testres"
+            }
+        }
+    ]
+}
