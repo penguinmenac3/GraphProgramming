@@ -1,4 +1,5 @@
 import json
+import sys
 
 class GraphEx(object):
 	def __init__(self, graph_path, verbose = False):
@@ -75,4 +76,7 @@ class GraphEx(object):
 		return True
 
 if __name__ == "__main__":
-	print("Not implemented yet.")
+	for arg in sys.argv[1:]:
+		GraphEx(arg).execute()
+	if len(sys.argv) < 2:
+		print("Usage: Pass graph json files to execute as parameters.")

@@ -1,0 +1,2 @@
+@python graphex.py %*
+@pause
