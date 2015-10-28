@@ -3,17 +3,17 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
-  spec.name          = "NAME"
+  spec.name          = "GraphEditor"
   spec.version       = '1.0'
-  spec.authors       = ["Your Name Here"]
-  spec.email         = ["youremail@yourdomain.com"]
-  spec.summary       = %q{Short summary of your project}
-  spec.description   = %q{Longer description of your project.}
-  spec.homepage      = "http://domainforproject.com/"
-  spec.license       = "MIT"
+  spec.authors       = ["Michael Fürst"]
+  spec.email         = ["penguinmenac3@gmail.com"]
+  spec.summary       = %q{A graph editor to create and edit graphs for graph programming.}
+  spec.description   = %q{A graph editor to create and edit graphs for graph programming. See github https://github.com/penguinmenac3/GraphProgramming}
+  spec.homepage      = "https://github.com/penguinmenac3/GraphProgramming"
+  spec.license       = "GNU GENERAL PUBLIC LICENSE"
 
-  spec.files         = ['lib/NAME.rb']
-  spec.executables   = ['bin/NAME']
-  spec.test_files    = ['tests/test_NAME.rb']
+  spec.files         = ['lib/grapheditor.rb']
+  spec.executables   = ['bin/app.rb']
+  spec.test_files    = ['tests/test_grapheditor.rb']
   spec.require_paths = ["lib"]
 end
