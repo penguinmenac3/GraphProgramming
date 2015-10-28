@@ -1,5 +1,8 @@
 import json
 import sys
+import time
+from threading import Thread
+from collections import deque
 
 class GraphEx(object):
 	def __init__(self, graph_path, verbose = False):
@@ -51,23 +54,35 @@ class GraphEx(object):
 
 	def execute(self):
 		self.calculated = {}
+		self.toCalculate = deque()
+		self.activeCalculations = []
 		if self.verbose:
 			print(self.nodes)
 			print(self.input_nodes)
 
-		self.tryExecute(self.input_nodes.values())
+		self.toCalculate.extend(self.input_nodes.values())
+		self.tryExecute()
 
-	def tryExecute(self, nodes):
-		for node in nodes:
-			if self.checkIfCalculated(node.prevNodes):
+	def tryExecute(self):
+		while self.toCalculate or self.activeCalculations:
+			if not self.toCalculate:
+				time.sleep(0.01)
+				continue
+			node = self.toCalculate.popleft()
+			if self.checkIfCalculated(node.prevNodes) and node not in self.calculated and node not in self.activeCalculations:
 				value = {}
 				for key in node.inputs:
 					resultNode = node.inputs[key]["node"]
 					varname = node.inputs[key]["var"]
 					value[key] = self.calculated[resultNode][varname]
-				result = node.tick(value)
-				self.calculated[node] = result
-				self.tryExecute(node.nextNodes)
+				self.activeCalculations.append(node)
+				Thread(target=self.executeNode, args=(node, value)).start()
+
+	def executeNode(self, node, value):
+		result = node.tick(value)
+		self.calculated[node] = result
+		self.toCalculate.extend(node.nextNodes)
+		self.activeCalculations.remove(node)
 
 	def checkIfCalculated(self, nodes):
 		for node in nodes:
