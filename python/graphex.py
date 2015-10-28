@@ -60,7 +60,7 @@ class GraphEx(object):
 	def execute(self):
 		# Initialize all lists.
 		self.calculated = {}
-		self.toCalculate = deque()
+		self.toCalculate = []
 		self.activeCalculations = []
 
 		# add the input nodes to the nodes that should be calculated.
@@ -74,8 +74,9 @@ class GraphEx(object):
 				continue
 
 			# Select the node to execute and check if it can be executed.
-			node = self.toCalculate.popleft()
-			if self.checkIfCalculated(node.prevNodes) and node not in self.calculated and node not in self.activeCalculations:
+			node = self.toCalculate[0]
+			self.toCalculate.remove(node)
+			if self.checkIfCalculated(node.prevNodes) and node not in self.activeCalculations:
 				# Prepare the input value set for the node.
 				value = {}
 				for key in node.inputs:

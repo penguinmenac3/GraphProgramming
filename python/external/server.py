@@ -16,7 +16,7 @@ def serverLoop(host = "localhost", port = 25555):
 	    	value = ""
 	    	try:
 	    		value = json.loads(clientfile.readline())
-	    	except Exception:
+	    	except ValueError:
 	    		break
 
 	    	result = calculate(value)
@@ -24,7 +24,7 @@ def serverLoop(host = "localhost", port = 25555):
 
 	    	try:
 	    		clientsocket.send(msg.encode("utf-8"))
-	    	except Exception:
+	    	except ValueError:
 	    		break
 
 

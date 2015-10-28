@@ -23,15 +23,6 @@ if __name__ == "__main__":
 	graphex.GraphEx("../samples/Graph1WithExecutable.json").execute()
 
 	print(" ")
-	print("======================")
-	print("Graph1WithNetwork.json")
-	print("======================")
-	print("Expecting: ")
-	print(str(3.14/2))
-	print("Result:")
-	graphex.GraphEx("../samples/Graph1WithNetwork.json").execute()
-
-	print(" ")
 	print("======")
 	print("Graph2")
 	print("======")
