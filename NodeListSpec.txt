@@ -1,0 +1,12 @@
+NodeList:[Node]
+Node:{
+        "name": "DefaultNodeName",
+        "code": "AlgorithmName",
+        "inputs": {
+            "parametername": "Type"
+        },
+        "outputs": {
+            "parametername": "Type"
+        },
+        "desc": "A description what the node does."
+    }

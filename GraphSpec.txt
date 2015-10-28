@@ -1,6 +1,23 @@
-Graph:{nodes:[Node],connections:[{NodeName,Output,NodeName,Input}]}
-Node:{name:String,inputs:{name:Type,name:Type},outputs:{name:Type,name:Type},desc:String}
-Output:String   # Identifier of the Output in the NodeName to the left)
-Input:String    # Identifier of the Input in the NodeName to the left)
-NodeName:String # Identifier of the Node that should be used.
-Type:String     # Defining the type like Double,Mat4,...
+Graph:{ nodes:[Node],
+        connections:[
+        { "input": {
+                "node": "PreviousNodeName",
+                "output": "parametername"
+            },
+            "output": {
+                "node": "NextNodeName",
+                "input": "parametername"
+            }
+        }]
+       }
+Node:{
+        "name": "NodeName",
+        "code": "AlgorithmName",
+        "inputs": {
+            "parametername": "Type"
+        },
+        "outputs": {
+            "parametername": "Type"
+        },
+        "desc": "A description what the node does."
+    }
