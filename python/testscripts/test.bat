@@ -1,3 +1,4 @@
-@python2 testGraphex.py
+@cd ..
+@python testGraphex.py
 @echo ______________________________________
 @pause
