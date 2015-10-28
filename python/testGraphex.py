@@ -4,7 +4,7 @@ if __name__ == "__main__":
 	print("====")
 	print("Test")
 	print("====")
-	print()
+	print(" ")
 	print("======")
 	print("Graph1")
 	print("======")
@@ -13,7 +13,16 @@ if __name__ == "__main__":
 	print("Result:")
 	graphex.GraphEx("../samples/Graph1.json").execute()
 
-	print()
+	print(" ")
+	print("=========================")
+	print("Graph1WithExecutable.json")
+	print("=========================")
+	print("Expecting: ")
+	print(str(3.14/2))
+	print("Result:")
+	graphex.GraphEx("../samples/Graph1WithExecutable.json").execute()
+
+	print(" ")
 	print("======")
 	print("Graph2")
 	print("======")
@@ -22,7 +31,7 @@ if __name__ == "__main__":
 	print("Result:")
 	graphex.GraphEx("../samples/Graph2.json").execute()
 
-	print()
+	print(" ")
 	print("==================")
 	print("DuplicateNameGraph")
 	print("==================")
@@ -32,6 +41,6 @@ if __name__ == "__main__":
 	except Exception:
 		print("Malformed graph was detected.")
 
-	print()
+	print(" ")
 	print("Done")
-	print()
+	print(" ")
