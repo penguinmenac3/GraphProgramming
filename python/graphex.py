@@ -6,9 +6,12 @@ from collections import deque
 
 class GraphEx(object):
 	def __init__(self, graph_path, verbose = False):
+		# Open the graph and parse it as json.
 		data = open(graph_path, 'r').read()
 		self.verbose = verbose
 		self.raw_graph = json.loads(data)
+
+		# Now build a graph that we can work with efficiently.
 		self.findAndCreateNodes(self.raw_graph["nodes"])
 		self.findAndCreateConnections(self.raw_graph["connections"])
 
@@ -43,54 +46,66 @@ class GraphEx(object):
 	def findAndCreateConnections(self, connectionlist):
 		self.connections = {}
 		for conn in connectionlist:
+			# Find all nodes and outputs as well as inputs.
 			inputNode = self.nodes[conn["input"]["node"]]
 			outputNode = self.nodes[conn["output"]["node"]]
 			outputQualifier = conn["input"]["output"]
 			inputQualifier = conn["output"]["input"]
 
+			# Link the nodes together
 			inputNode.nextNodes.append(outputNode)
 			outputNode.prevNodes.append(inputNode)
 			outputNode.inputs[inputQualifier] = {"node":inputNode,"var":outputQualifier}
 
 	def execute(self):
+		# Initialize all lists.
 		self.calculated = {}
 		self.toCalculate = deque()
 		self.activeCalculations = []
-		if self.verbose:
-			print(self.nodes)
-			print(self.input_nodes)
 
+		# add the input nodes to the nodes that should be calculated.
 		self.toCalculate.extend(self.input_nodes.values())
-		self.tryExecute()
 
-	def tryExecute(self):
+		# Execute nodes until there is no more nodes to calculate and no nodes in calculation.
 		while self.toCalculate or self.activeCalculations:
+			# When there are only active calculations and nothing new, wait.
 			if not self.toCalculate:
 				time.sleep(0.01)
 				continue
+
+			# Select the node to execute and check if it can be executed.
 			node = self.toCalculate.popleft()
 			if self.checkIfCalculated(node.prevNodes) and node not in self.calculated and node not in self.activeCalculations:
+				# Prepare the input value set for the node.
 				value = {}
 				for key in node.inputs:
 					resultNode = node.inputs[key]["node"]
 					varname = node.inputs[key]["var"]
 					value[key] = self.calculated[resultNode][varname]
+
+				# Add the node to the active calculations list and start a calculation thread.
 				self.activeCalculations.append(node)
 				Thread(target=self.executeNode, args=(node, value)).start()
+		
 
 	def executeNode(self, node, value):
+		# Tick the node and then add the result to calculated.
 		result = node.tick(value)
 		self.calculated[node] = result
+
+		# Add the nodes that follow in the graph to the to calculate list and remove self from active nodes.
 		self.toCalculate.extend(node.nextNodes)
 		self.activeCalculations.remove(node)
 
 	def checkIfCalculated(self, nodes):
+		# Check if all nodes are calculated.
 		for node in nodes:
 			if node not in self.calculated:
 				return False
 		return True
 
 if __name__ == "__main__":
+	# Execute all graph paths passed as parameters.
 	for arg in sys.argv[1:]:
 		GraphEx(arg).execute()
 	if len(sys.argv) < 2:
