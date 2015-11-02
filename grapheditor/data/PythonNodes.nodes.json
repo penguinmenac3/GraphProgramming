@@ -8,6 +8,42 @@
     "desc": "Outputs 3.14"
 },
 {
+    "name": "One",
+    "code": "OneNode",
+    "inputs": {},
+    "outputs": {
+        "result": "Double"
+    },
+    "desc": "Outputs 1"
+},
+{
+    "name": "Zero",
+    "code": "ZeroNode",
+    "inputs": {},
+    "outputs": {
+        "result": "Double"
+    },
+    "desc": "Outputs 0"
+},
+{
+    "name": "True",
+    "code": "TrueNode",
+    "inputs": {},
+    "outputs": {
+        "result": "Boolean"
+    },
+    "desc": "Outputs true."
+},
+{
+    "name": "False",
+    "code": "FalseNode",
+    "inputs": {},
+    "outputs": {
+        "result": "Boolean"
+    },
+    "desc": "Outputs false."
+},
+{
     "name": "Sum",
     "code": "SumNode",
     "inputs": {
@@ -120,6 +156,110 @@
         "result": "Boolean"
     },
     "desc": "Checks if all inputs are equal."
+},
+{
+    "name": "Less Than",
+    "code": "LessNode",
+    "inputs": {
+        "left": "Double",
+        "right": "Double"
+    },
+    "outputs": {
+        "result": "Boolean"
+    },
+    "desc": "Checks if left is less than right."
+},
+{
+    "name": "Greater Than",
+    "code": "GreaterNode",
+    "inputs": {
+        "left": "Double",
+        "right": "Double"
+    },
+    "outputs": {
+        "result": "Boolean"
+    },
+    "desc": "Checks if left is greater than right."
+},
+{
+    "name": "And",
+    "code": "AndNode",
+    "inputs": {
+        "left": "Boolean",
+        "right": "Boolean"
+    },
+    "outputs": {
+        "result": "Boolean"
+    },
+    "desc": "Checks if both are true."
+},
+{
+    "name": "Or",
+    "code": "OrNode",
+    "inputs": {
+        "left": "Boolean",
+        "right": "Boolean"
+    },
+    "outputs": {
+        "result": "Boolean"
+    },
+    "desc": "Checks if at least one is true."
+},
+{
+    "name": "Not",
+    "code": "NotNode",
+    "inputs": {
+        "val": "Boolean"
+    },
+    "outputs": {
+        "result": "Boolean"
+    },
+    "desc": "Invert the input."
+},
+{
+    "name": "If",
+    "code": "IfNode",
+    "inputs": {
+        "condition": "Boolean",
+        "val": "Double"
+    },
+    "outputs": {
+        "true": "Boolean",
+        "false": "Boolean"
+    },
+    "desc": "An if statement left is true right is false."
+},
+{
+    "name": "While less than",
+    "code": "WhileLessNode",
+    "inputs": {
+        "initial": "Double",
+        "val": "Double"
+    },
+    "outputs": {
+        "leave": "Double",
+        "loop": "Double"
+    },
+    "loopback":[
+        "initial"
+    ],
+    "desc": "Loop as long as it is less than the reverence value. (right loop)"
+},
+{
+    "name": "While greater than",
+    "code": "WhileGreaterNode",
+    "inputs": {
+        "initial": "Double",
+        "val": "Double"
+    },
+    "outputs": {
+        "leave": "Double",
+        "loop": "Double"
+    },
+    "loopback":[
+        "initial"
+    ],
+    "desc": "Loop as long as it is greater than the reverence value. (right loop)"
 },
 {
     "name": "Division by 2",

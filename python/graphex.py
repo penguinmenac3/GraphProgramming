@@ -37,6 +37,8 @@ class GraphEx(object):
 			currentNode.nextNodes = []
 			currentNode.prevNodes = []
 			currentNode.inputs = {}
+			currentNode.outputs = {}
+			currentNode.inputBuffer = {}
 
 			# Add the node to the internal lists for inputs and all nodes.
 			self.nodes[node["name"]] = currentNode
@@ -54,12 +56,14 @@ class GraphEx(object):
 
 			# Link the nodes together
 			inputNode.nextNodes.append(outputNode)
+			if outputQualifier not in inputNode.outputs:
+				inputNode.outputs[outputQualifier] = []
+			inputNode.outputs[outputQualifier].append({"node":outputNode,"var":inputQualifier});
 			outputNode.prevNodes.append(inputNode)
-			outputNode.inputs[inputQualifier] = {"node":inputNode,"var":outputQualifier}
+			outputNode.inputs[inputQualifier] = {"var":outputQualifier}
 
 	def execute(self):
 		# Initialize all lists.
-		self.calculated = {}
 		self.toCalculate = []
 		self.activeCalculations = []
 
@@ -75,33 +79,42 @@ class GraphEx(object):
 
 			# Select the node to execute and check if it can be executed.
 			node = self.toCalculate[0]
-			self.toCalculate.remove(node)
-			if self.checkIfCalculated(node.prevNodes) and node not in self.activeCalculations:
+			self.toCalculate = [value for value in self.toCalculate if value != node]
+			if node in self.activeCalculations:
+				self.toCalculate.append(node)
+				continue
+			if self.checkIfReady(node):
 				# Prepare the input value set for the node.
-				value = {}
-				for key in node.inputs:
-					resultNode = node.inputs[key]["node"]
-					varname = node.inputs[key]["var"]
-					value[key] = self.calculated[resultNode][varname]
+				abort = False
+				for key in node.inputBuffer:
+					if node.inputBuffer[key] == None:
+						abort = True
+						break
 
-				# Add the node to the active calculations list and start a calculation thread.
-				self.activeCalculations.append(node)
-				Thread(target=self.executeNode, args=(node, value)).start()
+				if not abort:
+					# Add the node to the active calculations list and start a calculation thread.
+					self.activeCalculations.append(node)
+					Thread(target=self.executeNode, args=(node, node.inputBuffer)).start()
 		
 
 	def executeNode(self, node, value):
 		# Tick the node and then add the result to calculated.
 		result = node.tick(value)
-		self.calculated[node] = result
+		#print(result)
+		for key in node.outputs:
+			for elem in node.outputs[key]:
+				resultNode = elem["node"]
+				resultNode.inputBuffer[elem["var"]] = result[key]
+				#print(resultNode.inputBuffer)
 
 		# Add the nodes that follow in the graph to the to calculate list and remove self from active nodes.
 		self.toCalculate.extend(node.nextNodes)
 		self.activeCalculations.remove(node)
 
-	def checkIfCalculated(self, nodes):
+	def checkIfReady(self, node):
 		# Check if all nodes are calculated.
-		for node in nodes:
-			if node not in self.calculated:
+		for key in node.inputs:
+			if key not in node.inputBuffer:
 				return False
 		return True
 

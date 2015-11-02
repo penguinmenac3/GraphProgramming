@@ -270,7 +270,17 @@ function WebUI_CWebUI() {
 		toRemove = null;
 		graph.connections.forEach(function(connection) {
 			if (inputNode != null && connection.output.node == inputNode.name && connection.output.input == inputName) {
-				toRemove = connection;
+				var allowedToRemove = true;
+				that.nodes.forEach(function(node) {
+					if (node.code == inputNode.code) {
+						if((node.loopback.indexOf(inputName) > -1)) {
+							allowedToRemove = false;
+						}
+					}
+				});
+				if (allowedToRemove == true) {
+					toRemove = connection;
+				}
 			}
 		});
 		if (toRemove != null) {
