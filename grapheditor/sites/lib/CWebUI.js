@@ -270,12 +270,12 @@ function WebUI_CWebUI() {
 			if (absX > 10 && absX < 90 && absY > 170 && absY < 200) {
 				for (var connection in that.selectedNode.inputs) {
   					if (that.selectedNode.inputs.hasOwnProperty(connection)) {
-						updateGraph(that.selectedNode, null, connection, null);
+						updateGraph(that.selectedNode, null, connection, null, true);
 					}
 				}
 				for (var connection in that.selectedNode.outputs) {
   					if (that.selectedNode.outputs.hasOwnProperty(connection)) {
-						updateGraph(null, that.selectedNode, null, connection);
+						updateGraph(null, that.selectedNode, null, connection, true);
 					}
 				}
 				var index = graph.nodes.indexOf(that.selectedNode);
@@ -293,37 +293,35 @@ function WebUI_CWebUI() {
 		}
 	};
 
-	function updateGraph(inputNode, outputNode, inputName, outputName) {
-		var toRemove = null;
+	function updateGraph(inputNode, outputNode, inputName, outputName, force) {
+		force = typeof force !== 'undefined' ? force : false;
+		var toRemove = [];
 		graph.connections.forEach(function(connection) {
 			if (inputNode != null && connection.output.node == inputNode.name && connection.output.input == inputName) {
 				var allowedToRemove = true;
-				that.nodes.forEach(function(node) {
-					if (node.code == inputNode.code) {
-						if(node.loopback != null && (node.loopback.indexOf(inputName) > -1)) {
-							allowedToRemove = false;
+				if (force == false) {
+					that.nodes.forEach(function(node) {
+						if (node.code == inputNode.code) {
+							if(node.loopback != null && (node.loopback.indexOf(inputName) > -1)) {
+								allowedToRemove = false;
+							}
 						}
-					}
-				});
+					});
+				}
 				if (allowedToRemove == true) {
-					toRemove = connection;
+					toRemove.push(connection);
 				}
 			}
 		});
-		if (toRemove != null) {
-			var index = graph.connections.indexOf(toRemove);
-    		graph.connections.splice(index, 1);
-		}
-		toRemove = null;
 		graph.connections.forEach(function(connection) {
 			if (outputNode != null && connection.input.node == outputNode.name && connection.input.output == outputName) {
-				toRemove = connection;
+				toRemove.push(connection);
 			}
 		});
-		if (toRemove != null) {
-			var index = graph.connections.indexOf(toRemove);
+		toRemove.forEach(function(elem) {
+			var index = graph.connections.indexOf(elem);
     		graph.connections.splice(index, 1);
-		}
+		});
 
 		if (inputNode != null && outputNode != null && inputName != null && outputName != null) {
 			graph.connections.push({"input":{"node":outputNode.name, "output": outputName}, "output":{"node":inputNode.name, "input": inputName}});
