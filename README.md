@@ -1,6 +1,8 @@
 # Graph Programming
 Code can be interpreted as a graph. Actually compilers already do that. However, this project takes that approach to the programmer.
 
+![Image of the graph programming ui.](https://raw.githubusercontent.com/penguinmenac3/GraphProgramming/master/images/image%20(1).png)
+
 # Motivation
 The world gets smarter and more connected. But who will programm all those smart bits in the internet of things?
 A simple answer would be programmers. However, there is so much that you can do and so few programmers that can implement it.
