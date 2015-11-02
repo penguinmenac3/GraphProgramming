@@ -17,7 +17,7 @@ import time
 from subprocess import check_output as qx
 import re
 
-PORT_NUMBER = 8080
+PORT_NUMBER = 8088
 
 #This class will handles any incoming request from
 #the browser
@@ -82,7 +82,7 @@ class myHandler(BaseHTTPRequestHandler):
             data["execGraph"] = re.sub(r'\W+', '', data["execGraph"])
             print("Executing: " + data["execGraph"])
             cmd = "python ../python/graphex.py data/" + data["execGraph"] + ".graph.json"
-            output = qx(cmd).decode("utf-8")
+            output = qx(cmd, shell=True).decode("utf-8")
             self.send_response(200)
             self.send_header('Content-type','text/html')
             self.end_headers()
