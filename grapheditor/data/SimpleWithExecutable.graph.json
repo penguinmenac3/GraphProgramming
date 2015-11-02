@@ -11,7 +11,7 @@
         },
         {
             "name": "AlgorithmNode",
-            "code": "AlgorithmNode",
+            "code": "ExecutableNode",
             "inputs": {
                 "testin": "Double"
             },
