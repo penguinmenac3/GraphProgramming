@@ -1,5 +1,5 @@
 [{
-    "name": "InputNode",
+    "name": "Input",
     "code": "InputNode",
     "inputs": {},
     "outputs": {
@@ -8,7 +8,121 @@
     "desc": "Outputs 3.14"
 },
 {
-    "name": "AlgorithmNode",
+    "name": "Sum",
+    "code": "SumNode",
+    "inputs": {
+        "left": "Double",
+        "right": "Double"
+    },
+    "outputs": {
+        "result": "Double"
+    },
+    "desc": "Sum the two inputs."
+},
+{
+    "name": "Subtraction",
+    "code": "SubtractNode",
+    "inputs": {
+        "left": "Double",
+        "right": "Double"
+    },
+    "outputs": {
+        "result": "Double"
+    },
+    "desc": "Sum the two inputs."
+},
+{
+    "name": "Subtraction",
+    "code": "SubtractNode",
+    "inputs": {
+        "left": "Double",
+        "right": "Double"
+    },
+    "outputs": {
+        "result": "Double"
+    },
+    "desc": "Subtract the two inputs."
+},
+{
+    "name": "Multiplication",
+    "code": "MultNode",
+    "inputs": {
+        "left": "Double",
+        "right": "Double"
+    },
+    "outputs": {
+        "result": "Double"
+    },
+    "desc": "Multiplicate the two inputs."
+},
+{
+    "name": "Divide",
+    "code": "DivNode",
+    "inputs": {
+        "left": "Double",
+        "right": "Double"
+    },
+    "outputs": {
+        "result": "Double"
+    },
+    "desc": "Divide the two inputs."
+},
+{
+    "name": "Split Flow",
+    "code": "SplitFlowNode",
+    "inputs": {
+        "val": "Double"
+    },
+    "outputs": {
+        "left": "Double",
+        "right": "Double"
+    },
+    "desc": "Passes the variable to both outputs."
+},
+{
+    "name": "Split Flow 5",
+    "code": "SplitFlow5Node",
+    "inputs": {
+        "val": "Double"
+    },
+    "outputs": {
+        "1": "Double",
+        "2": "Double",
+        "3": "Double",
+        "4": "Double",
+        "5": "Double"
+    },
+    "desc": "Passes the variable to all outputs."
+},
+{
+    "name": "Equals",
+    "code": "EqualNode",
+    "inputs": {
+        "left": "Double",
+        "right": "Double"
+    },
+    "outputs": {
+        "result": "Boolean"
+    },
+    "desc": "Checks if two inputs are equal."
+},
+{
+    "name": "Equals 5",
+    "code": "Equal5Node",
+    "inputs": {
+        "1": "Double",
+        "2": "Double",
+        "3": "Double",
+        "4": "Double",
+        "5": "Double"
+    },
+    "outputs": {
+        "result": "Boolean"
+    },
+    "desc": "Checks if all inputs are equal."
+},
+{
+    "name": "Division by 2",
     "code": "AlgorithmNode",
     "inputs": {
         "testin": "Double"
@@ -19,7 +133,7 @@
     "desc": "Divide input by 2."
 },
 {
-    "name": "ExecutableNode",
+    "name": "Call external executable",
     "code": "ExecutableNode",
     "inputs": {
         "testin": "Double"
@@ -27,10 +141,10 @@
     "outputs": {
         "testout": "Double"
     },
-    "desc": "Divide input by 2."
+    "desc": "Call an external executable.."
 },
 {
-    "name": "NetworkNode",
+    "name": "Wait for network",
     "code": "NetworkNode",
     "inputs": {
         "testin": "Double"
@@ -38,15 +152,15 @@
     "outputs": {
         "testout": "Double"
     },
-    "desc": "Divide input by 2."
+    "desc": "Wait for a network node to do it's job."
 },
 {
-    "name": "OutputNode",
+    "name": "Print to console",
     "code": "OutputNode",
     "inputs": {
         "testres": "Double"
     },
     "outputs": {},
-    "desc": "Print output."
+    "desc": "Print the input."
 }
 ]
