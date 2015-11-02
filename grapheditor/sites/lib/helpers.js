@@ -54,6 +54,33 @@ function sendViaPost(params, callback, callbackFailure) {
     xmlhttp.send(params);
 }
 
+function execute(graph, callback, callbackFailure) {
+    var xmlhttp;
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            if (xmlhttp.responseText != "") {
+                if (callback != null) {
+                    callback(xmlhttp.responseText);
+                }
+            }
+        } else if (xmlhttp.readyState==4) {
+            if (callbackFailure != null) {
+                callbackFailure(xmlhttp.responseText);
+            }
+        }
+    }
+    var params = "execGraph=" + graph;
+    xmlhttp.open("POST", "/api",true);
+    //Send the proper header information along with the request
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
+}
+
 function sendViaGet(params, callback, callbackFailure) {
 	var xmlhttp;
     if (window.XMLHttpRequest) {

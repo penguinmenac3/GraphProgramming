@@ -14,6 +14,8 @@ import sys
 import os
 from threading import Thread
 import time
+from subprocess import check_output as qx
+import re
 
 PORT_NUMBER = 8080
 
@@ -76,6 +78,16 @@ class myHandler(BaseHTTPRequestHandler):
     def handleAPI(self, data):
         print(data)
         path = None
+        if "execGraph" in data:
+            data["execGraph"] = re.sub(r'\W+', '', data["execGraph"])
+            print("Executing: " + data["execGraph"])
+            cmd = "python ../python/graphex.py data/" + data["execGraph"] + ".graph.json"
+            output = qx(cmd).decode("utf-8")
+            self.send_response(200)
+            self.send_header('Content-type','text/html')
+            self.end_headers()
+            self.wfile.write(output.encode("utf-8"))
+            return
         if "getnodes" in data:
             path = "data/" + data["getnodes"] + ".nodes.json"
         if "getgraph" in data:

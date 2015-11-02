@@ -14,6 +14,7 @@ function WebUI_CRenderEngine() {
 	this.nodeWidth = 200;
 	this.nodeHeight = 80;
 	this.tmpLine = null;
+	this.result = "";
 
 	this.init = function(b_fullscreen, init_width, init_height, container) {
 		fullscreen = b_fullscreen;
@@ -153,6 +154,9 @@ function WebUI_CRenderEngine() {
 		renderGraph();
 		renderActionButtons();
 
+		/* Top pane */
+		printResult()
+
 		/* Bottom pane */
 		ctx.font = "12px 'Helvetica'";
 		ctx.fillStyle = "rgb(128,128,128)";
@@ -209,6 +213,10 @@ function WebUI_CRenderEngine() {
 
 	this.removeTmpNodeLine = function() {
 		that.tmpLine = null;
+	};
+
+	this.setResult = function(text) {
+		that.result = text;
 	};
 
 	function renderDot(px, py) {
@@ -328,6 +336,7 @@ function WebUI_CRenderEngine() {
 		renderButton("NODES", 50, 105);
 		renderButton("NEW", 50, 145);
 		renderButton("DEL", 50, 185);
+		renderButton("RUN", 50, 225);
 	}
 
 	function renderButton(text, x, y) {
@@ -345,5 +354,30 @@ function WebUI_CRenderEngine() {
 		ctx.textBaseline = 'center';
 		ctx.fillText(text, x, y - 7);
 
+	}
+
+	function printResult() {
+		var len = that.result.split("\n").length;
+		if (len > 1) {
+			ctx.beginPath();
+			ctx.lineWidth="1";
+			ctx.fillStyle = "rgb(244,244,244)";
+			ctx.strokeStyle="rgb(128,128,128)";
+			ctx.rect(100, 10, 200, 15 + len * 15);
+			ctx.fill();
+			ctx.stroke();
+
+			ctx.font = "12px 'Helvetica'";
+			ctx.fillStyle = "rgb(128,128,128)";
+			ctx.textAlign = 'left';
+			ctx.textBaseline = 'top';
+			ctx.fillText("Result:", 110, 15);
+			var i = 1;
+			var split = that.result.split("\n");
+			for (var line in split) {
+				ctx.fillText(split[line], 110, 15 + i * 15);
+				i++;
+			}
+		}
 	}
 }
