@@ -65,18 +65,6 @@
     "outputs": {
         "result": "Double"
     },
-    "desc": "Sum the two inputs."
-},
-{
-    "name": "Subtraction",
-    "code": "SubtractNode",
-    "inputs": {
-        "left": "Double",
-        "right": "Double"
-    },
-    "outputs": {
-        "result": "Double"
-    },
     "desc": "Subtract the two inputs."
 },
 {
@@ -243,7 +231,7 @@
     "loopback":[
         "initial"
     ],
-    "desc": "Loop as long as it is less than the reverence value. (right loop)"
+    "desc": "While left less than right do right else left."
 },
 {
     "name": "While greater than",
@@ -259,7 +247,21 @@
     "loopback":[
         "initial"
     ],
-    "desc": "Loop as long as it is greater than the reverence value. (right loop)"
+    "desc": "While left larger than right do right else left."
+},
+{
+    "name": "Pass Any",
+    "code": "AnyNode",
+    "inputs": {
+        "val": "Double"
+    },
+    "outputs": {
+        "result": "Double"
+    },
+    "loopback":[
+        "val"
+    ],
+    "desc": "Just pipes value through. Picks any input."
 },
 {
     "name": "Division by 2",

@@ -11,7 +11,7 @@ function WebUI_CRenderEngine() {
 	var renderOffsetX = 0;
 	var renderOffsetY = 0;
 	this.dotSize = 20;
-	this.nodeWidth = 140;
+	this.nodeWidth = 200;
 	this.nodeHeight = 80;
 	this.tmpLine = null;
 

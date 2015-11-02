@@ -273,7 +273,7 @@ function WebUI_CWebUI() {
 				var allowedToRemove = true;
 				that.nodes.forEach(function(node) {
 					if (node.code == inputNode.code) {
-						if((node.loopback.indexOf(inputName) > -1)) {
+						if(node.loopback != null && (node.loopback.indexOf(inputName) > -1)) {
 							allowedToRemove = false;
 						}
 					}
