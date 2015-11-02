@@ -19,6 +19,28 @@
     "desc": "Divide input by 2."
 },
 {
+    "name": "ExecutableNode",
+    "code": "ExecutableNode",
+    "inputs": {
+        "testin": "Double"
+    },
+    "outputs": {
+        "testout": "Double"
+    },
+    "desc": "Divide input by 2."
+},
+{
+    "name": "NetworkNode",
+    "code": "NetworkNode",
+    "inputs": {
+        "testin": "Double"
+    },
+    "outputs": {
+        "testout": "Double"
+    },
+    "desc": "Divide input by 2."
+},
+{
     "name": "OutputNode",
     "code": "OutputNode",
     "inputs": {
@@ -26,4 +48,5 @@
     },
     "outputs": {},
     "desc": "Print output."
-}]
+}
+]
