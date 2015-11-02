@@ -3,7 +3,7 @@ from subprocess import check_output as qx
 
 class Node(object):
 	def __init__(self, verbose):
-		self.executablePath = "python external/executable.py"
+		self.executablePath = "python ../python/external/executable.py"
 		if verbose:
 			print("Created test executable node.")
 
@@ -12,7 +12,7 @@ class Node(object):
 
 	def tick(self, value):
 		cmd = self.executablePath + " " + json.dumps(value).replace("\\", "\\\\").replace("\"", "\\\"")
-		output = qx(cmd).decode("utf-8")
+		output = qx(cmd, shell=True).decode("utf-8")
 		return json.loads(output)
 		
 
