@@ -1,17 +1,20 @@
 class Node(object):
-	def __init__(self, verbose):
+	def __init__(self, verbose, args):
 		if verbose:
 			print("Created node.")
 
 	def isInput(self):
 		return False
 
+	def isRepeating(self):
+		return False
+		
 	def tick(self, value):
 		return {"result":value["val"]}
 		
 
-def instance(verbose):
-	return Node(verbose)
+def instance(verbose, args):
+	return Node(verbose, args)
 
 if __name__ == "__main__":
-	print("Divides input by 2.")
+	print("A node.")

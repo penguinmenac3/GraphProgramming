@@ -23,12 +23,12 @@ class Node(object):
 				self.socket.connect((self.host, self.port))
 				self.socketfile = self.socket.makefile()
 				self.socket.send((json.dumps(value)+"\n").encode("utf-8"))
-				line = self.socketfile.readline()
+				line = "success"
 				self.socket.close()
 			except (ConnectionRefusedError, ConnectionResetError):
 				time.sleep(1)
 				line = None
-		return json.loads(line)
+		return {}
 		
 
 def instance(verbose, args):

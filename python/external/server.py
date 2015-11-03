@@ -1,6 +1,6 @@
 import socket
 import json
-
+import time
 
 def serverLoop(host = "localhost", port = 25555):
 	serversocket = socket.socket()
@@ -29,7 +29,8 @@ def serverLoop(host = "localhost", port = 25555):
 
 
 def calculate(value):
-	return {"testout":value["testin"] / 2}
+	time.sleep(2)
+	return {"result":2}
 
 
 if __name__ == "__main__":

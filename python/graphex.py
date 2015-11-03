@@ -33,7 +33,7 @@ class GraphEx(object):
 				raise ImportError("Cannot find implementation for node: " + node["code"])
 
 			# Create node and add lists for connecting them.
-			currentNode = module.instance(self.verbose)
+			currentNode = module.instance(self.verbose, node["args"])
 			currentNode.nextNodes = []
 			currentNode.prevNodes = []
 			currentNode.inputs = {}
@@ -110,6 +110,8 @@ class GraphEx(object):
 		# Add the nodes that follow in the graph to the to calculate list and remove self from active nodes.
 		self.toCalculate.extend(node.nextNodes)
 		self.activeCalculations.remove(node)
+		if node.isRepeating():
+			self.toCalculate.append(node)
 
 	def checkIfReady(self, node):
 		# Check if all nodes are calculated.

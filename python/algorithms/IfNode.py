@@ -1,9 +1,12 @@
 class Node(object):
-	def __init__(self, verbose):
+	def __init__(self, verbose, args):
 		if verbose:
-			print("Created sum Node.")
+			print("Created node.")
 
 	def isInput(self):
+		return False
+
+	def isRepeating(self):
 		return False
 
 	def tick(self, value):
@@ -13,8 +16,8 @@ class Node(object):
 			return {"true":None, "false":value["val"]}
 		
 
-def instance(verbose):
-	return Node(verbose)
+def instance(verbose, args):
+	return Node(verbose, args)
 
 if __name__ == "__main__":
-	print("Sums two inputs.")
+	print("A node.")

@@ -10,10 +10,10 @@ class Node(object):
 			print("Created node.")
 
 	def isInput(self):
-		return False
+		return True
 
 	def isRepeating(self):
-		return False
+		return True
 		
 	def tick(self, value):
 		line = None

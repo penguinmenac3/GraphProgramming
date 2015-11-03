@@ -10,9 +10,10 @@ function WebUI_CWebUI() {
 	this.graph = null;
 	this.nodes = null;
 	this.selectedNode = null;
-	that.graphName = "Default";
+	this.graphName = "Default";
 	this.selectedConnection = null;
-	that.startPos = null;
+	this.startPos = null;
+	this.clickNode = null;
 	
 	this.start = function(fullscreen, width, height, container) {
 		/* check if dependencies are already existing */
@@ -167,6 +168,37 @@ function WebUI_CWebUI() {
 				return;
 			}
 		});
+		if (that.selectedNode == null) {
+			var currentNode = null;
+			graph.nodes.forEach(function(node) {
+				var x1 = node.x - RenderEngine.nodeWidth/2;
+				var y1 = node.y - RenderEngine.nodeHeight/2;
+				var x2 = node.x + RenderEngine.nodeWidth/2;
+				var y2 = node.y + RenderEngine.nodeHeight/2;
+				if (x > x1 && x < x2 && y > y1 && y < y2) {
+					currentNode = node;
+					return;
+				}
+			});
+			if (currentNode == null) {
+				that.clickNode = null;
+				return;
+			}
+			if (that.clickNode == currentNode) {
+				that.clickNode = null;
+				var args = prompt("Change args", JSON.stringify(currentNode.args));
+				if (args == null) {
+					that.startPos = null;
+					return;
+				}
+				currentNode.args = JSON.parse(args);
+				that.changed = true;
+				that.startPos = null;
+			} else {
+				that.clickNode = currentNode;
+				that.startPos = null;
+			}
+		}
 	};
 
 	function tryFindInput(node, x, y) {

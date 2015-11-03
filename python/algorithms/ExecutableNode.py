@@ -2,12 +2,15 @@ import json
 from subprocess import check_output as qx
 
 class Node(object):
-	def __init__(self, verbose):
-		self.executablePath = "python ../python/external/executable.py"
+	def __init__(self, verbose, args):
+		self.executablePath = args
 		if verbose:
-			print("Created test executable node.")
+			print("A node.")
 
 	def isInput(self):
+		return False
+
+	def isRepeating(self):
 		return False
 
 	def tick(self, value):
@@ -16,8 +19,8 @@ class Node(object):
 		return json.loads(output)
 		
 
-def instance(verbose):
-	return Node(verbose)
+def instance(verbose, args):
+	return Node(verbose, args)
 
 if __name__ == "__main__":
-	print("Calls another executable to process data.")
+	print("A node")

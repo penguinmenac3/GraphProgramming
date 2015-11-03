@@ -3,45 +3,30 @@
     "code": "InputNode",
     "inputs": {},
     "outputs": {
-        "test": "Double"
+        "result": "Double"
     },
-    "desc": "Outputs 3.14"
+    "args":1,
+    "desc": "Outputs {arg}"
 },
 {
-    "name": "One",
-    "code": "OneNode",
+    "name": "Trigger",
+    "code": "TriggerNode",
     "inputs": {},
     "outputs": {
         "result": "Double"
     },
-    "desc": "Outputs 1"
+    "args":{"time":5, "val":1},
+    "desc": "Outputs {arg}"
 },
 {
-    "name": "Zero",
-    "code": "ZeroNode",
-    "inputs": {},
-    "outputs": {
-        "result": "Double"
-    },
-    "desc": "Outputs 0"
-},
-{
-    "name": "True",
-    "code": "TrueNode",
+    "name": "Boolean Input",
+    "code": "BooleanInputNode",
     "inputs": {},
     "outputs": {
         "result": "Boolean"
     },
-    "desc": "Outputs true."
-},
-{
-    "name": "False",
-    "code": "FalseNode",
-    "inputs": {},
-    "outputs": {
-        "result": "Boolean"
-    },
-    "desc": "Outputs false."
+    "args":true,
+    "desc": "Outputs {args}."
 },
 {
     "name": "Sum",
@@ -53,6 +38,7 @@
     "outputs": {
         "result": "Double"
     },
+    "args":{},
     "desc": "Sum the two inputs."
 },
 {
@@ -119,20 +105,8 @@
     "desc": "Passes the variable to all outputs."
 },
 {
-    "name": "Equals",
-    "code": "EqualNode",
-    "inputs": {
-        "left": "Double",
-        "right": "Double"
-    },
-    "outputs": {
-        "result": "Boolean"
-    },
-    "desc": "Checks if two inputs are equal."
-},
-{
     "name": "Equals 5",
-    "code": "Equal5Node",
+    "code": "EqualNode",
     "inputs": {
         "1": "Double",
         "2": "Double",
@@ -143,7 +117,8 @@
     "outputs": {
         "result": "Boolean"
     },
-    "desc": "Checks if all inputs are equal."
+    "args":5,
+    "desc": "Checks if first #{args} inputs are equal."
 },
 {
     "name": "Less Than",
@@ -155,6 +130,7 @@
     "outputs": {
         "result": "Boolean"
     },
+    "args":{},
     "desc": "Checks if left is less than right."
 },
 {
@@ -167,6 +143,7 @@
     "outputs": {
         "result": "Boolean"
     },
+    "args":{},
     "desc": "Checks if left is greater than right."
 },
 {
@@ -179,6 +156,7 @@
     "outputs": {
         "result": "Boolean"
     },
+    "args":{},
     "desc": "Checks if both are true."
 },
 {
@@ -191,6 +169,7 @@
     "outputs": {
         "result": "Boolean"
     },
+    "args":{},
     "desc": "Checks if at least one is true."
 },
 {
@@ -202,6 +181,7 @@
     "outputs": {
         "result": "Boolean"
     },
+    "args":{},
     "desc": "Invert the input."
 },
 {
@@ -215,6 +195,7 @@
         "true": "Boolean",
         "false": "Boolean"
     },
+    "args":{},
     "desc": "An if statement left is true right is false."
 },
 {
@@ -231,6 +212,7 @@
     "loopback":[
         "initial"
     ],
+    "args":{},
     "desc": "While left less than right do right else left."
 },
 {
@@ -247,6 +229,7 @@
     "loopback":[
         "initial"
     ],
+    "args":{},
     "desc": "While left larger than right do right else left."
 },
 {
@@ -261,48 +244,61 @@
     "loopback":[
         "val"
     ],
+    "args":{},
     "desc": "Just pipes value through. Picks any input."
 },
 {
-    "name": "Division by 2",
-    "code": "AlgorithmNode",
-    "inputs": {
-        "testin": "Double"
-    },
-    "outputs": {
-        "testout": "Double"
-    },
-    "desc": "Divide input by 2."
-},
-{
-    "name": "Call external executable",
+    "name": "Call executable",
     "code": "ExecutableNode",
     "inputs": {
-        "testin": "Double"
+        "val": "Double"
     },
     "outputs": {
-        "testout": "Double"
+        "result": "Double"
     },
-    "desc": "Call an external executable.."
+    "args":{},
+    "desc": "Call {args}"
 },
 {
     "name": "Wait for network",
     "code": "NetworkNode",
     "inputs": {
-        "testin": "Double"
+        "val": "Double"
     },
     "outputs": {
-        "testout": "Double"
+        "result": "Double"
     },
+    "args":{"host":"localhost","port":25555},
+    "desc": "Wait for a network node to do it's job."
+},
+{
+    "name": "Wait for network",
+    "code": "NetworkInputNode",
+    "inputs": {},
+    "outputs": {
+        "result": "Double"
+    },
+    "args":{"host":"localhost","port":25555},
+    "desc": "Wait for a network node to do it's job."
+},
+{
+    "name": "Send on network",
+    "code": "NetworkOutputNode",
+    "inputs": {
+        "val": "Double"
+    },
+    "outputs": {},
+    "args":{"host":"localhost","port":25555},
     "desc": "Wait for a network node to do it's job."
 },
 {
     "name": "Print to console",
     "code": "OutputNode",
     "inputs": {
-        "testres": "Double"
+        "val": "Double"
     },
     "outputs": {},
+    "args":{},
     "desc": "Print the input."
 }
 ]

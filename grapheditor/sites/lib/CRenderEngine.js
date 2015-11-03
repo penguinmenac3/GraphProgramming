@@ -287,7 +287,10 @@ function WebUI_CRenderEngine() {
 
 		/* Write text with speed and curve info */
 		renderNodeText(node.name, node.x, node.y, 0, -30);
-		renderNodeText(node.code, node.x, node.y, 0,  0);
+		if (typeof node.args === "undefined") {
+			node.args = {};
+		}
+		renderNodeText("args="+JSON.stringify(node.args), node.x, node.y, 0,  0);
 		renderNodeText(node.desc, node.x, node.y, 0,  15);
 
 		for (var key in node.inputs) {
