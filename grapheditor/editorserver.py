@@ -79,7 +79,7 @@ class myHandler(BaseHTTPRequestHandler):
         print(data)
         path = None
         if "execGraph" in data:
-            data["execGraph"] = re.sub(r'\W+', '', data["execGraph"])
+            #data["execGraph"] = re.sub(r'(\W|/)+', '', data["execGraph"])
             print("Executing: " + data["execGraph"])
             cmd = "python ../python/graphex.py data/" + data["execGraph"] + ".graph.json"
             output = qx(cmd, shell=True).decode("utf-8")
