@@ -7,7 +7,7 @@ Code can be interpreted as a graph. Actually compilers already do that. However,
 The world gets smarter and more connected. But who will programm all those smart bits in the internet of things?
 A simple answer would be programmers. However, there is so much that you can do and so few programmers that can implement it.
 
-And even an experienced programmer may often think why do I allways have to do the same work and cannot reuse code easily.
+And even an experienced programmer may often think why do I always have to do the same work and cannot reuse code easily.
 Usually writing network code for IoT applications is a tedious task.
 And once you have written your network logic you are no longer motivated to write the actual intelligence based on all that sensor information.
 At least in hobby projects that is usually the case.
