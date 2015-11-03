@@ -3,7 +3,6 @@ from subprocess import check_output as qx
 
 class Node(object):
 	def __init__(self, verbose, args):
-		self.executablePath = args
 		if verbose:
 			print("A node.")
 
@@ -14,9 +13,7 @@ class Node(object):
 		return False
 
 	def tick(self, value):
-		cmd = self.executablePath + " " + value["arg"].replace("\\", "\\\\").replace("\"", "\\\"")
-		output = qx(cmd, shell=True).decode("utf-8")
-		return {"result":output}
+		return {"result":json.loads(value["val"])}
 		
 
 def instance(verbose, args):

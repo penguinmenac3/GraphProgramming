@@ -248,10 +248,10 @@
     "name": "Pass Any",
     "code": "AnyNode",
     "inputs": {
-        "val": "Double"
+        "val": "Object"
     },
     "outputs": {
-        "result": "Double"
+        "result": "Object"
     },
     "loopback":[
         "val"
@@ -263,13 +263,37 @@
     "name": "Call executable",
     "code": "ExecutableNode",
     "inputs": {
-        "val": "Double"
+        "arg": "String"
     },
     "outputs": {
-        "result": "Double"
+        "result": "String"
+    },
+    "args":"python ../python/graphex.py",
+    "desc": "Call {args} with input as param"
+},
+{
+    "name": "Parse Json",
+    "code": "JsonParseNode",
+    "inputs": {
+        "val": "String"
+    },
+    "outputs": {
+        "result": "Object"
     },
     "args":{},
-    "desc": "Call {args}"
+    "desc": "Parse JSON code."
+},
+{
+    "name": "Parse Json",
+    "code": "JsonStringifyNode",
+    "inputs": {
+        "val": "Object"
+    },
+    "outputs": {
+        "result": "String"
+    },
+    "args":{},
+    "desc": "Parse JSON code."
 },
 {
     "name": "Wait for network",
