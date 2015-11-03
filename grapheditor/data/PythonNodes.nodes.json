@@ -9,6 +9,18 @@
     "desc": "Outputs {arg}"
 },
 {
+    "name": "Leaky Integrator",
+    "code": "LeakyIntegratorNode",
+    "inputs": {
+        "val": "Double"
+    },
+    "outputs": {
+        "result": "Boolean"
+    },
+    "args":{"time":1,"decay":1},
+    "desc": "Adds inputs and looses {decay} per {time} s."
+},
+{
     "name": "Trigger",
     "code": "TriggerNode",
     "inputs": {},
