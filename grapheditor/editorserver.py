@@ -12,12 +12,28 @@ from cgi import parse_header, parse_multipart
 import socket
 import sys
 import os
+import signal
 from threading import Thread
 import time
 from subprocess import check_output as qx
+import subprocess
 import re
 
 PORT_NUMBER = 8088
+execProcess = None
+result = None
+
+def pollPipe():
+	global execProcess
+	global result
+	while True:
+		line = execProcess.stdout.readline().decode("utf-8")
+		if line != '':
+			#the real code does filtering here
+			result = result + line.rstrip() + "\n"
+		else:
+			break
+	execProcess = None
 
 #This class will handles any incoming request from
 #the browser
@@ -78,15 +94,61 @@ class myHandler(BaseHTTPRequestHandler):
     def handleAPI(self, data):
         print(data)
         path = None
-        if "execGraph" in data:
+        global execProcess
+        global result
+        if "startGraph" in data:
             #data["execGraph"] = re.sub(r'(\W|/)+', '', data["execGraph"])
-            print("Executing: " + data["execGraph"])
-            cmd = "python ../python/graphex.py data/" + data["execGraph"] + ".graph.json"
-            output = qx(cmd, shell=True).decode("utf-8")
+            print("Starting: " + data["startGraph"])
+            if execProcess != None:
+            	self.send_response(404)
+            	self.send_header('Content-type','text/html')
+            	self.end_headers()
+            	self.wfile.write("Canot start 2 processes.".encode("utf-8"))
+            	return
+            cmd = "data/" + data["startGraph"] + ".graph.json"
+            preex = None
+            try:
+            	preex = os.setsid
+            except AttributeError:
+            	print("Windows: Feature not availible.")
+            execProcess = subprocess.Popen(["python", "../python/graphex.py", cmd], stdout=subprocess.PIPE, shell=True, preexec_fn=preex)
+            result = ""
+            Thread(target=pollPipe).start()
             self.send_response(200)
             self.send_header('Content-type','text/html')
             self.end_headers()
-            self.wfile.write(output.encode("utf-8"))
+            self.wfile.write(result.encode("utf-8"))
+            return
+        if "updateGraph" in data:
+            if execProcess == None and result == None:
+            	self.send_response(404)
+            	self.send_header('Content-type','text/html')
+            	self.end_headers()
+            	self.wfile.write("Process must be running".encode("utf-8"))
+            	return
+            self.send_response(200)
+            self.send_header('Content-type','text/html')
+            self.end_headers()
+            self.wfile.write(result.encode("utf-8"))
+            if execProcess == None:
+            	result = None
+            return
+        if "killGraph" in data:
+            if execProcess == None:
+            	self.send_response(404)
+            	self.send_header('Content-type','text/html')
+            	self.end_headers()
+            	self.wfile.write("Process must be running".encode("utf-8"))
+            	return
+
+            try:
+            	os.killpg(execProcess.pid, signal.SIGTERM)
+            except AttributeError:
+            	print("Windows: Feature not availible.")
+            self.send_response(200)
+            self.send_header('Content-type','text/html')
+            self.end_headers()
+            self.wfile.write("".encode("utf-8"))
             return
         if "getnodes" in data:
             path = "data/" + data["getnodes"] + ".nodes.json"

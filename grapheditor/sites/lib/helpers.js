@@ -81,6 +81,82 @@ function execute(graph, callback, callbackFailure) {
     xmlhttp.send(params);
 }
 
+function start(graph, callback, callbackFailure) {
+    var xmlhttp;
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            update(graph, callback, callbackFailure);
+            if (callback != null) {
+                callback(xmlhttp.responseText);
+            }
+        } else if (xmlhttp.readyState==4) {
+            if (callbackFailure != null) {
+                callbackFailure(xmlhttp.responseText);
+            }
+        }
+    }
+    var params = "startGraph=" + graph;
+    xmlhttp.open("POST", "/api",true);
+    //Send the proper header information along with the request
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
+}
+
+function update(graph, callback, callbackFailure) {
+    var xmlhttp;
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            update(graph, callback, callbackFailure);
+            if (callback != null) {
+                callback(xmlhttp.responseText);
+            }
+        } else if (xmlhttp.readyState==4) {
+        }
+    }
+    var params = "updateGraph=" + graph;
+    xmlhttp.open("POST", "/api",true);
+    //Send the proper header information along with the request
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
+}
+
+function kill() {
+    var xmlhttp;
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            if (xmlhttp.responseText != "") {
+                if (callback != null) {
+                    console.log(xmlhttp.responseText);
+                }
+            }
+        } else if (xmlhttp.readyState==4) {
+            if (callbackFailure != null) {
+                console.log(xmlhttp.responseText);
+            }
+        }
+    }
+    var params = "killGraph=" + true;
+    xmlhttp.open("POST", "/api",true);
+    //Send the proper header information along with the request
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
+}
+
 function sendViaGet(params, callback, callbackFailure) {
 	var xmlhttp;
     if (window.XMLHttpRequest) {

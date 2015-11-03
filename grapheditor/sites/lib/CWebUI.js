@@ -127,7 +127,7 @@ function WebUI_CWebUI() {
 				alert("Drop a node here to delete it.");
 				return;
 			}
-			if (absY > 210 && absY < 240) {
+			/*if (absY > 210 && absY < 240) {
 				if (that.changed == true) {
 					var name = prompt("Autosave: Please enter graph name", WebUI.graphName);
 					if (name == null) {
@@ -138,6 +138,23 @@ function WebUI_CWebUI() {
 					that.changed = false;
 				}
 				execute(that.graphName, RenderEngine.setResult, RenderEngine.setResult);
+				return;
+			}*/
+			if (absY > 250 && absY < 280) {
+				if (that.changed == true) {
+					var name = prompt("Autosave: Please enter graph name", WebUI.graphName);
+					if (name == null) {
+						return;
+					}
+					WebUI.graphName = name;
+					WebUI.saveGraph(WebUI.graphName);
+					that.changed = false;
+				}
+				start(that.graphName, RenderEngine.setResult, RenderEngine.setResult);
+				return;
+			}
+			if (absY > 290 && absY < 310) {
+				kill();
 				return;
 			}
 		}

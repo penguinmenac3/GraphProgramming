@@ -339,7 +339,9 @@ function WebUI_CRenderEngine() {
 		renderButton("NODES", 50, 105);
 		renderButton("NEW", 50, 145);
 		renderButton("DEL", 50, 185);
-		renderButton("RUN", 50, 225);
+		//renderButton("RUN", 50, 225);
+		renderButton("START", 50, 265);
+		renderButton("KILL", 50, 305);
 	}
 
 	function renderButton(text, x, y) {

@@ -1,3 +1,5 @@
+import sys
+
 class Node(object):
 	def __init__(self, verbose, args):
 		if verbose:
@@ -11,6 +13,7 @@ class Node(object):
 
 	def tick(self, value):
 		print(value["val"])
+		sys.stdout.flush()
 		return {}
 
 
