@@ -368,7 +368,7 @@ function WebUI_CRenderEngine() {
 			ctx.lineWidth="1";
 			ctx.fillStyle = "rgb(244,244,244)";
 			ctx.strokeStyle="rgb(128,128,128)";
-			ctx.rect(100, 10, 200, 15 + len * 15);
+			ctx.rect(100, 10, 400, 15 + len * 15);
 			ctx.fill();
 			ctx.stroke();
 
