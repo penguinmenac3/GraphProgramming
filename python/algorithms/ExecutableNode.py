@@ -3,7 +3,8 @@ from subprocess import check_output as qx
 
 class Node(object):
 	def __init__(self, verbose, args):
-		self.executablePath = args
+		self.executablePath = args["executable"]
+		self.escapeArgs = args["escapeArgs"]
 		if verbose:
 			print("A node.")
 
@@ -14,7 +15,11 @@ class Node(object):
 		return False
 
 	def tick(self, value):
-		cmd = self.executablePath + " " + value["arg"].replace("\\", "\\\\").replace("\"", "\\\"")
+		arg = value["arg"]
+		if self.escapeArgs:
+			arg = value["arg"].replace("\\", "\\\\").replace("\"", "\\\"")
+
+		cmd = self.executablePath + " " + arg
 		output = qx(cmd, shell=True).decode("utf-8")
 		return {"result":output}
 		
