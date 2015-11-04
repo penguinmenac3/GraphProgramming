@@ -26,9 +26,10 @@ class GraphEx(object):
 
 			# Try to import the code required for a node.
 			try:
+				codeName = node["code"]
 				if self.verbose:
-					print("Importing algorithms.%s" % node["code"])
-				module = __import__("algorithms.%s" % node["code"], fromlist=["instance"])
+					print("Importing stdlib.%s" % codeName)
+				module = __import__("stdlib.%s" % codeName, fromlist=["instance"])
 			except ImportError:
 				raise ImportError("Cannot find implementation for node: " + node["code"])
 

@@ -1,6 +1,16 @@
 [{
-    "name": "Input",
-    "code": "InputNode",
+    "name": "String Constant",
+    "code": "string.const",
+    "inputs": {},
+    "outputs": {
+        "result": "String"
+    },
+    "args":"Hello World!",
+    "desc": "Outputs {arg}"
+},
+{
+    "name": "Number Constant",
+    "code": "number.const",
     "inputs": {},
     "outputs": {
         "result": "Double"
@@ -10,7 +20,7 @@
 },
 {
     "name": "Leaky Integrator",
-    "code": "LeakyIntegratorNode",
+    "code": "structures.leakyintegrator",
     "inputs": {
         "val": "Double"
     },
@@ -22,7 +32,17 @@
 },
 {
     "name": "Trigger",
-    "code": "TriggerNode",
+    "code": "string.trigger",
+    "inputs": {},
+    "outputs": {
+        "result": "String"
+    },
+    "args":{"time":5, "val":"Hello World!"},
+    "desc": "Outputs {arg}"
+},
+{
+    "name": "Trigger",
+    "code": "number.trigger",
     "inputs": {},
     "outputs": {
         "result": "Double"
@@ -31,8 +51,18 @@
     "desc": "Outputs {arg}"
 },
 {
-    "name": "Boolean Input",
-    "code": "BooleanInputNode",
+    "name": "Trigger",
+    "code": "boolean.trigger",
+    "inputs": {},
+    "outputs": {
+        "result": "Boolean"
+    },
+    "args":{"time":5, "val":true},
+    "desc": "Outputs {arg}"
+},
+{
+    "name": "Boolean Constant",
+    "code": "boolean.const",
     "inputs": {},
     "outputs": {
         "result": "Boolean"
@@ -41,8 +71,21 @@
     "desc": "Outputs {args}."
 },
 {
+    "name": "Concatenate",
+    "code": "string.concat",
+    "inputs": {
+        "left": "String",
+        "right": "String"
+    },
+    "outputs": {
+        "result": "String"
+    },
+    "args":{},
+    "desc": "Concatenate the two inputs."
+},
+{
     "name": "Sum",
-    "code": "SumNode",
+    "code": "number.sum",
     "inputs": {
         "left": "Double",
         "right": "Double"
@@ -55,7 +98,7 @@
 },
 {
     "name": "Subtraction",
-    "code": "SubtractNode",
+    "code": "number.subtract",
     "inputs": {
         "left": "Double",
         "right": "Double"
@@ -67,7 +110,7 @@
 },
 {
     "name": "Multiplication",
-    "code": "MultNode",
+    "code": "number.mult",
     "inputs": {
         "left": "Double",
         "right": "Double"
@@ -79,7 +122,7 @@
 },
 {
     "name": "Divide",
-    "code": "DivNode",
+    "code": "number.div",
     "inputs": {
         "left": "Double",
         "right": "Double"
@@ -91,34 +134,50 @@
 },
 {
     "name": "Split Flow",
-    "code": "SplitFlowNode",
+    "code": "default.splitflow",
     "inputs": {
-        "val": "Double"
+        "val": "Object"
     },
     "outputs": {
-        "left": "Double",
-        "right": "Double"
+        "left": "Object",
+        "right": "Object"
     },
     "desc": "Passes the variable to both outputs."
 },
 {
     "name": "Split Flow 5",
-    "code": "SplitFlow5Node",
+    "code": "default.splitflow5",
     "inputs": {
-        "val": "Double"
+        "val": "Object"
     },
     "outputs": {
-        "1": "Double",
-        "2": "Double",
-        "3": "Double",
-        "4": "Double",
-        "5": "Double"
+        "1": "Object",
+        "2": "Object",
+        "3": "Object",
+        "4": "Object",
+        "5": "Object"
     },
     "desc": "Passes the variable to all outputs."
 },
 {
     "name": "Equals 5",
-    "code": "EqualNode",
+    "code": "string.equal",
+    "inputs": {
+        "1": "String",
+        "2": "String",
+        "3": "String",
+        "4": "String",
+        "5": "String"
+    },
+    "outputs": {
+        "result": "Boolean"
+    },
+    "args":5,
+    "desc": "Checks if first #{args} inputs are equal."
+},
+{
+    "name": "Equals 5",
+    "code": "number.equal",
     "inputs": {
         "1": "Double",
         "2": "Double",
@@ -133,8 +192,24 @@
     "desc": "Checks if first #{args} inputs are equal."
 },
 {
+    "name": "Equals 5",
+    "code": "boolean.equal",
+    "inputs": {
+        "1": "Boolean",
+        "2": "Boolean",
+        "3": "Boolean",
+        "4": "Boolean",
+        "5": "Boolean"
+    },
+    "outputs": {
+        "result": "Boolean"
+    },
+    "args":5,
+    "desc": "Checks if first #{args} inputs are equal."
+},
+{
     "name": "Less Than",
-    "code": "LessNode",
+    "code": "number.less",
     "inputs": {
         "left": "Double",
         "right": "Double"
@@ -147,7 +222,7 @@
 },
 {
     "name": "Greater Than",
-    "code": "GreaterNode",
+    "code": "number.greater",
     "inputs": {
         "left": "Double",
         "right": "Double"
@@ -160,7 +235,7 @@
 },
 {
     "name": "And",
-    "code": "AndNode",
+    "code": "boolean.and",
     "inputs": {
         "left": "Boolean",
         "right": "Boolean"
@@ -173,7 +248,7 @@
 },
 {
     "name": "Or",
-    "code": "OrNode",
+    "code": "boolean.or",
     "inputs": {
         "left": "Boolean",
         "right": "Boolean"
@@ -186,7 +261,7 @@
 },
 {
     "name": "Not",
-    "code": "NotNode",
+    "code": "boolean.not",
     "inputs": {
         "val": "Boolean"
     },
@@ -198,21 +273,21 @@
 },
 {
     "name": "If",
-    "code": "IfNode",
+    "code": "structures.if",
     "inputs": {
         "condition": "Boolean",
-        "val": "Double"
+        "val": "Object"
     },
     "outputs": {
-        "true": "Boolean",
-        "false": "Boolean"
+        "true": "Object",
+        "false": "Object"
     },
     "args":{},
     "desc": "An if statement left is true right is false."
 },
 {
     "name": "While less than",
-    "code": "WhileLessNode",
+    "code": "structures.whileless",
     "inputs": {
         "initial": "Double",
         "val": "Double"
@@ -229,7 +304,7 @@
 },
 {
     "name": "While greater than",
-    "code": "WhileGreaterNode",
+    "code": "structures.whilegreater",
     "inputs": {
         "initial": "Double",
         "val": "Double"
@@ -246,7 +321,7 @@
 },
 {
     "name": "Pass Any",
-    "code": "AnyNode",
+    "code": "default.any",
     "inputs": {
         "val": "Object"
     },
@@ -261,19 +336,19 @@
 },
 {
     "name": "Call executable",
-    "code": "ExecutableNode",
+    "code": "sys.executable",
     "inputs": {
         "arg": "String"
     },
     "outputs": {
         "result": "String"
     },
-    "args":"python ../python/graphex.py",
+    "args":"ping \"localhost\"",
     "desc": "Call {args} with input as param"
 },
 {
     "name": "Parse Json",
-    "code": "JsonParseNode",
+    "code": "json.parse",
     "inputs": {
         "val": "String"
     },
@@ -285,7 +360,7 @@
 },
 {
     "name": "Parse Json",
-    "code": "JsonStringifyNode",
+    "code": "json.stringify",
     "inputs": {
         "val": "Object"
     },
@@ -297,31 +372,31 @@
 },
 {
     "name": "Wait for network",
-    "code": "NetworkNode",
+    "code": "sys.network",
     "inputs": {
-        "val": "Double"
+        "val": "Object"
     },
     "outputs": {
-        "result": "Double"
+        "result": "Object"
     },
     "args":{"host":"localhost","port":25555},
     "desc": "Wait for a network node to do it's job."
 },
 {
     "name": "Wait for network",
-    "code": "NetworkInputNode",
+    "code": "sys.networkinput",
     "inputs": {},
     "outputs": {
-        "result": "Double"
+        "result": "Object"
     },
     "args":{"host":"localhost","port":25555},
     "desc": "Wait for a network node to do it's job."
 },
 {
     "name": "Send on network",
-    "code": "NetworkOutputNode",
+    "code": "sys.networkoutput",
     "inputs": {
-        "val": "Double"
+        "val": "Object"
     },
     "outputs": {},
     "args":{"host":"localhost","port":25555},
@@ -329,9 +404,9 @@
 },
 {
     "name": "Print to console",
-    "code": "OutputNode",
+    "code": "sys.print",
     "inputs": {
-        "val": "Double"
+        "val": "Object"
     },
     "outputs": {},
     "args":{},
