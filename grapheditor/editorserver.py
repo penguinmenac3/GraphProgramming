@@ -111,7 +111,7 @@ class myHandler(BaseHTTPRequestHandler):
             	preex = os.setsid
             except AttributeError:
             	print("Windows: Feature not availible.")
-            execProcess = subprocess.Popen(["python", "../python/graphex.py", cmd], stdout=subprocess.PIPE, shell=True, preexec_fn=preex)
+            execProcess = subprocess.Popen(["python2", "../python/graphex.py", cmd], stdout=subprocess.PIPE, shell=True, preexec_fn=preex)
             result = ""
             Thread(target=pollPipe).start()
             self.send_response(200)

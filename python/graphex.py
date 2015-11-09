@@ -4,7 +4,11 @@ import time
 from threading import Thread
 from collections import deque
 
-import builtins
+try:
+	import builtins
+except ImportError:
+	import __builtin__ as builtins
+
 builtins.registry = {}
 builtins.registry_output = {}
 
@@ -86,7 +90,7 @@ class GraphEx(object):
 		self.toCalculate.extend(self.input_nodes.values())
 
 		# Execute nodes until there is no more nodes to calculate and no nodes in calculation.
-		while self.toCalculate or self.activeCalculations:
+		while (self.toCalculate or self.activeCalculations) and not builtins.registry["kill"]:
 			# When there are only active calculations and nothing new, wait.
 			if not self.toCalculate:
 				time.sleep(0.01)
@@ -142,5 +146,6 @@ if __name__ == "__main__":
 	else:
 		if len(sys.argv) > 2:
 			builtins.registry = json.loads(" ".join(sys.argv[2:]))
+		builtins.registry["kill"] = False
 		GraphEx(sys.argv[1]).execute()
 		print(json.dumps(builtins.registry_output))

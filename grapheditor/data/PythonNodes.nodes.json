@@ -566,5 +566,170 @@
     "outputs": {},
     "args":{},
     "desc": "Print the input."
+},
+{
+    "name": "RC Car Controller",
+    "code": "raspi.rccar",
+    "inputs": {
+        "speed": "Double",
+        "turn": "Double"
+    },
+    "outputs": {},
+    "args":{},
+    "desc": "Controll the rc car."
+},
+{
+    "name": "Video Input Stream",
+    "code": "cv.video",
+    "inputs": {},
+    "outputs": {
+    	"result":"Image"
+    },
+    "args":{"fps":10, "resource":0},
+    "desc": "Get videos from {resource}."
+},
+{
+    "name": "Resize",
+    "code": "cv.resize",
+    "inputs": {
+    	"img":"Image"
+    },
+    "outputs": {
+    	"result":"Image"
+    },
+    "args":{"width":320, "height":240},
+    "desc": "Resize an image."
+},
+{
+    "name": "InRange",
+    "code": "cv.inrange",
+    "inputs": {
+    	"img":"Image"
+    },
+    "outputs": {
+    	"result":"Image"
+    },
+    "args":{"lh":0, "ls":0, "lv":0, "uh":255, "us":40, "uv":255},
+    "desc": "In range operation on image."
+},
+{
+    "name": "Convert bgr 2 hsv",
+    "code": "cv.bgr2hsv",
+    "inputs": {
+    	"img":"Image"
+    },
+    "outputs": {
+    	"result":"Image"
+    },
+    "args":{},
+    "desc": "Convert a bgr to hsv image."
+},
+{
+    "name": "Convert hsv 2 bgr",
+    "code": "cv.hsv2bgr",
+    "inputs": {
+    	"img":"Image"
+    },
+    "outputs": {
+    	"result":"Image"
+    },
+    "args":{},
+    "desc": "Convert a hsv to bgr image."
+},
+{
+    "name": "Blur Image",
+    "code": "cv.medianblur",
+    "inputs": {
+    	"img":"Image"
+    },
+    "outputs": {
+    	"result":"Image"
+    },
+    "args":10,
+    "desc": "Blur Image with median blur."
+},
+{
+    "name": "Blur Image",
+    "code": "cv.gaussianblur",
+    "inputs": {
+    	"img":"Image"
+    },
+    "outputs": {
+    	"result":"Image"
+    },
+    "args":1,
+    "desc": "Blur Image with gaussian blur."
+},
+{
+    "name": "Fixed Intensity",
+    "code": "cv.fixedintensity",
+    "inputs": {
+    	"img":"Image"
+    },
+    "outputs": {
+    	"result":"Image"
+    },
+    "args":127,
+    "desc": "Fixed intensity to {args}."
+},
+{
+    "name": "Fixed Hue",
+    "code": "cv.fixedhue",
+    "inputs": {
+    	"img":"Image"
+    },
+    "outputs": {
+    	"result":"Image"
+    },
+    "args":127,
+    "desc": "Fixed hue to {args}."
+},
+{
+    "name": "Fixed Saturisation",
+    "code": "cv.fixedsaturisation",
+    "inputs": {
+    	"img":"Image"
+    },
+    "outputs": {
+    	"result":"Image"
+    },
+    "args":127,
+    "desc": "Fixed saturisation to {args}."
+},
+{
+    "name": "Add Weighted",
+    "code": "cv.addweighted",
+    "inputs": {
+    	"left":"Image",
+    	"right":"Image"
+    },
+    "outputs": {
+    	"result":"Image"
+    },
+    "args":{"left":1.75,"right":-0.75},
+    "desc": "Add images with weights."
+},
+{
+    "name": "Show Image",
+    "code": "cv.show",
+    "inputs": {
+    	"img":"Image"
+    },
+    "outputs": {
+    },
+    "args":{"title":"CV Debug View"},
+    "desc": "Show an image."
+},
+{
+    "name": "Convert image to distribution",
+    "code": "cv.img2distribution",
+    "inputs": {
+    	"img":"Image"
+    },
+    "outputs": {
+    	"result":"[Double]"
+    },
+    "args":{},
+    "desc": "Convert a grayscale image into a posterior distribution."
 }
 ]

@@ -1,0 +1,359 @@
+{
+	"nodes": [
+		{
+			"name": "Video Input Stream",
+			"code": "cv.video",
+			"inputs": {},
+			"outputs": {
+				"result": "Image"
+			},
+			"args": {
+				"fps": 10,
+				"resource": 0
+			},
+			"desc": "Get videos from {resource}.",
+			"x": 26,
+			"y": -476.5
+		},
+		{
+			"name": "Resize",
+			"code": "cv.resize",
+			"inputs": {
+				"img": "Image"
+			},
+			"outputs": {
+				"result": "Image"
+			},
+			"args": {
+				"width": 320,
+				"height": 240
+			},
+			"desc": "Resize an image.",
+			"x": -9,
+			"y": -376.5
+		},
+		{
+			"name": "Show Image",
+			"code": "cv.show",
+			"inputs": {
+				"img": "Image"
+			},
+			"outputs": {},
+			"args": {
+				"title": "Drivable Regions"
+			},
+			"desc": "Resize an image.",
+			"x": 87,
+			"y": 739.5
+		},
+		{
+			"name": "InRange",
+			"code": "cv.inrange",
+			"inputs": {
+				"img": "Image"
+			},
+			"outputs": {
+				"result": "Image"
+			},
+			"args": {
+				"lh": 0,
+				"ls": 0,
+				"lv": 0,
+				"uh": 255,
+				"us": 40,
+				"uv": 255
+			},
+			"desc": "In range operation on image.",
+			"x": 48,
+			"y": 637.5
+		},
+		{
+			"name": "Convert bgr 2 hsv",
+			"code": "cv.bgr2hsv",
+			"inputs": {
+				"img": "Image"
+			},
+			"outputs": {
+				"result": "Image"
+			},
+			"args": {},
+			"desc": "Convert a bgr to hsv image.",
+			"x": -86,
+			"y": -175.5
+		},
+		{
+			"name": "Blur Image",
+			"code": "cv.medianblur",
+			"inputs": {
+				"img": "Image"
+			},
+			"outputs": {
+				"result": "Image"
+			},
+			"args": 10,
+			"desc": "Blur Image with median blur.",
+			"x": -49,
+			"y": -275.5
+		},
+		{
+			"name": "Fixed Intensity",
+			"code": "cv.fixedintensity",
+			"inputs": {
+				"img": "Image"
+			},
+			"outputs": {
+				"result": "Image"
+			},
+			"args": 127,
+			"desc": "Fixed intensity to {args}.",
+			"x": -121,
+			"y": -74.5
+		},
+		{
+			"name": "Convert hsv 2 bgr",
+			"code": "cv.hsv2bgr",
+			"inputs": {
+				"img": "Image"
+			},
+			"outputs": {
+				"result": "Image"
+			},
+			"args": {},
+			"desc": "Convert a hsv to bgr image.",
+			"x": -152,
+			"y": 27.5
+		},
+		{
+			"name": "Blur Image Gaussian",
+			"code": "cv.gaussianblur",
+			"inputs": {
+				"img": "Image"
+			},
+			"outputs": {
+				"result": "Image"
+			},
+			"args": 1,
+			"desc": "Blur Image with gaussian blur.",
+			"x": 16,
+			"y": 234.5
+		},
+		{
+			"name": "Split Flow",
+			"code": "default.splitflow",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"left": "Object",
+				"right": "Object"
+			},
+			"desc": "Passes the variable to both outputs.",
+			"x": -123,
+			"y": 130.5,
+			"args": {}
+		},
+		{
+			"name": "Add Weighted",
+			"code": "cv.addweighted",
+			"inputs": {
+				"left": "Image",
+				"right": "Image"
+			},
+			"outputs": {
+				"result": "Image"
+			},
+			"args": {
+				"left": 1.75,
+				"right": -0.75
+			},
+			"desc": "Add images with weights.",
+			"x": -120,
+			"y": 334.5
+		},
+		{
+			"name": "Convert bgr 2 hsv (2)",
+			"code": "cv.bgr2hsv",
+			"inputs": {
+				"img": "Image"
+			},
+			"outputs": {
+				"result": "Image"
+			},
+			"args": {},
+			"desc": "Convert a bgr to hsv image.",
+			"x": 16,
+			"y": 535.5
+		},
+		{
+			"name": "Split Flow (2)",
+			"code": "default.splitflow",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"left": "Object",
+				"right": "Object"
+			},
+			"desc": "Passes the variable to both outputs.",
+			"x": -83,
+			"y": 434.5,
+			"args": {}
+		},
+		{
+			"name": "Show Image (2)",
+			"code": "cv.show",
+			"inputs": {
+				"img": "Image"
+			},
+			"outputs": {},
+			"args": {
+				"title": "Preprocessed"
+			},
+			"desc": "Show an image.",
+			"x": -198,
+			"y": 539.5
+		}
+	],
+	"connections": [
+		{
+			"input": {
+				"node": "Video Input Stream",
+				"output": "result"
+			},
+			"output": {
+				"node": "Resize",
+				"input": "img"
+			}
+		},
+		{
+			"input": {
+				"node": "InRange",
+				"output": "result"
+			},
+			"output": {
+				"node": "Show Image",
+				"input": "img"
+			}
+		},
+		{
+			"input": {
+				"node": "Resize",
+				"output": "result"
+			},
+			"output": {
+				"node": "Blur Image",
+				"input": "img"
+			}
+		},
+		{
+			"input": {
+				"node": "Blur Image",
+				"output": "result"
+			},
+			"output": {
+				"node": "Convert bgr 2 hsv",
+				"input": "img"
+			}
+		},
+		{
+			"input": {
+				"node": "Convert bgr 2 hsv",
+				"output": "result"
+			},
+			"output": {
+				"node": "Fixed Intensity",
+				"input": "img"
+			}
+		},
+		{
+			"input": {
+				"node": "Fixed Intensity",
+				"output": "result"
+			},
+			"output": {
+				"node": "Convert hsv 2 bgr",
+				"input": "img"
+			}
+		},
+		{
+			"input": {
+				"node": "Convert hsv 2 bgr",
+				"output": "result"
+			},
+			"output": {
+				"node": "Split Flow",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "Split Flow",
+				"output": "right"
+			},
+			"output": {
+				"node": "Blur Image Gaussian",
+				"input": "img"
+			}
+		},
+		{
+			"input": {
+				"node": "Blur Image Gaussian",
+				"output": "result"
+			},
+			"output": {
+				"node": "Add Weighted",
+				"input": "right"
+			}
+		},
+		{
+			"input": {
+				"node": "Split Flow",
+				"output": "left"
+			},
+			"output": {
+				"node": "Add Weighted",
+				"input": "left"
+			}
+		},
+		{
+			"input": {
+				"node": "Split Flow (2)",
+				"output": "left"
+			},
+			"output": {
+				"node": "Show Image (2)",
+				"input": "img"
+			}
+		},
+		{
+			"input": {
+				"node": "Add Weighted",
+				"output": "result"
+			},
+			"output": {
+				"node": "Split Flow (2)",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "Split Flow (2)",
+				"output": "right"
+			},
+			"output": {
+				"node": "Convert bgr 2 hsv (2)",
+				"input": "img"
+			}
+		},
+		{
+			"input": {
+				"node": "Convert bgr 2 hsv (2)",
+				"output": "result"
+			},
+			"output": {
+				"node": "InRange",
+				"input": "img"
+			}
+		}
+	]
+}
