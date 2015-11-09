@@ -34,12 +34,14 @@ Did the motivation sound like nice to you?
 
 I have good news. Such a solution can be implemented. There is already a graph executor written in python in this repo, as well as some sample graphs.
 
-A graph editor will follow once the python implementation is completed.
+Also a full editor implementation exists. However, it does no type checking.
 
 Maybe there will also be implementations for other languages than python.
 
 
-# Bad News
-Whereas this is just a small project performance is not a main focus.
-However, there are no intentional performance pitfalls.
-It's just lack of time for performance optimisation.
+# One more thing
+
+The implementation already supports opencv and raspi servo drivers from adafruit.
+More robot stuff is on it's way.
+
+![Image of the graph programming ui.](https://raw.githubusercontent.com/penguinmenac3/GraphProgramming/master/images/cv_support.png)
