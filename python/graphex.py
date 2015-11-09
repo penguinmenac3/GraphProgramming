@@ -4,8 +4,13 @@ import time
 from threading import Thread
 from collections import deque
 
+import builtins
+builtins.registry = {}
+builtins.registry_output = {}
+
 class GraphEx(object):
 	def __init__(self, graph_path, verbose = False):
+
 		# Open the graph and parse it as json.
 		data = open(graph_path, 'r').read()
 		self.verbose = verbose
@@ -31,7 +36,16 @@ class GraphEx(object):
 					print("Importing stdlib.%s" % codeName)
 				module = __import__("stdlib.%s" % codeName, fromlist=["instance"])
 			except ImportError:
-				raise ImportError("Cannot find implementation for node: " + node["code"])
+				module = None
+			# Try to import the code required for a node.
+			if not module:
+				try:
+					codeName = node["code"]
+					if self.verbose:
+						print("Importing extlib.%s" % codeName)
+					module = __import__("extlib.%s" % codeName, fromlist=["instance"])
+				except ImportError:
+					raise ImportError("Cannot find implementation for node: " + node["code"])
 
 			# Create node and add lists for connecting them.
 			currentNode = module.instance(self.verbose, node["args"])
@@ -123,7 +137,10 @@ class GraphEx(object):
 
 if __name__ == "__main__":
 	# Execute all graph paths passed as parameters.
-	for arg in sys.argv[1:]:
-		GraphEx(arg).execute()
 	if len(sys.argv) < 2:
 		print("Usage: Pass graph json files to execute as parameters.")
+	else:
+		if len(sys.argv) > 2:
+			builtins.registry = json.loads(" ".join(sys.argv[2:]))
+		GraphEx(sys.argv[1]).execute()
+		print(json.dumps(builtins.registry_output))

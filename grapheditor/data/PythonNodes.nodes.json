@@ -61,6 +61,46 @@
     "desc": "Outputs {arg}"
 },
 {
+    "name": "Trigger Arg",
+    "code": "boolean.argtrigger",
+    "inputs": {},
+    "outputs": {
+        "result": "Boolean"
+    },
+    "args":{"time":5, "val":"test"},
+    "desc": "Outputs {arg}"
+},
+{
+    "name": "Trigger Arg",
+    "code": "number.argtrigger",
+    "inputs": {},
+    "outputs": {
+        "result": "Double"
+    },
+    "args":{"time":5, "val":"test"},
+    "desc": "Outputs {arg}"
+},
+{
+    "name": "Trigger Arg",
+    "code": "string.argtrigger",
+    "inputs": {},
+    "outputs": {
+        "result": "String"
+    },
+    "args":{"time":5, "val":"test"},
+    "desc": "Outputs {arg}"
+},
+{
+    "name": "Trigger Arg",
+    "code": "arrays.argtrigger",
+    "inputs": {},
+    "outputs": {
+        "result": "[Object]"
+    },
+    "args":{"time":5, "val":"test"},
+    "desc": "Outputs {arg}"
+},
+{
     "name": "Boolean Constant",
     "code": "boolean.const",
     "inputs": {},
@@ -68,6 +108,46 @@
         "result": "Boolean"
     },
     "args":true,
+    "desc": "Outputs {args}."
+},
+{
+    "name": "Boolean Constant Arg",
+    "code": "boolean.argconst",
+    "inputs": {},
+    "outputs": {
+        "result": "Boolean"
+    },
+    "args":"test",
+    "desc": "Outputs {args}."
+},
+{
+    "name": "String Constant Arg",
+    "code": "string.argconst",
+    "inputs": {},
+    "outputs": {
+        "result": "String"
+    },
+    "args":"test",
+    "desc": "Outputs {args}."
+},
+{
+    "name": "Number Constant Arg",
+    "code": "number.argconst",
+    "inputs": {},
+    "outputs": {
+        "result": "Double"
+    },
+    "args":"test",
+    "desc": "Outputs {args}."
+},
+{
+    "name": "Array Constant Arg",
+    "code": "arrays.argconst",
+    "inputs": {},
+    "outputs": {
+        "result": "[Object]"
+    },
+    "args":"test",
     "desc": "Outputs {args}."
 },
 {
@@ -82,6 +162,59 @@
     },
     "args":{},
     "desc": "Concatenate the two inputs."
+},
+{
+    "name": "Index of",
+    "code": "string.indexof",
+    "inputs": {
+        "str": "String",
+        "ref": "String",
+        "offset": "Double"
+    },
+    "outputs": {
+        "result": "Double"
+    },
+    "args":{},
+    "desc": "The index of a substring."
+},
+{
+    "name": "Split",
+    "code": "string.split",
+    "inputs": {
+        "str": "String",
+        "splitter": "String"
+    },
+    "outputs": {
+        "result": "[String]"
+    },
+    "args":{},
+    "desc": "Split a string."
+},
+{
+    "name": "Starts with",
+    "code": "string.startswith",
+    "inputs": {
+        "str": "String",
+        "ref": "String"
+    },
+    "outputs": {
+        "result": "Boolean"
+    },
+    "args":{},
+    "desc": "Starts with a substring."
+},
+{
+    "name": "Ends with",
+    "code": "string.endswith",
+    "inputs": {
+        "str": "String",
+        "ref": "String"
+    },
+    "outputs": {
+        "result": "Boolean"
+    },
+    "args":{},
+    "desc": "Ends with a substring."
 },
 {
     "name": "Sum",
@@ -345,6 +478,28 @@
     },
     "args":"ping \"localhost\"",
     "desc": "Call {args} with input as param"
+},
+{
+    "name": "Call graph",
+    "code": "sys.subgraph",
+    "inputs": {
+        "arg": "Object"
+    },
+    "outputs": {
+        "result": "Object"
+    },
+    "args":"Default",
+    "desc": "Call graph with {args} as param"
+},
+{
+    "name": "Set Output",
+    "code": "sys.output",
+    "inputs": {
+        "arg": "Object"
+    },
+    "outputs": {},
+    "args":"test",
+    "desc": "Set the output \"arg\" of the graph."
 },
 {
     "name": "Parse Json",

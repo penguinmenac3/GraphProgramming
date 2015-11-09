@@ -1,1 +1,40 @@
-{"nodes":[{"name":"String Constant","code":"string.const","inputs":{},"outputs":{"result":"String"},"args":"Hello World!","desc":"Outputs {arg}","x":-11,"y":-139.5},{"name":"Print to console","code":"sys.print","inputs":{"val":"Object"},"outputs":{},"args":{},"desc":"Print the input.","x":-8,"y":123.5}],"connections":[{"input":{"node":"String Constant","output":"result"},"output":{"node":"Print to console","input":"val"}}]}
+{
+	"nodes": [
+		{
+			"name": "String Constant",
+			"code": "string.const",
+			"inputs": {},
+			"outputs": {
+				"result": "String"
+			},
+			"args": "Hello World!",
+			"desc": "Outputs {arg}",
+			"x": -7.5,
+			"y": -136.5
+		},
+		{
+			"name": "Print to console",
+			"code": "sys.print",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {},
+			"args": {},
+			"desc": "Print the input.",
+			"x": -8,
+			"y": 123.5
+		}
+	],
+	"connections": [
+		{
+			"input": {
+				"node": "String Constant",
+				"output": "result"
+			},
+			"output": {
+				"node": "Print to console",
+				"input": "val"
+			}
+		}
+	]
+}

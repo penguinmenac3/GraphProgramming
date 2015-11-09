@@ -1,0 +1,64 @@
+{
+	"nodes": [
+		{
+			"name": "Boolean Constant Arg",
+			"code": "boolean.argconst",
+			"inputs": {},
+			"outputs": {
+				"result": "Boolean"
+			},
+			"args": "test",
+			"desc": "Outputs {args}.",
+			"x": -45,
+			"y": -226.5
+		},
+		{
+			"name": "Not",
+			"code": "boolean.not",
+			"inputs": {
+				"val": "Boolean"
+			},
+			"outputs": {
+				"result": "Boolean"
+			},
+			"args": {},
+			"desc": "Invert the input.",
+			"x": -46,
+			"y": -72.5
+		},
+		{
+			"name": "Set Output",
+			"code": "sys.output",
+			"inputs": {
+				"arg": "Object"
+			},
+			"outputs": {},
+			"args": "test",
+			"desc": "Set the output \"arg\" of the graph.",
+			"x": -46,
+			"y": 81.5
+		}
+	],
+	"connections": [
+		{
+			"input": {
+				"node": "Boolean Constant Arg",
+				"output": "result"
+			},
+			"output": {
+				"node": "Not",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "Not",
+				"output": "result"
+			},
+			"output": {
+				"node": "Set Output",
+				"input": "arg"
+			}
+		}
+	]
+}
