@@ -16,7 +16,7 @@ class Node(object):
 
 	def tick(self, value):
 		img = value["img"]
-		width, height = cv.GetSize(img)
+		width, height, layers = img.shape
         distribution = list(range(width))
         
         for x in range(width):

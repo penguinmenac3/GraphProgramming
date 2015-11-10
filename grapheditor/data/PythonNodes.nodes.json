@@ -713,7 +713,7 @@
     "name": "Show Image",
     "code": "cv.show",
     "inputs": {
-    	"img":"Image"
+        "img":"Image"
     },
     "outputs": {
     },
