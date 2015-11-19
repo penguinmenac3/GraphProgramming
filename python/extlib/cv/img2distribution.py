@@ -16,7 +16,12 @@ class Node(object):
 
 	def tick(self, value):
 		img = value["img"]
-		width, height, layers = img.shape
+		width = 0
+		height = 0
+		try:
+			height, width, shape = img.shape
+		except:
+			height, width = img.shape
         distribution = list(range(width))
         
         for x in range(width):

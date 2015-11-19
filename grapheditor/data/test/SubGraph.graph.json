@@ -11,8 +11,8 @@
 			},
 			"args": "test/Args",
 			"desc": "Call graph with {args} as param",
-			"x": -93,
-			"y": -143.5
+			"x": -126,
+			"y": -180.5
 		},
 		{
 			"name": "Print to console",

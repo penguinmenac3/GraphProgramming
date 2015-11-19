@@ -721,6 +721,17 @@
     "desc": "Show an image."
 },
 {
+    "name": "Record Video",
+    "code": "cv.record",
+    "inputs": {
+        "img":"Image"
+    },
+    "outputs": {
+    },
+    "args":{"resource":"webcam.avi"},
+    "desc": "Record a video to file."
+},
+{
     "name": "Convert image to distribution",
     "code": "cv.img2distribution",
     "inputs": {

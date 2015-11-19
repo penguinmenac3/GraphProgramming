@@ -9,6 +9,7 @@ class Node(object):
 			print("Created input node.")
 		self.args = args
 		self.cap = cv2.VideoCapture(args["resource"])
+		#cap = cv2.VideoCapture(0)
 		if not self.cap.isOpened():
 			raise Exception("Cannot open the given resource: ", args["resource"])
 

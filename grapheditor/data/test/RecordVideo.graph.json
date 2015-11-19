@@ -1,0 +1,94 @@
+{
+	"nodes": [
+		{
+			"name": "Video Input Stream",
+			"code": "cv.video",
+			"inputs": {},
+			"outputs": {
+				"result": "Image"
+			},
+			"args": {
+				"fps": 60,
+				"resource": 0
+			},
+			"desc": "Get videos from {resource}.",
+			"x": 3.5,
+			"y": -192.5
+		},
+		{
+			"name": "Split Flow",
+			"code": "default.splitflow",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"left": "Object",
+				"right": "Object"
+			},
+			"desc": "Passes the variable to both outputs.",
+			"x": 3.5,
+			"y": -62.5,
+			"args": {}
+		},
+		{
+			"name": "Show Image",
+			"code": "cv.show",
+			"inputs": {
+				"img": "Image"
+			},
+			"outputs": {},
+			"args": {
+				"title": "CV Debug View"
+			},
+			"desc": "Show an image.",
+			"x": -95.5,
+			"y": 95.5
+		},
+		{
+			"name": "Record Video",
+			"code": "cv.record",
+			"inputs": {
+				"img": "Image"
+			},
+			"outputs": {},
+			"args": {
+				"resource": "webcam.avi"
+			},
+			"desc": "Record a video to file.",
+			"x": 117,
+			"y": 102.5
+		}
+	],
+	"connections": [
+		{
+			"input": {
+				"node": "Video Input Stream",
+				"output": "result"
+			},
+			"output": {
+				"node": "Split Flow",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "Split Flow",
+				"output": "left"
+			},
+			"output": {
+				"node": "Show Image",
+				"input": "img"
+			}
+		},
+		{
+			"input": {
+				"node": "Split Flow",
+				"output": "right"
+			},
+			"output": {
+				"node": "Record Video",
+				"input": "img"
+			}
+		}
+	]
+}
