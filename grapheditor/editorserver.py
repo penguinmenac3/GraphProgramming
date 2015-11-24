@@ -121,10 +121,12 @@ class myHandler(BaseHTTPRequestHandler):
             preex = None
             try:
                 preex = os.setsid
+                cmd = ["python ../python/graphex.py " + cmd]
             except AttributeError:
                 print("Windows: Feature not availible.")
+                cmd = ["python2", "../python/graphex.py ", cmd]
             execProcess = subprocess.Popen(
-                ["python ../python/graphex.py " + cmd],
+                cmd,
                  stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                  shell=True, preexec_fn=preex)
             result = ""
