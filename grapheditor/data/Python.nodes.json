@@ -1,0 +1,120 @@
+[{
+    "name": "Splitflow",
+    "code": "default.splitflow",
+    "inputs": {"val": "Object"},
+    "outputs": {"right": "Object", "left": "Object"},
+    "args":"",
+    "desc": "Splits the flow."
+},
+{
+    "name": "Splitflow",
+    "code": "default.splitflow5",
+    "inputs": {"val": "Object"},
+    "outputs": {"5": "Object", "4": "Object", "1": "Object", "2": "Object", "3": "Object"},
+    "args":"",
+    "desc": "Splits the flow."
+},
+{
+    "name": "Accept any input",
+    "code": "default.any",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "Object"},
+    "args":"",
+    "desc": "If any input is present pass it."
+},
+{
+    "name": "Not",
+    "code": "boolean.not",
+    "inputs": {"val": "Boolean"},
+    "outputs": {"result": "Boolean"},
+    "args":"",
+    "desc": "Output the inverted input."
+},
+{
+    "name": "And",
+    "code": "boolean.and",
+    "inputs": {"right": "Boolean", "left": "Boolean"},
+    "outputs": {"result": "Boolean"},
+    "args":"",
+    "desc": "Combine inputs with and."
+},
+{
+    "name": "Or",
+    "code": "boolean.or",
+    "inputs": {"right": "Boolean", "left": "Boolean"},
+    "outputs": {"result": "Boolean"},
+    "args":"",
+    "desc": "Output the or of the inputs."
+},
+{
+    "name": "Arg trigger",
+    "code": "boolean.argconst",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args":{"time": 1.0, "val": "arg"},
+    "desc": "Get input from arguments."
+},
+{
+    "name": "Trigger",
+    "code": "boolean.trigger",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args":{"time": 1.0, "val": true},
+    "desc": "Trigger arg.val every arg.time s."
+},
+{
+    "name": "Const",
+    "code": "boolean.const",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args":true,
+    "desc": "Output the arg."
+},
+{
+    "name": "Arg const",
+    "code": "boolean.argconst",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args":"arg",
+    "desc": "Get input from arguments."
+},
+{
+    "name": "Equal",
+    "code": "boolean.equal",
+    "inputs": {"5": "Boolean", "4": "Boolean", "1": "Boolean", "2": "Boolean", "3": "Boolean"},
+    "outputs": {"result": "Boolean"},
+    "args":5,
+    "desc": "Checks if the first arg inputs are equal."
+},
+{
+    "name": "Arg trigger",
+    "code": "arrays.argtrigger",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args":{"time": 1.0, "val": "arg"},
+    "desc": "Get triggers from commandline."
+},
+{
+    "name": "Arg const",
+    "code": "arrays.argconst",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args":"arg",
+    "desc": "Get triggers from commandline."
+},
+{
+    "name": "Parse Json",
+    "code": "json.parse",
+    "inputs": {"val": "String"},
+    "outputs": {"result": "Object"},
+    "args":"",
+    "desc": "Parse a json string into an object."
+},
+{
+    "name": "Stringify Json",
+    "code": "json.stringify",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "String"},
+    "args":"",
+    "desc": "Makes a json string out of an object."
+}]
