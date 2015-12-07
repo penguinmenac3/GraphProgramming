@@ -6,12 +6,14 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Arg const", "arrays.argconst", "arg", {}, {"result":"String"}, "Get triggers from commandline.", verbose)
+        super(Node, self).__init__("Arg const", "arrays.argconst", "arg", {}, {"result": "String"},
+                                   "Get triggers from commandline.", verbose, True, False)
         self.args = args
 
     def tick(self, value):
         global registry
-        return {"result":registry[self.args]}
+        return {"result": registry[self.args]}
+
 
 if __name__ == "__main__":
     print(Node(False, []).toString())
