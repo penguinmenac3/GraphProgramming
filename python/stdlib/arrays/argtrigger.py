@@ -16,7 +16,3 @@ class Node(base.Node):
         time.sleep(self.args["time"])
         global registry
         return {"result": registry[self.args["val"]]}
-
-
-if __name__ == "__main__":
-    print(Node(False, []).toString())

@@ -13,7 +13,3 @@ class Node(base.Node):
     def tick(self, value):
         global registry
         return {"result": registry[self.args]}
-
-
-if __name__ == "__main__":
-    print(Node(False, []).toString())
