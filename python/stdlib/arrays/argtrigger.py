@@ -1,25 +1,18 @@
 import time
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
-class Node(object):
-	def __init__(self, verbose, args):
-		if verbose:
-			print("Created input node.")
-		self.args = args
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("Arg trigger", "arrays.argtrigger", {"val":"arg", "time":1.0}, {}, {"result":"String"}, "Get triggers from commandline.", verbose)
+        self.args = args
 
-	def isInput(self):
-		return True
-
-	def isRepeating(self):
-		return True
-
-	def tick(self, value):
-		time.sleep(self.args["time"])
-		global registry
-		return {"result":registry[self.args["val"]]}
-
-
-def instance(verbose, args):
-	return Node(verbose, args)
+    def tick(self, value):
+        time.sleep(self.args["time"])
+        global registry
+        return {"result":registry[self.args["val"]]}
 
 if __name__ == "__main__":
-	print("A node")
+    print(Node(False, []).toString())
