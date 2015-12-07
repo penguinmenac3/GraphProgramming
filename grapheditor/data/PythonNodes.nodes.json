@@ -742,5 +742,31 @@
     },
     "args":{},
     "desc": "Convert a grayscale image into a posterior distribution."
+},
+{
+    "name": "Detect sift features",
+    "code": "cv.sift",
+    "inputs": {
+    	"img":"Image"
+    },
+    "outputs": {
+    	"img":"Image",
+        "features":"Feature"
+    },
+    "args":"",
+    "desc": "Detect sift features."
+},
+{
+    "name": "Plot features",
+    "code": "cv.plotfeatures",
+    "inputs": {
+    	"img":"Image",
+    	"features":"Feature"
+    },
+    "outputs": {
+    	"img":"Image"
+    },
+    "args":"",
+    "desc": "Plot features in an image."
 }
 ]
