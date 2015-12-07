@@ -1,23 +1,15 @@
 import json
-from subprocess import check_output as qx
 
-class Node(object):
-	def __init__(self, verbose, args):
-		if verbose:
-			print("A node.")
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
-	def isInput(self):
-		return False
 
-	def isRepeating(self):
-		return False
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("Stringify Json", "json.stringify", "", {"val": "Object"}, {"result": "String"},
+                                   "Makes a json string out of an object..", verbose)
 
-	def tick(self, value):
-		return {"result":json.dumps(value["val"])}
-		
-
-def instance(verbose, args):
-	return Node(verbose, args)
-
-if __name__ == "__main__":
-	print("A node")
+    def tick(self, value):
+        return {"result": json.dumps(value["val"])}
