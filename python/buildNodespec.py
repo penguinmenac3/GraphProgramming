@@ -10,17 +10,23 @@ def files_by_pattern(directory, matchFunc):
 
 def try_load(name, verbose):
     name = name.replace("/", ".")[2:-3]
-    if name == "stdlib.Node":
+    if name == "stdlib.Node" or name == "graphex" or name == "buildNodespec" or name.endswith("__init__"):
         return None
     if verbose:
         print("Try loading node: " + name)
     try:
         module = __import__(name, fromlist=["Node"])
-    except (ImportError, SyntaxError):
+    except (ImportError, SyntaxError) as e:
+        if verbose:
+            print("Syntax or import error at: " + name)
+            print(e)
         return None
     try:
         return module.Node(False, []).toJson()
-    except (AttributeError, TypeError):
+    except (AttributeError, TypeError) as e:
+        if verbose:
+            print("Failed parsing " + name + "!")
+            print(e)
         return None
 
 
@@ -53,4 +59,6 @@ if __name__ == "__main__":
 
     file = open(filename, 'w')
     file.write(txt)
+    if verbose:
+        print(txt)
     print("Done. If some nodes are programmed wrong. Kill this process now.")
