@@ -1,38 +1,32 @@
-import json
 import socket
 import time
 
-class Node(object):
-	def __init__(self, verbose, args):
-		self.host = args["host"]
-		self.port = args["port"]
-		if verbose:
-			print("Created node.")
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
-	def isInput(self):
-		return False
 
-	def isRepeating(self):
-		return False
-		
-	def tick(self, value):
-		line = None
-		while line == None:
-			try:
-				self.socket = socket.socket()
-				self.socket.connect((self.host, self.port))
-				self.socketfile = self.socket.makefile()
-				self.socket.send((json.dumps(value)+"\n").encode("utf-8"))
-				line = "success"
-				self.socket.close()
-			except (ConnectionRefusedError, ConnectionResetError):
-				time.sleep(1)
-				line = None
-		return {}
-		
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("Network", "sys.networkoutput",
+                                   {"host": "127.0.0.1", "port": 25555},
+                                   {"msg": "String"},
+                                   {"result": "String"},
+                                   "Execute executable with given args.", verbose)
+        self.args = args
 
-def instance(verbose, args):
-	return Node(verbose, args)
-
-if __name__ == "__main__":
-	print("A node.")
+    def tick(self, value):
+        host = self.args["host"]
+        port = self.args["port"]
+        line = None
+        while line is None:
+            try:
+                s = socket.socket()
+                s.connect((host, port))
+                s.send((value["msg"] + "\n").encode("utf-8"))
+                s.close()
+            except (ConnectionRefusedError, ConnectionResetError):
+                time.sleep(1)
+                line = None
+        return {}

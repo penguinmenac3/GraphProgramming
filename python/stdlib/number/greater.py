@@ -1,20 +1,15 @@
-class Node(object):
-	def __init__(self, verbose, args):
-		if verbose:
-			print("Created node.")
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
-	def isInput(self):
-		return False
 
-	def isRepeating(self):
-		return False
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("Greater than", "number.greater", "",
+                                   {"left": "Number", "right": "Number"},
+                                   {"result": "Number"},
+                                   "Check if left > right.", verbose)
 
-	def tick(self, value):
-		return {"result":value["left"] > value["right"]}
-		
-
-def instance(verbose, args):
-	return Node(verbose, args)
-
-if __name__ == "__main__":
-	print("Sums two inputs.")
+    def tick(self, value):
+        return {"result": value["left"] > value["right"]}

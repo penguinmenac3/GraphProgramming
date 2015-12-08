@@ -77,7 +77,7 @@ class Node(object):
     "code": "''' + self.getCode() + '''",
     "inputs": ''' + json.dumps(self.getInputs()) + ''',
     "outputs": ''' + json.dumps(self.getOutputs()) + ''',
-    "args":''' + json.dumps(self.getDefaultArgs()) + ''',
+    "args": ''' + json.dumps(self.getDefaultArgs()) + ''',
     "desc": "''' + self.getDescription() + '''"
 }'''
 

@@ -1,24 +1,17 @@
 import time
 
-class Node(object):
-	def __init__(self, verbose, args):
-		if verbose:
-			print("Created input node.")
-		self.args = args
-
-	def isInput(self):
-		return True
-
-	def isRepeating(self):
-		return True
-
-	def tick(self, value):
-		time.sleep(self.args["time"])
-		return {"result":self.args["val"]}
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
 
-def instance(verbose, args):
-	return Node(verbose, args)
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("Trigger Number", "number.trigger", {"val":42, "time":1.0},
+                                   {}, {"result": "Number"}, "Trigger value every time seconds.", verbose, True, True)
+        self.args = args
 
-if __name__ == "__main__":
-	print("A node")
+    def tick(self, value):
+        time.sleep(self.args["time"])
+        return {"result": self.args["val"]}

@@ -1,24 +1,19 @@
-class Node(object):
-	def __init__(self, verbose, args):
-		if verbose:
-			print("Created node.")
-		self.args = args
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
-	def isInput(self):
-		return False
-		
-	def isRepeating(self):
-		return False
 
-	def tick(self, value):
-		result = True
-		for (i in range(args-1)):
-			result = result && value[i] == value[i+1]
-		return {"result":result}
-		
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("Equal", "number.equal", 5,
+                                   {"1": "Number", "2": "Number", "3": "Number", "4": "Number", "5": "Number"},
+                                   {"result": "Boolean"},
+                                   "Check if values are equal.", verbose)
+        self.args = args
 
-def instance(verbose, args):
-	return Node(verbose, args)
-
-if __name__ == "__main__":
-	print("A node.")
+    def tick(self, value):
+        result = True
+        for i in range(self.args - 1):
+            result = result and value[i] == value[i + 1]
+        return {"result": result}

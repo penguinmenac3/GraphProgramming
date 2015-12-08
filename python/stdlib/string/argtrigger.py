@@ -1,25 +1,19 @@
 import time
 
-class Node(object):
-	def __init__(self, verbose, args):
-		if verbose:
-			print("Created input node.")
-		self.args = args
-
-	def isInput(self):
-		return True
-
-	def isRepeating(self):
-		return True
-
-	def tick(self, value):
-		time.sleep(self.args["time"])
-		global registry
-		return {"result":registry[self.args["val"]]}
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
 
-def instance(verbose, args):
-	return Node(verbose, args)
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("String Argument Trigger", "string.argtrigger", {"val": "arg", "time": 1.0}, {},
+                                   {"result": "String"},
+                                   "Pass the argument of the program.", verbose, True, True)
+        self.args = args
 
-if __name__ == "__main__":
-	print("A node")
+    def tick(self, value):
+        time.sleep(self.args["time"])
+        global registry
+        return {"result": registry[self.args["val"]]}
