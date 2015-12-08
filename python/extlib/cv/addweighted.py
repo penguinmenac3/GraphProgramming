@@ -1,29 +1,24 @@
 import cv2
-import numpy as np
-import matplotlib.pyplot as plt
 
-class Node(object):
-	def __init__(self, verbose, args):
-		if verbose:
-			print("Created node.")
-		self.left = args["left"]
-		self.right = args["right"]
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
-	def isInput(self):
-		return False
-		
-	def isRepeating(self):
-		return False
 
-	def tick(self, value):
-		img = value["left"]
-		img2 = value["right"]
-		img = cv2.addWeighted(img, self.left, img2, self.right, 0)
-		return {"result":img}
-		
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("Add Weighted", "cv.addweighted",
+                                   {"left": "Number", "right": "Number"},
+                                   {"left": "Image", "right": "Image"},
+                                   {"result": "Image"},
+                                   "Add the two images weighted.", verbose)
+        self.args = args
 
-def instance(verbose, args):
-	return Node(verbose, args)
-
-if __name__ == "__main__":
-	print("A node.")
+    def tick(self, value):
+        left = self.args["left"]
+        right = self.args["right"]
+        img = value["left"]
+        img2 = value["right"]
+        img = cv2.addWeighted(img, left, img2, right, 0)
+        return {"result": img}

@@ -1,31 +1,28 @@
 import cv2
-import numpy as np
-from threading import Thread
 
-class Node(object):
-	def __init__(self, verbose, args):
-		if verbose:
-			print("Created node.")
-		self.sift = cv2.xfeatures2d.SIFT_create()
-		#self.sift = cv2.SURF(400)
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
-	def isInput(self):
-		return False
-		
-	def isRepeating(self):
-		return False
 
-	def tick(self, value):
-		img = value["img"]
-		gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("Sift", "cv.sift",
+                                   "",
+                                   {"img", "Image"},
+                                   {"img": "Image", "features":"Array"},
+                                   "Detect sift features.", verbose)
+        self.args = args
+        self.sift = None
 
-		kp = self.sift.detect(gray, None)
+    def tick(self, value):
+        if self.sift is None:
+            self.sift = cv2.xfeatures2d.SIFT_create()
+            #self.sift = cv2.SURF(400)
+        img = value["img"]
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-		return {"img":img, "features":kp}
-		
+        kp = self.sift.detect(gray, None)
 
-def instance(verbose, args):
-	return Node(verbose, args)
-
-if __name__ == "__main__":
-	print("A node.")
+        return {"img": img, "features": kp}
