@@ -2,7 +2,7 @@
 
 import time
 import math
-from extlib.raspi.Adafruit_I2C import Adafruit_I2C
+from extlib.raspi.Adafruit_I2C_Lib import Adafruit_I2C
 
 # ============================================================================
 # Adafruit PCA9685 16-Channel PWM Servo Driver

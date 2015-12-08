@@ -10,9 +10,9 @@ from time import sleep
 from threading import Thread
 
 try:
-    import extlib.raspi.Adafruit_PWM_Servo_Driver as servoDriver
+    import extlib.raspi.Adafruit_PWM_Servo_Driver_Lib as servoDriver
 except ImportError:
-    import extlib.raspi.Dummy_PWM_Servo_Driver as servoDriver
+    import extlib.raspi.Dummy_PWM_Servo_Driver_Lib as servoDriver
 try:
     from ...stdlib import Node as base
 except ValueError:
