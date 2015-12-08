@@ -10,7 +10,7 @@ class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("Sift", "cv.sift",
                                    "",
-                                   {"img", "Image"},
+                                   {"img": "Image"},
                                    {"img": "Image", "features":"Array"},
                                    "Detect sift features.", verbose)
         self.args = args

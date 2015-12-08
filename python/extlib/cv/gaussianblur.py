@@ -10,7 +10,7 @@ class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("Gaussian Blur", "cv.gaussianblur",
                                    4,
-                                   {"img", "Image"},
+                                   {"img": "Image"},
                                    {"result": "Image"},
                                    "Apply gaussian blur on image.", verbose)
         self.args = args

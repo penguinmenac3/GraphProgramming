@@ -8,7 +8,7 @@ class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("Image to distribution", "cv.img2distribution",
                                    "",
-                                   {"img", "Image"},
+                                   {"img": "Image"},
                                    {"result": "Array"},
                                    "Convert an image to a distribution.", verbose)
 

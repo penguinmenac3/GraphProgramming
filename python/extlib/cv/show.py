@@ -11,7 +11,7 @@ class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("Show", "cv.show",
                                    {"title": "Debug View"},
-                                   {"img", "Image"},
+                                   {"img": "Image"},
                                    {},
                                    "Show an image.", verbose)
         self.args = args

@@ -11,7 +11,7 @@ class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("In Range", "cv.inrange",
                                    {"lh": 0, "ls": 0, "lv": 0, "uh": 255, "us": 255, "uv": 255},
-                                   {"img", "Image"},
+                                   {"img": "Image"},
                                    {"result": "Image"},
                                    "Apply an inRange operation on the image.", verbose)
         self.args = args

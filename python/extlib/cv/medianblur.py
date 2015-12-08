@@ -10,7 +10,7 @@ class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("Median Blur", "cv.medianblur",
                                    4,
-                                   {"img", "Image"},
+                                   {"img": "Image"},
                                    {"result": "Image"},
                                    "Apply median blur on image.", verbose)
         self.args = args

@@ -8,7 +8,7 @@ class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("Fixed Saturisation", "cv.fixedsaturisation",
                                    127,
-                                   {"img", "Image"},
+                                   {"img": "Image"},
                                    {"result": "Image"},
                                    "Set the saturisation to a fixed value.", verbose)
         self.args = args

@@ -10,7 +10,7 @@ class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("HSV to BGR", "cv.hsv2bgr",
                                    "",
-                                   {"img", "Image"},
+                                   {"img": "Image"},
                                    {"result": "Image"},
                                    "Convert HSV image to BGR image.", verbose)
         self.args = args
