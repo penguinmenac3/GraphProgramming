@@ -3,7 +3,7 @@ import sys
 
 
 def files_by_pattern(directory, matchFunc):
-    for path, dirs, files in os.walk(directory):
+    for path, dirs, files in os.walk(directory, followlinks=True):
         for f in filter(matchFunc, files):
             yield os.path.join(path, f)
 
