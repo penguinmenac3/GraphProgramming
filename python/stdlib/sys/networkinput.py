@@ -28,7 +28,7 @@ class Node(base.Node):
             line = self.client_styled_pull(host, port, password)
         else:
             line = self.server_styled_pull(host, port, password)
-        return line
+        return {"result": line}
 
     def server_styled_pull(self, host, port, password):
         line = None

@@ -31,4 +31,4 @@ class Node(base.Node):
             except (ConnectionRefusedError, ConnectionResetError):
                 time.sleep(1)
                 line = None
-        return line
+        return {"result": line}
