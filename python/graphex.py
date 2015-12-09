@@ -2,7 +2,6 @@ import json
 import sys
 import time
 from threading import Thread
-from collections import deque
 
 try:
     import builtins
@@ -14,6 +13,8 @@ builtins.registry_output = {}
 
 class GraphEx(object):
     def __init__(self, graph_path, verbose = False):
+        self.nodes = {}
+        self.input_nodes = {}
 
         # Open the graph and parse it as json.
         data = open(graph_path, 'r').read()
@@ -23,9 +24,6 @@ class GraphEx(object):
         # Now build a graph that we can work with efficiently.
         self.findAndCreateNodes(self.raw_graph["nodes"])
         self.findAndCreateConnections(self.raw_graph["connections"])
-
-        self.nodes = {}
-        self.input_nodes = {}
 
     def findAndCreateNodes(self, nodelist):
         # Empty nodes and input nodes list.
@@ -42,7 +40,7 @@ class GraphEx(object):
                 codeName = node["code"]
                 if self.verbose:
                     print("Importing stdlib.%s" % codeName)
-                module = __import__("stdlib.%s" % codeName, fromlist=["instance"])
+                module = __import__("stdlib.%s" % codeName, fromlist=["Node"])
             except ImportError:
                 module = None
             # Try to import the code required for a node.
@@ -51,7 +49,7 @@ class GraphEx(object):
                     codeName = node["code"]
                     if self.verbose:
                         print("Importing extlib.%s" % codeName)
-                    module = __import__("extlib.%s" % codeName, fromlist=["instance"])
+                    module = __import__("extlib.%s" % codeName, fromlist=["Node"])
                 except ImportError:
                     module = None
             # Search in users private lib.
@@ -60,16 +58,16 @@ class GraphEx(object):
                     codeName = node["code"]
                     if self.verbose:
                         print("Importing privatelib.%s" % codeName)
-                    module = __import__("pirvatelib.%s" % codeName, fromlist=["instance"])
+                    module = __import__("pirvatelib.%s" % codeName, fromlist=["Node"])
                 except ImportError:
                     raise ImportError("Cannot find implementation for node: " + node["code"])
 
             # Create node and add lists for connecting them.
-            currentNode = module.instance(self.verbose, node["args"])
+            currentNode = module.Node(self.verbose, node["args"])
             currentNode.nextNodes = []
             currentNode.prevNodes = []
-            currentNode.inputs = {}
-            currentNode.outputs = {}
+            currentNode.ins = {}
+            currentNode.outs = {}
             currentNode.inputBuffer = {}
 
             # Add the node to the internal lists for inputs and all nodes.
@@ -88,11 +86,11 @@ class GraphEx(object):
 
             # Link the nodes together
             inputNode.nextNodes.append(outputNode)
-            if outputQualifier not in inputNode.outputs:
-                inputNode.outputs[outputQualifier] = []
-            inputNode.outputs[outputQualifier].append({"node":outputNode,"var":inputQualifier});
+            if outputQualifier not in inputNode.outs:
+                inputNode.outs[outputQualifier] = []
+            inputNode.outs[outputQualifier].append({"node":outputNode,"var":inputQualifier});
             outputNode.prevNodes.append(inputNode)
-            outputNode.inputs[inputQualifier] = {"var":outputQualifier}
+            outputNode.ins[inputQualifier] = {"var":outputQualifier}
 
     def execute(self):
         # Initialize all lists.
@@ -119,7 +117,7 @@ class GraphEx(object):
                 # Prepare the input value set for the node.
                 abort = False
                 for key in node.inputBuffer:
-                    if node.inputBuffer[key] == None:
+                    if node.inputBuffer[key] is None:
                         abort = True
                         break
 
@@ -133,8 +131,8 @@ class GraphEx(object):
         # Tick the node and then add the result to calculated.
         result = node.tick(value)
         #print(result)
-        for key in node.outputs:
-            for elem in node.outputs[key]:
+        for key in node.outs:
+            for elem in node.outs[key]:
                 resultNode = elem["node"]
                 resultNode.inputBuffer[elem["var"]] = result[key]
                 #print(resultNode.inputBuffer)
@@ -147,7 +145,7 @@ class GraphEx(object):
 
     def checkIfReady(self, node):
         # Check if all nodes are calculated.
-        for key in node.inputs:
+        for key in node.ins:
             if key not in node.inputBuffer:
                 return False
         return True

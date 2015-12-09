@@ -66,7 +66,7 @@
     "name": "Splitflow",
     "code": "default.splitflow5",
     "inputs": {"val": "Object"},
-    "outputs": {"5": "Object", "3": "Object", "2": "Object", "4": "Object", "1": "Object"},
+    "outputs": {"3": "Object", "2": "Object", "4": "Object", "5": "Object", "1": "Object"},
     "args": "",
     "desc": "Splits the flow."
 },
@@ -107,7 +107,7 @@
     "code": "boolean.argconst",
     "inputs": {},
     "outputs": {"result": "Boolean"},
-    "args": {"val": "arg", "time": 1.0},
+    "args": {"time": 1.0, "val": "arg"},
     "desc": "Get input from arguments."
 },
 {
@@ -115,7 +115,7 @@
     "code": "boolean.trigger",
     "inputs": {},
     "outputs": {"result": "Boolean"},
-    "args": {"val": true, "time": 1.0},
+    "args": {"time": 1.0, "val": true},
     "desc": "Trigger arg.val every arg.time s."
 },
 {
@@ -137,7 +137,7 @@
 {
     "name": "Equal",
     "code": "boolean.equal",
-    "inputs": {"5": "Boolean", "3": "Boolean", "2": "Boolean", "4": "Boolean", "1": "Boolean"},
+    "inputs": {"3": "Boolean", "2": "Boolean", "4": "Boolean", "5": "Boolean", "1": "Boolean"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Checks if the first arg inputs are equal."
@@ -147,7 +147,7 @@
     "code": "arrays.argtrigger",
     "inputs": {},
     "outputs": {"result": "String"},
-    "args": {"val": "arg", "time": 1.0},
+    "args": {"time": 1.0, "val": "arg"},
     "desc": "Get triggers from commandline."
 },
 {
@@ -161,7 +161,7 @@
 {
     "name": "Index of",
     "code": "string.indexof",
-    "inputs": {"offset": "Number", "str": "String", "ref": "String"},
+    "inputs": {"ref": "String", "offset": "Number", "str": "String"},
     "outputs": {"result": "Number"},
     "args": "",
     "desc": "Get the index of a ref in a string."
@@ -171,7 +171,7 @@
     "code": "string.argtrigger",
     "inputs": {},
     "outputs": {"result": "String"},
-    "args": {"val": "arg", "time": 1.0},
+    "args": {"time": 1.0, "val": "arg"},
     "desc": "Pass the argument of the program."
 },
 {
@@ -179,7 +179,7 @@
     "code": "string.trigger",
     "inputs": {},
     "outputs": {"result": "String"},
-    "args": {"val": "Hello World!", "time": 1.0},
+    "args": {"time": 1.0, "val": "Hello World!"},
     "desc": "Trigger string."
 },
 {
@@ -209,7 +209,7 @@
 {
     "name": "Starts with",
     "code": "string.startswith",
-    "inputs": {"str": "String", "ref": "String"},
+    "inputs": {"ref": "String", "str": "String"},
     "outputs": {"result": "Boolean"},
     "args": "",
     "desc": "String starts with ref."
@@ -217,7 +217,7 @@
 {
     "name": "Equal",
     "code": "string.equal",
-    "inputs": {"5": "String", "3": "String", "2": "String", "4": "String", "1": "String"},
+    "inputs": {"3": "String", "2": "String", "4": "String", "5": "String", "1": "String"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Check if values are equal."
@@ -225,7 +225,7 @@
 {
     "name": "Ends with",
     "code": "string.endswith",
-    "inputs": {"str": "String", "ref": "String"},
+    "inputs": {"ref": "String", "str": "String"},
     "outputs": {"result": "Boolean"},
     "args": "",
     "desc": "Check if a string ends with the reference."
@@ -275,7 +275,7 @@
     "code": "number.argtrigger",
     "inputs": {},
     "outputs": {"result": "Number"},
-    "args": {"val": "arg", "time": 1.0},
+    "args": {"time": 1.0, "val": "arg"},
     "desc": "Pass the argument of the program."
 },
 {
@@ -283,7 +283,7 @@
     "code": "number.trigger",
     "inputs": {},
     "outputs": {"result": "Number"},
-    "args": {"val": 42, "time": 1.0},
+    "args": {"time": 1.0, "val": 42},
     "desc": "Trigger value every time seconds."
 },
 {
@@ -337,7 +337,7 @@
 {
     "name": "Equal",
     "code": "number.equal",
-    "inputs": {"5": "Number", "3": "Number", "2": "Number", "4": "Number", "1": "Number"},
+    "inputs": {"3": "Number", "2": "Number", "4": "Number", "5": "Number", "1": "Number"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Check if values are equal."
@@ -345,7 +345,7 @@
 {
     "name": "While greater",
     "code": "structures.whilegreater",
-    "inputs": {"val": "Number", "initial": "Number"},
+    "inputs": {"initial": "Number", "val": "Number"},
     "outputs": {"leave": "Number", "loop": "Number"},
     "args": "",
     "desc": "Loop while initial is greater than val."
@@ -353,7 +353,7 @@
 {
     "name": "While less",
     "code": "structures.whileless",
-    "inputs": {"val": "Number", "initial": "Number"},
+    "inputs": {"initial": "Number", "val": "Number"},
     "outputs": {"leave": "Number", "loop": "Number"},
     "args": "",
     "desc": "Loop while initial is less than val."
@@ -370,7 +370,7 @@
     "name": "If",
     "code": "structures.if",
     "inputs": {"val": "Object", "condition": "Boolean"},
-    "outputs": {"false": "Object", "true": "Object"},
+    "outputs": {"true": "Object", "false": "Object"},
     "args": "",
     "desc": "If condition pass to true otherwise to false."
 },
@@ -387,7 +387,7 @@
     "code": "cv.video",
     "inputs": {},
     "outputs": {"result": "Image"},
-    "args": {"fps": 30, "resource": 0},
+    "args": {"resource": 0, "fps": 30},
     "desc": "Capture video."
 },
 {
@@ -395,7 +395,7 @@
     "code": "cv.inrange",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
-    "args": {"ls": 0, "uh": 255, "lv": 0, "uv": 255, "us": 255, "lh": 0},
+    "args": {"lh": 0, "lv": 0, "uh": 255, "us": 255, "uv": 255, "ls": 0},
     "desc": "Apply an inRange operation on the image."
 },
 {
@@ -505,7 +505,7 @@
 {
     "name": "RcCar",
     "code": "raspi.rccar",
-    "inputs": {"speed": "Number", "turn": "Number"},
+    "inputs": {"turn": "Number", "speed": "Number"},
     "outputs": {},
     "args": {"maxSpeed": 0.5},
     "desc": "Set turn and speed of rccar."

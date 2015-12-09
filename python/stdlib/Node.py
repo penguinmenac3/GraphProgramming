@@ -18,7 +18,7 @@ class Node(object):
     @:param isInput optional if the node is an input node
     @:param isRepeating optional if the node is a repeating node
     """
-    def __init__(self, name, code, defaultArgs, inputs, outputs, description, verbose, isInput = False, isRepeating = False):
+    def __init__(self, name, code, defaultArgs, inputs, outputs, description, verbose, isInput=False, isRepeating=False):
         self.name = name
         self.inputs = inputs
         self.outputs = outputs
