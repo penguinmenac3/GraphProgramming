@@ -58,7 +58,7 @@ class GraphEx(object):
                     codeName = node["code"]
                     if self.verbose:
                         print("Importing privatelib.%s" % codeName)
-                    module = __import__("pirvatelib.%s" % codeName, fromlist=["Node"])
+                    module = __import__("privatelib.%s" % codeName, fromlist=["Node"])
                 except ImportError:
                     raise ImportError("Cannot find implementation for node: " + node["code"])
 
