@@ -10,7 +10,7 @@ except ValueError:
 class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("Network", "sys.networkoutput",
-                                   {"host": "127.0.0.1", "port": 25555},
+                                   {"host": "127.0.0.1", "port": 25555, "server": False, "password": None},
                                    {"msg": "String"},
                                    {"result": "String"},
                                    "Execute executable with given args.", verbose)
