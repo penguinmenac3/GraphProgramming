@@ -1,28 +1,23 @@
 import cv2
-import numpy as np
-import matplotlib.pyplot as plt
 
-class Node(object):
-	def __init__(self, verbose, args):
-		if verbose:
-			print("Created node.")
-		self.width = args["width"]
-		self.height = args["height"]
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
-	def isInput(self):
-		return False
-		
-	def isRepeating(self):
-		return False
 
-	def tick(self, value):
-		img = value["img"]
-		img = cv2.resize(img, (self.width, self.height), 0, 0, cv2.INTER_CUBIC)
-		return {"result":img}
-		
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("Resize", "cv.resize",
+                                   {"width": 320, "height": 240},
+                                   {"img": "Image"},
+                                   {"result": "Image"},
+                                   "Apply gaussian blur on image.", verbose)
+        self.args = args
 
-def instance(verbose, args):
-	return Node(verbose, args)
-
-if __name__ == "__main__":
-	print("A node.")
+    def tick(self, value):
+        width = self.args["width"]
+        height = self.args["height"]
+        img = value["img"]
+        img = cv2.resize(img, (width, height), 0, 0, cv2.INTER_CUBIC)
+        return {"result": img}

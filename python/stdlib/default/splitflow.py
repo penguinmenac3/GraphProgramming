@@ -1,20 +1,14 @@
-class Node(object):
-	def __init__(self, verbose, args):
-		if verbose:
-			print("Created sum Node.")
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
-	def isInput(self):
-		return False
 
-	def isRepeating(self):
-		return False
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("Splitflow", "default.splitflow", "", {"val": "Object"},
+                                   {"left": "Object", "right": "Object"},
+                                   "Splits the flow.", verbose)
 
-	def tick(self, value):
-		return {"left":value["val"], "right":value["val"]}
-		
-
-def instance(verbose, args):
-	return Node(verbose, args)
-
-if __name__ == "__main__":
-	print("A node.")
+    def tick(self, value):
+        return {"left": value["val"], "right": value["val"]}

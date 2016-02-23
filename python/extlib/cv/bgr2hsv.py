@@ -1,26 +1,21 @@
 import cv2
-import numpy as np
-import matplotlib.pyplot as plt
 
-class Node(object):
-	def __init__(self, verbose, args):
-		if verbose:
-			print("Created node.")
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
-	def isInput(self):
-		return False
-		
-	def isRepeating(self):
-		return False
 
-	def tick(self, value):
-		img = value["img"]
-		img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-		return {"result":img}
-		
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("BGR to HSV", "cv.bgr2hsv",
+                                   "",
+                                   {"img": "Image"},
+                                   {"result": "Image"},
+                                   "Convert BGR image to HSV image.", verbose)
+        self.args = args
 
-def instance(verbose, args):
-	return Node(verbose, args)
-
-if __name__ == "__main__":
-	print("A node.")
+    def tick(self, value):
+        img = value["img"]
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        return {"result": img}

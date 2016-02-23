@@ -8,21 +8,21 @@
 				"result": "String"
 			},
 			"args": "Hello World!",
-			"desc": "Outputs {arg}",
-			"x": -7.5,
-			"y": -136.5
+			"desc": "Pass the string arg as output.",
+			"x": -0.5,
+			"y": -143.5
 		},
 		{
-			"name": "Print to console",
+			"name": "Print",
 			"code": "sys.print",
 			"inputs": {
-				"val": "Object"
+				"val": "String"
 			},
 			"outputs": {},
-			"args": {},
-			"desc": "Print the input.",
-			"x": -8,
-			"y": 123.5
+			"args": "",
+			"desc": "Print input to console.",
+			"x": 1.5,
+			"y": 101.5
 		}
 	],
 	"connections": [
@@ -32,7 +32,7 @@
 				"output": "result"
 			},
 			"output": {
-				"node": "Print to console",
+				"node": "Print",
 				"input": "val"
 			}
 		}

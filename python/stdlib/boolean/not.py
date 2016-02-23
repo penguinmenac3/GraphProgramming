@@ -1,20 +1,13 @@
-class Node(object):
-	def __init__(self, verbose, args):
-		if verbose:
-			print("Created node.")
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
-	def isInput(self):
-		return False
 
-	def isRepeating(self):
-		return False
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("Not", "boolean.not", "", {"val": "Boolean"},
+                                   {"result": "Boolean"}, "Output the inverted input.", verbose)
 
-	def tick(self, value):
-		return {"result":not value["val"]}
-		
-
-def instance(verbose, args):
-	return Node(verbose, args)
-
-if __name__ == "__main__":
-	print("A node.")
+    def tick(self, value):
+        return {"result": not value["val"]}

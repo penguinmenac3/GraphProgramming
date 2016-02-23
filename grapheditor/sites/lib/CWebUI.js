@@ -33,7 +33,7 @@ function WebUI_CWebUI() {
 		KeyListener.launch(RenderEngine);
 
 		getGraph(that.graphName, that.setGraph, that.printError);
-		getNodes("PythonNodes", that.setNodes, that.printError);
+		getNodes("Python", that.setNodes, that.printError);
 		return true;
 	};
 

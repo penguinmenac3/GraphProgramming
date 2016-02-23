@@ -1,0 +1,512 @@
+[{
+    "name": "Network",
+    "code": "sys.network",
+    "inputs": {"msg": "String"},
+    "outputs": {"result": "String"},
+    "args": {"port": 25555, "host": "127.0.0.1"},
+    "desc": "Send input over network and wait for result."
+},
+{
+    "name": "Execute",
+    "code": "sys.executable",
+    "inputs": {"arg": "String"},
+    "outputs": {"result": "String"},
+    "args": {"escapeArgs": false, "executable": "python graphex.py"},
+    "desc": "Execute executable with given args."
+},
+{
+    "name": "Subgraph",
+    "code": "sys.subgraph",
+    "inputs": {"arg": "Object"},
+    "outputs": {"result": "Object"},
+    "args": "DefaultGraph",
+    "desc": "Execute a subgraph."
+},
+{
+    "name": "Print",
+    "code": "sys.print",
+    "inputs": {"val": "String"},
+    "outputs": {},
+    "args": "",
+    "desc": "Print input to console."
+},
+{
+    "name": "Network",
+    "code": "sys.networkoutput",
+    "inputs": {"msg": "String"},
+    "outputs": {"result": "String"},
+    "args": {"port": 25555, "host": "127.0.0.1"},
+    "desc": "Execute executable with given args."
+},
+{
+    "name": "Network Input",
+    "code": "sys.networkinput",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": {"port": 25555, "host": "127.0.0.1"},
+    "desc": "Wait for input over network."
+},
+{
+    "name": "Output",
+    "code": "sys.output",
+    "inputs": {"arg": "String"},
+    "outputs": {},
+    "args": "arg",
+    "desc": "Set an output arg."
+},
+{
+    "name": "Splitflow",
+    "code": "default.splitflow",
+    "inputs": {"val": "Object"},
+    "outputs": {"left": "Object", "right": "Object"},
+    "args": "",
+    "desc": "Splits the flow."
+},
+{
+    "name": "Splitflow",
+    "code": "default.splitflow5",
+    "inputs": {"val": "Object"},
+    "outputs": {"3": "Object", "2": "Object", "4": "Object", "5": "Object", "1": "Object"},
+    "args": "",
+    "desc": "Splits the flow."
+},
+{
+    "name": "Accept any input",
+    "code": "default.any",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "Object"},
+    "args": "",
+    "desc": "If any input is present pass it."
+},
+{
+    "name": "Not",
+    "code": "boolean.not",
+    "inputs": {"val": "Boolean"},
+    "outputs": {"result": "Boolean"},
+    "args": "",
+    "desc": "Output the inverted input."
+},
+{
+    "name": "And",
+    "code": "boolean.and",
+    "inputs": {"left": "Boolean", "right": "Boolean"},
+    "outputs": {"result": "Boolean"},
+    "args": "",
+    "desc": "Combine inputs with and."
+},
+{
+    "name": "Or",
+    "code": "boolean.or",
+    "inputs": {"left": "Boolean", "right": "Boolean"},
+    "outputs": {"result": "Boolean"},
+    "args": "",
+    "desc": "Output the or of the inputs."
+},
+{
+    "name": "Arg trigger",
+    "code": "boolean.argconst",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args": {"time": 1.0, "val": "arg"},
+    "desc": "Get input from arguments."
+},
+{
+    "name": "Trigger",
+    "code": "boolean.trigger",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args": {"time": 1.0, "val": true},
+    "desc": "Trigger arg.val every arg.time s."
+},
+{
+    "name": "Const",
+    "code": "boolean.const",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args": true,
+    "desc": "Output the arg."
+},
+{
+    "name": "Arg const",
+    "code": "boolean.argconst",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args": "arg",
+    "desc": "Get input from arguments."
+},
+{
+    "name": "Equal",
+    "code": "boolean.equal",
+    "inputs": {"3": "Boolean", "2": "Boolean", "4": "Boolean", "5": "Boolean", "1": "Boolean"},
+    "outputs": {"result": "Boolean"},
+    "args": 5,
+    "desc": "Checks if the first arg inputs are equal."
+},
+{
+    "name": "Arg trigger",
+    "code": "arrays.argtrigger",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": {"time": 1.0, "val": "arg"},
+    "desc": "Get triggers from commandline."
+},
+{
+    "name": "Arg const",
+    "code": "arrays.argconst",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": "arg",
+    "desc": "Get triggers from commandline."
+},
+{
+    "name": "Index of",
+    "code": "string.indexof",
+    "inputs": {"ref": "String", "offset": "Number", "str": "String"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Get the index of a ref in a string."
+},
+{
+    "name": "String Argument Trigger",
+    "code": "string.argtrigger",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": {"time": 1.0, "val": "arg"},
+    "desc": "Pass the argument of the program."
+},
+{
+    "name": "Trigger string",
+    "code": "string.trigger",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": {"time": 1.0, "val": "Hello World!"},
+    "desc": "Trigger string."
+},
+{
+    "name": "String Concat",
+    "code": "string.concat",
+    "inputs": {"left": "String", "right": "String"},
+    "outputs": {"result": "String"},
+    "args": "",
+    "desc": "Concat the two strings."
+},
+{
+    "name": "String Constant",
+    "code": "string.const",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": "Hello World!",
+    "desc": "Pass the string arg as output."
+},
+{
+    "name": "String Argument",
+    "code": "string.argconst",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": "arg",
+    "desc": "Pass the argument of the program."
+},
+{
+    "name": "Starts with",
+    "code": "string.startswith",
+    "inputs": {"ref": "String", "str": "String"},
+    "outputs": {"result": "Boolean"},
+    "args": "",
+    "desc": "String starts with ref."
+},
+{
+    "name": "Equal",
+    "code": "string.equal",
+    "inputs": {"3": "String", "2": "String", "4": "String", "5": "String", "1": "String"},
+    "outputs": {"result": "Boolean"},
+    "args": 5,
+    "desc": "Check if values are equal."
+},
+{
+    "name": "Ends with",
+    "code": "string.endswith",
+    "inputs": {"ref": "String", "str": "String"},
+    "outputs": {"result": "Boolean"},
+    "args": "",
+    "desc": "Check if a string ends with the reference."
+},
+{
+    "name": "Split",
+    "code": "string.split",
+    "inputs": {"splitter": "String", "str": "String"},
+    "outputs": {"result": "Array"},
+    "args": "",
+    "desc": "Split a string by a splitter."
+},
+{
+    "name": "Parse Json",
+    "code": "json.parse",
+    "inputs": {"val": "String"},
+    "outputs": {"result": "Object"},
+    "args": "",
+    "desc": "Parse a json string into an object."
+},
+{
+    "name": "Stringify Json",
+    "code": "json.stringify",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "String"},
+    "args": "",
+    "desc": "Makes a json string out of an object."
+},
+{
+    "name": "Divide",
+    "code": "number.div",
+    "inputs": {"left": "Number", "right": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Divide left by right."
+},
+{
+    "name": "Less than",
+    "code": "number.less",
+    "inputs": {"left": "Number", "right": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Check if left < right."
+},
+{
+    "name": "Number Argument Trigger",
+    "code": "number.argtrigger",
+    "inputs": {},
+    "outputs": {"result": "Number"},
+    "args": {"time": 1.0, "val": "arg"},
+    "desc": "Pass the argument of the program."
+},
+{
+    "name": "Trigger Number",
+    "code": "number.trigger",
+    "inputs": {},
+    "outputs": {"result": "Number"},
+    "args": {"time": 1.0, "val": 42},
+    "desc": "Trigger value every time seconds."
+},
+{
+    "name": "Sum",
+    "code": "number.sum",
+    "inputs": {"left": "Number", "right": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Sum left and right."
+},
+{
+    "name": "Subtract",
+    "code": "number.subtract",
+    "inputs": {"left": "Number", "right": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Subtract right from left."
+},
+{
+    "name": "Greater than",
+    "code": "number.greater",
+    "inputs": {"left": "Number", "right": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Check if left > right."
+},
+{
+    "name": "Number Constant",
+    "code": "number.const",
+    "inputs": {},
+    "outputs": {"result": "Number"},
+    "args": 1.0,
+    "desc": "Pass the number arg as output."
+},
+{
+    "name": "Number Argument",
+    "code": "number.argconst",
+    "inputs": {},
+    "outputs": {"result": "Number"},
+    "args": "arg",
+    "desc": "Pass the argument of the program."
+},
+{
+    "name": "Multiply",
+    "code": "number.mult",
+    "inputs": {"left": "Number", "right": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Multiply values with each other."
+},
+{
+    "name": "Equal",
+    "code": "number.equal",
+    "inputs": {"3": "Number", "2": "Number", "4": "Number", "5": "Number", "1": "Number"},
+    "outputs": {"result": "Boolean"},
+    "args": 5,
+    "desc": "Check if values are equal."
+},
+{
+    "name": "While greater",
+    "code": "structures.whilegreater",
+    "inputs": {"initial": "Number", "val": "Number"},
+    "outputs": {"leave": "Number", "loop": "Number"},
+    "args": "",
+    "desc": "Loop while initial is greater than val."
+},
+{
+    "name": "While less",
+    "code": "structures.whileless",
+    "inputs": {"initial": "Number", "val": "Number"},
+    "outputs": {"leave": "Number", "loop": "Number"},
+    "args": "",
+    "desc": "Loop while initial is less than val."
+},
+{
+    "name": "Leaky Integrator",
+    "code": "structures.leakyintegrator",
+    "inputs": {"val": "Number"},
+    "outputs": {"result": "Boolean"},
+    "args": {"time": 1.0, "decay": 1.0},
+    "desc": "Leaky integrator."
+},
+{
+    "name": "If",
+    "code": "structures.if",
+    "inputs": {"val": "Object", "condition": "Boolean"},
+    "outputs": {"true": "Object", "false": "Object"},
+    "args": "",
+    "desc": "If condition pass to true otherwise to false."
+},
+{
+    "name": "Resize",
+    "code": "cv.resize",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"width": 320, "height": 240},
+    "desc": "Apply gaussian blur on image."
+},
+{
+    "name": "Video",
+    "code": "cv.video",
+    "inputs": {},
+    "outputs": {"result": "Image"},
+    "args": {"resource": 0, "fps": 30},
+    "desc": "Capture video."
+},
+{
+    "name": "In Range",
+    "code": "cv.inrange",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"lh": 0, "lv": 0, "uh": 255, "us": 255, "uv": 255, "ls": 0},
+    "desc": "Apply an inRange operation on the image."
+},
+{
+    "name": "HSV to BGR",
+    "code": "cv.hsv2bgr",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert HSV image to BGR image."
+},
+{
+    "name": "Fixed Hue",
+    "code": "cv.fixedhue",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": 127,
+    "desc": "Set the hue to a fixed value."
+},
+{
+    "name": "Fixed Saturisation",
+    "code": "cv.fixedsaturisation",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": 127,
+    "desc": "Set the saturisation to a fixed value."
+},
+{
+    "name": "Record",
+    "code": "cv.record",
+    "inputs": {"img": "Image"},
+    "outputs": {},
+    "args": {"resource": "test.mp4"},
+    "desc": "Apply gaussian blur on image."
+},
+{
+    "name": "Sift",
+    "code": "cv.sift",
+    "inputs": {"img": "Image"},
+    "outputs": {"img": "Image", "features": "Array"},
+    "args": "",
+    "desc": "Detect sift features."
+},
+{
+    "name": "Plot features",
+    "code": "cv.plotfeatures",
+    "inputs": {"img": "Image", "features": "Array"},
+    "outputs": {"img": "Image"},
+    "args": "",
+    "desc": "Plot features into an image."
+},
+{
+    "name": "Show",
+    "code": "cv.show",
+    "inputs": {"img": "Image"},
+    "outputs": {},
+    "args": {"title": "Debug View"},
+    "desc": "Show an image."
+},
+{
+    "name": "Add Weighted",
+    "code": "cv.addweighted",
+    "inputs": {"left": "Image", "right": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"left": "Number", "right": "Number"},
+    "desc": "Add the two images weighted."
+},
+{
+    "name": "Median Blur",
+    "code": "cv.medianblur",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": 4,
+    "desc": "Apply median blur on image."
+},
+{
+    "name": "Gaussian Blur",
+    "code": "cv.gaussianblur",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": 4,
+    "desc": "Apply gaussian blur on image."
+},
+{
+    "name": "BGR to HSV",
+    "code": "cv.bgr2hsv",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert BGR image to HSV image."
+},
+{
+    "name": "Fixed Intensity",
+    "code": "cv.fixedintensity",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": 127,
+    "desc": "Set the intensity to a fixed value."
+},
+{
+    "name": "Image to distribution",
+    "code": "cv.img2distribution",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Array"},
+    "args": "",
+    "desc": "Convert an image to a distribution."
+},
+{
+    "name": "RcCar",
+    "code": "raspi.rccar",
+    "inputs": {"turn": "Number", "speed": "Number"},
+    "outputs": {},
+    "args": {"maxSpeed": 0.5},
+    "desc": "Set turn and speed of rccar."
+}]

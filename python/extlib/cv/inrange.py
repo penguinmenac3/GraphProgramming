@@ -1,34 +1,31 @@
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
 
-class Node(object):
-	def __init__(self, verbose, args):
-		if verbose:
-			print("Created node.")
-		self.lh = args["lh"]
-		self.ls = args["ls"]
-		self.lv = args["lv"]
-		self.uh = args["uh"]
-		self.us = args["us"]
-		self.uv = args["uv"]
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
-	def isInput(self):
-		return False
-		
-	def isRepeating(self):
-		return False
 
-	def tick(self, value):
-		img = value["img"]
-		lower = np.array((self.lh, self.ls, self.lv), dtype=np.uint8, ndmin=1)
-		upper = np.array((self.uh, self.us, self.uv), dtype=np.uint8, ndmin=1)
-		img = cv2.inRange(img, lower, upper)
-		return {"result":img}
-		
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("In Range", "cv.inrange",
+                                   {"lh": 0, "ls": 0, "lv": 0, "uh": 255, "us": 255, "uv": 255},
+                                   {"img": "Image"},
+                                   {"result": "Image"},
+                                   "Apply an inRange operation on the image.", verbose)
+        self.args = args
 
-def instance(verbose, args):
-	return Node(verbose, args)
+    def tick(self, value):
+        lh = self.args["lh"]
+        ls = self.args["ls"]
+        lv = self.args["lv"]
+        uh = self.args["uh"]
+        us = self.args["us"]
+        uv = self.args["uv"]
 
-if __name__ == "__main__":
-	print("A node.")
+        img = value["img"]
+        lower = np.array((lh, ls, lv), dtype=np.uint8, ndmin=1)
+        upper = np.array((uh, us, uv), dtype=np.uint8, ndmin=1)
+        img = cv2.inRange(img, lower, upper)
+        return {"result": img}

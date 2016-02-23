@@ -1,21 +1,15 @@
-class Node(object):
-	def __init__(self, verbose, args):
-		if verbose:
-			print("Created input node.")
-		self.args = args
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
-	def isInput(self):
-		return True
 
-	def isRepeating(self):
-		return False
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("Arg const", "boolean.argconst", "arg", {},
+                                   {"result": "Boolean"}, "Get input from arguments.", verbose, True, False)
+        self.args = args
 
-	def tick(self, value):
-		global registry
-		return {"result":registry[self.args]}
-
-def instance(verbose, args):
-	return Node(verbose, args)
-
-if __name__ == "__main__":
-	print("A node")
+    def tick(self, value):
+        global registry
+        return {"result": registry[self.args]}

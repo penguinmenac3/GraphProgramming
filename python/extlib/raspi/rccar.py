@@ -8,27 +8,32 @@ Created on 16.07.2015
 import time
 from time import sleep
 from threading import Thread
+
 try:
-    import extlib.raspi.Adafruit_PWM_Servo_Driver as servoDriver
+    import extlib.raspi.Adafruit_PWM_Servo_Driver_Lib as servoDriver
 except ImportError:
-    import extlib.raspi.Dummy_PWM_Servo_Driver as servoDriver
+    import extlib.raspi.Dummy_PWM_Servo_Driver_Lib as servoDriver
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
 
-class Node(object):
+class Node(base.Node):
     def __init__(self, verbose, args):
-        self.driver = BareDriver()
-        Thread(target=self.driver.driveloop).start()
-        self.driver.setMax(args["maxSpeed"])
-        if verbose:
-            print("Created node.")
+        super(Node, self).__init__("RcCar", "raspi.rccar",
+                                   {"maxSpeed": 0.5},
+                                   {"speed": "Number", "turn": "Number"},
+                                   {},
+                                   "Set turn and speed of rccar.", verbose)
+        self.args = args
+        self.driver = None
 
-    def isInput(self):
-        return False
-
-    def isRepeating(self):
-        return False
-        
     def tick(self, value):
+        if self.driver is None:
+            self.driver = BareDriver()
+            Thread(target=self.driver.driveloop).start()
+            self.driver.setMax(self.args["maxSpeed"])
         self.driver.set(value["speed"], value["turn"])
         return {}
 
@@ -132,6 +137,7 @@ class BareDriver(object):
 
 def instance(verbose, args):
     return Node(verbose, args)
+
 
 if __name__ == "__main__":
     print("A node.")

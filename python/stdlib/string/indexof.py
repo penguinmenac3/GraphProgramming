@@ -1,20 +1,15 @@
-class Node(object):
-	def __init__(self, verbose, args):
-		if verbose:
-			print("Created node.")
+try:
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
 
-	def isInput(self):
-		return False
-		
-	def isRepeating(self):
-		return False
 
-	def tick(self, value):
-		return {"result":value["str"].find(value["ref"], beg=value["offset"])}
-		
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("Index of", "string.indexof", "",
+                                   {"str": "String", "ref": "String", "offset": "Number"},
+                                   {"result": "Number"},
+                                   "Get the index of a ref in a string.", verbose)
 
-def instance(verbose, args):
-	return Node(verbose, args)
-
-if __name__ == "__main__":
-	print("A node.")
+    def tick(self, value):
+        return {"result": value["str"].find(value["ref"], beg=value["offset"])}
