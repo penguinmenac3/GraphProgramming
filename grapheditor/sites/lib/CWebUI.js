@@ -58,6 +58,36 @@ function WebUI_CWebUI() {
 	this.printError = function(text) {
 		console.log(text);
 	};
+    
+    this.createNode = function(nodeclass) {
+				if (nodeclass == null) {
+					return;
+				}
+                
+                that.hideNodeSelector();
+				var selectedNode = null;
+				that.nodes.forEach(function(node) {
+					if (node.code == nodeclass) {
+						selectedNode = node;
+					}
+				});
+				if (selectedNode == null) {
+					return;
+				}
+				nodename = prompt("Node Name (must be unique)", selectedNode.name);
+				if (nodename == null) {
+					return;
+				}
+				selectedNode = JSON.parse(JSON.stringify(selectedNode));
+				selectedNode.name = nodename;
+				graph.nodes.push(selectedNode);
+
+				that.changed = true;
+    };
+    
+    this.hideNodeSelector = function() {
+        document.getElementById("nodeselector").style.display = "none";
+    };
 
 	this.trySelect = function(x, y) {		
 		var absX = x + RenderEngine.getOffsetX() + RenderEngine.getSize().width / 2;
@@ -86,7 +116,7 @@ function WebUI_CWebUI() {
 				return;
 			}
 			if (absY > 90 && absY < 120) {
-				var name = prompt("Please enter node spec name", "PythonNodes");
+				var name = prompt("Please enter node spec name", "Python");
 				if (name == null) {
 					return;
 				}
@@ -95,32 +125,25 @@ function WebUI_CWebUI() {
 			}
 			if (absY > 130 && absY < 160) {
 				var classes = "";
+                var prefix = "";
 				that.nodes.forEach(function(node) {
-					classes += node.code + ",";
+                    var nodetype = "algorithmnode";
+                    if (Object.keys(node.inputs).length == 0) {
+                        nodetype = "inputnode";
+                    } else if (Object.keys(node.outputs).length == 0) {
+                        nodetype = "outputnode";
+                    } else if (node.code.lastIndexOf("structures", 0) === 0 || node.code.lastIndexOf("default", 0) === 0) {
+                        nodetype = "structurenode";
+                    }
+                    var cur = node.code.split(".")[0];
+                    if (cur != prefix) {
+                        prefix = cur;
+                        classes += "<h2>" + prefix.toUpperCase() + "</h2>";
+                    }
+					classes += '<button onclick="WebUI.createNode(\'' + node.code + '\')" class="node ' + nodetype + '">' + node.name + '</button>';
 				});
-				var nodeclass = prompt("Node Class ["+classes + "]", null);
-				if (nodeclass == null) {
-					return;
-				}
-				var selectedNode = null;
-				that.nodes.forEach(function(node) {
-					if (node.code == nodeclass) {
-						selectedNode = node;
-					}
-				});
-				if (selectedNode == null) {
-					return;
-				}
-				nodename = prompt("Node Name (must be unique)", selectedNode.name);
-				if (nodename == null) {
-					return;
-				}
-				selectedNode = JSON.parse(JSON.stringify(selectedNode));
-				selectedNode.name = nodename;
-				graph.nodes.push(selectedNode);
-
-				that.changed = true;
-
+                document.getElementById("nodeselector").innerHTML = classes;
+                document.getElementById("nodeselector").style.display = "";
 				return;
 			}
 			if (absY > 170 && absY < 200) {

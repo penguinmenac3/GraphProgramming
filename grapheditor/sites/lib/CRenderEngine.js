@@ -25,7 +25,7 @@ function WebUI_CRenderEngine() {
 		if (container == null) {
 			document.body.appendChild(canvas);
 		} else {
-			document.getElementById(obj).appendChild(canvas);
+			document.getElementById(container).appendChild(canvas);
 		}
 		/* fix the style to display it correctly */
 		if (fullscreen) {
@@ -336,9 +336,9 @@ function WebUI_CRenderEngine() {
 	function renderActionButtons() {
 		renderButton("LOAD", 50, 25);
 		renderButton("SAVE", 50, 65);
-		renderButton("NODES", 50, 105);
-		renderButton("NEW", 50, 145);
-		renderButton("DEL", 50, 185);
+		renderButton("LANGUAGE", 50, 105);
+		renderButton("NEW NODE", 50, 145);
+		renderButton("DELETE", 50, 185);
 		//renderButton("RUN", 50, 225);
 		renderButton("START", 50, 265);
 		renderButton("KILL", 50, 305);
