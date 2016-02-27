@@ -90,8 +90,29 @@ function WebUI_CWebUI() {
     };
 
 	this.trySelect = function(x, y) {		
-		var absX = x + RenderEngine.getOffsetX() + RenderEngine.getSize().width / 2;
-		var absY = y + RenderEngine.getOffsetY() + RenderEngine.getSize().height / 2;
+        var scale = RenderEngine.getScale();
+		var absX = x + RenderEngine.getOffsetX() * scale + RenderEngine.getSize().width / 2;
+		var absY = y + RenderEngine.getOffsetY() * scale + RenderEngine.getSize().height / 2;
+        var canvasSize = RenderEngine.getSize();
+        if (absX < canvasSize.width - 10 && absX > canvasSize.width - 90) {
+            if (absY > 10 && absY < 40) {
+				RenderEngine.changeScale(-0.2);
+				return;
+			}
+			if (absY > 50 && absY < 80) {
+				RenderEngine.changeScale(0.2);
+				return;
+			}
+            if (absY > 90 && absY < 120) {
+                RenderEngine.resetScale();
+                return;
+            }
+            if (absY > 130 && absY < 160) {
+                RenderEngine.resetScale();
+                RenderEngine.resetOffset();
+                return;
+            }
+        }
 		if (absX > 10 && absX < 90) {
 			if (absY > 10 && absY < 40) {
 				var name = prompt("Please enter graph name", WebUI.graphName);
@@ -185,10 +206,10 @@ function WebUI_CWebUI() {
 		that.startPos = {"x":x+RenderEngine.getOffsetX(), "y":y+RenderEngine.getOffsetY()};
 
 		graph.nodes.forEach(function(node) {
-			var x1 = node.x - RenderEngine.nodeWidth/2;
-			var y1 = node.y - RenderEngine.nodeHeight/2;
-			var x2 = node.x - RenderEngine.nodeWidth/2 + RenderEngine.dotSize;
-			var y2 = node.y - RenderEngine.nodeHeight/2 + RenderEngine.dotSize;
+			var x1 = node.x * scale - RenderEngine.nodeWidth/2 * scale;
+			var y1 = node.y * scale - RenderEngine.nodeHeight/2 * scale;
+			var x2 = node.x * scale - RenderEngine.nodeWidth/2 * scale + RenderEngine.dotSize * scale;
+			var y2 = node.y * scale - RenderEngine.nodeHeight/2 * scale + RenderEngine.dotSize * scale;
 			if (x > x1 && x < x2 && y > y1 && y < y2) {
 				that.selectedNode = node;
 				return;
@@ -211,10 +232,10 @@ function WebUI_CWebUI() {
 		if (that.selectedNode == null) {
 			var currentNode = null;
 			graph.nodes.forEach(function(node) {
-				var x1 = node.x - RenderEngine.nodeWidth/2;
-				var y1 = node.y - RenderEngine.nodeHeight/2;
-				var x2 = node.x + RenderEngine.nodeWidth/2;
-				var y2 = node.y + RenderEngine.nodeHeight/2;
+				var x1 = node.x * scale - RenderEngine.nodeWidth/2 * scale;
+				var y1 = node.y * scale - RenderEngine.nodeHeight/2 * scale;
+				var x2 = node.x * scale + RenderEngine.nodeWidth/2 * scale;
+				var y2 = node.y * scale + RenderEngine.nodeHeight/2 * scale;
 				if (x > x1 && x < x2 && y > y1 && y < y2) {
 					currentNode = node;
 					return;
@@ -242,14 +263,15 @@ function WebUI_CWebUI() {
 	};
 
 	function tryFindInput(node, x, y) {
+        var scale = RenderEngine.getScale();
 		var result = null;
 		for (var connection in node.inputs) {
   			if (node.inputs.hasOwnProperty(connection)) {
 				var pos = RenderEngine.getNodeInputPosition(that.graph, node.name, connection);
-				var x1 = pos.x - RenderEngine.dotSize/2;
-				var y1 = pos.y - RenderEngine.dotSize/2;
-				var x2 = pos.x + RenderEngine.dotSize/2;
-				var y2 = pos.y + RenderEngine.dotSize/2;
+				var x1 = pos.x * scale - RenderEngine.dotSize/2 * scale;
+				var y1 = pos.y * scale - RenderEngine.dotSize/2 * scale;
+				var x2 = pos.x * scale + RenderEngine.dotSize/2 * scale;
+				var y2 = pos.y * scale + RenderEngine.dotSize/2 * scale;
 				if (x > x1 && x < x2 && y > y1 && y < y2) {
 					var result = connection;
 					return connection;
@@ -260,14 +282,15 @@ function WebUI_CWebUI() {
 	}
 
 	function tryFindOutput(node, x, y) {
+        var scale = RenderEngine.getScale();
 		var result = null;
 		for (var connection in node.outputs) {
   			if (node.outputs.hasOwnProperty(connection)) {
 				var pos = RenderEngine.getNodeOutputPosition(that.graph, node.name, connection);
-				var x1 = pos.x - RenderEngine.dotSize/2;
-				var y1 = pos.y - RenderEngine.dotSize/2;
-				var x2 = pos.x + RenderEngine.dotSize/2;
-				var y2 = pos.y + RenderEngine.dotSize/2;
+				var x1 = pos.x * scale - RenderEngine.dotSize/2 * scale;
+				var y1 = pos.y * scale - RenderEngine.dotSize/2 * scale;
+				var x2 = pos.x * scale + RenderEngine.dotSize/2 * scale;
+				var y2 = pos.y * scale + RenderEngine.dotSize/2 * scale;
 				if (x > x1 && x < x2 && y > y1 && y < y2) {
 					var result = connection;
 					return connection;
@@ -278,17 +301,18 @@ function WebUI_CWebUI() {
 	}
 
 	this.moveSelected = function(x, y) {
+        var scale = RenderEngine.getScale();
 		var absX = x + RenderEngine.getOffsetX() + RenderEngine.getSize().width / 2;
 		var absY = y + RenderEngine.getOffsetY() + RenderEngine.getSize().height / 2;
 		if (that.selectedInputConnection != null) {
 			var pos = RenderEngine.getNodeInputPosition(that.graph, that.selectedNode.name, that.selectedInputConnection);
-			RenderEngine.tmpNodeLine(pos.x, pos.y, x, y);
+			RenderEngine.tmpNodeLine(pos.x, pos.y, x / scale, y / scale);
 		} else if (that.selectedOutputConnection != null) {
 			var pos = RenderEngine.getNodeOutputPosition(that.graph, that.selectedNode.name, that.selectedOutputConnection);
-			RenderEngine.tmpNodeLine(pos.x, pos.y, x, y);
+			RenderEngine.tmpNodeLine(pos.x, pos.y, x / scale, y / scale);
 		} else if (that.selectedNode != null) {
-			that.selectedNode.x = x + RenderEngine.nodeWidth/2 - RenderEngine.dotSize / 2;
-			that.selectedNode.y = y + RenderEngine.nodeHeight/2 - RenderEngine.dotSize / 2;
+			that.selectedNode.x = x / scale + RenderEngine.nodeWidth/2 - RenderEngine.dotSize / 2;
+			that.selectedNode.y = y / scale + RenderEngine.nodeHeight/2 - RenderEngine.dotSize / 2;
 		} else if (that.startPos != null) {
 			var nextPos = {"x":x+RenderEngine.getOffsetX(), "y":y+RenderEngine.getOffsetY()};
 			RenderEngine.move(nextPos.x - that.startPos.x, nextPos.y - that.startPos.y);
@@ -297,6 +321,7 @@ function WebUI_CWebUI() {
 	};
 
 	this.unselect = function(x, y) {
+        var scale = RenderEngine.getScale();
 		var absX = x + RenderEngine.getOffsetX() + RenderEngine.getSize().width / 2;
 		var absY = y + RenderEngine.getOffsetY() + RenderEngine.getSize().height / 2;
 		var spos = that.startPos;
@@ -336,8 +361,8 @@ function WebUI_CWebUI() {
 			RenderEngine.setResult("");
 			that.changed = true;
 		} else if (that.selectedNode != null) {
-			that.selectedNode.x = x + RenderEngine.nodeWidth/2 - RenderEngine.dotSize / 2;
-			that.selectedNode.y = y + RenderEngine.nodeHeight/2 - RenderEngine.dotSize / 2;
+			that.selectedNode.x = x / scale + RenderEngine.nodeWidth/2 - RenderEngine.dotSize / 2;
+			that.selectedNode.y = y / scale + RenderEngine.nodeHeight/2 - RenderEngine.dotSize / 2;
 
 			if (absX > 10 && absX < 90 && absY > 170 && absY < 200) {
 				for (var connection in that.selectedNode.inputs) {

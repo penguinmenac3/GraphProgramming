@@ -10,6 +10,7 @@ function WebUI_CRenderEngine() {
 	var fullscreen = false;
 	var renderOffsetX = 0;
 	var renderOffsetY = 0;
+    var scale = 1;
 	this.dotSize = 20;
 	this.nodeWidth = 200;
 	this.nodeHeight = 80;
@@ -76,10 +77,27 @@ function WebUI_CRenderEngine() {
 	this.getOffsetY = function() {
 		return renderOffsetY;
 	};
+    
+    this.resetOffset = function() {
+        renderOffsetX = 0;
+        renderOffsetY = 0;
+    }
 
 	this.getSize = function () {
 		return {width:width, height:height};
 	};
+    
+    this.changeScale = function(factor) {
+        scale *= 1.0 + factor;
+    };
+    
+    this.resetScale = function() {
+        scale = 1;
+    };
+    
+    this.getScale = function() {
+        return scale;
+    };
 
 	/* switch fullscreen flag & change pos attr for correct positioning */
 	this.toggleFullscreen = function() {
@@ -140,10 +158,10 @@ function WebUI_CRenderEngine() {
 		ctx.beginPath();
 		ctx.lineWidth="1";
 		ctx.strokeStyle="red";
-		ctx.moveTo(renderOffsetX + width/2 - 20,renderOffsetY + height/2);
-		ctx.lineTo(renderOffsetX + width/2 + 20,renderOffsetY + height/2);
-		ctx.moveTo(renderOffsetX + width/2,renderOffsetY + height/2 - 20);
-		ctx.lineTo(renderOffsetX + width/2,renderOffsetY + height/2 + 20);
+		ctx.moveTo(renderOffsetX * scale + width/2 - 20 * scale,renderOffsetY * scale + height/2);
+		ctx.lineTo(renderOffsetX * scale + width/2 + 20 * scale,renderOffsetY * scale + height/2);
+		ctx.moveTo(renderOffsetX * scale + width/2,renderOffsetY * scale + height/2 - 20 * scale);
+		ctx.lineTo(renderOffsetX * scale + width/2,renderOffsetY * scale + height/2 + 20 * scale);
 		ctx.stroke();
 
 
@@ -224,7 +242,7 @@ function WebUI_CRenderEngine() {
 		ctx.lineWidth="1";
 		ctx.fillStyle = "rgb(244,244,244)";
 		ctx.strokeStyle="rgb(128,128,128)";
-		ctx.rect(renderOffsetX + px-that.dotSize/2 + width/2,renderOffsetY + py-that.dotSize/2 + height/2,that.dotSize,that.dotSize);
+		ctx.rect(renderOffsetX * scale + px * scale - that.dotSize/2 * scale + width/2,renderOffsetY * scale + py * scale - that.dotSize/2 * scale + height/2,that.dotSize * scale,that.dotSize * scale);
 		ctx.fill();
 		ctx.stroke();
 	}
@@ -233,18 +251,18 @@ function WebUI_CRenderEngine() {
 		ctx.beginPath();
 		ctx.lineWidth="2";
 		ctx.strokeStyle="rgb(128,128,128)";
-		ctx.moveTo(renderOffsetX + px1 + width/2,renderOffsetY + py1 + height/2);
-		ctx.lineTo(renderOffsetX + px2 + width/2,renderOffsetY + py2 + height/2);
+		ctx.moveTo(renderOffsetX * scale + px1 * scale + width/2,renderOffsetY * scale + py1 * scale + height/2);
+		ctx.lineTo(renderOffsetX * scale + px2 * scale + width/2,renderOffsetY * scale + py2 * scale + height/2);
 		ctx.stroke();
 	}
 
 	function renderNodeText(text, x, y, offsetX, offsetY) {
 		/* Write text with speed and curve info */
-		ctx.font = "12px 'Helvetica'";
+		ctx.font = parseInt(12 * scale) + "px 'Helvetica'";
 		ctx.fillStyle = "rgb(128,128,128)";
 		ctx.textAlign = 'center';
 		ctx.textBaseline = 'center';
-		ctx.fillText(text, renderOffsetX + x + width/2 + offsetX, renderOffsetY + y + height/2 + offsetY);
+		ctx.fillText(text, renderOffsetX * scale + x * scale + width/2 + offsetX * scale, renderOffsetY * scale + y * scale + height/2 + offsetY * scale);
 	}
 
 	function renderNodeRect(x, y) {
@@ -252,7 +270,7 @@ function WebUI_CRenderEngine() {
 		ctx.lineWidth="1";
 		ctx.fillStyle = "rgb(244,244,244)";
 		ctx.strokeStyle="rgb(128,128,128)";
-		ctx.rect(renderOffsetX + x + width/2-that.nodeWidth/2,renderOffsetY + y + height/2-that.nodeHeight/2,that.nodeWidth,that.nodeHeight);
+		ctx.rect(renderOffsetX * scale + x * scale + width/2-that.nodeWidth/2 * scale,renderOffsetY * scale + y * scale + height/2-that.nodeHeight/2 * scale,that.nodeWidth * scale,that.nodeHeight * scale);
 		ctx.fill();
 		ctx.stroke();
 	}
@@ -342,6 +360,11 @@ function WebUI_CRenderEngine() {
 		//renderButton("RUN", 50, 225);
 		renderButton("START", 50, 265);
 		renderButton("KILL", 50, 305);
+        
+		renderButton("ZOOM OUT", canvas.width - 50, 25);
+		renderButton("ZOOM IN", canvas.width - 50, 65);
+		renderButton("RESET ZOOM", canvas.width - 50, 105);
+		renderButton("RESET VIEW", canvas.width - 50, 145);
 	}
 
 	function renderButton(text, x, y) {

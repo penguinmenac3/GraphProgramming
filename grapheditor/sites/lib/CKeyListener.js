@@ -18,8 +18,9 @@ function WebUI_CKeyListener() {
 		if (e.which == BUTTON_LEFT) {
 			mouse.pos = getCursorPosition(e);
 			mouse.isDown = true;
-			var dx = mouse.pos.x - RenderEngine.getSize().width / 2 - RenderEngine.getOffsetX(); 
-			var dy = mouse.pos.y - RenderEngine.getSize().height / 2 - RenderEngine.getOffsetY();
+            var scale = RenderEngine.getScale();
+			var dx = mouse.pos.x - RenderEngine.getSize().width / 2 - RenderEngine.getOffsetX() * scale; 
+			var dy = mouse.pos.y - RenderEngine.getSize().height / 2 - RenderEngine.getOffsetY() * scale;
 			WebUI.trySelect(dx, dy);
 		}
 	}
@@ -29,8 +30,9 @@ function WebUI_CKeyListener() {
 		if (e.which == BUTTON_LEFT) {
 			mouse.isDown = false;
 			mouse.pos = getCursorPosition(e);
-			var dx = mouse.pos.x - RenderEngine.getSize().width / 2 - RenderEngine.getOffsetX(); 
-			var dy = mouse.pos.y - RenderEngine.getSize().height / 2 - RenderEngine.getOffsetY();
+            var scale = RenderEngine.getScale();
+			var dx = mouse.pos.x - RenderEngine.getSize().width / 2 - RenderEngine.getOffsetX() * scale; 
+			var dy = mouse.pos.y - RenderEngine.getSize().height / 2 - RenderEngine.getOffsetY() * scale;
 			WebUI.unselect(dx, dy);
 		}
 	}
@@ -38,8 +40,9 @@ function WebUI_CKeyListener() {
 	function onmousemove(e) {
 		if (mouse.isDown == true) {
 			mouse.pos = getCursorPosition(e);
-			var dx = mouse.pos.x - RenderEngine.getSize().width / 2 - RenderEngine.getOffsetX(); 
-			var dy = mouse.pos.y - RenderEngine.getSize().height / 2 - RenderEngine.getOffsetY();
+            var scale = RenderEngine.getScale();
+			var dx = mouse.pos.x - RenderEngine.getSize().width / 2 - RenderEngine.getOffsetX() * scale; 
+			var dy = mouse.pos.y - RenderEngine.getSize().height / 2 - RenderEngine.getOffsetY() * scale;
 			WebUI.moveSelected(dx, dy);
 		}
 	}
@@ -48,8 +51,9 @@ function WebUI_CKeyListener() {
 	function ontouchstart(e) {
 		mouse.pos = getCursorPosition(e);
 		mouse.isDown = true;
-		var dx = mouse.pos.x - RenderEngine.getSize().width / 2 - RenderEngine.getOffsetX(); 
-		var dy = mouse.pos.y - RenderEngine.getSize().height / 2 - RenderEngine.getOffsetY();
+        var scale = RenderEngine.getScale();
+		var dx = mouse.pos.x - RenderEngine.getSize().width / 2 - RenderEngine.getOffsetX() * scale; 
+		var dy = mouse.pos.y - RenderEngine.getSize().height / 2 - RenderEngine.getOffsetY() * scale;
 		WebUI.trySelect(dx, dy);
 		e.preventDefault();
 	}
@@ -58,16 +62,18 @@ function WebUI_CKeyListener() {
 	function ontouchend(e) {
 		mouse.isDown = false;
 		mouse.pos = getCursorPosition(e);
-		var dx = mouse.pos.x - RenderEngine.getSize().width / 2 - RenderEngine.getOffsetX(); 
-		var dy = mouse.pos.y - RenderEngine.getSize().height / 2 - RenderEngine.getOffsetY();
+        var scale = RenderEngine.getScale();
+		var dx = mouse.pos.x - RenderEngine.getSize().width / 2 - RenderEngine.getOffsetX() * scale; 
+		var dy = mouse.pos.y - RenderEngine.getSize().height / 2 - RenderEngine.getOffsetY() * scale;
 		WebUI.unselect(dx, dy);
 		e.preventDefault();
 	}
 	/* Here the free movement is implemented (on mouse drag) */
 	function ontouchmove(e) {
 		mouse.pos = getCursorPosition(e);
-		var dx = mouse.pos.x - RenderEngine.getSize().width / 2 - RenderEngine.getOffsetX(); 
-		var dy = mouse.pos.y - RenderEngine.getSize().height / 2 - RenderEngine.getOffsetY();
+        var scale = RenderEngine.getScale();
+		var dx = mouse.pos.x - RenderEngine.getSize().width / 2 - RenderEngine.getOffsetX() * scale; 
+		var dy = mouse.pos.y - RenderEngine.getSize().height / 2 - RenderEngine.getOffsetY() * scale;
 		WebUI.moveSelected(dx, dy);
 		e.preventDefault();
 	}
