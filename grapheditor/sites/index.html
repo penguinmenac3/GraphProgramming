@@ -12,18 +12,38 @@
   <script type="text/javascript" src="lib/CKeyListener.js"></script>
   <script type="text/javascript" src="lib/CWebUI.js"></script>
   <style>
+    body {
+        background-color: rgba(100, 100, 100, 0.5)
+    }
+    .graphview {
+        background-color: white;
+    }
     .overlay {
         position: absolute;
-        top: 0px;
-        left: 0px;
-        width: 60%;
-        min-height: 100%;
+        top:0;
+        bottom:0;
+        left:0;
+        right:0;
         padding-left:20%;
         padding-right:20%;
         padding-top:2em;
         padding-bottom:2em;
         z-index: 100;
-        background-color: rgba(255, 255, 255, 0.5)
+        background-color: rgba(100, 100, 100, 0.5)
+    }
+    .inneroverlay {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 60%;
+        min-height: 60%;
+        margin-left:20%;
+        margin-right:20%;
+        margin-top:2em;
+        margin-bottom:2em;
+        padding: 2em;
+        z-index: 101;
+        background-color: rgba(255, 255, 255, 0.8)
     }
     .node {
         color: white;
@@ -45,13 +65,32 @@
     .outputnode {
         background-color: indianred;
     }
+    .languagenode {
+        background-color: orange;
+    }
   </style>
  </head>
  <!-- Use the Script inside the body onload to create the webui -->
  <body onload="WebUI.start(true, 800, 600, 'graphview');" onresize="">
      <div id="graphview" class="graphview"></div>
      <div id="nodeselector" style="display:none" class="overlay" onclick="WebUI.hideNodeSelector()">
+        <div id="innernodeselector" class="inneroverlay">
          <!-- Nodes that can be created -->
+        </div>
+     </div>
+     <div id="languageselector" style="display:none" class="overlay" onclick="WebUI.hideLanguageSelector()">
+        <div id="innerlanguageselector" class="inneroverlay">
+         <h2>Select A Language</h2>
+         <button class="node languagenode" onclick="WebUI.changeLanguage('Python')">PYTHON</button>
+         <button class="node languagenode" onclick="WebUI.changeLanguage('Java')">JAVA</button>
+         <button class="node languagenode" onclick="WebUI.changeLanguage('Csharp')">C SHARP</button>
+         <button class="node languagenode" onclick="WebUI.changeLanguage('Cpp')">C++</button>
+        </div>
+     </div>
+     <div id="erroroverlay" style="display:none" class="overlay" onclick="WebUI.hideErrorOverlay()">
+        <div id="innererroroverlay" class="inneroverlay">
+            An error occured.
+        </div>
      </div>
  </body>
 </html>

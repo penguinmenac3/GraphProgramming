@@ -55,7 +55,7 @@ function WebUI_CRenderEngine() {
 
 	this.resize = function() {
 		if (fullscreen == true) {
-			width = window.innerWidth;
+			width = window.innerWidth - 20;
 			height = window.innerHeight;
 		} else {
 			width = default_width;
@@ -152,7 +152,8 @@ function WebUI_CRenderEngine() {
 
 	this.render = function(fps) {
 		/* clean canvas */
-		ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = "white";
+		ctx.fillRect(0, 0, width, height);
 
 		/* Render the origin cross */
 		ctx.beginPath();
@@ -304,7 +305,11 @@ function WebUI_CRenderEngine() {
 		renderNodeRect(node.x, node.y);
 
 		/* Write text with speed and curve info */
-		renderNodeText(node.name, node.x, node.y, 0, -30);
+        var nname = node.name;
+        if (nname.lastIndexOf("_") != -1) {
+            nname = nname.substring(0, nname.lastIndexOf("_"));
+        }
+		renderNodeText(nname, node.x, node.y, 0, -30);
 		if (typeof node.args === "undefined") {
 			node.args = {};
 		}

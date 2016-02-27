@@ -1,7 +1,7 @@
 {
 	"nodes": [
 		{
-			"name": "String Constant",
+			"name": "String Constant_LXX8S",
 			"code": "string.const",
 			"inputs": {},
 			"outputs": {
@@ -9,11 +9,11 @@
 			},
 			"args": "Hello World!",
 			"desc": "Pass the string arg as output.",
-			"x": -0.5,
-			"y": -143.5
+			"x": -4.5,
+			"y": -95.5
 		},
 		{
-			"name": "Print",
+			"name": "Print_E2umn",
 			"code": "sys.print",
 			"inputs": {
 				"val": "String"
@@ -21,18 +21,18 @@
 			"outputs": {},
 			"args": "",
 			"desc": "Print input to console.",
-			"x": 1.5,
-			"y": 101.5
+			"x": 5.5,
+			"y": 102.5
 		}
 	],
 	"connections": [
 		{
 			"input": {
-				"node": "String Constant",
+				"node": "String Constant_LXX8S",
 				"output": "result"
 			},
 			"output": {
-				"node": "Print",
+				"node": "Print_E2umn",
 				"input": "val"
 			}
 		}

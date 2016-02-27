@@ -56,9 +56,25 @@ function WebUI_CWebUI() {
 	};
 
 	this.printError = function(text) {
+        document.getElementById("erroroverlay").style.display = "";
+        document.getElementById("innererroroverlay").innerHTML = '<h2>An Error Occured</h2>' + text;
 		console.log(text);
 	};
     
+	this.printErrorTitled = function(title, text) {
+        document.getElementById("erroroverlay").style.display = "";
+        document.getElementById("innererroroverlay").innerHTML = '<h2>' + title + '</h2>' + text;
+	};
+    function makeid() {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for( var i=0; i < 5; i++ )
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    }
+
     this.createNode = function(nodeclass) {
 				if (nodeclass == null) {
 					return;
@@ -74,10 +90,11 @@ function WebUI_CWebUI() {
 				if (selectedNode == null) {
 					return;
 				}
-				nodename = prompt("Node Name (must be unique)", selectedNode.name);
+				var nodename = prompt("Node Name", selectedNode.name);
 				if (nodename == null) {
 					return;
 				}
+                nodename += "_" + makeid();
 				selectedNode = JSON.parse(JSON.stringify(selectedNode));
 				selectedNode.name = nodename;
 				graph.nodes.push(selectedNode);
@@ -87,6 +104,18 @@ function WebUI_CWebUI() {
     
     this.hideNodeSelector = function() {
         document.getElementById("nodeselector").style.display = "none";
+    };
+    
+    this.changeLanguage = function(language) {
+        that.hideLanguageSelector();
+        getNodes(language, that.setNodes, WebUI.printError);
+    };
+    this.hideLanguageSelector = function() {
+        document.getElementById("languageselector").style.display = "none";
+    };
+    
+    this.hideErrorOverlay = function() {
+        document.getElementById("erroroverlay").style.display = "none";
     };
 
 	this.trySelect = function(x, y) {		
@@ -137,11 +166,7 @@ function WebUI_CWebUI() {
 				return;
 			}
 			if (absY > 90 && absY < 120) {
-				var name = prompt("Please enter node spec name", "Python");
-				if (name == null) {
-					return;
-				}
-				getNodes(name, that.setNodes, that.printError);
+                document.getElementById("languageselector").style.display = "";
 				return;
 			}
 			if (absY > 130 && absY < 160) {
@@ -163,12 +188,12 @@ function WebUI_CWebUI() {
                     }
 					classes += '<button onclick="WebUI.createNode(\'' + node.code + '\')" class="node ' + nodetype + '">' + node.name + '</button>';
 				});
-                document.getElementById("nodeselector").innerHTML = classes;
+                document.getElementById("innernodeselector").innerHTML = classes;
                 document.getElementById("nodeselector").style.display = "";
 				return;
 			}
 			if (absY > 170 && absY < 200) {
-				alert("Drop a node here to delete it.");
+                that.printErrorTitled("Hint","Drop a node here to delete it.");
 				return;
 			}
 			/*if (absY > 210 && absY < 240) {
