@@ -1,5 +1,6 @@
 
 function WebUI_CRenderEngine() {
+    var isDirty = true;
 	var that = this;
 	var canvas = null;
 	var ctx = null;
@@ -17,6 +18,10 @@ function WebUI_CRenderEngine() {
 	this.nodeHeight = 80;
 	this.tmpLine = null;
 	this.result = "";
+    
+    this.setDirty = function() {
+        isDirty = true;
+    };
 
 	this.init = function(b_fullscreen, init_width, init_height, container) {
 		fullscreen = b_fullscreen;
@@ -65,11 +70,13 @@ function WebUI_CRenderEngine() {
 		}
 		canvas.width = width;
 		canvas.height = height;
+        that.setDirty();
 	};
 
 	this.move = function (dx, dy) {
 		renderOffsetX += dx;
 		renderOffsetY += dy;
+        that.setDirty();
 	};
 
 	this.getOffsetX = function() {
@@ -83,6 +90,7 @@ function WebUI_CRenderEngine() {
     this.resetOffset = function() {
         renderOffsetX = 0;
         renderOffsetY = 0;
+        that.setDirty();
     }
 
 	this.getSize = function () {
@@ -91,10 +99,12 @@ function WebUI_CRenderEngine() {
     
     this.changeScale = function(factor) {
         scale *= 1.0 + factor;
+        that.setDirty();
     };
     
     this.resetScale = function() {
         scale = 1;
+        that.setDirty();
     };
     
     this.getScale = function() {
@@ -103,6 +113,7 @@ function WebUI_CRenderEngine() {
     
     this.setHasParent = function(hasParentParam) {
         hasParent = hasParentParam;
+        that.setDirty();
     }
 
 	/* switch fullscreen flag & change pos attr for correct positioning */
@@ -157,6 +168,10 @@ function WebUI_CRenderEngine() {
 	};
 
 	this.render = function(fps) {
+        if (!isDirty) {
+            return;
+        }
+        isDirty = false;
 		/* clean canvas */
         ctx.fillStyle = "white";
 		ctx.fillRect(0, 0, width, height);
@@ -234,14 +249,17 @@ function WebUI_CRenderEngine() {
 
 	this.tmpNodeLine = function(x1,y1, x2, y2) {
 		that.tmpLine = {"x1":x1, "x2":x2, "y1":y1, "y2": y2};
+        that.setDirty();
 	};
 
 	this.removeTmpNodeLine = function() {
 		that.tmpLine = null;
+        that.setDirty();
 	};
 
 	this.setResult = function(text) {
 		that.result = text;
+        that.setDirty();
 	};
 
 	function renderDot(px, py) {

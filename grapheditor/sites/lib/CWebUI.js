@@ -48,6 +48,7 @@ function WebUI_CWebUI() {
         if (that.graphStack.length > 1) {
             RenderEngine.setHasParent(true);
         }
+        RenderEngine.setDirty();
 		that.changed = false;
 	};
 
@@ -106,6 +107,7 @@ function WebUI_CWebUI() {
 				selectedNode = JSON.parse(JSON.stringify(selectedNode));
 				selectedNode.name = nodename;
 				graph.nodes.push(selectedNode);
+                RenderEngine.setDirty();
 
 				that.changed = true;
     };
@@ -267,6 +269,7 @@ function WebUI_CWebUI() {
                 if (that.graphStack.length < 2) {
                     RenderEngine.setHasParent(false);
                 }
+                RenderEngine.setDirty();
 				return;
 			}
 		}
@@ -327,6 +330,7 @@ function WebUI_CWebUI() {
 				    WebUI.graphName = currentNode.args;
 				    getGraph(WebUI.graphName, WebUI.setGraph, WebUI.printError);
                 }
+                RenderEngine.setDirty();
 			} else {
 				that.clickNode = currentNode;
 				that.startPos = null;
@@ -385,6 +389,7 @@ function WebUI_CWebUI() {
 		} else if (that.selectedNode != null) {
 			that.selectedNode.x = x / scale + RenderEngine.nodeWidth/2 - RenderEngine.dotSize / 2;
 			that.selectedNode.y = y / scale + RenderEngine.nodeHeight/2 - RenderEngine.dotSize / 2;
+            RenderEngine.setDirty();
 		} else if (that.startPos != null) {
 			var nextPos = {"x":x+RenderEngine.getOffsetX(), "y":y+RenderEngine.getOffsetY()};
 			RenderEngine.move(nextPos.x - that.startPos.x, nextPos.y - that.startPos.y);
@@ -415,6 +420,7 @@ function WebUI_CWebUI() {
 			that.selectedNode = null;
 			RenderEngine.setResult("");
 			that.changed = true;
+            RenderEngine.setDirty();
 		} else if (that.selectedOutputConnection != null) {
 			var inputName = null;
 			var inputNode = null;
@@ -432,6 +438,7 @@ function WebUI_CWebUI() {
 			that.selectedNode = null;
 			RenderEngine.setResult("");
 			that.changed = true;
+            RenderEngine.setDirty();
 		} else if (that.selectedNode != null) {
 			that.selectedNode.x = x / scale + RenderEngine.nodeWidth/2 - RenderEngine.dotSize / 2;
 			that.selectedNode.y = y / scale + RenderEngine.nodeHeight/2 - RenderEngine.dotSize / 2;
@@ -495,5 +502,6 @@ function WebUI_CWebUI() {
 		if (inputNode != null && outputNode != null && inputName != null && outputName != null) {
 			graph.connections.push({"input":{"node":outputNode.name, "output": outputName}, "output":{"node":inputNode.name, "input": inputName}});
 		}
+        RenderEngine.setDirty();
 	}
 }
