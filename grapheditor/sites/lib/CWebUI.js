@@ -8,6 +8,8 @@ function WebUI_CWebUI() {
 	this.mouse_click_listener = null;
 	this.debug = false;
 	this.graph = null;
+    this.graphStack = new Array();
+    this.graphNameStack = new Array();
 	this.nodes = null;
 	this.selectedNode = null;
 	this.graphName = "Default";
@@ -32,14 +34,20 @@ function WebUI_CWebUI() {
 		/* start the render loop with the key listener */
 		KeyListener.launch(RenderEngine);
 
+        RenderEngine.setHasParent(false);
 		getGraph(that.graphName, that.setGraph, that.printError);
 		getNodes("Python", that.setNodes, that.printError);
 		return true;
 	};
 
 	this.setGraph = function(graph) {
+        that.graphStack.push(graph);
+        that.graphNameStack.push(that.graphName);
 		that.graph = graph;
 		RenderEngine.setResult("");
+        if (that.graphStack.length > 1) {
+            RenderEngine.setHasParent(true);
+        }
 		that.changed = false;
 	};
 
@@ -149,6 +157,9 @@ function WebUI_CWebUI() {
 					return;
 				}
 				WebUI.graphName = name;
+                that.graphStack = new Array();
+                that.graphNameStack = new Array();
+                RenderEngine.setHasParent(false);
 				getGraph(WebUI.graphName, WebUI.setGraph, WebUI.printError);
 				return;
 			}
@@ -170,8 +181,7 @@ function WebUI_CWebUI() {
 				return;
 			}
 			if (absY > 130 && absY < 160) {
-				var classes = "";
-                var prefix = "";
+				var classes = {};
 				that.nodes.forEach(function(node) {
                     var nodetype = "algorithmnode";
                     if (Object.keys(node.inputs).length == 0) {
@@ -182,13 +192,29 @@ function WebUI_CWebUI() {
                         nodetype = "structurenode";
                     }
                     var cur = node.code.split(".")[0];
-                    if (cur != prefix) {
+                    if (!classes[cur]) {
                         prefix = cur;
-                        classes += "<h2>" + prefix.toUpperCase() + "</h2>";
+                        classes[cur] = "<h2>" + prefix.toUpperCase() + "</h2>";
                     }
-					classes += '<button onclick="WebUI.createNode(\'' + node.code + '\')" class="node ' + nodetype + '">' + node.name + '</button>';
+					classes[cur] += '<button onclick="WebUI.createNode(\'' + node.code + '\')" class="node ' + nodetype + '">' + node.name + '</button>';
 				});
-                document.getElementById("innernodeselector").innerHTML = classes;
+                var classesStr = "";
+                var keys = [];
+                for (var key in classes) {
+                    if (classes.hasOwnProperty(key)) {
+                        keys.push(key);
+                    }
+                }
+                keys = keys.sort();
+                classesStr += classes["default"];
+                classesStr += classes["structures"];
+                for (var key in keys) {
+                    if (keys[key] == "structures" || keys[key] == "default") {
+                        continue;
+                    }
+                    classesStr += classes[keys[key]];
+                }
+                document.getElementById("innernodeselector").innerHTML = classesStr;
                 document.getElementById("nodeselector").style.display = "";
 				return;
 			}
@@ -224,6 +250,23 @@ function WebUI_CWebUI() {
 			}
 			if (absY > 290 && absY < 310) {
 				kill();
+				return;
+			}
+			if (absY > 370 && absY < 390) {
+                if (that.graphStack.length < 2) {
+                    return;
+                }
+				if (that.changed == true) {
+					that.graphName = name;
+					that.saveGraph(that.graphName);
+				}
+                that.graphStack.pop();
+                that.graphNameStack.pop();
+                that.graph = that.graphStack[that.graphStack.length-1];
+                that.graphName = that.graphNameStack[that.graphNameStack.length-1];
+                if (that.graphStack.length < 2) {
+                    RenderEngine.setHasParent(false);
+                }
 				return;
 			}
 		}
@@ -280,6 +323,10 @@ function WebUI_CWebUI() {
 				currentNode.args = JSON.parse(args);
 				that.changed = true;
 				that.startPos = null;
+                if(currentNode.code == "sys.subgraph") {
+				    WebUI.graphName = currentNode.args;
+				    getGraph(WebUI.graphName, WebUI.setGraph, WebUI.printError);
+                }
 			} else {
 				that.clickNode = currentNode;
 				that.startPos = null;

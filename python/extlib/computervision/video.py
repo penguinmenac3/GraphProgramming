@@ -9,7 +9,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Video", "cv.video",
+        super(Node, self).__init__("Video", "computervision.video",
                                    {"resource": 0, "fps": 30},
                                    {},
                                    {"result": "Image"},

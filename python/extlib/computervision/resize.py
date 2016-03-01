@@ -8,14 +8,16 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("BGR to HSV", "cv.bgr2hsv",
-                                   "",
+        super(Node, self).__init__("Resize", "computervision.resize",
+                                   {"width": 320, "height": 240},
                                    {"img": "Image"},
                                    {"result": "Image"},
-                                   "Convert BGR image to HSV image.", verbose)
+                                   "Apply gaussian blur on image.", verbose)
         self.args = args
 
     def tick(self, value):
+        width = self.args["width"]
+        height = self.args["height"]
         img = value["img"]
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        img = cv2.resize(img, (width, height), 0, 0, cv2.INTER_CUBIC)
         return {"result": img}

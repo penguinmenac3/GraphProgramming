@@ -11,6 +11,7 @@ function WebUI_CRenderEngine() {
 	var renderOffsetX = 0;
 	var renderOffsetY = 0;
     var scale = 1;
+    var hasParent = false;
 	this.dotSize = 20;
 	this.nodeWidth = 200;
 	this.nodeHeight = 80;
@@ -55,7 +56,8 @@ function WebUI_CRenderEngine() {
 
 	this.resize = function() {
 		if (fullscreen == true) {
-			width = window.innerWidth - 20;
+			//width = document.body.clientWidth - 1;
+			width = window.innerWidth;
 			height = window.innerHeight;
 		} else {
 			width = default_width;
@@ -98,6 +100,10 @@ function WebUI_CRenderEngine() {
     this.getScale = function() {
         return scale;
     };
+    
+    this.setHasParent = function(hasParentParam) {
+        hasParent = hasParentParam;
+    }
 
 	/* switch fullscreen flag & change pos attr for correct positioning */
 	this.toggleFullscreen = function() {
@@ -370,6 +376,10 @@ function WebUI_CRenderEngine() {
 		renderButton("ZOOM IN", canvas.width - 50, 65);
 		renderButton("RESET ZOOM", canvas.width - 50, 105);
 		renderButton("RESET VIEW", canvas.width - 50, 145);
+        
+        if (hasParent) {
+            renderButton("BACK", 50, 385);
+        }
 	}
 
 	function renderButton(text, x, y) {

@@ -1,3 +1,5 @@
+import cv2
+
 try:
     from ...stdlib import Node as base
 except ValueError:
@@ -6,14 +8,14 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Fixed Intensity", "cv.fixedintensity",
-                                   127,
+        super(Node, self).__init__("Median Blur", "computervision.medianblur",
+                                   4,
                                    {"img": "Image"},
                                    {"result": "Image"},
-                                   "Set the intensity to a fixed value.", verbose)
+                                   "Apply median blur on image.", verbose)
         self.args = args
 
     def tick(self, value):
         img = value["img"]
-        img[:, :, 2] = self.args
+        img = cv2.medianBlur(img, self.args * 2 + 1)
         return {"result": img}

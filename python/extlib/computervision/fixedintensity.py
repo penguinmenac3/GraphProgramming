@@ -1,5 +1,3 @@
-import cv2
-
 try:
     from ...stdlib import Node as base
 except ValueError:
@@ -8,16 +6,14 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Resize", "cv.resize",
-                                   {"width": 320, "height": 240},
+        super(Node, self).__init__("Fixed Intensity", "computervision.fixedintensity",
+                                   127,
                                    {"img": "Image"},
                                    {"result": "Image"},
-                                   "Apply gaussian blur on image.", verbose)
+                                   "Set the intensity to a fixed value.", verbose)
         self.args = args
 
     def tick(self, value):
-        width = self.args["width"]
-        height = self.args["height"]
         img = value["img"]
-        img = cv2.resize(img, (width, height), 0, 0, cv2.INTER_CUBIC)
+        img[:, :, 2] = self.args
         return {"result": img}

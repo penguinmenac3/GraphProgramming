@@ -8,7 +8,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Plot features", "cv.plotfeatures",
+        super(Node, self).__init__("Plot features", "computervision.plotfeatures",
                                    "",
                                    {"img": "Image", "features": "Array"},
                                    {"img": "Image"},

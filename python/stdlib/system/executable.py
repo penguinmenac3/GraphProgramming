@@ -8,7 +8,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Execute", "sys.executable",
+        super(Node, self).__init__("Execute", "system.executable",
                                    {"executable": "python graphex.py", "escapeArgs": False},
                                    {"arg": "String"},
                                    {"result": "String"},

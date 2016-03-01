@@ -36,14 +36,15 @@
         top: 0px;
         left: 0px;
         width: 60%;
-        min-height: 60%;
+        height: 80%;
+        overflow:auto;
         margin-left:20%;
         margin-right:20%;
         margin-top:2em;
         margin-bottom:2em;
         padding: 2em;
         z-index: 101;
-        background-color: rgba(255, 255, 255, 0.8)
+        background-color: rgba(255, 255, 255, 1.0)
     }
     .node {
         color: white;
@@ -69,17 +70,22 @@
         background-color: orange;
     }
   </style>
+  <script type="text/javascript">
+    function initialize() {
+        WebUI.start(true, 800, 600, 'graphview');
+    }
+  </script>
  </head>
  <!-- Use the Script inside the body onload to create the webui -->
- <body onload="WebUI.start(true, 800, 600, 'graphview');" onresize="">
+ <body onload="window.setTimeout(initialize, 1000);" onresize="">
      <div id="graphview" class="graphview"></div>
      <div id="nodeselector" style="display:none" class="overlay" onclick="WebUI.hideNodeSelector()">
-        <div id="innernodeselector" class="inneroverlay">
+        <div id="innernodeselector" class="inneroverlay" onclick="event.cancelBubble=true;">
          <!-- Nodes that can be created -->
         </div>
      </div>
      <div id="languageselector" style="display:none" class="overlay" onclick="WebUI.hideLanguageSelector()">
-        <div id="innerlanguageselector" class="inneroverlay">
+        <div id="innerlanguageselector" class="inneroverlay" onclick="event.cancelBubble=true;">
          <h2>Select A Language</h2>
          <button class="node languagenode" onclick="WebUI.changeLanguage('Python')">PYTHON</button>
          <button class="node languagenode" onclick="WebUI.changeLanguage('Java')">JAVA</button>
@@ -88,7 +94,7 @@
         </div>
      </div>
      <div id="erroroverlay" style="display:none" class="overlay" onclick="WebUI.hideErrorOverlay()">
-        <div id="innererroroverlay" class="inneroverlay">
+        <div id="innererroroverlay" class="inneroverlay" onclick="event.cancelBubble=true;">
             An error occured.
         </div>
      </div>

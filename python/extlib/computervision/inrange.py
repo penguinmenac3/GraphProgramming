@@ -9,7 +9,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("In Range", "cv.inrange",
+        super(Node, self).__init__("In Range", "computervision.inrange",
                                    {"lh": 0, "ls": 0, "lv": 0, "uh": 255, "us": 255, "uv": 255},
                                    {"img": "Image"},
                                    {"result": "Image"},

@@ -8,14 +8,14 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Gaussian Blur", "cv.gaussianblur",
-                                   4,
+        super(Node, self).__init__("BGR to HSV", "computervision.bgr2hsv",
+                                   "",
                                    {"img": "Image"},
                                    {"result": "Image"},
-                                   "Apply gaussian blur on image.", verbose)
+                                   "Convert BGR image to HSV image.", verbose)
         self.args = args
 
     def tick(self, value):
         img = value["img"]
-        img = cv2.GaussianBlur(img, (0, 0), self.args * 2 + 1)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
         return {"result": img}

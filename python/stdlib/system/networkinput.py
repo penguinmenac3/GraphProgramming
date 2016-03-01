@@ -9,7 +9,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Network Input", "sys.networkinput",
+        super(Node, self).__init__("Network Input", "system.networkinput",
                                    {"host": "127.0.0.1", "port": 25555, "server": False, "password": None},
                                    {},
                                    {"result": "String"},

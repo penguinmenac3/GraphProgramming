@@ -9,8 +9,8 @@
 			},
 			"args": "Hello World!",
 			"desc": "Pass the string arg as output.",
-			"x": -4.5,
-			"y": -95.5
+			"x": 120.5,
+			"y": -155.5
 		},
 		{
 			"name": "Print_E2umn",
@@ -21,14 +21,38 @@
 			"outputs": {},
 			"args": "",
 			"desc": "Print input to console.",
-			"x": 5.5,
-			"y": 102.5
+			"x": 121.5,
+			"y": 137.5
+		},
+		{
+			"name": "Subgraph_NvShN",
+			"code": "sys.subgraph",
+			"inputs": {
+				"arg": "Object"
+			},
+			"outputs": {
+				"result": "Object"
+			},
+			"args": "ReplaceByName",
+			"desc": "Execute a subgraph.",
+			"x": 127.5,
+			"y": -8.5
 		}
 	],
 	"connections": [
 		{
 			"input": {
 				"node": "String Constant_LXX8S",
+				"output": "result"
+			},
+			"output": {
+				"node": "Subgraph_NvShN",
+				"input": "arg"
+			}
+		},
+		{
+			"input": {
+				"node": "Subgraph_NvShN",
 				"output": "result"
 			},
 			"output": {

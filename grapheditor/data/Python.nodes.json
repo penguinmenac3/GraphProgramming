@@ -2,7 +2,7 @@
     "name": "While greater",
     "code": "structures.whilegreater",
     "inputs": {"val": "Number", "initial": "Number"},
-    "outputs": {"leave": "Number", "loop": "Number"},
+    "outputs": {"loop": "Number", "leave": "Number"},
     "args": "",
     "desc": "Loop while initial is greater than val."
 },
@@ -18,15 +18,15 @@
     "name": "While less",
     "code": "structures.whileless",
     "inputs": {"val": "Number", "initial": "Number"},
-    "outputs": {"leave": "Number", "loop": "Number"},
+    "outputs": {"loop": "Number", "leave": "Number"},
     "args": "",
     "desc": "Loop while initial is less than val."
 },
 {
     "name": "If",
     "code": "structures.if",
-    "inputs": {"val": "Object", "condition": "Boolean"},
-    "outputs": {"false": "Object", "true": "Object"},
+    "inputs": {"condition": "Boolean", "val": "Object"},
+    "outputs": {"true": "Object", "false": "Object"},
     "args": "",
     "desc": "If condition pass to true otherwise to false."
 },
@@ -66,7 +66,7 @@
     "name": "Splitflow",
     "code": "default.splitflow5",
     "inputs": {"val": "Object"},
-    "outputs": {"5": "Object", "2": "Object", "3": "Object", "4": "Object", "1": "Object"},
+    "outputs": {"4": "Object", "2": "Object", "5": "Object", "3": "Object", "1": "Object"},
     "args": "",
     "desc": "Splits the flow."
 },
@@ -129,7 +129,7 @@
 {
     "name": "Equal",
     "code": "number.equal",
-    "inputs": {"5": "Number", "2": "Number", "3": "Number", "4": "Number", "1": "Number"},
+    "inputs": {"4": "Number", "2": "Number", "5": "Number", "3": "Number", "1": "Number"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Check if values are equal."
@@ -209,7 +209,7 @@
 {
     "name": "Equal",
     "code": "boolean.equal",
-    "inputs": {"5": "Boolean", "2": "Boolean", "3": "Boolean", "4": "Boolean", "1": "Boolean"},
+    "inputs": {"4": "Boolean", "2": "Boolean", "5": "Boolean", "3": "Boolean", "1": "Boolean"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Checks if the first arg inputs are equal."
@@ -240,23 +240,23 @@
 },
 {
     "name": "Execute",
-    "code": "sys.executable",
+    "code": "system.executable",
     "inputs": {"arg": "String"},
     "outputs": {"result": "String"},
-    "args": {"executable": "python graphex.py", "escapeArgs": false},
+    "args": {"escapeArgs": false, "executable": "python graphex.py"},
     "desc": "Execute executable with given args."
 },
 {
     "name": "Network",
-    "code": "sys.networkoutput",
+    "code": "system.networkoutput",
     "inputs": {"msg": "String"},
     "outputs": {"result": "String"},
-    "args": {"port": 25555, "host": "127.0.0.1", "server": false, "password": null},
+    "args": {"host": "127.0.0.1", "password": null, "port": 25555, "server": false},
     "desc": "Execute executable with given args."
 },
 {
     "name": "Output",
-    "code": "sys.output",
+    "code": "system.output",
     "inputs": {"arg": "String"},
     "outputs": {},
     "args": "arg",
@@ -264,15 +264,15 @@
 },
 {
     "name": "Network Input",
-    "code": "sys.networkinput",
+    "code": "system.networkinput",
     "inputs": {},
     "outputs": {"result": "String"},
-    "args": {"port": 25555, "host": "127.0.0.1", "server": false, "password": null},
+    "args": {"host": "127.0.0.1", "password": null, "port": 25555, "server": false},
     "desc": "Wait for input over network."
 },
 {
     "name": "Subgraph",
-    "code": "sys.subgraph",
+    "code": "system.subgraph",
     "inputs": {"arg": "Object"},
     "outputs": {"result": "Object"},
     "args": "DefaultGraph",
@@ -280,7 +280,7 @@
 },
 {
     "name": "Print",
-    "code": "sys.print",
+    "code": "system.print",
     "inputs": {"val": "String"},
     "outputs": {},
     "args": "",
@@ -288,16 +288,16 @@
 },
 {
     "name": "Network",
-    "code": "sys.network",
+    "code": "system.network",
     "inputs": {"msg": "String"},
     "outputs": {"result": "String"},
-    "args": {"port": 25555, "host": "127.0.0.1", "server": false, "password": null},
+    "args": {"host": "127.0.0.1", "password": null, "port": 25555, "server": false},
     "desc": "Send input over network and wait for result."
 },
 {
     "name": "Index of",
     "code": "string.indexof",
-    "inputs": {"ref": "String", "str": "String", "offset": "Number"},
+    "inputs": {"str": "String", "ref": "String", "offset": "Number"},
     "outputs": {"result": "Number"},
     "args": "",
     "desc": "Get the index of a ref in a string."
@@ -305,7 +305,7 @@
 {
     "name": "Starts with",
     "code": "string.startswith",
-    "inputs": {"ref": "String", "str": "String"},
+    "inputs": {"str": "String", "ref": "String"},
     "outputs": {"result": "Boolean"},
     "args": "",
     "desc": "String starts with ref."
@@ -337,7 +337,7 @@
 {
     "name": "Equal",
     "code": "string.equal",
-    "inputs": {"5": "String", "2": "String", "3": "String", "4": "String", "1": "String"},
+    "inputs": {"4": "String", "2": "String", "5": "String", "3": "String", "1": "String"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Check if values are equal."
@@ -345,7 +345,7 @@
 {
     "name": "Ends with",
     "code": "string.endswith",
-    "inputs": {"ref": "String", "str": "String"},
+    "inputs": {"str": "String", "ref": "String"},
     "outputs": {"result": "Boolean"},
     "args": "",
     "desc": "Check if a string ends with the reference."
@@ -369,22 +369,14 @@
 {
     "name": "Split",
     "code": "string.split",
-    "inputs": {"splitter": "String", "str": "String"},
+    "inputs": {"str": "String", "splitter": "String"},
     "outputs": {"result": "Array"},
     "args": "",
     "desc": "Split a string by a splitter."
 },
 {
-    "name": "RcCar",
-    "code": "raspi.rccar",
-    "inputs": {"turn": "Number", "speed": "Number"},
-    "outputs": {},
-    "args": {"maxSpeed": 0.5},
-    "desc": "Set turn and speed of rccar."
-},
-{
     "name": "Median Blur",
-    "code": "cv.medianblur",
+    "code": "computervision.medianblur",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": 4,
@@ -392,7 +384,7 @@
 },
 {
     "name": "HSV to BGR",
-    "code": "cv.hsv2bgr",
+    "code": "computervision.hsv2bgr",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": "",
@@ -400,7 +392,7 @@
 },
 {
     "name": "Show",
-    "code": "cv.show",
+    "code": "computervision.show",
     "inputs": {"img": "Image"},
     "outputs": {},
     "args": {"title": "Debug View"},
@@ -408,7 +400,7 @@
 },
 {
     "name": "BGR to HSV",
-    "code": "cv.bgr2hsv",
+    "code": "computervision.bgr2hsv",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": "",
@@ -416,7 +408,7 @@
 },
 {
     "name": "Fixed Saturisation",
-    "code": "cv.fixedsaturisation",
+    "code": "computervision.fixedsaturisation",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": 127,
@@ -424,7 +416,7 @@
 },
 {
     "name": "Fixed Intensity",
-    "code": "cv.fixedintensity",
+    "code": "computervision.fixedintensity",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": 127,
@@ -432,7 +424,7 @@
 },
 {
     "name": "Fixed Hue",
-    "code": "cv.fixedhue",
+    "code": "computervision.fixedhue",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": 127,
@@ -440,15 +432,15 @@
 },
 {
     "name": "Resize",
-    "code": "cv.resize",
+    "code": "computervision.resize",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
-    "args": {"height": 240, "width": 320},
+    "args": {"width": 320, "height": 240},
     "desc": "Apply gaussian blur on image."
 },
 {
     "name": "Add Weighted",
-    "code": "cv.addweighted",
+    "code": "computervision.addweighted",
     "inputs": {"left": "Image", "right": "Image"},
     "outputs": {"result": "Image"},
     "args": {"left": "Number", "right": "Number"},
@@ -456,7 +448,7 @@
 },
 {
     "name": "Record",
-    "code": "cv.record",
+    "code": "computervision.record",
     "inputs": {"img": "Image"},
     "outputs": {},
     "args": {"resource": "test.mp4"},
@@ -464,7 +456,7 @@
 },
 {
     "name": "Gaussian Blur",
-    "code": "cv.gaussianblur",
+    "code": "computervision.gaussianblur",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": 4,
@@ -472,7 +464,7 @@
 },
 {
     "name": "Sift",
-    "code": "cv.sift",
+    "code": "computervision.sift",
     "inputs": {"img": "Image"},
     "outputs": {"img": "Image", "features": "Array"},
     "args": "",
@@ -480,7 +472,7 @@
 },
 {
     "name": "Image to distribution",
-    "code": "cv.img2distribution",
+    "code": "computervision.img2distribution",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Array"},
     "args": "",
@@ -488,7 +480,7 @@
 },
 {
     "name": "Video",
-    "code": "cv.video",
+    "code": "computervision.video",
     "inputs": {},
     "outputs": {"result": "Image"},
     "args": {"fps": 30, "resource": 0},
@@ -496,25 +488,49 @@
 },
 {
     "name": "In Range",
-    "code": "cv.inrange",
+    "code": "computervision.inrange",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
-    "args": {"uv": 255, "uh": 255, "ls": 0, "lh": 0, "us": 255, "lv": 0},
+    "args": {"ls": 0, "lh": 0, "uv": 255, "uh": 255, "lv": 0, "us": 255},
     "desc": "Apply an inRange operation on the image."
 },
 {
     "name": "Plot features",
-    "code": "cv.plotfeatures",
+    "code": "computervision.plotfeatures",
     "inputs": {"img": "Image", "features": "Array"},
     "outputs": {"img": "Image"},
     "args": "",
     "desc": "Plot features into an image."
 },
 {
+    "name": "GPIO Out",
+    "code": "raspberrypi.gpioout",
+    "inputs": {"val": "Boolean"},
+    "outputs": {},
+    "args": 8,
+    "desc": "Set the gpio pin to the input value"
+},
+{
+    "name": "GPIO In",
+    "code": "raspberrypi.gpioin",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args": 10,
+    "desc": "Read if a gpio has a signal."
+},
+{
+    "name": "RcCar",
+    "code": "raspberrypi.rccar",
+    "inputs": {"speed": "Number", "turn": "Number"},
+    "outputs": {},
+    "args": {"maxSpeed": 0.5},
+    "desc": "Set turn and speed of rccar."
+},
+{
     "name": "Ultrasonic Sensor",
-    "code": "rccar.ultrasonicsensor",
+    "code": "raspberrypi.ultrasonicsensor",
     "inputs": {"trigger": "Double"},
     "outputs": {"distance": "Double"},
-    "args": {"ECHO": 10, "TRIG": 8},
+    "args": {"TRIG": 8, "ECHO": 10},
     "desc": "Measure the distance."
 }]

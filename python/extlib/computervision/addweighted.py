@@ -8,7 +8,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Add Weighted", "cv.addweighted",
+        super(Node, self).__init__("Add Weighted", "computervision.addweighted",
                                    {"left": "Number", "right": "Number"},
                                    {"left": "Image", "right": "Image"},
                                    {"result": "Image"},
