@@ -337,16 +337,16 @@ function WebUI_CWebUI() {
                     nname = nname.substring(0, nname.lastIndexOf("_"));
                 }
                 html += "<h3>" + nname + "</h3>";
-                console.log(currentNode);
+                //console.log(currentNode);
                 html += "<p>Code: " + currentNode.code + "</p>";
                 html += "<p>Desc: " + currentNode.desc + "</p>";
                 html += "<p>Inputs: " + JSON.stringify(currentNode.inputs) + "</p>";
                 html += "<p>Outputs: " + JSON.stringify(currentNode.outputs) + "</p>";
                 
                 html += "<p>Args: <input id='args' value='" + JSON.stringify(currentNode.args) + "' /></p>";
-                html += "<p><button class='btn btn-default right' onclick='WebUI.nodeChanged()'>Save</button></p>";
+                html += "<p><button class='node inputnode right' onclick='WebUI.nodeChanged()'>Save</button></p>";
                 if(currentNode.code == "system.subgraph") {
-				    html += "<p><button class='btn btn-default right' onclick='getGraph(\"" + currentNode.args + "\", WebUI.setGraph, WebUI.printError)'>Edit Subgraph</button><p>";
+				    html += "<p><button class='node algorithmnode right' onclick='getGraph(\"" + currentNode.args + "\", WebUI.setGraph, WebUI.printError)'>Edit Subgraph</button><p>";
                 }
                 document.getElementById("infocontent").innerHTML = html;
                 RenderEngine.marked = currentNode;
@@ -539,7 +539,7 @@ function WebUI_CWebUI() {
     this.setDebug = function (result) {
         showInfo();
         result = result.replace(new RegExp("\n", 'g'), "<br>");
-        document.getElementById("debugcontent").innerHTML = "<button class='btn btn-default right' onclick='WebUI.clearDebug()'>clear</button><br>" + result;
+        document.getElementById("debugcontent").innerHTML = "<button class='node outputnode right' onclick='WebUI.clearDebug()'>clear</button><br>" + result;
     }
     
     this.clearDebug = function () {

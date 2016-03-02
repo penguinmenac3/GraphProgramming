@@ -9,8 +9,8 @@
 			"outputs": {},
 			"args": "",
 			"desc": "Print input to console.",
-			"x": 67,
-			"y": 100.5
+			"x": 21,
+			"y": 173.5
 		},
 		{
 			"name": "String Constant_T2bf3",
@@ -19,21 +19,68 @@
 			"outputs": {
 				"result": "String"
 			},
-			"args": "Hello World!",
+			"args": "Hello ",
 			"desc": "Pass the string arg as output.",
-			"x": 65,
-			"y": -145.5
+			"x": -117,
+			"y": -167.5
+		},
+		{
+			"name": "String Concat_weJLJ",
+			"code": "string.concat",
+			"inputs": {
+				"left": "String",
+				"right": "String"
+			},
+			"outputs": {
+				"result": "String"
+			},
+			"args": "",
+			"desc": "Concat the two strings.",
+			"x": 22,
+			"y": 2.5
+		},
+		{
+			"name": "String Constant_uDCPO",
+			"code": "string.const",
+			"inputs": {},
+			"outputs": {
+				"result": "String"
+			},
+			"args": "World!",
+			"desc": "Pass the string arg as output.",
+			"x": 187,
+			"y": -170.5
 		}
 	],
 	"connections": [
+		{
+			"input": {
+				"node": "String Concat_weJLJ",
+				"output": "result"
+			},
+			"output": {
+				"node": "Print_CeItr",
+				"input": "val"
+			}
+		},
 		{
 			"input": {
 				"node": "String Constant_T2bf3",
 				"output": "result"
 			},
 			"output": {
-				"node": "Print_CeItr",
-				"input": "val"
+				"node": "String Concat_weJLJ",
+				"input": "left"
+			}
+		},
+		{
+			"input": {
+				"node": "String Constant_uDCPO",
+				"output": "result"
+			},
+			"output": {
+				"node": "String Concat_weJLJ",
+				"input": "right"
 			}
 		}
 	]

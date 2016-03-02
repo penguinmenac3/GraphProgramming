@@ -13,8 +13,8 @@ function WebUI_CRenderEngine() {
     var scale = 1;
     var hasParent = false;
 	this.dotSize = 20;
-	this.nodeWidth = 200;
-	this.nodeHeight = 80;
+	this.nodeWidth = 180;
+	this.nodeHeight = 60;
 	this.tmpLine = null;
 	this.result = "";
     this.showInfo = true;
@@ -262,19 +262,20 @@ function WebUI_CRenderEngine() {
         that.setDirty();
 	};*/
 
-	function renderDot(px, py, marked) {
+	function renderDot(px, py, marked, fillStyle) {
 		ctx.beginPath();
-		ctx.lineWidth="1";
-        if (!marked) {
-		  ctx.strokeStyle="rgb(128,128,128)";
-		  ctx.fillStyle = "rgb(244,244,244)";
-        } else {
-		  ctx.strokeStyle="rgb(128,200,128)";
-		  ctx.fillStyle = "rgb(244,255,244)";
-        }
+		ctx.fillStyle = fillStyle;
 		ctx.rect(renderOffsetX * scale + px * scale - that.dotSize/2 * scale + width/2,renderOffsetY * scale + py * scale - that.dotSize/2 * scale + height/2,that.dotSize * scale,that.dotSize * scale);
 		ctx.fill();
-		ctx.stroke();
+        
+        if (!marked) {
+		  ctx.lineWidth="0";
+		  ctx.strokeStyle=fillStyle;
+        } else {
+		  ctx.lineWidth="2";
+		  ctx.strokeStyle="rgb(128,128,128)";
+		  ctx.stroke();
+        }
 	}
 
 	function renderDotConnection(px1, py1, px2, py2) {
@@ -286,28 +287,31 @@ function WebUI_CRenderEngine() {
 		ctx.stroke();
 	}
 
-	function renderNodeText(text, x, y, offsetX, offsetY) {
+	function renderNodeText(text, x, y, offsetX, offsetY, color, size) {
+        if (!color) {
+            color="rgb(128,128,128)";
+        }
 		/* Write text with speed and curve info */
-		ctx.font = parseInt(12 * scale) + "px 'Helvetica'";
-		ctx.fillStyle = "rgb(128,128,128)";
+		ctx.font = parseInt(size * scale) + "px 'Helvetica'";
+		ctx.fillStyle = color;
 		ctx.textAlign = 'center';
 		ctx.textBaseline = 'center';
 		ctx.fillText(text, renderOffsetX * scale + x * scale + width/2 + offsetX * scale, renderOffsetY * scale + y * scale + height/2 + offsetY * scale);
 	}
 
-	function renderNodeRect(x, y, marked) {
+	function renderNodeRect(x, y, marked, fillStyle) {
 		ctx.beginPath();
-		ctx.lineWidth="1";
-        if (!marked) {
-		  ctx.strokeStyle="rgb(128,128,128)";
-		  ctx.fillStyle = "rgb(244,244,244)";
-        } else {
-		  ctx.strokeStyle="rgb(128,200,128)";
-		  ctx.fillStyle = "rgb(244,255,244)";
-        }
+		ctx.fillStyle = fillStyle;
 		ctx.rect(renderOffsetX * scale + x * scale + width/2-that.nodeWidth/2 * scale,renderOffsetY * scale + y * scale + height/2-that.nodeHeight/2 * scale,that.nodeWidth * scale,that.nodeHeight * scale);
 		ctx.fill();
-		ctx.stroke();
+        if (!marked) {
+		  ctx.lineWidth="0";
+		  ctx.strokeStyle=fillStyle;
+        } else {
+		  ctx.lineWidth="5";
+		  ctx.strokeStyle="rgb(128,128,128)";
+		  ctx.stroke();
+        }
 	}
 
 	function renderGraph() {
@@ -334,35 +338,50 @@ function WebUI_CRenderEngine() {
 			node.y = 0;
 			console.log("Default position for: " + node.name)
 		}
+        
+        var fillStyle = "rgba(128,128,128,0.6)";
+        var foregroundColor = "white";
+        var fillStyleLarge = "orange";
+        if (Object.keys(node.inputs).length == 0) {
+            fillStyleLarge = "mediumseagreen";
+        } else if (Object.keys(node.outputs).length == 0) {
+            fillStyleLarge = "indianred";
+        } else if (node.code.lastIndexOf("structures", 0) === 0 || node.code.lastIndexOf("default", 0) === 0) {
+            fillStyleLarge = "darkslategray";
+        }
 
 		/* Draw rect symbol for robot */
-		renderNodeRect(node.x, node.y, node == that.marked);
+		renderNodeRect(node.x, node.y, node == that.marked, fillStyleLarge);
 
 		/* Write text with speed and curve info */
         var nname = node.name;
         if (nname.lastIndexOf("_") != -1) {
             nname = nname.substring(0, nname.lastIndexOf("_"));
         }
-		renderNodeText(nname, node.x, node.y, 0, -30);
 		if (typeof node.args === "undefined") {
 			node.args = {};
 		}
-		renderNodeText("args="+JSON.stringify(node.args), node.x, node.y, 0,  0);
-		renderNodeText(node.desc, node.x, node.y, 0,  15);
+        if (node.args != {} && node.args != "" && node.args != null) {
+		  renderNodeText(nname, node.x, node.y, 0, -15, foregroundColor, 16);
+		  renderNodeText(JSON.stringify(node.args), node.x, node.y, 0,  10, foregroundColor, 12);
+        } else {
+		  renderNodeText(nname, node.x, node.y, 0, -6, foregroundColor, 16);
+        }
+		//renderNodeText(node.desc, node.x, node.y, 0,  15, foregroundColor);
 
 		for (var key in node.inputs) {
   			if (node.inputs.hasOwnProperty(key)) {
   				pos = getPosition(node, key, node.inputs, true);
-    			renderDot(pos.x, pos.y, node == that.marked);
+    			renderDot(pos.x, pos.y, node == that.marked, fillStyle);
   			}
 		}
 		for (var key in node.outputs) {
   			if (node.outputs.hasOwnProperty(key)) {
   				pos = getPosition(node, key, node.outputs, false);
-    			renderDot(pos.x, pos.y, node == that.marked);
+    			renderDot(pos.x, pos.y, node == that.marked, fillStyle);
   			}
 		}
-		renderDot(node.x - that.nodeWidth/2 + that.dotSize / 2, node.y - that.nodeHeight/2 + that.dotSize / 2, node == that.marked);
+		renderDot(node.x - that.nodeWidth/2 + that.dotSize / 2, node.y - that.nodeHeight/2 + that.dotSize / 2, node == that.marked, fillStyle);
 	}
 
 	function getPosition(parent, reference, list, isInput) {
@@ -391,42 +410,39 @@ function WebUI_CRenderEngine() {
 	}
 
 	function renderActionButtons() {
-		renderButton("LOAD", 50, 25);
-		renderButton("SAVE", 50, 65);
-		renderButton("LANGUAGE", 50, 105);
-		renderButton("NEW NODE", 50, 145);
-		renderButton("DELETE", 50, 185);
-		//renderButton("RUN", 50, 225);
-		renderButton("START", 50, 265);
-		renderButton("KILL", 50, 305);
+		renderButton("LOAD", 50, 25, "darkslategray");
+		renderButton("SAVE", 50, 65, "darkslategray");
+		renderButton("LANGUAGE", 50, 105, "darkslategray");
+		renderButton("NEW NODE", 50, 145, "orange");
+		renderButton("DELETE", 50, 185, "indianred");
+		//renderButton("RUN", 50, 225, "dimgray");
+		renderButton("START", 50, 265, "mediumseagreen");
+		renderButton("KILL", 50, 305, "indianred");
         
-		renderButton("ZOOM OUT", canvas.width - 50, 25);
-		renderButton("ZOOM IN", canvas.width - 50, 65);
-		renderButton("RESET ZOOM", canvas.width - 50, 105);
-		renderButton("RESET VIEW", canvas.width - 50, 145);
+		renderButton("ZOOM OUT", canvas.width - 50, 25, "darkslategray");
+		renderButton("ZOOM IN", canvas.width - 50, 65, "darkslategray");
+		renderButton("RESET ZOOM", canvas.width - 50, 105, "indianred");
+		renderButton("RESET VIEW", canvas.width - 50, 145, "indianred");
         
         if (that.showInfo) {
-		  renderButton("< SHOW", canvas.width - 50, canvas.height / 2);
+		  renderButton("< SHOW", canvas.width - 50, canvas.height / 2, "mediumseagreen");
         } else {
-		  renderButton("> HIDE", canvas.width - 50, canvas.height / 2);
+		  renderButton("> HIDE", canvas.width - 50, canvas.height / 2, "indianred");
         }
         
         if (hasParent) {
-            renderButton("BACK", 50, 385);
+            renderButton("BACK", 50, 385, "dimgray");
         }
 	}
 
-	function renderButton(text, x, y) {
+	function renderButton(text, x, y, color) {
 		ctx.beginPath();
-		ctx.lineWidth="1";
-		ctx.fillStyle = "rgb(244,244,244)";
-		ctx.strokeStyle="rgb(128,128,128)";
+		ctx.fillStyle = color;
 		ctx.rect(x - 40, y -15, 80, 30);
 		ctx.fill();
-		ctx.stroke();
 
 		ctx.font = "12px 'Helvetica'";
-		ctx.fillStyle = "rgb(128,128,128)";
+		ctx.fillStyle = "white";
 		ctx.textAlign = 'center';
 		ctx.textBaseline = 'center';
 		ctx.fillText(text, x, y - 7);
