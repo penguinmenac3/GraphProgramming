@@ -99,6 +99,12 @@ function WebUI_CRenderEngine() {
     
     this.changeScale = function(factor) {
         scale *= 1.0 + factor;
+        if (scale < 0.1) {
+            scale = 0.1;
+        }
+        if (scale > 1.728){
+            scale = 1.728;
+        }
         that.setDirty();
     };
     
