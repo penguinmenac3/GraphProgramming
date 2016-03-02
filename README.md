@@ -44,4 +44,4 @@ Maybe there will also be implementations for other languages than python.
 The implementation already supports opencv and raspi servo drivers from adafruit.
 More robot stuff is on it's way.
 
-![Image of the graph programming ui.](https://raw.githubusercontent.com/penguinmenac3/GraphProgramming/master/images/cv_support.png)
+![Image of the graph programming ui.](https://raw.githubusercontent.com/penguinmenac3/GraphProgramming/master/images/CVGraph.png)
