@@ -536,13 +536,19 @@ function WebUI_CWebUI() {
         RenderEngine.setDirty();
     }
     
+    var lastDebug = "";
     this.setDebug = function (result) {
+        if (lastDebug == result) {
+            return;
+        }
+        lastDebug = result;
         showInfo();
         result = result.replace(new RegExp("\n", 'g'), "<br>");
         document.getElementById("debugcontent").innerHTML = "<button class='node outputnode right' onclick='WebUI.clearDebug()'>clear</button><br>" + result;
     }
     
     this.clearDebug = function () {
+        lastDebug = "";
         document.getElementById("debugcontent").innerHTML = "Run graph to get debug output.";
     }
 }
