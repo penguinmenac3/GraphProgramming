@@ -13,6 +13,7 @@ function WebUI_CRenderEngine() {
     var scale = 1;
     var hasParent = false;
 	this.dotSize = 20;
+	this.dotTouchSize = 40;
 	this.nodeWidth = 180;
 	this.nodeHeight = 60;
 	this.tmpLine = null;
@@ -387,7 +388,7 @@ function WebUI_CRenderEngine() {
     			renderDot(pos.x, pos.y, node == that.marked, fillStyle);
   			}
 		}
-		renderDot(node.x - that.nodeWidth/2 + that.dotSize / 2, node.y - that.nodeHeight/2 + that.dotSize / 2, node == that.marked, fillStyle);
+		//renderDot(node.x - that.nodeWidth/2 + that.dotSize / 2, node.y - that.nodeHeight/2 + that.dotSize / 2, node == that.marked, fillStyle);
 	}
 
 	function getPosition(parent, reference, list, isInput) {

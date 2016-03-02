@@ -4,6 +4,9 @@ function WebUI_CWebUI() {
 	var that = this;
 	var KeyListener = null;
 	var RenderEngine = null;
+    var moved = false;
+    var moveOffsetX = 0;
+    var moveOffsetY = 0;
 	this.keyboard_input_state = true;
 	this.mouse_click_listener = null;
 	this.debug = false;
@@ -291,10 +294,13 @@ function WebUI_CWebUI() {
 		graph.nodes.forEach(function(node) {
 			var x1 = node.x * scale - RenderEngine.nodeWidth/2 * scale;
 			var y1 = node.y * scale - RenderEngine.nodeHeight/2 * scale;
-			var x2 = node.x * scale - RenderEngine.nodeWidth/2 * scale + RenderEngine.dotSize * scale;
-			var y2 = node.y * scale - RenderEngine.nodeHeight/2 * scale + RenderEngine.dotSize * scale;
+			var x2 = node.x * scale + RenderEngine.nodeWidth/2 * scale;
+			var y2 = node.y * scale + RenderEngine.nodeHeight/2 * scale;
 			if (x > x1 && x < x2 && y > y1 && y < y2) {
 				that.selectedNode = node;
+                moveOffsetX = node.x - x;
+                moveOffsetY = node.y - y;
+                moved = false;
 				return;
 			}
 			var input = tryFindInput(node, x, y);
@@ -312,51 +318,6 @@ function WebUI_CWebUI() {
 				return;
 			}
 		});
-		if (that.selectedNode == null) {
-			var currentNode = null;
-			graph.nodes.forEach(function(node) {
-				var x1 = node.x * scale - RenderEngine.nodeWidth/2 * scale;
-				var y1 = node.y * scale - RenderEngine.nodeHeight/2 * scale;
-				var x2 = node.x * scale + RenderEngine.nodeWidth/2 * scale;
-				var y2 = node.y * scale + RenderEngine.nodeHeight/2 * scale;
-				if (x > x1 && x < x2 && y > y1 && y < y2) {
-					currentNode = node;
-					return;
-				}
-			});
-			if (currentNode == null) {
-				that.clickNode = null;
-				return;
-			}
-			if (currentNode != null) {
-				that.clickNode = null;
-				that.startPos = null;
-                var html = "";
-                var nname = currentNode.name;
-                if (nname.lastIndexOf("_") != -1) {
-                    nname = nname.substring(0, nname.lastIndexOf("_"));
-                }
-                html += "<h3>" + nname + "</h3>";
-                //console.log(currentNode);
-                html += "<p>Code: " + currentNode.code + "</p>";
-                html += "<p>Desc: " + currentNode.desc + "</p>";
-                html += "<p>Inputs: " + JSON.stringify(currentNode.inputs) + "</p>";
-                html += "<p>Outputs: " + JSON.stringify(currentNode.outputs) + "</p>";
-                
-                html += "<p>Args: <input id='args' value='" + JSON.stringify(currentNode.args) + "' /></p>";
-                html += "<p><button class='node inputnode right' onclick='WebUI.nodeChanged()'>Save</button></p>";
-                if(currentNode.code == "system.subgraph") {
-				    html += "<p><button class='node algorithmnode right' onclick='getGraph(\"" + currentNode.args + "\", WebUI.setGraph, WebUI.printError)'>Edit Subgraph</button><p>";
-                }
-                document.getElementById("infocontent").innerHTML = html;
-                RenderEngine.marked = currentNode;
-                showInfo();
-                RenderEngine.setDirty();
-			} else {
-				that.clickNode = currentNode;
-				that.startPos = null;
-			}
-		}
 	};
     
     this.nodeChanged = function () {
@@ -371,10 +332,10 @@ function WebUI_CWebUI() {
 		for (var connection in node.inputs) {
   			if (node.inputs.hasOwnProperty(connection)) {
 				var pos = RenderEngine.getNodeInputPosition(that.graph, node.name, connection);
-				var x1 = pos.x * scale - RenderEngine.dotSize/2 * scale;
-				var y1 = pos.y * scale - RenderEngine.dotSize/2 * scale;
-				var x2 = pos.x * scale + RenderEngine.dotSize/2 * scale;
-				var y2 = pos.y * scale + RenderEngine.dotSize/2 * scale;
+				var x1 = pos.x * scale - RenderEngine.dotTouchSize/2 * scale;
+				var y1 = pos.y * scale - RenderEngine.dotTouchSize/2 * scale;
+				var x2 = pos.x * scale + RenderEngine.dotTouchSize/2 * scale;
+				var y2 = pos.y * scale + RenderEngine.dotTouchSize/2 * scale;
 				if (x > x1 && x < x2 && y > y1 && y < y2) {
 					var result = connection;
 					return connection;
@@ -390,10 +351,10 @@ function WebUI_CWebUI() {
 		for (var connection in node.outputs) {
   			if (node.outputs.hasOwnProperty(connection)) {
 				var pos = RenderEngine.getNodeOutputPosition(that.graph, node.name, connection);
-				var x1 = pos.x * scale - RenderEngine.dotSize/2 * scale;
-				var y1 = pos.y * scale - RenderEngine.dotSize/2 * scale;
-				var x2 = pos.x * scale + RenderEngine.dotSize/2 * scale;
-				var y2 = pos.y * scale + RenderEngine.dotSize/2 * scale;
+				var x1 = pos.x * scale - RenderEngine.dotTouchSize/2 * scale;
+				var y1 = pos.y * scale - RenderEngine.dotTouchSize/2 * scale;
+				var x2 = pos.x * scale + RenderEngine.dotTouchSize/2 * scale;
+				var y2 = pos.y * scale + RenderEngine.dotTouchSize/2 * scale;
 				if (x > x1 && x < x2 && y > y1 && y < y2) {
 					var result = connection;
 					return connection;
@@ -414,8 +375,9 @@ function WebUI_CWebUI() {
 			var pos = RenderEngine.getNodeOutputPosition(that.graph, that.selectedNode.name, that.selectedOutputConnection);
 			RenderEngine.tmpNodeLine(pos.x, pos.y, x / scale, y / scale);
 		} else if (that.selectedNode != null) {
-			that.selectedNode.x = x / scale + RenderEngine.nodeWidth/2 - RenderEngine.dotSize / 2;
-			that.selectedNode.y = y / scale + RenderEngine.nodeHeight/2 - RenderEngine.dotSize / 2;
+			that.selectedNode.x = x / scale + moveOffsetX;
+			that.selectedNode.y = y / scale + moveOffsetY;
+            moved = true;
             RenderEngine.setDirty();
 		} else if (that.startPos != null) {
 			var nextPos = {"x":x+RenderEngine.getOffsetX(), "y":y+RenderEngine.getOffsetY()};
@@ -465,26 +427,54 @@ function WebUI_CWebUI() {
 			that.changed = true;
             RenderEngine.setDirty();
 		} else if (that.selectedNode != null) {
-			that.selectedNode.x = x / scale + RenderEngine.nodeWidth/2 - RenderEngine.dotSize / 2;
-			that.selectedNode.y = y / scale + RenderEngine.nodeHeight/2 - RenderEngine.dotSize / 2;
+            if (!moved) {
+                var currentNode = that.selectedNode;
+				that.clickNode = null;
+				that.startPos = null;
+                var html = "";
+                var nname = currentNode.name;
+                if (nname.lastIndexOf("_") != -1) {
+                    nname = nname.substring(0, nname.lastIndexOf("_"));
+                }
+                html += "<h3>" + nname + "</h3>";
+                //console.log(currentNode);
+                html += "<p>Code: " + currentNode.code + "</p>";
+                html += "<p>Desc: " + currentNode.desc + "</p>";
+                html += "<p>Inputs: " + JSON.stringify(currentNode.inputs) + "</p>";
+                html += "<p>Outputs: " + JSON.stringify(currentNode.outputs) + "</p>";
+                
+                html += "<p>Args: <input id='args' value='" + JSON.stringify(currentNode.args) + "' /></p>";
+                html += "<p><button class='node inputnode right' onclick='WebUI.nodeChanged()'>Save</button></p>";
+                if(currentNode.code == "system.subgraph") {
+				    html += "<p><button class='node algorithmnode right' onclick='getGraph(\"" + currentNode.args + "\", WebUI.setGraph, WebUI.printError)'>Edit Subgraph</button><p>";
+                }
+                document.getElementById("infocontent").innerHTML = html;
+                RenderEngine.marked = currentNode;
+                showInfo();
+                RenderEngine.setDirty();
+			} else {
+			    that.selectedNode.x = x / scale + moveOffsetX;
+		    	that.selectedNode.y = y / scale + moveOffsetY;
+                RenderEngine.setDirty();
 
-			if (absX > 10 && absX < 90 && absY > 170 && absY < 200) {
-				for (var connection in that.selectedNode.inputs) {
-  					if (that.selectedNode.inputs.hasOwnProperty(connection)) {
-						updateGraph(that.selectedNode, null, connection, null, true);
-					}
-				}
-				for (var connection in that.selectedNode.outputs) {
-  					if (that.selectedNode.outputs.hasOwnProperty(connection)) {
-						updateGraph(null, that.selectedNode, null, connection, true);
-					}
-				}
-				var index = graph.nodes.indexOf(that.selectedNode);
-    			graph.nodes.splice(index, 1);
+			    if (absX > 10 && absX < 90 && absY > 170 && absY < 200) {
+			    	for (var connection in that.selectedNode.inputs) {
+  			    		if (that.selectedNode.inputs.hasOwnProperty(connection)) {
+			    			updateGraph(that.selectedNode, null, connection, null, true);
+			    		}
+			    	}
+			    	for (var connection in that.selectedNode.outputs) {
+  			    		if (that.selectedNode.outputs.hasOwnProperty(connection)) {
+			    			updateGraph(null, that.selectedNode, null, connection, true);
+			    		}
+			    	}
+			    	var index = graph.nodes.indexOf(that.selectedNode);
+    		    	graph.nodes.splice(index, 1);
 
-				that.changed = true;
-				return;
-			}
+    				that.changed = true;
+    				return;
+    			}
+            }
 			that.selectedNode = null;
 			that.changed = true;
 		} else if (spos != null) {
