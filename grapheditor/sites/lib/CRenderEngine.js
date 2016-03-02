@@ -1,13 +1,12 @@
 
 function WebUI_CRenderEngine() {
-    var isDirty = true;
+    var containerDiv = null;
+    var isDirty = 2;
 	var that = this;
 	var canvas = null;
 	var ctx = null;
 	var width = 0;
 	var height = 0;
-	var default_width = 0;
-	var default_height = 0;
 	var fullscreen = false;
 	var renderOffsetX = 0;
 	var renderOffsetY = 0;
@@ -18,22 +17,25 @@ function WebUI_CRenderEngine() {
 	this.nodeHeight = 80;
 	this.tmpLine = null;
 	this.result = "";
+    this.showInfo = true;
+    this.marked = null;
     
     this.setDirty = function() {
-        isDirty = true;
+        isDirty = 2;
     };
 
-	this.init = function(b_fullscreen, init_width, init_height, container) {
+	this.init = function(b_fullscreen, container) {
 		fullscreen = b_fullscreen;
 		/* create a canvas element */
 		canvas = document.createElement('canvas');
 		canvas.setAttribute('id', 'webuicontainer');
 		/* bind it to the given container or the body */
 		if (container == null) {
-			document.body.appendChild(canvas);
+            containerDiv = document.body;
 		} else {
-			document.getElementById(container).appendChild(canvas);
+            containerDiv = document.getElementById(container);
 		}
+		containerDiv.appendChild(canvas);
 		/* fix the style to display it correctly */
 		if (fullscreen) {
 			canvas.style.position = "absolute";
@@ -46,8 +48,6 @@ function WebUI_CRenderEngine() {
 		/* extract the context, that is required for rendering */
 		ctx = canvas.getContext('2d');
 		ctx.save();
-		default_width = init_width;
-		default_height = init_height;
 		that.resize();
 		window.onresize = function () {
 			that.resize();
@@ -65,8 +65,8 @@ function WebUI_CRenderEngine() {
 			width = window.innerWidth;
 			height = window.innerHeight;
 		} else {
-			width = default_width;
-			height = default_height;
+			width = containerDiv.clientWidth;
+			height = containerDiv.clientHeight;
 		}
 		canvas.width = width;
 		canvas.height = height;
@@ -168,10 +168,10 @@ function WebUI_CRenderEngine() {
 	};
 
 	this.render = function(fps) {
-        if (!isDirty) {
+        if (isDirty < 1) {
             return;
         }
-        isDirty = false;
+        isDirty--;
 		/* clean canvas */
         ctx.fillStyle = "white";
 		ctx.fillRect(0, 0, width, height);
@@ -257,16 +257,21 @@ function WebUI_CRenderEngine() {
         that.setDirty();
 	};
 
-	this.setResult = function(text) {
+	/*this.setResult = function(text) {
 		that.result = text;
         that.setDirty();
-	};
+	};*/
 
-	function renderDot(px, py) {
+	function renderDot(px, py, marked) {
 		ctx.beginPath();
 		ctx.lineWidth="1";
-		ctx.fillStyle = "rgb(244,244,244)";
-		ctx.strokeStyle="rgb(128,128,128)";
+        if (!marked) {
+		  ctx.strokeStyle="rgb(128,128,128)";
+		  ctx.fillStyle = "rgb(244,244,244)";
+        } else {
+		  ctx.strokeStyle="rgb(128,200,128)";
+		  ctx.fillStyle = "rgb(244,255,244)";
+        }
 		ctx.rect(renderOffsetX * scale + px * scale - that.dotSize/2 * scale + width/2,renderOffsetY * scale + py * scale - that.dotSize/2 * scale + height/2,that.dotSize * scale,that.dotSize * scale);
 		ctx.fill();
 		ctx.stroke();
@@ -290,11 +295,16 @@ function WebUI_CRenderEngine() {
 		ctx.fillText(text, renderOffsetX * scale + x * scale + width/2 + offsetX * scale, renderOffsetY * scale + y * scale + height/2 + offsetY * scale);
 	}
 
-	function renderNodeRect(x, y) {
+	function renderNodeRect(x, y, marked) {
 		ctx.beginPath();
 		ctx.lineWidth="1";
-		ctx.fillStyle = "rgb(244,244,244)";
-		ctx.strokeStyle="rgb(128,128,128)";
+        if (!marked) {
+		  ctx.strokeStyle="rgb(128,128,128)";
+		  ctx.fillStyle = "rgb(244,244,244)";
+        } else {
+		  ctx.strokeStyle="rgb(128,200,128)";
+		  ctx.fillStyle = "rgb(244,255,244)";
+        }
 		ctx.rect(renderOffsetX * scale + x * scale + width/2-that.nodeWidth/2 * scale,renderOffsetY * scale + y * scale + height/2-that.nodeHeight/2 * scale,that.nodeWidth * scale,that.nodeHeight * scale);
 		ctx.fill();
 		ctx.stroke();
@@ -326,7 +336,7 @@ function WebUI_CRenderEngine() {
 		}
 
 		/* Draw rect symbol for robot */
-		renderNodeRect(node.x, node.y);
+		renderNodeRect(node.x, node.y, node == that.marked);
 
 		/* Write text with speed and curve info */
         var nname = node.name;
@@ -343,16 +353,16 @@ function WebUI_CRenderEngine() {
 		for (var key in node.inputs) {
   			if (node.inputs.hasOwnProperty(key)) {
   				pos = getPosition(node, key, node.inputs, true);
-    			renderDot(pos.x, pos.y);
+    			renderDot(pos.x, pos.y, node == that.marked);
   			}
 		}
 		for (var key in node.outputs) {
   			if (node.outputs.hasOwnProperty(key)) {
   				pos = getPosition(node, key, node.outputs, false);
-    			renderDot(pos.x, pos.y);
+    			renderDot(pos.x, pos.y, node == that.marked);
   			}
 		}
-		renderDot(node.x - that.nodeWidth/2 + that.dotSize / 2, node.y - that.nodeHeight/2 + that.dotSize / 2);
+		renderDot(node.x - that.nodeWidth/2 + that.dotSize / 2, node.y - that.nodeHeight/2 + that.dotSize / 2, node == that.marked);
 	}
 
 	function getPosition(parent, reference, list, isInput) {
@@ -394,6 +404,12 @@ function WebUI_CRenderEngine() {
 		renderButton("ZOOM IN", canvas.width - 50, 65);
 		renderButton("RESET ZOOM", canvas.width - 50, 105);
 		renderButton("RESET VIEW", canvas.width - 50, 145);
+        
+        if (that.showInfo) {
+		  renderButton("< SHOW", canvas.width - 50, canvas.height / 2);
+        } else {
+		  renderButton("> HIDE", canvas.width - 50, canvas.height / 2);
+        }
         
         if (hasParent) {
             renderButton("BACK", 50, 385);

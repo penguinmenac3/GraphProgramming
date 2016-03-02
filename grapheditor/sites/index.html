@@ -6,6 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script type="text/javascript" src="lib/helpers.js"></script>
   <script type="text/javascript" src="lib/vars.js"></script>
   <script type="text/javascript" src="lib/CRenderEngine.js"></script>
@@ -13,10 +14,45 @@
   <script type="text/javascript" src="lib/CWebUI.js"></script>
   <style>
     body {
-        background-color: rgba(100, 100, 100, 0.5)
+        background-color: rgba(100, 100, 100, 0.5);
+        height: 100%;
+        margin: 0;
+    }
+    .rightSide {
+        background-color: white;
+        position: absolute;
+        overflow:auto;
+        top:0;
+        bottom:0;
+        right:0;
+        width: 30%;
+        z-index: -1;
+    }
+    .tab {
+        padding: 1em;
+    }
+    .right {
+        float: right;
+    }
+    .info {
+        background-color: rgba(250, 250, 250, 1.0);
+        border: 1px solid rgba(200, 200, 200, 1.0);
+        padding-left: 1em;
+        padding-right: 1em;
+        padding-bottom: 3em;
+    }
+    .debug {
+        background-color: rgba(250, 250, 250, 1.0);
+        border: 1px solid rgba(200, 200, 200, 1.0);
+        padding: 1em;
     }
     .graphview {
         background-color: white;
+        position: absolute;
+        top:0;
+        bottom:0;
+        left:0;
+        right:0;
     }
     .overlay {
         position: absolute;
@@ -72,13 +108,27 @@
   </style>
   <script type="text/javascript">
     function initialize() {
-        WebUI.start(true, 800, 600, 'graphview');
+        WebUI.start(false, 'graphview');
     }
   </script>
  </head>
  <!-- Use the Script inside the body onload to create the webui -->
  <body onload="window.setTimeout(initialize, 1000);" onresize="">
      <div id="graphview" class="graphview"></div>
+     <div id="rightside" class="rightSide">
+         <div id="info" class="tab">
+            <h2>Info</h2>
+            <div id="infocontent" class="info">
+                Click/Tap on a node to show info about it.
+            </div>
+         </div>
+         <div id="debug" class="tab">
+            <h2>Debug</h2>
+            <div id="debugcontent" class="debug">
+                Run graph to get debug output.
+            </div>
+         </div>
+     </div>
      <div id="nodeselector" style="display:none" class="overlay" onclick="WebUI.hideNodeSelector()">
         <div id="innernodeselector" class="inneroverlay" onclick="event.cancelBubble=true;">
          <!-- Nodes that can be created -->

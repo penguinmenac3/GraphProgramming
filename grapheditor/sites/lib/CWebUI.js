@@ -17,7 +17,7 @@ function WebUI_CWebUI() {
 	this.startPos = null;
 	this.clickNode = null;
 	
-	this.start = function(fullscreen, width, height, container) {
+	this.start = function(fullscreen, container) {
 		/* check if dependencies are already existing */
 		if (KeyListener == null && RenderEngine == null) {
 			KeyListener = new WebUI_CKeyListener();
@@ -27,7 +27,7 @@ function WebUI_CWebUI() {
 		}
 
 		/* init the RenderEngine */
-		var canvas = RenderEngine.init(fullscreen, width, height, container);
+		var canvas = RenderEngine.init(fullscreen, container);
 		RenderEngine.render(60);
 		/* init the ObjectManager, needs canvas for MouseHandlers */
 		KeyListener.init(canvas);
@@ -44,7 +44,6 @@ function WebUI_CWebUI() {
         that.graphStack.push(graph);
         that.graphNameStack.push(that.graphName);
 		that.graph = graph;
-		RenderEngine.setResult("");
         if (that.graphStack.length > 1) {
             RenderEngine.setHasParent(true);
         }
@@ -151,6 +150,19 @@ function WebUI_CWebUI() {
                 RenderEngine.resetOffset();
                 return;
             }
+            if (absY > RenderEngine.getSize().height / 2 - 15 && absY < RenderEngine.getSize().height / 2 + 15) {
+                if (RenderEngine.showInfo) {
+                    showInfo();
+                } else {
+                    RenderEngine.showInfo = true;
+                    document.getElementById("graphview").style.right = "0";
+                    document.getElementById("infocontent").innerHTML = "Click/Tap on a node to show info about it.";
+                    RenderEngine.marked = null;
+                }
+                RenderEngine.resize();
+                RenderEngine.setDirty();
+                return;
+            }
         }
 		if (absX > 10 && absX < 90) {
 			if (absY > 10 && absY < 40) {
@@ -247,7 +259,7 @@ function WebUI_CWebUI() {
 					WebUI.saveGraph(WebUI.graphName);
 					that.changed = false;
 				}
-				start(that.graphName, RenderEngine.setResult, RenderEngine.setResult);
+				start(that.graphName, that.setDebug, that.setDebug);
 				return;
 			}
 			if (absY > 290 && absY < 310) {
@@ -316,20 +328,29 @@ function WebUI_CWebUI() {
 				that.clickNode = null;
 				return;
 			}
-			if (that.clickNode == currentNode) {
+			if (currentNode != null) {
 				that.clickNode = null;
-				var args = prompt("Change args", JSON.stringify(currentNode.args));
-				if (args == null) {
-					that.startPos = null;
-					return;
-				}
-				currentNode.args = JSON.parse(args);
-				that.changed = true;
 				that.startPos = null;
-                if(currentNode.code == "sys.subgraph") {
-				    WebUI.graphName = currentNode.args;
-				    getGraph(WebUI.graphName, WebUI.setGraph, WebUI.printError);
+                var html = "";
+                var nname = currentNode.name;
+                if (nname.lastIndexOf("_") != -1) {
+                    nname = nname.substring(0, nname.lastIndexOf("_"));
                 }
+                html += "<h3>" + nname + "</h3>";
+                console.log(currentNode);
+                html += "<p>Code: " + currentNode.code + "</p>";
+                html += "<p>Desc: " + currentNode.desc + "</p>";
+                html += "<p>Inputs: " + JSON.stringify(currentNode.inputs) + "</p>";
+                html += "<p>Outputs: " + JSON.stringify(currentNode.outputs) + "</p>";
+                
+                html += "<p>Args: <input id='args' value='" + JSON.stringify(currentNode.args) + "' /></p>";
+                html += "<p><button class='btn btn-default right' onclick='WebUI.nodeChanged()'>Save</button></p>";
+                if(currentNode.code == "system.subgraph") {
+				    html += "<p><button class='btn btn-default right' onclick='getGraph(\"" + currentNode.args + "\", WebUI.setGraph, WebUI.printError)'>Edit Subgraph</button><p>";
+                }
+                document.getElementById("infocontent").innerHTML = html;
+                RenderEngine.marked = currentNode;
+                showInfo();
                 RenderEngine.setDirty();
 			} else {
 				that.clickNode = currentNode;
@@ -337,6 +358,12 @@ function WebUI_CWebUI() {
 			}
 		}
 	};
+    
+    this.nodeChanged = function () {
+        RenderEngine.marked.args = JSON.parse(document.getElementById("args").value);
+	    that.changed = true;
+        RenderEngine.setDirty();
+    }
 
 	function tryFindInput(node, x, y) {
         var scale = RenderEngine.getScale();
@@ -418,7 +445,6 @@ function WebUI_CWebUI() {
 			RenderEngine.removeTmpNodeLine();
 			that.selectedInputConnection = null;
 			that.selectedNode = null;
-			RenderEngine.setResult("");
 			that.changed = true;
             RenderEngine.setDirty();
 		} else if (that.selectedOutputConnection != null) {
@@ -436,7 +462,6 @@ function WebUI_CWebUI() {
 			RenderEngine.removeTmpNodeLine();
 			that.selectedOutputConnection = null;
 			that.selectedNode = null;
-			RenderEngine.setResult("");
 			that.changed = true;
             RenderEngine.setDirty();
 		} else if (that.selectedNode != null) {
@@ -457,7 +482,6 @@ function WebUI_CWebUI() {
 				var index = graph.nodes.indexOf(that.selectedNode);
     			graph.nodes.splice(index, 1);
 
-				RenderEngine.setResult("");
 				that.changed = true;
 				return;
 			}
@@ -504,4 +528,21 @@ function WebUI_CWebUI() {
 		}
         RenderEngine.setDirty();
 	}
+    
+    function showInfo() {
+        RenderEngine.showInfo = false;
+        document.getElementById("graphview").style.right = "30%";
+        RenderEngine.resize();
+        RenderEngine.setDirty();
+    }
+    
+    this.setDebug = function (result) {
+        showInfo();
+        result = result.replace(new RegExp("\n", 'g'), "<br>");
+        document.getElementById("debugcontent").innerHTML = "<button class='btn btn-default right' onclick='WebUI.clearDebug()'>clear</button><br>" + result;
+    }
+    
+    this.clearDebug = function () {
+        document.getElementById("debugcontent").innerHTML = "Run graph to get debug output.";
+    }
 }

@@ -1,7 +1,19 @@
 {
 	"nodes": [
 		{
-			"name": "String Constant_LXX8S",
+			"name": "Print_CeItr",
+			"code": "system.print",
+			"inputs": {
+				"val": "String"
+			},
+			"outputs": {},
+			"args": "",
+			"desc": "Print input to console.",
+			"x": 67,
+			"y": 100.5
+		},
+		{
+			"name": "String Constant_T2bf3",
 			"code": "string.const",
 			"inputs": {},
 			"outputs": {
@@ -9,54 +21,18 @@
 			},
 			"args": "Hello World!",
 			"desc": "Pass the string arg as output.",
-			"x": 120.5,
-			"y": -155.5
-		},
-		{
-			"name": "Print_E2umn",
-			"code": "sys.print",
-			"inputs": {
-				"val": "String"
-			},
-			"outputs": {},
-			"args": "",
-			"desc": "Print input to console.",
-			"x": 121.5,
-			"y": 137.5
-		},
-		{
-			"name": "Subgraph_NvShN",
-			"code": "sys.subgraph",
-			"inputs": {
-				"arg": "Object"
-			},
-			"outputs": {
-				"result": "Object"
-			},
-			"args": "ReplaceByName",
-			"desc": "Execute a subgraph.",
-			"x": 127.5,
-			"y": -8.5
+			"x": 65,
+			"y": -145.5
 		}
 	],
 	"connections": [
 		{
 			"input": {
-				"node": "String Constant_LXX8S",
+				"node": "String Constant_T2bf3",
 				"output": "result"
 			},
 			"output": {
-				"node": "Subgraph_NvShN",
-				"input": "arg"
-			}
-		},
-		{
-			"input": {
-				"node": "Subgraph_NvShN",
-				"output": "result"
-			},
-			"output": {
-				"node": "Print_E2umn",
+				"node": "Print_CeItr",
 				"input": "val"
 			}
 		}
