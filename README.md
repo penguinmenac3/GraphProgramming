@@ -1,7 +1,7 @@
 # Graph Programming
 Code can be interpreted as a graph. Actually compilers already do that. However, this project takes that approach to the programmer.
 
-![Image of the graph programming ui.](https://raw.githubusercontent.com/penguinmenac3/GraphProgramming/master/images/GitGraph.png)
+![Image of the graph programming ui.](https://raw.githubusercontent.com/penguinmenac3/GraphProgramming/master/images/GraphProgrammingIDE.png)
 
 # Motivation
 The world gets smarter and more connected. But who will programm all those smart bits in the internet of things?
