@@ -3,6 +3,7 @@ function WebUI_CKeyListener() {
 	var that = this;
 	var RenderEngine = null;
 	var running = false;
+    var lastPos = {x: 0, y: 0};
 	/* fps mesurement */
 	var fps = 60;
 	var fps_timestamp = new Date().getTime();
@@ -120,6 +121,21 @@ function WebUI_CKeyListener() {
 		var canv_pos = RenderEngine.getCanvasPosition();
 		pos.x -= canv_pos.x;
 		pos.y -= canv_pos.y;
+        
+        if (typeof(pos.x) === "undefined" || typeof(pos.y) === "undefined" || pos.x == 0 || pos.y == 0 || isNaN(pos.x) || isNaN(pos.y)) {
+            for (var i = 0; i < e.touches.length; i++) {
+			    pos.x = e.touches[0].pageX;
+			    pos.y = e.touches[0].pageY;
+  		    }
+  		}
+        console.log(pos);
+        if (pos.x == 0 || pos.y == 0 || isNaN(pos.x) || isNaN(pos.y)) {
+            pos.x = lastPos.x;
+            pos.y = lastPos.y;
+        } else {
+            lastPos.x = pos.x;
+            lastPos.y = pos.y;
+        }
 		return pos;
 	}
 

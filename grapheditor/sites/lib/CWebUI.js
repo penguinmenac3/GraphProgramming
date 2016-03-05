@@ -521,7 +521,7 @@ function WebUI_CWebUI() {
     
     function showInfo() {
         RenderEngine.showInfo = false;
-        document.getElementById("graphview").style.right = "30%";
+        document.getElementById("graphview").style.right = "18em";
         RenderEngine.resize();
         RenderEngine.setDirty();
     }
