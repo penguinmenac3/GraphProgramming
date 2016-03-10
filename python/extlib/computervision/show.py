@@ -10,7 +10,7 @@ except ValueError:
 class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("Show", "computervision.show",
-                                   {"title": "Debug View"},
+                                   {"title": "Debug View", "fullscreen": True},
                                    {"img": "Image"},
                                    {},
                                    "Show an image.", verbose)
@@ -27,7 +27,11 @@ class Node(base.Node):
 
     def uithread(self):
         window_title = self.args["title"]
-        cv2.namedWindow(window_title)
+        if not self.args["fullscreen"]:
+            cv2.namedWindow(window_title)
+        else:
+            cv2.namedWindow(window_title, cv2.WND_PROP_FULLSCREEN)          
+            cv2.setWindowProperty(window_title, cv2.WND_PROP_FULLSCREEN, cv2.cv.CV_WINDOW_FULLSCREEN)
         while True:
             if not self.img is None:
                 cv2.imshow(window_title, self.img)

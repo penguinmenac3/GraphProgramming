@@ -2,6 +2,7 @@ import json
 import sys
 import time
 from threading import Thread
+from threading import Lock
 
 try:
     import builtins
@@ -15,6 +16,7 @@ class GraphEx(object):
     def __init__(self, graph_path, verbose = False):
         self.nodes = {}
         self.input_nodes = {}
+        self.lock = Lock()
 
         # Open the graph and parse it as json.
         data = open(graph_path, 'r').read()
@@ -96,12 +98,13 @@ class GraphEx(object):
         # Initialize all lists.
         self.toCalculate = []
         self.activeCalculations = []
+        self.ops = 0
 
         # add the input nodes to the nodes that should be calculated.
         self.toCalculate.extend(self.input_nodes.values())
 
         # Execute nodes until there is no more nodes to calculate and no nodes in calculation.
-        while (self.toCalculate or self.activeCalculations) and not builtins.registry["kill"]:
+        while self.shouldStillRun():
             # When there are only active calculations and nothing new, wait.
             if not self.toCalculate:
                 time.sleep(0.01)
@@ -138,10 +141,18 @@ class GraphEx(object):
                 #print(resultNode.inputBuffer)
 
         # Add the nodes that follow in the graph to the to calculate list and remove self from active nodes.
+        self.lock.acquire()
         self.toCalculate.extend(node.nextNodes)
         self.activeCalculations.remove(node)
         if node.isRepeating():
             self.toCalculate.append(node)
+        self.lock.release()
+
+    def shouldStillRun(self):
+        self.lock.acquire()
+        should_run = (self.toCalculate or self.activeCalculations) and not builtins.registry["kill"]
+        self.lock.release()
+        return should_run
 
     def checkIfReady(self, node):
         # Check if all nodes are calculated.

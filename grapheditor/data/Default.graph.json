@@ -1,7 +1,7 @@
 {
 	"nodes": [
 		{
-			"name": "Print_CeItr",
+			"name": "Print_f2rVH",
 			"code": "system.print",
 			"inputs": {
 				"val": "String"
@@ -9,78 +9,31 @@
 			"outputs": {},
 			"args": "",
 			"desc": "Print input to console.",
-			"x": 21,
-			"y": 173.5
+			"x": -20,
+			"y": 85
 		},
 		{
-			"name": "String Constant_T2bf3",
+			"name": "String Constant_VwxtY",
 			"code": "string.const",
 			"inputs": {},
 			"outputs": {
 				"result": "String"
 			},
-			"args": "Hello ",
+			"args": "Hello World!",
 			"desc": "Pass the string arg as output.",
-			"x": -117,
-			"y": -167.5
-		},
-		{
-			"name": "String Concat_weJLJ",
-			"code": "string.concat",
-			"inputs": {
-				"left": "String",
-				"right": "String"
-			},
-			"outputs": {
-				"result": "String"
-			},
-			"args": "",
-			"desc": "Concat the two strings.",
-			"x": 22,
-			"y": 2.5
-		},
-		{
-			"name": "String Constant_uDCPO",
-			"code": "string.const",
-			"inputs": {},
-			"outputs": {
-				"result": "String"
-			},
-			"args": "World!",
-			"desc": "Pass the string arg as output.",
-			"x": 187,
-			"y": -170.5
+			"x": -18,
+			"y": -76
 		}
 	],
 	"connections": [
 		{
 			"input": {
-				"node": "String Concat_weJLJ",
+				"node": "String Constant_VwxtY",
 				"output": "result"
 			},
 			"output": {
-				"node": "Print_CeItr",
+				"node": "Print_f2rVH",
 				"input": "val"
-			}
-		},
-		{
-			"input": {
-				"node": "String Constant_T2bf3",
-				"output": "result"
-			},
-			"output": {
-				"node": "String Concat_weJLJ",
-				"input": "left"
-			}
-		},
-		{
-			"input": {
-				"node": "String Constant_uDCPO",
-				"output": "result"
-			},
-			"output": {
-				"node": "String Concat_weJLJ",
-				"input": "right"
 			}
 		}
 	]

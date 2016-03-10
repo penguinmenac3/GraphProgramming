@@ -15,5 +15,5 @@ class Node(base.Node):
     def tick(self, value):
         result = True
         for i in range(self.args - 1):
-            result = result and value[i] == value[i + 1]
+            result = result and value[str(i+1)] == value[str(i + 2)]
         return {"result": result}
