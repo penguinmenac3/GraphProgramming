@@ -199,6 +199,13 @@ class myHandler(BaseHTTPRequestHandler):
                 path = "../python/extlib/" + node + ".py"
             if not os.path.isfile(path):
                 path = "../python/privatelib/" + node + ".py"
+            print(os.path.dirname(path))
+            if not os.path.exists(os.path.dirname(path)):
+                try:
+                    os.makedirs(os.path.dirname(path))
+                except OSError as exc: # Guard against race condition
+                    if exc.errno != errno.EEXIST:
+                        raise
             text_file = open(path, "w")
             text_file.write(data["value"])
             text_file.close()

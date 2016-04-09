@@ -234,6 +234,9 @@ function WebUI_CWebUI() {
                     if (!classes[cur]) {
                         prefix = cur;
                         classes[cur] = "<h2>" + prefix.toUpperCase() + "</h2>";
+                        if (prefix == "default" && localStorage.devmode == "true") {
+					        classes[cur] += '<button onclick="WebUI.createNewNode()" class="node newnode">(DEV) Define New</button>';
+                        }
                     }
 					classes[cur] += '<button onclick="WebUI.createNode(\'' + node.code + '\')" class="node ' + nodetype + '">' + node.name + '</button>';
 				});
@@ -381,6 +384,51 @@ function WebUI_CWebUI() {
         WebUI.hideCodeEditor();
     }
     
+    this.createNewNode = function() {
+        var sampleSrc = `try: 
+    from ...stdlib import Node as base
+except ValueError:
+    from stdlib import Node as base
+
+
+class Node(base.Node):
+    def __init__(self, verbose, args):
+        super(Node, self).__init__("YourNode", "package.node", {"code": 'result = value["val"]'},
+                                   {"val": "Object"},
+                                   {"result": "Object"},
+                                   "Executes the argument as pyton code.", verbose)
+        self.args = args
+
+    def tick(self, value):
+        result = {}
+        tag = None
+        if "tags" in value and "val" in value["tags"]:
+            tag = value["tags"]["val"]
+        
+        exec(self.args["code"])
+        
+        if tag:
+            return {"result": result, "tags":{"result":tag}}
+        else:
+            return {"result": result}
+`
+        var srcEdit = "<textarea id='src' class='src'>" + sampleSrc + "</textarea>";
+        var savebtn = "<button class='node inputnode right' onclick='WebUI.saveNewNode()'>Create</button>";
+        var cancelbtn = "<button class='node outputnode right' onclick='WebUI.hideCodeEditor()'>Cancel</button>"
+                
+        document.getElementById("codeeditor").style.display = "";
+        document.getElementById("innercodeeditor").innerHTML = "<h2><input class='hinput' id='nodeCode' value='package.node' /></h2>" + srcEdit + cancelbtn + savebtn;
+        codeMirror = CodeMirror.fromTextArea(document.getElementById("src"), {lineNumbers: true, theme: codeTheme});
+    }
+    
+    this.saveNewNode = function() {
+        codeMirror.toTextArea();
+        nodeCode = document.getElementById("nodeCode").value;
+        src = document.getElementById("src").value;
+        setSrc(nodeCode, src, that.printError);
+        WebUI.hideCodeEditor();
+    }
+    
     this.saveCodePeek = function(property) {
         codeMirror.toTextArea();
         src = document.getElementById("src").value;
@@ -407,7 +455,6 @@ function WebUI_CWebUI() {
         var savebtn = "<button class='node inputnode right' onclick='WebUI.saveCodePeek(\"" + that.currentNode.code + "\")'>Save</button>";
         if (localStorage.devmode != "true") {
             savebtn = "";
-            srcEdit = "<textarea id='src' class='src' readonly>" + src + "</textarea>";
         }
         var cancelbtn = "<button class='node outputnode right' onclick='WebUI.hideCodeEditor()'>Cancel</button>"
         

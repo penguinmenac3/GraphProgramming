@@ -1,7 +1,7 @@
 [{
     "name": "Equal",
     "code": "string.equal",
-    "inputs": {"2": "String", "3": "String", "4": "String", "1": "String", "5": "String"},
+    "inputs": {"2": "String", "5": "String", "3": "String", "1": "String", "4": "String"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Check if values are equal."
@@ -25,7 +25,7 @@
 {
     "name": "Index of",
     "code": "string.indexof",
-    "inputs": {"ref": "String", "str": "String", "offset": "Number"},
+    "inputs": {"offset": "Number", "str": "String", "ref": "String"},
     "outputs": {"result": "Number"},
     "args": "",
     "desc": "Get the index of a ref in a string."
@@ -33,7 +33,7 @@
 {
     "name": "Ends with",
     "code": "string.endswith",
-    "inputs": {"ref": "String", "str": "String"},
+    "inputs": {"str": "String", "ref": "String"},
     "outputs": {"result": "Boolean"},
     "args": "",
     "desc": "Check if a string ends with the reference."
@@ -49,7 +49,7 @@
 {
     "name": "Starts with",
     "code": "string.startswith",
-    "inputs": {"ref": "String", "str": "String"},
+    "inputs": {"str": "String", "ref": "String"},
     "outputs": {"result": "Boolean"},
     "args": "",
     "desc": "String starts with ref."
@@ -65,7 +65,7 @@
 {
     "name": "Split",
     "code": "string.split",
-    "inputs": {"splitter": "String", "str": "String"},
+    "inputs": {"str": "String", "splitter": "String"},
     "outputs": {"result": "Array"},
     "args": "",
     "desc": "Split a string by a splitter."
@@ -81,7 +81,7 @@
 {
     "name": "Equal",
     "code": "number.equal",
-    "inputs": {"2": "Number", "3": "Number", "4": "Number", "1": "Number", "5": "Number"},
+    "inputs": {"2": "Number", "5": "Number", "3": "Number", "1": "Number", "4": "Number"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Check if values are equal."
@@ -194,7 +194,7 @@
     "name": "Splitflow",
     "code": "default.splitflow5",
     "inputs": {"val": "Object"},
-    "outputs": {"2": "Object", "3": "Object", "4": "Object", "1": "Object", "5": "Object"},
+    "outputs": {"2": "Object", "5": "Object", "3": "Object", "1": "Object", "4": "Object"},
     "args": "",
     "desc": "Splits the flow."
 },
@@ -226,7 +226,7 @@
     "name": "If",
     "code": "structures.if",
     "inputs": {"condition": "Boolean", "val": "Object"},
-    "outputs": {"true": "Object", "false": "Object"},
+    "outputs": {"false": "Object", "true": "Object"},
     "args": "",
     "desc": "If condition pass to true otherwise to false."
 },
@@ -251,7 +251,7 @@
     "code": "system.networkoutput",
     "inputs": {"msg": "String"},
     "outputs": {"result": "String"},
-    "args": {"password": null, "port": 25555, "host": "127.0.0.1", "server": false},
+    "args": {"host": "127.0.0.1", "password": null, "server": false, "port": 25555},
     "desc": "Execute executable with given args."
 },
 {
@@ -275,7 +275,7 @@
     "code": "system.network",
     "inputs": {"msg": "String"},
     "outputs": {"result": "String"},
-    "args": {"password": null, "port": 25555, "host": "127.0.0.1", "server": false},
+    "args": {"host": "127.0.0.1", "password": null, "server": false, "port": 25555},
     "desc": "Send input over network and wait for result."
 },
 {
@@ -291,7 +291,7 @@
     "code": "system.executable",
     "inputs": {"arg": "String"},
     "outputs": {"result": "String"},
-    "args": {"executable": "python graphex.py", "escapeArgs": false},
+    "args": {"escapeArgs": false, "executable": "python graphex.py"},
     "desc": "Execute executable with given args."
 },
 {
@@ -299,7 +299,7 @@
     "code": "system.networkinput",
     "inputs": {},
     "outputs": {"result": "String"},
-    "args": {"password": null, "port": 25555, "host": "127.0.0.1", "server": false},
+    "args": {"host": "127.0.0.1", "password": null, "server": false, "port": 25555},
     "desc": "Wait for input over network."
 },
 {
@@ -329,7 +329,7 @@
 {
     "name": "Equal",
     "code": "boolean.equal",
-    "inputs": {"2": "Boolean", "3": "Boolean", "4": "Boolean", "1": "Boolean", "5": "Boolean"},
+    "inputs": {"2": "Boolean", "5": "Boolean", "3": "Boolean", "1": "Boolean", "4": "Boolean"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Checks if the first arg inputs are equal."

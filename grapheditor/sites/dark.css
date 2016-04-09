@@ -92,6 +92,9 @@ body {
         margin-bottom:0.2em;
         border: 0px;
     }
+    .newnode {
+        background-color: darkviolet;
+    }
     .inputnode {
         background-color: green;
     }
@@ -165,5 +168,5 @@ body {
         padding-top: 0.4em;
     }
     .CodeMirror {
-        height: 85%;
+        height: 82%;
     }
