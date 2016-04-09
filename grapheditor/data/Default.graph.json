@@ -42,23 +42,6 @@
 			"displayname": "String",
 			"x": -110,
 			"y": -187
-		},
-		{
-			"name": "BXx8s",
-			"code": "default.function",
-			"inputs": {
-				"val": "Object"
-			},
-			"outputs": {
-				"result": "Object"
-			},
-			"args": {
-				"code": "return {\"result\": value[\"val\"]}"
-			},
-			"desc": "Extract tag from node",
-			"displayname": "Extract Tag",
-			"x": 103,
-			"y": -3
 		}
 	],
 	"connections": [
