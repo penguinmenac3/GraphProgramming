@@ -1,3 +1,4 @@
+*.nodes.json
 ignored/*.graph.json
 ignored/*.nodes.json
 private
