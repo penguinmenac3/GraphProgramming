@@ -21,7 +21,7 @@ class Node(base.Node):
         port = self.args["port"]
         s = None
         if "tags" in value and "msg" in value["tags"]:
-            s = value["tags"]["msg"]
+            s = value["tags"]["msg"]["sock"]
             
         success = False
         while not success:
@@ -31,9 +31,12 @@ class Node(base.Node):
             	s.connect((host, port))
             s.send((value["msg"] + "\n").encode("utf-8"))
             if self.args["closeAfterSend"]:
-            	s.close()
+                if "tags" in value and "msg" in value["tags"]:
+                  value["tags"]["msg"]["closeSock"](s)
+                else:
+            	  s.close()
             success = True
-          except (ConnectionRefusedError, ConnectionResetError):
+          except:
             if "tags" in value and "msg" in value["tags"]:
                 return {}
             time.sleep(1)

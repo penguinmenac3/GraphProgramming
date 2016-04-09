@@ -1,5 +1,6 @@
 import socket
 import time
+import sys
 
 try:
     from ...stdlib import Node as base
@@ -29,9 +30,11 @@ class Node(base.Node):
                 if password is not None:
                     s.send((password + "\n").encode("utf-8"))
                 s.send((value["msg"] + "\n").encode("utf-8"))
-                line = sf.readline()
+                line = sf.readline().rstrip('\n')
                 s.close()
-            except (ConnectionRefusedError, ConnectionResetError):
+            except:
                 time.sleep(1)
+                print("Connection refused try again.")
+                sys.stdout.flush()
                 line = None
         return {"result": line}
