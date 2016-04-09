@@ -10,6 +10,7 @@ except ImportError:
     from urllib2 import unquote
 from cgi import parse_header, parse_multipart
 import os
+import os.path
 import signal
 from threading import Thread
 import subprocess
@@ -183,6 +184,28 @@ class myHandler(BaseHTTPRequestHandler):
             return
         if "getnodes" in data:
             path = "data/" + data["getnodes"] + ".nodes.json"
+        if "getsrc" in data:
+            node = data["getsrc"].decode("utf-8").replace(".", "/")
+            path = "../python/stdlib/" + node + ".py"
+            if not os.path.isfile(path):
+                path = "../python/extlib/" + node + ".py"
+            if not os.path.isfile(path):
+                path = "../python/privatelib/" + node + ".py"
+        if "setsrc" in data:
+            node = data["setsrc"].decode("utf-8").replace(".", "/")
+            path = "../python/stdlib/" + node + ".py"
+            if not os.path.isfile(path):
+                path = "../python/extlib/" + node + ".py"
+            if not os.path.isfile(path):
+                path = "../python/privatelib/" + node + ".py"
+            text_file = open(path, "w")
+            text_file.write(data["value"])
+            text_file.close()
+            self.send_response(200)
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
+            self.wfile.write("{'success':true}".encode("utf-8"))
+            return
         if "getgraph" in data:
             path = "data/" + data["getgraph"] + ".graph.json"
         if path:

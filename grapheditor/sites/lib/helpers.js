@@ -12,6 +12,16 @@ function attachEvent(obj, event, callback) {
 		obj['on' + event] = callback;
 }
 
+function getSrc(nodeCode, callback, callbackFailure) {
+    var params = "getsrc=" + encodeURIComponent(nodeCode);
+    sendViaPostRaw(params, callback, callbackFailure)
+}
+
+function setSrc(nodeCode, src, callbackFailure) {
+    var params = "setsrc=" + encodeURIComponent(nodeCode) + "&value=" + encodeURIComponent(src);
+    sendViaPostRaw(params, function(e) {}, callbackFailure)
+}
+
 function getGraph(graph, callback, callbackFailure) {
     var params = "getgraph=" + graph;
     sendViaPost(params, callback, callbackFailure)
@@ -39,6 +49,33 @@ function sendViaPost(params, callback, callbackFailure) {
             if (xmlhttp.responseText != "") {
                 if (callback != null) {
                     var inobject = JSON.parse(xmlhttp.responseText);
+                    callback(inobject);
+                }
+            }
+        } else if (xmlhttp.readyState==4) {
+            if (callbackFailure != null) {
+                callbackFailure(xmlhttp.responseText);
+            }
+        }
+    }
+    xmlhttp.open("POST", "/api",true);
+    //Send the proper header information along with the request
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(params);
+}
+
+function sendViaPostRaw(params, callback, callbackFailure) {
+    var xmlhttp;
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            if (xmlhttp.responseText != "") {
+                if (callback != null) {
+                    var inobject = xmlhttp.responseText;
                     callback(inobject);
                 }
             }

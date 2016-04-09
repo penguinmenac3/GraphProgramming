@@ -164,3 +164,6 @@ body {
         min-height: 80%;
         padding-top: 0.4em;
     }
+    .CodeMirror {
+        height: 85%;
+    }

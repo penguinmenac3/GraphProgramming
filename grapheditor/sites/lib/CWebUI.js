@@ -7,6 +7,8 @@ function WebUI_CWebUI() {
     var moved = false;
     var moveOffsetX = 0;
     var moveOffsetY = 0;
+    var codeMirror = null;
+    var codeTheme = "default";
     this.currentNode = null;
 	this.keyboard_input_state = true;
 	this.mouse_click_listener = null;
@@ -47,10 +49,13 @@ function WebUI_CWebUI() {
 	};
     
     this.setTheme = function(theme) {
+        that.theme = theme;
         if (theme == "dark") {
             RenderEngine.setTheme("#333333", "green", "#D75813", "darkslategray", "#AB0000", "rgba(150,150,150,0.6)", "darkgray", "#AB0000");
+            codeTheme = "lesser-dark";
         } else if (theme == "light") {    
             RenderEngine.setTheme("white", "#3CB371", "orange", "darkslategray", "indianred", "rgba(128,128,128,0.6)", "rgb(128,128,128)", "red");
+            codeTheme = "default";
         }
     }
 
@@ -348,6 +353,20 @@ function WebUI_CWebUI() {
         if (document.getElementById("args")) {
             that.currentNode.args = JSON.parse(document.getElementById("args").value);
         }
+        if ((typeof that.currentNode.args) == "object") {
+            for (var property in that.currentNode.args) {
+                if (that.currentNode.args.hasOwnProperty(property)) {
+                    
+                    if (property == "code") {
+                        // Do nothing, is only changed via editor.
+                    } else {
+                        elemId = "args-" + property;
+                        that.currentNode.args[property] = JSON.parse(document.getElementById(elemId).value);
+                    }
+                }
+            }
+        }
+        
         that.currentNode.desc = document.getElementById("desc").value;
         that.currentNode.displayname = document.getElementById("displayname").value;
 	    that.changed = true;
@@ -355,9 +374,17 @@ function WebUI_CWebUI() {
     }
     
     this.saveCodeEdit = function (property) {
+        codeMirror.toTextArea();
         that.currentNode.args[property] = document.getElementById("src").value;
         that.changed = true;
         RenderEngine.setDirty();
+        WebUI.hideCodeEditor();
+    }
+    
+    this.saveCodePeek = function(property) {
+        codeMirror.toTextArea();
+        src = document.getElementById("src").value;
+        setSrc(property, src, that.printError);
         WebUI.hideCodeEditor();
     }
     
@@ -371,7 +398,30 @@ function WebUI_CWebUI() {
         var nname = that.currentNode.displayname;
         
         document.getElementById("codeeditor").style.display = "";
-        document.getElementById("innercodeeditor").innerHTML = '<h2>Edit: ' + nname + ".args." + property + '</h2>' + srcEdit + cancelbtn + savebtn;
+        document.getElementById("innercodeeditor").innerHTML = '<h2>' + nname + ".args." + property + '</h2>' + srcEdit + cancelbtn + savebtn;
+        codeMirror = CodeMirror.fromTextArea(document.getElementById("src"), {lineNumbers: true, theme: codeTheme});
+    }
+    
+    function showCode(src) {
+        var srcEdit = "<textarea id='src' class='src'>" + src + "</textarea>";
+        var savebtn = "<button class='node inputnode right' onclick='WebUI.saveCodePeek(\"" + that.currentNode.code + "\")'>Save</button>";
+        if (localStorage.devmode != "true") {
+            savebtn = "";
+            srcEdit = "<textarea id='src' class='src' readonly>" + src + "</textarea>";
+        }
+        var cancelbtn = "<button class='node outputnode right' onclick='WebUI.hideCodeEditor()'>Cancel</button>"
+        
+        var nname = that.currentNode.displayname;
+        
+        document.getElementById("codeeditor").style.display = "";
+        document.getElementById("innercodeeditor").innerHTML = '<h2>' + that.currentNode.code + '</h2>' + srcEdit + cancelbtn + savebtn;
+        codeMirror = CodeMirror.fromTextArea(document.getElementById("src"), {lineNumbers: true, theme: codeTheme});
+    }
+    
+    
+    this.codePeek = function(property) {
+        showCode("Downloading code.");
+        getSrc(property, showCode, that.printError);
     }
 
 	function tryFindInput(node, x, y) {
@@ -483,7 +533,7 @@ function WebUI_CWebUI() {
                 var nname = that.currentNode.displayname;
                 html += "<h3><input class='hinput' id='displayname' value='" + nname + "' /></h3>";
                 //console.log(currentNode);
-                html += "<h4>Code</h4><p>" + that.currentNode.code + "</p>";
+                html += "<h4>Code</h4><p>" + that.currentNode.code + "<button class='button algorithmnode right' onclick='WebUI.codePeek(\"" + that.currentNode.code + "\")'>Peek</button></p>";
                 html += "<h4>Desc</h4><p><input class='pinput' id='desc' value='" + that.currentNode.desc + "' /></p>";
                 
                 html += "<h4>Inputs</h4><p>"

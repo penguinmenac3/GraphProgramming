@@ -2,8 +2,7 @@
 
 ## Core
 
-1. Add ability to add/change a tag to messages send.
-2. Add ability to read a tag from a message.
+1. Add tag passing to all nodes.
 
 
 ## LIB
