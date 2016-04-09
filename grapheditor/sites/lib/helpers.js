@@ -23,7 +23,7 @@ function getNodes(graph, callback, callbackFailure) {
 }
 
 function setGraph(graph, data, callback, callbackFailure) {
-    var params = "setgraph=" + graph + "&value=" + escape(JSON.stringify(data, null, "\t"));
+    var params = "setgraph=" + encodeURIComponent(graph) + "&value=" + encodeURIComponent(JSON.stringify(data, null, "\t"));
     sendViaPost(params, callback, callbackFailure)
 }
 

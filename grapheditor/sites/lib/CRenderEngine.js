@@ -381,16 +381,13 @@ function WebUI_CRenderEngine() {
 		renderNodeRect(node.x, node.y, node == that.marked, fillStyleLarge);
 
 		/* Write text with speed and curve info */
-        var nname = node.name;
-        if (nname.lastIndexOf("_") != -1) {
-            nname = nname.substring(0, nname.lastIndexOf("_"));
-        }
-		if (typeof node.args === "undefined") {
-			node.args = {};
+        var nname = node.displayname;
+		if (typeof node.desc === "undefined") {
+			node.desc = {};
 		}
-        if (node.args != {} && node.args != "" && node.args != null) {
+        if (node.desc != {} && node.desc != "" && node.desc != null) {
 		  renderNodeText(nname, node.x, node.y, 0, -15, foregroundColor, 16);
-		  renderNodeText(JSON.stringify(node.args), node.x, node.y, 0,  10, foregroundColor, 12);
+		  renderNodeText(node.desc, node.x, node.y, 0,  10, foregroundColor, 12);
         } else {
 		  renderNodeText(nname, node.x, node.y, 0, -6, foregroundColor, 16);
         }

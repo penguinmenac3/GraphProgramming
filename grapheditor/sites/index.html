@@ -18,10 +18,17 @@
     function swapTheme(theme){
 	    document.getElementById('pagestyle').setAttribute('href', theme + ".css");
         WebUI.setTheme(theme);
+        localStorage.theme = theme;
     }
     function initialize() {
-        WebUI.start(false, 'graphview', 'Default');
-        swapTheme("dark");
+        if (localStorage.graph) {
+            WebUI.start(false, 'graphview', localStorage.graph);
+        } else {
+            WebUI.start(false, 'graphview', 'Default');
+        }
+        if (localStorage.theme) {
+            swapTheme(localStorage.theme);
+        }
     }
   </script>
  </head>
@@ -46,6 +53,11 @@
      </div>
      <div id="nodeselector" style="display:none" class="overlay" onclick="WebUI.hideNodeSelector()">
         <div id="innernodeselector" class="inneroverlay" onclick="event.cancelBubble=true;">
+         <!-- Nodes that can be created -->
+        </div>
+     </div>
+     <div id="codeeditor" style="display:none" class="overlay">
+        <div id="innercodeeditor" class="inneroverlay" onclick="event.cancelBubble=true;">
          <!-- Nodes that can be created -->
         </div>
      </div>

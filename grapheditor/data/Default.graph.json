@@ -9,30 +9,76 @@
 			"outputs": {},
 			"args": "",
 			"desc": "Print input to console.",
-			"x": -20,
-			"y": 85
+			"x": -107,
+			"y": 162,
+			"displayname": "Print"
 		},
 		{
-			"name": "String Constant_VwxtY",
+			"name": "Function_iwJPO",
+			"code": "default.function",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"result": "Object"
+			},
+			"args": {
+				"code": "value[\"val\"] +=  \"\\nHow are you?\"\n\nresult = value[\"val\"]"
+			},
+			"desc": "Append a debug text",
+			"x": -110,
+			"y": -2,
+			"displayname": "Debug Append"
+		},
+		{
+			"name": "nNTFj",
 			"code": "string.const",
 			"inputs": {},
 			"outputs": {
 				"result": "String"
 			},
 			"args": "Hello World!",
-			"desc": "Pass the string arg as output.",
-			"x": -18,
-			"y": -76
+			"desc": "Hello World",
+			"displayname": "String",
+			"x": -110,
+			"y": -187
+		},
+		{
+			"name": "BXx8s",
+			"code": "default.function",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"result": "Object"
+			},
+			"args": {
+				"code": "return {\"result\": value[\"val\"]}"
+			},
+			"desc": "Extract tag from node",
+			"displayname": "Extract Tag",
+			"x": 103,
+			"y": -3
 		}
 	],
 	"connections": [
 		{
 			"input": {
-				"node": "String Constant_VwxtY",
+				"node": "Function_iwJPO",
 				"output": "result"
 			},
 			"output": {
 				"node": "Print_f2rVH",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "nNTFj",
+				"output": "result"
+			},
+			"output": {
+				"node": "Function_iwJPO",
 				"input": "val"
 			}
 		}

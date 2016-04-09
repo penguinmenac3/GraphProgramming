@@ -11,4 +11,7 @@ class Node(base.Node):
                                    "Splits the flow.", verbose)
 
     def tick(self, value):
-        return {"left": value["val"], "right": value["val"]}
+        tags = {}
+        if "tags" in value and "val" in value["tags"]:
+            tags = {"left": value["tags"]["val"], "right": value["tags"]["val"]}
+        return {"tags": tags, "left": value["val"], "right": value["val"]}

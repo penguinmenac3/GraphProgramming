@@ -77,6 +77,17 @@ body {
         margin-bottom:0.4em;
         border: 0px;
     }
+    .button {
+        color: white;
+        padding: 0.4em;
+        width: 5em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-left: 1em;
+        margin-bottom:0.2em;
+        border: 0px;
+    }
     .inputnode {
         background-color: #3CB371;
     }
@@ -121,4 +132,31 @@ body {
         display: block;
         padding: 1em;
         margin: 0.2em;
+    }
+    .pinput {
+        background-color: rgba(240, 240, 240, 1.0);
+        border-width: 0px; 
+        border-bottom-width: 2px;
+        border-color: orange;
+        border-style: solid;
+        width: 100%;
+        padding-top: 0.4em;
+    }
+    .hinput {
+        background-color: rgba(240, 240, 240, 1.0);
+        border-width: 0px; 
+        border-bottom-width: 2px;
+        border-color: orange;
+        border-style: solid;
+        width: 100%;
+        padding-top: 0.4em;
+    }
+    .src {
+        background-color: rgba(240, 240, 240, 1.0);
+        border-width: 1px; 
+        border-color: orange;
+        border-style: solid;
+        width: 100%;
+        min-height: 80%;
+        padding-top: 0.4em;
     }

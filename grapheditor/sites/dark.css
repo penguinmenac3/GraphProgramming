@@ -51,6 +51,7 @@ body {
         padding-top:2em;
         padding-bottom:2em;
         z-index: 100;
+        color: white;
         background-color: rgba(100, 100, 100, 0.5)
     }
     .inneroverlay {
@@ -66,6 +67,7 @@ body {
         margin-bottom:2em;
         padding: 2em;
         z-index: 101;
+        color: white;
         background-color: #333333;
     }
     .node {
@@ -77,6 +79,17 @@ body {
         text-overflow: ellipsis;
         margin-left:0.5em;
         margin-bottom:0.4em;
+        border: 0px;
+    }
+    .button {
+        color: white;
+        padding: 0.4em;
+        width: 5em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-left:1em;
+        margin-bottom:0.2em;
         border: 0px;
     }
     .inputnode {
@@ -123,4 +136,31 @@ body {
         display: none;
         padding: 1em;
         margin: 0.2em;
+    }
+    .pinput {
+        background-color: #444444;
+        border-width: 0px; 
+        border-bottom-width: 2px;
+        border-color: #D75813;
+        border-style: solid;
+        width: 100%;
+        padding-top: 0.4em;
+    }
+    .hinput {
+        background-color: #444444;
+        border-width: 0px; 
+        border-bottom-width: 2px;
+        border-color: #D75813;
+        border-style: solid;
+        width: 100%;
+        padding-top: 0.4em;
+    }
+    .src {
+        background-color: #444444;
+        border-width: 1px; 
+        border-color: #D75813;
+        border-style: solid;
+        width: 100%;
+        min-height: 80%;
+        padding-top: 0.4em;
     }

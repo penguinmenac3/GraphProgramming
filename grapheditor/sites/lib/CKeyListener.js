@@ -81,20 +81,6 @@ function WebUI_CKeyListener() {
 
 	function onkeydown(e) {
 		var key = e.keyCode;
-		switch (key) {
-		case KEY_F:
-			toggle_fullscreen();
-			break;
-		case KEY_F11:
-			force_fullscreen(true);
-			break;
-		case KEY_ESCAPE:
-			mode = 0;
-			step = 0;
-			frame = 0;
-			force_fullscreen(false);
-			break;
-		}
 	}
 
 	function toggle_fullscreen() {
@@ -128,7 +114,7 @@ function WebUI_CKeyListener() {
 			    pos.y = e.touches[0].pageY;
   		    }
   		}
-        console.log(pos);
+        //console.log(pos);
         if (pos.x == 0 || pos.y == 0 || isNaN(pos.x) || isNaN(pos.y)) {
             pos.x = lastPos.x;
             pos.y = lastPos.y;

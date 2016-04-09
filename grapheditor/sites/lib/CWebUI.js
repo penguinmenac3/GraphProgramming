@@ -7,6 +7,7 @@ function WebUI_CWebUI() {
     var moved = false;
     var moveOffsetX = 0;
     var moveOffsetY = 0;
+    this.currentNode = null;
 	this.keyboard_input_state = true;
 	this.mouse_click_listener = null;
 	this.debug = false;
@@ -41,6 +42,7 @@ function WebUI_CWebUI() {
         RenderEngine.setHasParent(false);
 		getGraph(that.graphName, that.setGraph, that.printError);
 		getNodes("Python", that.setNodes, that.printError);
+        showInfo();
 		return true;
 	};
     
@@ -56,6 +58,7 @@ function WebUI_CWebUI() {
         that.graphStack.push(graph);
         that.graphNameStack.push(that.graphName);
 		that.graph = graph;
+        localStorage.graph = that.graphName;
         if (that.graphStack.length > 1) {
             RenderEngine.setHasParent(true);
         }
@@ -114,9 +117,9 @@ function WebUI_CWebUI() {
 				if (nodename == null) {
 					return;
 				}
-                nodename += "_" + makeid();
 				selectedNode = JSON.parse(JSON.stringify(selectedNode));
-				selectedNode.name = nodename;
+				selectedNode.name = makeid();
+                selectedNode.displayname = nodename;
 				graph.nodes.push(selectedNode);
                 RenderEngine.setDirty();
 
@@ -137,6 +140,10 @@ function WebUI_CWebUI() {
     
     this.hideErrorOverlay = function() {
         document.getElementById("erroroverlay").style.display = "none";
+    };
+    
+    this.hideCodeEditor = function() {
+        document.getElementById("codeeditor").style.display = "none";
     };
 
 	this.trySelect = function(x, y) {		
@@ -169,6 +176,7 @@ function WebUI_CWebUI() {
                     RenderEngine.showInfo = true;
                     document.getElementById("graphview").style.right = "0";
                     document.getElementById("infocontent").innerHTML = "Click/Tap on a node to show info about it.";
+                    that.currentNode = null;
                     RenderEngine.marked = null;
                 }
                 RenderEngine.resize();
@@ -329,10 +337,41 @@ function WebUI_CWebUI() {
 		});
 	};
     
+    this.deselectNode = function () {
+        document.getElementById("infocontent").innerHTML = "Click/Tap on a node to show info about it.";
+        RenderEngine.marked = null;
+        that.currentNode = null;
+        RenderEngine.setDirty();
+    }
+    
     this.nodeChanged = function () {
-        RenderEngine.marked.args = JSON.parse(document.getElementById("args").value);
+        if (document.getElementById("args")) {
+            that.currentNode.args = JSON.parse(document.getElementById("args").value);
+        }
+        that.currentNode.desc = document.getElementById("desc").value;
+        that.currentNode.displayname = document.getElementById("displayname").value;
 	    that.changed = true;
         RenderEngine.setDirty();
+    }
+    
+    this.saveCodeEdit = function (property) {
+        that.currentNode.args[property] = document.getElementById("src").value;
+        that.changed = true;
+        RenderEngine.setDirty();
+        WebUI.hideCodeEditor();
+    }
+    
+    this.codeEdit = function(property) {
+        var src = that.currentNode.args[property];
+        
+        var srcEdit = "<textarea id='src' class='src'>" + src + "</textarea>";
+        var savebtn = "<button class='node inputnode right' onclick='WebUI.saveCodeEdit(\""+property+"\")'>Save</button>";
+        var cancelbtn = "<button class='node outputnode right' onclick='WebUI.hideCodeEditor()'>Cancel</button>"
+        
+        var nname = that.currentNode.displayname;
+        
+        document.getElementById("codeeditor").style.display = "";
+        document.getElementById("innercodeeditor").innerHTML = '<h2>Edit: ' + nname + ".args." + property + '</h2>' + srcEdit + cancelbtn + savebtn;
     }
 
 	function tryFindInput(node, x, y) {
@@ -437,28 +476,59 @@ function WebUI_CWebUI() {
             RenderEngine.setDirty();
 		} else if (that.selectedNode != null) {
             if (!moved) {
-                var currentNode = that.selectedNode;
+                that.currentNode = that.selectedNode;
 				that.clickNode = null;
 				that.startPos = null;
                 var html = "";
-                var nname = currentNode.name;
-                if (nname.lastIndexOf("_") != -1) {
-                    nname = nname.substring(0, nname.lastIndexOf("_"));
-                }
-                html += "<h3>" + nname + "</h3>";
+                var nname = that.currentNode.displayname;
+                html += "<h3><input class='hinput' id='displayname' value='" + nname + "' /></h3>";
                 //console.log(currentNode);
-                html += "<p>Code: " + currentNode.code + "</p>";
-                html += "<p>Desc: " + currentNode.desc + "</p>";
-                html += "<p>Inputs: " + JSON.stringify(currentNode.inputs) + "</p>";
-                html += "<p>Outputs: " + JSON.stringify(currentNode.outputs) + "</p>";
+                html += "<h4>Code</h4><p>" + that.currentNode.code + "</p>";
+                html += "<h4>Desc</h4><p><input class='pinput' id='desc' value='" + that.currentNode.desc + "' /></p>";
                 
-                html += "<p>Args: <input id='args' value='" + JSON.stringify(currentNode.args) + "' /></p>";
-                html += "<p><button class='node inputnode right' onclick='WebUI.nodeChanged()'>Save</button></p>";
-                if(currentNode.code == "system.subgraph") {
-				    html += "<p><button class='node algorithmnode right' onclick='getGraph(\"" + currentNode.args + "\", WebUI.setGraph, WebUI.printError)'>Edit Subgraph</button><p>";
+                html += "<h4>Inputs</h4><p>"
+                for (var property in that.currentNode.inputs) {
+                    if (that.currentNode.inputs.hasOwnProperty(property)) {
+                        html += "" + property + ": " + JSON.stringify(that.currentNode.inputs[property]) + "<BR>";
+                    }
                 }
+                html += "</p>";
+                html += "<h4>Outputs</h4><p>"
+                for (var property in that.currentNode.outputs) {
+                    if (that.currentNode.outputs.hasOwnProperty(property)) {
+                        html += "" + property + ": " + JSON.stringify(that.currentNode.outputs[property]) + "<BR>";
+                    }
+                }
+                html += "</p>";
+                
+                var iteratable = false;
+                if ((typeof that.currentNode.args) == "object") {
+                for (var property in that.currentNode.args) {
+                    if (that.currentNode.args.hasOwnProperty(property)) {
+                        if (iteratable == false) {
+                            html += "<h4>Args</h4><p>"
+                        }
+                        if (property == "code") {
+                            html += "" + property + ": <button class='button algorithmnode right' onclick='WebUI.codeEdit(\""+property+"\")'>Edit</button><BR>";
+                        } else {
+                            html += "" + property + ": <input class='pinput' id='args-" + property + "' value='" + JSON.stringify(that.currentNode.args[property]) + "' /><BR>";
+                        }
+                        iteratable = true;
+                    }
+                }
+                }
+                if (iteratable == false) {
+                    html += "<h4>Args</h4><p><input class='pinput' id='args' value='" + JSON.stringify(that.currentNode.args) + "' /></p>";
+                } else {
+                    html += "</p>"
+                }
+                if(that.currentNode.code == "system.subgraph") {
+				    html += "<p><button class='node algorithmnode right' onclick='getGraph(\"" + that.currentNode.args + "\", WebUI.setGraph, WebUI.printError)'>Edit Subgraph</button><p>";
+                }
+                html += "<p style='padding-top:1em'><button class='button inputnode' onclick='WebUI.nodeChanged()'>Save</button>";
+                html += "<button class='button outputnode' onclick='WebUI.deselectNode()'>Unselect</button></p>";
                 document.getElementById("infocontent").innerHTML = html;
-                RenderEngine.marked = currentNode;
+                RenderEngine.marked = that.currentNode;
                 showInfo();
                 RenderEngine.setDirty();
 			} else {
@@ -543,7 +613,7 @@ function WebUI_CWebUI() {
         lastDebug = result;
         showInfo();
         result = result.replace(new RegExp("\n", 'g'), "<br>");
-        document.getElementById("debugcontent").innerHTML = "<button class='node outputnode right' onclick='WebUI.clearDebug()'>clear</button><br>" + result;
+        document.getElementById("debugcontent").innerHTML = "<button class='button outputnode right' onclick='WebUI.clearDebug()'>clear</button><br>" + result;
     }
     
     this.clearDebug = function () {

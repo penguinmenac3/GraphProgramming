@@ -70,7 +70,7 @@ class GraphEx(object):
             currentNode.prevNodes = []
             currentNode.ins = {}
             currentNode.outs = {}
-            currentNode.inputBuffer = {}
+            currentNode.inputBuffer = {"tags":{}}
 
             # Add the node to the internal lists for inputs and all nodes.
             self.nodes[node["name"]] = currentNode
@@ -138,6 +138,8 @@ class GraphEx(object):
             for elem in node.outs[key]:
                 resultNode = elem["node"]
                 resultNode.inputBuffer[elem["var"]] = result[key]
+                if "tags" in result and key in result["tags"]:
+                    resultNode.inputBuffer["tags"][elem["var"]] = result["tags"][key]
                 #print(resultNode.inputBuffer)
 
         # Add the nodes that follow in the graph to the to calculate list and remove self from active nodes.
