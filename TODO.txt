@@ -1,0 +1,24 @@
+# Todolist
+
+## Core
+
+1. Add ability to add/change a tag to messages send.
+2. Add ability to read a tag from a message.
+
+
+## LIB
+
+0. Add function node that is freely programmable in Python!
+1. Check if networking supports HTTP, HTTPS, TCP, UDP and implement missing.
+2. Add object constructor, extractor (read) and deconstructor/splitter to enable complex object creation and handling.
+3. Add encryption package that encrypts messages
+4. Add Queue that queues all messages and only passes those with matching tags (Actually reorders so that the tags match)
+5. Implement Array/Vector package
+
+## Editor
+
+0. Add editor for function node.
+1. Improve subgraph handling and editing, autodetect inputs and outputs for upper graph-level node.
+2. Introduce sessions and resume where I left off.
+3. List availible graphs.
+4. Dark theme (option)

@@ -20,7 +20,7 @@ function WebUI_CWebUI() {
 	this.startPos = null;
 	this.clickNode = null;
 	
-	this.start = function(fullscreen, container) {
+	this.start = function(fullscreen, container, initialGraph) {
 		/* check if dependencies are already existing */
 		if (KeyListener == null && RenderEngine == null) {
 			KeyListener = new WebUI_CKeyListener();
@@ -28,6 +28,7 @@ function WebUI_CWebUI() {
 		} else {
 			return false; /* an error occured, there is already running a web ui on this tab. */
 		}
+        that.graphName = initialGraph;
 
 		/* init the RenderEngine */
 		var canvas = RenderEngine.init(fullscreen, container);
@@ -42,6 +43,14 @@ function WebUI_CWebUI() {
 		getNodes("Python", that.setNodes, that.printError);
 		return true;
 	};
+    
+    this.setTheme = function(theme) {
+        if (theme == "dark") {
+            RenderEngine.setTheme("#333333", "green", "#D75813", "darkslategray", "#AB0000", "rgba(150,150,150,0.6)", "darkgray", "#AB0000");
+        } else if (theme == "light") {    
+            RenderEngine.setTheme("white", "#3CB371", "orange", "darkslategray", "indianred", "rgba(128,128,128,0.6)", "rgb(128,128,128)", "red");
+        }
+    }
 
 	this.setGraph = function(graph) {
         that.graphStack.push(graph);

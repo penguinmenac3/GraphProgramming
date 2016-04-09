@@ -20,9 +20,29 @@ function WebUI_CRenderEngine() {
 	this.result = "";
     this.showInfo = true;
     this.marked = null;
+    var clearColor = "white";
+    var colorInputNode = "#3CB371";
+    var colorAlgorithmNode = "orange";
+    var colorStructureNode = "darkslategray";
+    var colorOutputNode = "indianred";
+    var colorConnector = "rgba(128,128,128,0.6)";
+    var colorMarked = "rgb(128,128,128)";
+    var colorOrigin = "red";
     
     this.setDirty = function() {
         isDirty = 2;
+    };
+    
+    this.setTheme = function(clear, input, algorithm, structural, output, connector, marked, origin) {
+        clearColor = clear;
+        colorInputNode = input;
+        colorAlgorithmNode = algorithm;
+        colorStructureNode = structural;
+        colorOutputNode = output;
+        colorConnector = connector;
+        colorMarked = marked;
+        colorOrigin = origin;
+        that.setDirty();
     };
 
 	this.init = function(b_fullscreen, container) {
@@ -180,13 +200,13 @@ function WebUI_CRenderEngine() {
         }
         isDirty--;
 		/* clean canvas */
-        ctx.fillStyle = "white";
+        ctx.fillStyle = clearColor;
 		ctx.fillRect(0, 0, width, height);
 
 		/* Render the origin cross */
 		ctx.beginPath();
 		ctx.lineWidth="1";
-		ctx.strokeStyle="red";
+		ctx.strokeStyle=colorOrigin;
 		ctx.moveTo(renderOffsetX * scale + width/2 - 20 * scale,renderOffsetY * scale + height/2);
 		ctx.lineTo(renderOffsetX * scale + width/2 + 20 * scale,renderOffsetY * scale + height/2);
 		ctx.moveTo(renderOffsetX * scale + width/2,renderOffsetY * scale + height/2 - 20 * scale);
@@ -280,7 +300,7 @@ function WebUI_CRenderEngine() {
 		  ctx.strokeStyle=fillStyle;
         } else {
 		  ctx.lineWidth="2";
-		  ctx.strokeStyle="rgb(128,128,128)";
+		  ctx.strokeStyle=colorMarked;
 		  ctx.stroke();
         }
 	}
@@ -288,7 +308,7 @@ function WebUI_CRenderEngine() {
 	function renderDotConnection(px1, py1, px2, py2) {
 		ctx.beginPath();
 		ctx.lineWidth="2";
-		ctx.strokeStyle="rgb(128,128,128)";
+		ctx.strokeStyle=colorConnector;
 		ctx.moveTo(renderOffsetX * scale + px1 * scale + width/2,renderOffsetY * scale + py1 * scale + height/2);
 		ctx.lineTo(renderOffsetX * scale + px2 * scale + width/2,renderOffsetY * scale + py2 * scale + height/2);
 		ctx.stroke();
@@ -316,7 +336,7 @@ function WebUI_CRenderEngine() {
 		  ctx.strokeStyle=fillStyle;
         } else {
 		  ctx.lineWidth="5";
-		  ctx.strokeStyle="rgb(128,128,128)";
+		  ctx.strokeStyle=colorMarked;
 		  ctx.stroke();
         }
 	}
@@ -346,15 +366,15 @@ function WebUI_CRenderEngine() {
 			console.log("Default position for: " + node.name)
 		}
         
-        var fillStyle = "rgba(128,128,128,0.6)";
+        var fillStyle = colorConnector;
         var foregroundColor = "white";
-        var fillStyleLarge = "orange";
+        var fillStyleLarge = colorAlgorithmNode;
         if (Object.keys(node.inputs).length == 0) {
-            fillStyleLarge = "mediumseagreen";
+            fillStyleLarge = colorInputNode;
         } else if (Object.keys(node.outputs).length == 0) {
-            fillStyleLarge = "indianred";
+            fillStyleLarge = colorOutputNode;
         } else if (node.code.lastIndexOf("structures", 0) === 0 || node.code.lastIndexOf("default", 0) === 0) {
-            fillStyleLarge = "darkslategray";
+            fillStyleLarge = colorStructureNode;
         }
 
 		/* Draw rect symbol for robot */
@@ -417,24 +437,24 @@ function WebUI_CRenderEngine() {
 	}
 
 	function renderActionButtons() {
-		renderButton("LOAD", 50, 25, "darkslategray");
-		renderButton("SAVE", 50, 65, "darkslategray");
-		renderButton("LANGUAGE", 50, 105, "darkslategray");
-		renderButton("NEW NODE", 50, 145, "orange");
-		renderButton("DELETE", 50, 185, "indianred");
+		renderButton("LOAD", 50, 25, colorStructureNode);
+		renderButton("SAVE", 50, 65, colorStructureNode);
+		renderButton("LANGUAGE", 50, 105, colorStructureNode);
+		renderButton("NEW NODE", 50, 145, colorAlgorithmNode);
+		renderButton("DELETE", 50, 185, colorOutputNode);
 		//renderButton("RUN", 50, 225, "dimgray");
-		renderButton("START", 50, 265, "mediumseagreen");
-		renderButton("KILL", 50, 305, "indianred");
+		renderButton("START", 50, 265, colorInputNode);
+		renderButton("KILL", 50, 305, colorOutputNode);
         
-		renderButton("ZOOM OUT", canvas.width - 50, 25, "darkslategray");
-		renderButton("ZOOM IN", canvas.width - 50, 65, "darkslategray");
-		renderButton("RESET ZOOM", canvas.width - 50, 105, "indianred");
-		renderButton("RESET VIEW", canvas.width - 50, 145, "indianred");
+		renderButton("ZOOM OUT", canvas.width - 50, 25, colorStructureNode);
+		renderButton("ZOOM IN", canvas.width - 50, 65, colorStructureNode);
+		renderButton("RESET ZOOM", canvas.width - 50, 105, colorOutputNode);
+		renderButton("RESET VIEW", canvas.width - 50, 145, colorOutputNode);
         
         if (that.showInfo) {
-		  renderButton("< SHOW", canvas.width - 50, canvas.height / 2, "mediumseagreen");
+		  renderButton("< SHOW", canvas.width - 50, canvas.height / 2, colorInputNode);
         } else {
-		  renderButton("> HIDE", canvas.width - 50, canvas.height / 2, "indianred");
+		  renderButton("> HIDE", canvas.width - 50, canvas.height / 2, colorOutputNode);
         }
         
         if (hasParent) {

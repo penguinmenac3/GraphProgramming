@@ -6,111 +6,22 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
+  
+  <link id="pagestyle" rel="stylesheet" type="text/css" href="light.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script type="text/javascript" src="lib/helpers.js"></script>
   <script type="text/javascript" src="lib/vars.js"></script>
   <script type="text/javascript" src="lib/CRenderEngine.js"></script>
   <script type="text/javascript" src="lib/CKeyListener.js"></script>
   <script type="text/javascript" src="lib/CWebUI.js"></script>
-  <style>
-    body {
-        background-color: rgba(100, 100, 100, 0.5);
-        height: 100%;
-        margin: 0;
-    }
-    .rightSide {
-        background-color: white;
-        position: absolute;
-        overflow:auto;
-        top:0;
-        bottom:0;
-        right:0;
-        width: 18em;
-        z-index: -1;
-    }
-    .tab {
-        margin-top: 1em;
-        padding: 1em;
-        background-color: rgba(240, 240, 240, 1.0);
-        padding-bottom: 4em;
-    }
-    .right {
-        float: right;
-    }
-    .info {
-        padding-left: 1em;
-        padding-right: 1em;
-    }
-    .debug {
-        padding-left: 1em;
-        padding-right: 1em;
-    }
-    .graphview {
-        background-color: white;
-        position: absolute;
-        top:0;
-        bottom:0;
-        left:0;
-        right:0;
-    }
-    .overlay {
-        position: absolute;
-        top:0;
-        bottom:0;
-        left:0;
-        right:0;
-        padding-left:20%;
-        padding-right:20%;
-        padding-top:2em;
-        padding-bottom:2em;
-        z-index: 100;
-        background-color: rgba(100, 100, 100, 0.5)
-    }
-    .inneroverlay {
-        position: absolute;
-        top: 0;
-        bottom:0;
-        left: 0;
-        right: 0;
-        overflow:auto;
-        margin-left:15%;
-        margin-right:15%;
-        margin-top:2em;
-        margin-bottom:2em;
-        padding: 2em;
-        z-index: 101;
-        background-color: rgba(255, 255, 255, 1.0)
-    }
-    .node {
-        color: white;
-        padding: 0.8em;
-        width: 12em;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin-left:0.5em;
-        margin-bottom:0.4em;
-        border: 0px;
-    }
-    .inputnode {
-        background-color: mediumseagreen;
-    }
-    .algorithmnode {
-        background-color: orange;
-    }
-    .structurenode{
-        background-color: darkslategray;
-    }
-    .outputnode {
-        background-color: indianred;
-    }
-    .languagenode {
-        background-color: orange;
-    }
-  </style>
   <script type="text/javascript">
+    function swapTheme(theme){
+	    document.getElementById('pagestyle').setAttribute('href', theme + ".css");
+        WebUI.setTheme(theme);
+    }
     function initialize() {
-        WebUI.start(false, 'graphview');
+        WebUI.start(false, 'graphview', 'Default');
+        swapTheme("dark");
     }
   </script>
  </head>
@@ -118,6 +29,8 @@
  <body onload="window.setTimeout(initialize, 1000);" onresize="">
      <div id="graphview" class="graphview"></div>
      <div id="rightside" class="rightSide">
+        <a class="buttonlight" onclick="swapTheme('light')">Switch Theme (Light)</a>
+        <a class="buttondark" onclick="swapTheme('dark')">Switch Theme (Dark)</a>
          <div id="info" class="tab">
             <h2>Info</h2>
             <div id="infocontent" class="info">

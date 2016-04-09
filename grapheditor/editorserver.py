@@ -67,9 +67,22 @@ class myHandler(BaseHTTPRequestHandler):
 
         path = "sites/" + path
         try:
+            if path.endswith(".png"):
+                f=open(path, 'rb')
+                self.send_response(200)
+                self.send_header('Content-type', 'image/png')
+                self.end_headers()
+                self.wfile.write(f.read())
+                f.close()
+                return
             data = open(path, 'r').read()
             self.send_response(200)
-            self.send_header('Content-type', 'text/html')
+            if (path.endswith(".css")):
+                self.send_header('Content-type', 'text/css')
+            elif (path.endswith(".js")):
+                self.send_header('Content-type', 'text/js')
+            else:
+                self.send_header('Content-type', 'text/html')
             self.end_headers()
                # Send the html message
             self.wfile.write(data.encode("utf-8"))
