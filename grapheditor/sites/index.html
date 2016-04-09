@@ -36,6 +36,13 @@
             swapTheme(localStorage.theme);
         }
     }
+    function toggleDev() {
+        if (localStorage.devmode == "true") {
+            localStorage.devmode = "false";
+        } else {
+            localStorage.devmode = "true";
+        }
+    }
   </script>
  </head>
  <!-- Use the Script inside the body onload to create the webui -->
@@ -44,6 +51,7 @@
      <div id="rightside" class="rightSide">
         <a class="buttonlight" onclick="swapTheme('light')">Switch Theme (Light)</a>
         <a class="buttondark" onclick="swapTheme('dark')">Switch Theme (Dark)</a>
+        <a class="buttondev newnode" onclick="toggleDev()">Toggle Dev. Mode</a>
          <div id="info" class="tab">
             <h2>Info</h2>
             <div id="infocontent" class="info">

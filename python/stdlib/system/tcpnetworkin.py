@@ -9,8 +9,8 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Network Input", "system.networkinput",
-                                   {"host": "127.0.0.1", "port": 25555, "server": False, "password": None},
+        super(Node, self).__init__("TCP Network", "system.tcpnetworkin",
+                                   {"host": "127.0.0.1", "port": 25555, "server": False, "password": None, "passSocketAsTag": True},
                                    {},
                                    {"result": "String"},
                                    "Wait for input over network.", verbose, True, True)
@@ -24,11 +24,17 @@ class Node(base.Node):
         if "password" in self.args and self.args["password"] is not None:
             password = self.args["password"]
         line = None
+        sock = None
         if not isServer:
-            line = self.client_styled_pull(host, port, password)
+            line, sock = self.client_styled_pull(host, port, password)
         else:
-            line = self.server_styled_pull(host, port, password)
-        return {"result": line}
+            line, sock = self.server_styled_pull(host, port, password)
+        result = {"result": line}
+        if self.args["passSocketAsTag"]:
+            result["tags"] = {"result": sock}
+        else:
+            sock.close()
+        return result
 
     def server_styled_pull(self, host, port, password):
         line = None
@@ -44,8 +50,7 @@ class Node(base.Node):
                 if password is not None:
                     s.send((password + "\n").encode("utf-8"))
                 line = sf.readline()
-                s.close()
+        		return line, s
             except (ConnectionRefusedError, ConnectionResetError):
                 time.sleep(1)
                 line = None
-        return line

@@ -136,6 +136,21 @@ body {
         padding: 1em;
         margin: 0.2em;
     }
+    .buttondev {
+        background-color: violet;
+        color: white;
+        display: block;
+        padding: 1em;
+        margin: 0.2em;
+    }
+    .buttondev:hover {
+        text-decoration: none;
+        background-color: darkviolet;
+        color: white;
+        display: block;
+        padding: 1em;
+        margin: 0.2em;
+    }
     .pinput {
         background-color: rgba(240, 240, 240, 1.0);
         border-width: 0px; 
