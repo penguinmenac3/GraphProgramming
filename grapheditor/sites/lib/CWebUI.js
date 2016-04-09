@@ -222,7 +222,7 @@ function WebUI_CWebUI() {
                         nodetype = "inputnode";
                     } else if (Object.keys(node.outputs).length == 0) {
                         nodetype = "outputnode";
-                    } else if (node.code.lastIndexOf("structures", 0) === 0 || node.code.lastIndexOf("default", 0) === 0) {
+                    } else if (node.code.lastIndexOf("structures", 0) === 0 || (node.code.lastIndexOf("default", 0) === 0 && node.code.lastIndexOf("function", "default.".length) < 0)) {
                         nodetype = "structurenode";
                     }
                     var cur = node.code.split(".")[0];

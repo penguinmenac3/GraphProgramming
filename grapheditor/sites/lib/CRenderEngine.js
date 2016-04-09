@@ -373,7 +373,7 @@ function WebUI_CRenderEngine() {
             fillStyleLarge = colorInputNode;
         } else if (Object.keys(node.outputs).length == 0) {
             fillStyleLarge = colorOutputNode;
-        } else if (node.code.lastIndexOf("structures", 0) === 0 || node.code.lastIndexOf("default", 0) === 0) {
+        } else if (node.code.lastIndexOf("structures", 0) === 0 || (node.code.lastIndexOf("default", 0) === 0 && node.code.lastIndexOf("function", "default.".length) < 0)) {
             fillStyleLarge = colorStructureNode;
         }
 
