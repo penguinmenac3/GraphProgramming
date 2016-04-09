@@ -1,7 +1,7 @@
 [{
     "name": "Equal",
     "code": "string.equal",
-    "inputs": {"4": "String", "2": "String", "1": "String", "3": "String", "5": "String"},
+    "inputs": {"4": "String", "3": "String", "1": "String", "5": "String", "2": "String"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Check if values are equal."
@@ -19,13 +19,13 @@
     "code": "string.argtrigger",
     "inputs": {},
     "outputs": {"result": "String"},
-    "args": {"val": "arg", "time": 1.0},
+    "args": {"time": 1.0, "val": "arg"},
     "desc": "Pass the argument of the program."
 },
 {
     "name": "Index of",
     "code": "string.indexof",
-    "inputs": {"ref": "String", "str": "String", "offset": "Number"},
+    "inputs": {"ref": "String", "offset": "Number", "str": "String"},
     "outputs": {"result": "Number"},
     "args": "",
     "desc": "Get the index of a ref in a string."
@@ -41,7 +41,7 @@
 {
     "name": "String Concat",
     "code": "string.concat",
-    "inputs": {"left": "String", "right": "String"},
+    "inputs": {"right": "String", "left": "String"},
     "outputs": {"result": "String"},
     "args": "",
     "desc": "Concat the two strings."
@@ -75,13 +75,13 @@
     "code": "string.trigger",
     "inputs": {},
     "outputs": {"result": "String"},
-    "args": {"val": "Hello World!", "time": 1.0},
+    "args": {"time": 1.0, "val": "Hello World!"},
     "desc": "Trigger string."
 },
 {
     "name": "Equal",
     "code": "number.equal",
-    "inputs": {"4": "Number", "2": "Number", "1": "Number", "3": "Number", "5": "Number"},
+    "inputs": {"4": "Number", "3": "Number", "1": "Number", "5": "Number", "2": "Number"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Check if values are equal."
@@ -99,13 +99,13 @@
     "code": "number.argtrigger",
     "inputs": {},
     "outputs": {"result": "Number"},
-    "args": {"val": "arg", "time": 1.0},
+    "args": {"time": 1.0, "val": "arg"},
     "desc": "Pass the argument of the program."
 },
 {
     "name": "Sum",
     "code": "number.sum",
-    "inputs": {"left": "Number", "right": "Number"},
+    "inputs": {"right": "Number", "left": "Number"},
     "outputs": {"result": "Number"},
     "args": "",
     "desc": "Sum left and right."
@@ -113,7 +113,7 @@
 {
     "name": "Subtract",
     "code": "number.subtract",
-    "inputs": {"left": "Number", "right": "Number"},
+    "inputs": {"right": "Number", "left": "Number"},
     "outputs": {"result": "Number"},
     "args": "",
     "desc": "Subtract right from left."
@@ -121,7 +121,7 @@
 {
     "name": "Less than",
     "code": "number.less",
-    "inputs": {"left": "Number", "right": "Number"},
+    "inputs": {"right": "Number", "left": "Number"},
     "outputs": {"result": "Number"},
     "args": "",
     "desc": "Check if left < right."
@@ -129,7 +129,7 @@
 {
     "name": "Greater than",
     "code": "number.greater",
-    "inputs": {"left": "Number", "right": "Number"},
+    "inputs": {"right": "Number", "left": "Number"},
     "outputs": {"result": "Number"},
     "args": "",
     "desc": "Check if left > right."
@@ -145,7 +145,7 @@
 {
     "name": "Divide",
     "code": "number.div",
-    "inputs": {"left": "Number", "right": "Number"},
+    "inputs": {"right": "Number", "left": "Number"},
     "outputs": {"result": "Number"},
     "args": "",
     "desc": "Divide left by right."
@@ -153,7 +153,7 @@
 {
     "name": "Multiply",
     "code": "number.mult",
-    "inputs": {"left": "Number", "right": "Number"},
+    "inputs": {"right": "Number", "left": "Number"},
     "outputs": {"result": "Number"},
     "args": "",
     "desc": "Multiply values with each other."
@@ -163,7 +163,7 @@
     "code": "number.trigger",
     "inputs": {},
     "outputs": {"result": "Number"},
-    "args": {"val": 42, "time": 1.0},
+    "args": {"time": 1.0, "val": 42},
     "desc": "Trigger value every time seconds."
 },
 {
@@ -171,14 +171,14 @@
     "code": "default.function",
     "inputs": {"val": "Object"},
     "outputs": {"result": "Object"},
-    "args": {"code": "return {\"result\": value[\"val\"]}"},
+    "args": {"code": "result = value[\"val\"]"},
     "desc": "Executes the argument as pyton code."
 },
 {
     "name": "Splitflow",
     "code": "default.splitflow",
     "inputs": {"val": "Object"},
-    "outputs": {"left": "Object", "right": "Object"},
+    "outputs": {"right": "Object", "left": "Object"},
     "args": "",
     "desc": "Splits the flow."
 },
@@ -194,7 +194,7 @@
     "name": "Splitflow",
     "code": "default.splitflow5",
     "inputs": {"val": "Object"},
-    "outputs": {"4": "Object", "2": "Object", "1": "Object", "3": "Object", "5": "Object"},
+    "outputs": {"4": "Object", "3": "Object", "1": "Object", "5": "Object", "2": "Object"},
     "args": "",
     "desc": "Splits the flow."
 },
@@ -235,7 +235,7 @@
     "code": "arrays.argtrigger",
     "inputs": {},
     "outputs": {"result": "String"},
-    "args": {"val": "arg", "time": 1.0},
+    "args": {"time": 1.0, "val": "arg"},
     "desc": "Get triggers from commandline."
 },
 {
@@ -251,7 +251,7 @@
     "code": "system.networkoutput",
     "inputs": {"msg": "String"},
     "outputs": {"result": "String"},
-    "args": {"server": false, "password": null, "host": "127.0.0.1", "port": 25555},
+    "args": {"password": null, "host": "127.0.0.1", "server": false, "port": 25555},
     "desc": "Execute executable with given args."
 },
 {
@@ -275,7 +275,7 @@
     "code": "system.network",
     "inputs": {"msg": "String"},
     "outputs": {"result": "String"},
-    "args": {"server": false, "password": null, "host": "127.0.0.1", "port": 25555},
+    "args": {"password": null, "host": "127.0.0.1", "server": false, "port": 25555},
     "desc": "Send input over network and wait for result."
 },
 {
@@ -291,7 +291,7 @@
     "code": "system.executable",
     "inputs": {"arg": "String"},
     "outputs": {"result": "String"},
-    "args": {"escapeArgs": false, "executable": "python graphex.py"},
+    "args": {"executable": "python graphex.py", "escapeArgs": false},
     "desc": "Execute executable with given args."
 },
 {
@@ -299,7 +299,7 @@
     "code": "system.networkinput",
     "inputs": {},
     "outputs": {"result": "String"},
-    "args": {"server": false, "password": null, "host": "127.0.0.1", "port": 25555},
+    "args": {"password": null, "host": "127.0.0.1", "server": false, "port": 25555},
     "desc": "Wait for input over network."
 },
 {
@@ -329,7 +329,7 @@
 {
     "name": "Equal",
     "code": "boolean.equal",
-    "inputs": {"4": "Boolean", "2": "Boolean", "1": "Boolean", "3": "Boolean", "5": "Boolean"},
+    "inputs": {"4": "Boolean", "3": "Boolean", "1": "Boolean", "5": "Boolean", "2": "Boolean"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Checks if the first arg inputs are equal."
@@ -347,13 +347,13 @@
     "code": "boolean.argconst",
     "inputs": {},
     "outputs": {"result": "Boolean"},
-    "args": {"val": "arg", "time": 1.0},
+    "args": {"time": 1.0, "val": "arg"},
     "desc": "Get input from arguments."
 },
 {
     "name": "And",
     "code": "boolean.and",
-    "inputs": {"left": "Boolean", "right": "Boolean"},
+    "inputs": {"right": "Boolean", "left": "Boolean"},
     "outputs": {"result": "Boolean"},
     "args": "",
     "desc": "Combine inputs with and."
@@ -369,7 +369,7 @@
 {
     "name": "Or",
     "code": "boolean.or",
-    "inputs": {"left": "Boolean", "right": "Boolean"},
+    "inputs": {"right": "Boolean", "left": "Boolean"},
     "outputs": {"result": "Boolean"},
     "args": "",
     "desc": "Output the or of the inputs."
@@ -379,7 +379,7 @@
     "code": "boolean.trigger",
     "inputs": {},
     "outputs": {"result": "Boolean"},
-    "args": {"val": true, "time": 1.0},
+    "args": {"time": 1.0, "val": true},
     "desc": "Trigger arg.val every arg.time s."
 },
 {

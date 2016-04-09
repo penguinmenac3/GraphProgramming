@@ -18,7 +18,7 @@ class Node(base.Node):
         if "tags" in value and "val" in value["tags"]:
             tag = value["tags"]["val"]
         
-        exec self.args["code"]
+        exec(self.args["code"])
         
         if tag:
             return {"result": result, "tags":{"result":tag}}
