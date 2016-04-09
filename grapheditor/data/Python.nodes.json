@@ -1,7 +1,7 @@
 [{
     "name": "Equal",
     "code": "string.equal",
-    "inputs": {"4": "String", "2": "String", "3": "String", "1": "String", "5": "String"},
+    "inputs": {"1": "String", "5": "String", "3": "String", "4": "String", "2": "String"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Check if values are equal."
@@ -25,7 +25,7 @@
 {
     "name": "Index of",
     "code": "string.indexof",
-    "inputs": {"ref": "String", "str": "String", "offset": "Number"},
+    "inputs": {"str": "String", "ref": "String", "offset": "Number"},
     "outputs": {"result": "Number"},
     "args": "",
     "desc": "Get the index of a ref in a string."
@@ -33,7 +33,7 @@
 {
     "name": "Ends with",
     "code": "string.endswith",
-    "inputs": {"ref": "String", "str": "String"},
+    "inputs": {"str": "String", "ref": "String"},
     "outputs": {"result": "Boolean"},
     "args": "",
     "desc": "Check if a string ends with the reference."
@@ -49,7 +49,7 @@
 {
     "name": "Starts with",
     "code": "string.startswith",
-    "inputs": {"ref": "String", "str": "String"},
+    "inputs": {"str": "String", "ref": "String"},
     "outputs": {"result": "Boolean"},
     "args": "",
     "desc": "String starts with ref."
@@ -81,7 +81,7 @@
 {
     "name": "Equal",
     "code": "number.equal",
-    "inputs": {"4": "Number", "2": "Number", "3": "Number", "1": "Number", "5": "Number"},
+    "inputs": {"1": "Number", "5": "Number", "3": "Number", "4": "Number", "2": "Number"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Check if values are equal."
@@ -194,7 +194,7 @@
     "name": "Splitflow",
     "code": "default.splitflow5",
     "inputs": {"val": "Object"},
-    "outputs": {"4": "Object", "2": "Object", "3": "Object", "1": "Object", "5": "Object"},
+    "outputs": {"1": "Object", "5": "Object", "3": "Object", "4": "Object", "2": "Object"},
     "args": "",
     "desc": "Splits the flow."
 },
@@ -203,14 +203,14 @@
     "code": "structures.leakyintegrator",
     "inputs": {"val": "Number"},
     "outputs": {"result": "Boolean"},
-    "args": {"time": 1.0, "decay": 1.0},
+    "args": {"decay": 1.0, "time": 1.0},
     "desc": "Leaky integrator."
 },
 {
     "name": "While less",
     "code": "structures.whileless",
     "inputs": {"initial": "Number", "val": "Number"},
-    "outputs": {"leave": "Number", "loop": "Number"},
+    "outputs": {"loop": "Number", "leave": "Number"},
     "args": "",
     "desc": "Loop while initial is less than val."
 },
@@ -218,7 +218,7 @@
     "name": "While greater",
     "code": "structures.whilegreater",
     "inputs": {"initial": "Number", "val": "Number"},
-    "outputs": {"leave": "Number", "loop": "Number"},
+    "outputs": {"loop": "Number", "leave": "Number"},
     "args": "",
     "desc": "Loop while initial is greater than val."
 },
@@ -251,7 +251,7 @@
     "code": "system.tcpnetwork",
     "inputs": {"msg": "String"},
     "outputs": {"result": "String"},
-    "args": {"host": "127.0.0.1", "port": 25555, "password": null},
+    "args": {"password": null, "port": 25555, "host": "127.0.0.1"},
     "desc": "Send input over network and wait for result."
 },
 {
@@ -279,11 +279,19 @@
     "desc": "Print input to console."
 },
 {
+    "name": "TCP Network",
+    "code": "system.tcpnetworkin",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": {"passDummy": null, "server": true, "password": null, "port": 25555, "host": "127.0.0.1", "passSocketAsTag": true},
+    "desc": "Wait for input over network."
+},
+{
     "name": "Execute",
     "code": "system.executable",
     "inputs": {"arg": "String"},
     "outputs": {"result": "String"},
-    "args": {"executable": "python graphex.py", "escapeArgs": false},
+    "args": {"escapeArgs": false, "executable": "python graphex.py"},
     "desc": "Execute executable with given args."
 },
 {
@@ -291,7 +299,7 @@
     "code": "system.tcpnetworkout",
     "inputs": {"msg": "String"},
     "outputs": {},
-    "args": {"server": false, "host": "127.0.0.1", "port": 25555, "closeAfterSend": true, "password": null},
+    "args": {"closeAfterSend": true, "password": null, "port": 25555, "host": "127.0.0.1"},
     "desc": "Send message over tcp network."
 },
 {
@@ -321,7 +329,7 @@
 {
     "name": "Equal",
     "code": "boolean.equal",
-    "inputs": {"4": "Boolean", "2": "Boolean", "3": "Boolean", "1": "Boolean", "5": "Boolean"},
+    "inputs": {"1": "Boolean", "5": "Boolean", "3": "Boolean", "4": "Boolean", "2": "Boolean"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Checks if the first arg inputs are equal."

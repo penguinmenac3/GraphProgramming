@@ -10,7 +10,7 @@ except ValueError:
 class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("TCP Network", "system.tcpnetworkin",
-                                   {"host": "127.0.0.1", "port": 25555, "server": False, "password": None, "passSocketAsTag": True},
+                                   {"host": "127.0.0.1", "port": 25555, "server": True, "password": None, "passSocketAsTag": True, "passDummy": None},
                                    {},
                                    {"result": "String"},
                                    "Wait for input over network.", verbose, True, True)
@@ -49,8 +49,11 @@ class Node(base.Node):
                 sf = s.makefile()
                 if password is not None:
                     s.send((password + "\n").encode("utf-8"))
-                line = sf.readline()
-        		return line, s
+                if self.args["passDummy"] is None:
+                    line = sf.readline()
+                else:
+                    line = self.args["passDummy"]
+                return line, s
             except (ConnectionRefusedError, ConnectionResetError):
                 time.sleep(1)
                 line = None

@@ -10,7 +10,7 @@ except ValueError:
 class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("TCP Network", "system.tcpnetworkout",
-                                   {"host": "127.0.0.1", "port": 25555, "server": False, "password": None, "closeAfterSend": True},
+                                   {"host": "127.0.0.1", "port": 25555, "password": None, "closeAfterSend": True},
                                    {"msg": "String"},
                                    {},
                                    "Send message over tcp network.", verbose)
