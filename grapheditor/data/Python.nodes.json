@@ -1,7 +1,7 @@
 [{
     "name": "Equal",
     "code": "string.equal",
-    "inputs": {"4": "String", "3": "String", "1": "String", "5": "String", "2": "String"},
+    "inputs": {"2": "String", "3": "String", "4": "String", "1": "String", "5": "String"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Check if values are equal."
@@ -19,13 +19,13 @@
     "code": "string.argtrigger",
     "inputs": {},
     "outputs": {"result": "String"},
-    "args": {"time": 1.0, "val": "arg"},
+    "args": {"val": "arg", "time": 1.0},
     "desc": "Pass the argument of the program."
 },
 {
     "name": "Index of",
     "code": "string.indexof",
-    "inputs": {"ref": "String", "offset": "Number", "str": "String"},
+    "inputs": {"ref": "String", "str": "String", "offset": "Number"},
     "outputs": {"result": "Number"},
     "args": "",
     "desc": "Get the index of a ref in a string."
@@ -75,13 +75,13 @@
     "code": "string.trigger",
     "inputs": {},
     "outputs": {"result": "String"},
-    "args": {"time": 1.0, "val": "Hello World!"},
+    "args": {"val": "Hello World!", "time": 1.0},
     "desc": "Trigger string."
 },
 {
     "name": "Equal",
     "code": "number.equal",
-    "inputs": {"4": "Number", "3": "Number", "1": "Number", "5": "Number", "2": "Number"},
+    "inputs": {"2": "Number", "3": "Number", "4": "Number", "1": "Number", "5": "Number"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Check if values are equal."
@@ -99,7 +99,7 @@
     "code": "number.argtrigger",
     "inputs": {},
     "outputs": {"result": "Number"},
-    "args": {"time": 1.0, "val": "arg"},
+    "args": {"val": "arg", "time": 1.0},
     "desc": "Pass the argument of the program."
 },
 {
@@ -163,7 +163,7 @@
     "code": "number.trigger",
     "inputs": {},
     "outputs": {"result": "Number"},
-    "args": {"time": 1.0, "val": 42},
+    "args": {"val": 42, "time": 1.0},
     "desc": "Trigger value every time seconds."
 },
 {
@@ -194,7 +194,7 @@
     "name": "Splitflow",
     "code": "default.splitflow5",
     "inputs": {"val": "Object"},
-    "outputs": {"4": "Object", "3": "Object", "1": "Object", "5": "Object", "2": "Object"},
+    "outputs": {"2": "Object", "3": "Object", "4": "Object", "1": "Object", "5": "Object"},
     "args": "",
     "desc": "Splits the flow."
 },
@@ -203,7 +203,7 @@
     "code": "structures.leakyintegrator",
     "inputs": {"val": "Number"},
     "outputs": {"result": "Boolean"},
-    "args": {"time": 1.0, "decay": 1.0},
+    "args": {"decay": 1.0, "time": 1.0},
     "desc": "Leaky integrator."
 },
 {
@@ -225,8 +225,8 @@
 {
     "name": "If",
     "code": "structures.if",
-    "inputs": {"val": "Object", "condition": "Boolean"},
-    "outputs": {"false": "Object", "true": "Object"},
+    "inputs": {"condition": "Boolean", "val": "Object"},
+    "outputs": {"true": "Object", "false": "Object"},
     "args": "",
     "desc": "If condition pass to true otherwise to false."
 },
@@ -235,7 +235,7 @@
     "code": "arrays.argtrigger",
     "inputs": {},
     "outputs": {"result": "String"},
-    "args": {"time": 1.0, "val": "arg"},
+    "args": {"val": "arg", "time": 1.0},
     "desc": "Get triggers from commandline."
 },
 {
@@ -251,7 +251,7 @@
     "code": "system.networkoutput",
     "inputs": {"msg": "String"},
     "outputs": {"result": "String"},
-    "args": {"password": null, "host": "127.0.0.1", "server": false, "port": 25555},
+    "args": {"password": null, "port": 25555, "host": "127.0.0.1", "server": false},
     "desc": "Execute executable with given args."
 },
 {
@@ -275,7 +275,7 @@
     "code": "system.network",
     "inputs": {"msg": "String"},
     "outputs": {"result": "String"},
-    "args": {"password": null, "host": "127.0.0.1", "server": false, "port": 25555},
+    "args": {"password": null, "port": 25555, "host": "127.0.0.1", "server": false},
     "desc": "Send input over network and wait for result."
 },
 {
@@ -299,7 +299,7 @@
     "code": "system.networkinput",
     "inputs": {},
     "outputs": {"result": "String"},
-    "args": {"password": null, "host": "127.0.0.1", "server": false, "port": 25555},
+    "args": {"password": null, "port": 25555, "host": "127.0.0.1", "server": false},
     "desc": "Wait for input over network."
 },
 {
@@ -329,7 +329,7 @@
 {
     "name": "Equal",
     "code": "boolean.equal",
-    "inputs": {"4": "Boolean", "3": "Boolean", "1": "Boolean", "5": "Boolean", "2": "Boolean"},
+    "inputs": {"2": "Boolean", "3": "Boolean", "4": "Boolean", "1": "Boolean", "5": "Boolean"},
     "outputs": {"result": "Boolean"},
     "args": 5,
     "desc": "Checks if the first arg inputs are equal."
@@ -347,7 +347,7 @@
     "code": "boolean.argconst",
     "inputs": {},
     "outputs": {"result": "Boolean"},
-    "args": {"time": 1.0, "val": "arg"},
+    "args": {"val": "arg", "time": 1.0},
     "desc": "Get input from arguments."
 },
 {
@@ -379,7 +379,7 @@
     "code": "boolean.trigger",
     "inputs": {},
     "outputs": {"result": "Boolean"},
-    "args": {"time": 1.0, "val": true},
+    "args": {"val": true, "time": 1.0},
     "desc": "Trigger arg.val every arg.time s."
 },
 {
