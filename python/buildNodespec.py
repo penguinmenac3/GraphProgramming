@@ -16,6 +16,7 @@ def try_load(name, verbose, i, total):
             "__init__") or name.endswith("_Lib"):
         return False, None
     try:
+        print(name)
         module = __import__(name, fromlist=["Node"])
     except (ImportError, SyntaxError) as e:
         if verbose:
@@ -61,14 +62,14 @@ if __name__ == "__main__":
             errs.append(node)
 
     if verbose:
-        print()
+        print("")
 
     for e in errs:
         name = e[0]
         ex = e[1]
         print("ERROR in module " + name)
         print(ex)
-        print()
+        print("")
 
     if txt.endswith(",\n"):
         txt = txt[:-2]

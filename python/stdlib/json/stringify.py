@@ -12,4 +12,7 @@ class Node(base.Node):
                                    "Makes a json string out of an object.", verbose)
 
     def tick(self, value):
+        if "tags" in value and "val" in value["tags"]:
+            tag = value["tags"]["val"]
+            return {"result": json.dumps(value["val"]), "tags": {"result": tag}}
         return {"result": json.dumps(value["val"])}
