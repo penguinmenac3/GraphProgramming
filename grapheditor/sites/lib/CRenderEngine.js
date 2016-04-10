@@ -289,7 +289,15 @@ function WebUI_CRenderEngine() {
         that.setDirty();
 	};*/
 
-	function renderDot(px, py, marked, fillStyle) {
+	function renderDot(px, py, marked, fillStyle, name) {        
+        ctx.font = parseInt(that.dotSize/2 * scale) + "px 'Helvetica'";
+		ctx.fillStyle = fillStyle;
+		ctx.textAlign = 'left';
+		ctx.textBaseline = 'center';
+        var offsetX = that.dotSize/2 + 4;
+        var offsetY = -that.dotSize/4;
+		ctx.fillText(name, renderOffsetX * scale + px * scale + width/2 + offsetX * scale, renderOffsetY * scale + py * scale + height/2 + offsetY * scale);
+        
 		ctx.beginPath();
 		ctx.fillStyle = fillStyle;
 		ctx.rect(renderOffsetX * scale + px * scale - that.dotSize/2 * scale + width/2,renderOffsetY * scale + py * scale - that.dotSize/2 * scale + height/2,that.dotSize * scale,that.dotSize * scale);
@@ -396,13 +404,13 @@ function WebUI_CRenderEngine() {
 		for (var key in node.inputs) {
   			if (node.inputs.hasOwnProperty(key)) {
   				pos = getPosition(node, key, node.inputs, true);
-    			renderDot(pos.x, pos.y, node == that.marked, fillStyle);
+    			renderDot(pos.x, pos.y, node == that.marked, fillStyle, key);
   			}
 		}
 		for (var key in node.outputs) {
   			if (node.outputs.hasOwnProperty(key)) {
   				pos = getPosition(node, key, node.outputs, false);
-    			renderDot(pos.x, pos.y, node == that.marked, fillStyle);
+    			renderDot(pos.x, pos.y, node == that.marked, fillStyle, key);
   			}
 		}
 		//renderDot(node.x - that.nodeWidth/2 + that.dotSize / 2, node.y - that.nodeHeight/2 + that.dotSize / 2, node == that.marked, fillStyle);
