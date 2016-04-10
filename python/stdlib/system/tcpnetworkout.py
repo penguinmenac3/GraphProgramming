@@ -34,7 +34,7 @@ class Node(base.Node):
                 if "tags" in value and "msg" in value["tags"]:
                   value["tags"]["msg"]["closeSock"](s)
                 else:
-            	  s.close()
+                  s.close()
             success = True
           except:
             if "tags" in value and "msg" in value["tags"]:
