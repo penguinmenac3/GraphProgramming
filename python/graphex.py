@@ -11,6 +11,7 @@ except ImportError:
 
 builtins.registry = {}
 builtins.registry_output = {}
+builtins.shutdown_hook = []
 
 class GraphEx(object):
     def __init__(self, graph_path, verbose = False):
@@ -172,4 +173,6 @@ if __name__ == "__main__":
             builtins.registry = json.loads(" ".join(sys.argv[2:]))
         builtins.registry["kill"] = False
         GraphEx(sys.argv[1]).execute()
+        for hook in builtins.shutdown_hook:
+            hook()
         print(json.dumps(builtins.registry_output))
