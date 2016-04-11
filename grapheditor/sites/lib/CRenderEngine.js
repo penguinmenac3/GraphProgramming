@@ -30,7 +30,7 @@ function WebUI_CRenderEngine() {
     var colorOrigin = "red";
     
     this.setDirty = function() {
-        isDirty = 2;
+        isDirty = 1;
     };
     
     this.setTheme = function(clear, input, algorithm, structural, output, connector, marked, origin) {
@@ -89,8 +89,8 @@ function WebUI_CRenderEngine() {
 			width = containerDiv.clientWidth;
 			height = containerDiv.clientHeight;
 		}
-		canvas.width = width;
-		canvas.height = height;
+		ctx.canvas.width = width;
+		ctx.canvas.height = height;
         that.setDirty();
 	};
 
@@ -293,7 +293,7 @@ function WebUI_CRenderEngine() {
         ctx.font = parseInt(that.dotSize/2 * scale) + "px 'Helvetica'";
 		ctx.fillStyle = fillStyle;
 		ctx.textAlign = 'left';
-		ctx.textBaseline = 'center';
+		ctx.textBaseline = 'top';
         var offsetX = that.dotSize/2 + 4;
         var offsetY = -that.dotSize/4;
 		ctx.fillText(name, renderOffsetX * scale + px * scale + width/2 + offsetX * scale, renderOffsetY * scale + py * scale + height/2 + offsetY * scale);
@@ -330,7 +330,7 @@ function WebUI_CRenderEngine() {
 		ctx.font = parseInt(size * scale) + "px 'Helvetica'";
 		ctx.fillStyle = color;
 		ctx.textAlign = 'center';
-		ctx.textBaseline = 'center';
+		ctx.textBaseline = 'top';
 		ctx.fillText(text, renderOffsetX * scale + x * scale + width/2 + offsetX * scale, renderOffsetY * scale + y * scale + height/2 + offsetY * scale);
 	}
 
@@ -476,7 +476,7 @@ function WebUI_CRenderEngine() {
 		ctx.font = "12px 'Helvetica'";
 		ctx.fillStyle = "white";
 		ctx.textAlign = 'center';
-		ctx.textBaseline = 'center';
+		ctx.textBaseline = 'top';
 		ctx.fillText(text, x, y - 7);
 
 	}

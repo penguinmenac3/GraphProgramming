@@ -178,14 +178,8 @@ function WebUI_CWebUI() {
                 if (RenderEngine.showInfo) {
                     showInfo();
                 } else {
-                    RenderEngine.showInfo = true;
-                    document.getElementById("graphview").style.right = "0";
-                    document.getElementById("infocontent").innerHTML = "Click/Tap on a node to show info about it.";
-                    that.currentNode = null;
-                    RenderEngine.marked = null;
+                    hideInfo();
                 }
-                RenderEngine.resize();
-                RenderEngine.setDirty();
                 return;
             }
         }
@@ -696,10 +690,22 @@ class Node(base.Node):
 	}
     
     function showInfo() {
-        RenderEngine.showInfo = false;
-        document.getElementById("graphview").style.right = "18em";
-        RenderEngine.resize();
-        RenderEngine.setDirty();
+        if (RenderEngine.showInfo == true) {
+            RenderEngine.showInfo = false;
+            document.getElementById("graphview").style.right = "18em";
+            RenderEngine.resize();
+        }
+    }
+    
+    function hideInfo() {
+        if (RenderEngine.showInfo == false) {
+            RenderEngine.showInfo = true;
+            document.getElementById("graphview").style.right = "0";
+            document.getElementById("infocontent").innerHTML = "Click/Tap on a node to show info about it.";
+            that.currentNode = null;
+            RenderEngine.marked = null;
+            RenderEngine.resize();
+        }
     }
     
     var lastDebug = "";
