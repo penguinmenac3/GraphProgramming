@@ -2,11 +2,11 @@
 
 ## Core
 
-1. Add tag passing to all nodes.
-
+1. All nodes should have queueing and non-queueing input-mode (selectable, queueing as default).
 
 ## LIB
 
+0. Add tag passing to all nodes.
 1. Check if networking supports HTTP, HTTPS, TCP, UDP and implement missing.
 2. Add object constructor, extractor (read) and deconstructor/splitter to enable complex object creation and handling.
 3. Add encryption package that encrypts messages
@@ -16,6 +16,5 @@
 ## Editor
 
 1. Improve subgraph handling and editing, autodetect inputs and outputs for upper graph-level node.
-2. Introduce sessions and resume where I left off.
-3. List availible graphs.
-4. Dark theme (option)
+2. List availible graphs.
+3. Buttons should be HTML and not canvas. (Allows simpler png export of graphs for showing something)
