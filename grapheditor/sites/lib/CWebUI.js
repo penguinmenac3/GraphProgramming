@@ -271,23 +271,6 @@ function WebUI_CWebUI() {
 				execute(that.graphName, RenderEngine.setResult, RenderEngine.setResult);
 				return;
 			}*/
-			if (absY > 250 && absY < 280) {
-				if (that.changed == true) {
-					var name = prompt("Autosave: Please enter graph name", WebUI.graphName);
-					if (name == null) {
-						return;
-					}
-					WebUI.graphName = name;
-					WebUI.saveGraph(WebUI.graphName);
-					that.changed = false;
-				}
-				start(that.graphName, that.setDebug, that.setDebug);
-				return;
-			}
-			if (absY > 290 && absY < 310) {
-				kill();
-				return;
-			}
 			if (absY > 370 && absY < 390) {
                 if (that.graphStack.length < 2) {
                     return;
@@ -716,11 +699,26 @@ class Node(base.Node):
         lastDebug = result;
         showInfo();
         result = result.replace(new RegExp("\n", 'g'), "<br>");
-        document.getElementById("debugcontent").innerHTML = "<button class='button outputnode right' onclick='WebUI.clearDebug()'>clear</button><br>" + result;
+        document.getElementById("debugcontent").innerHTML = "<button class='button outputnode right' onclick='WebUI.clearDebug()'>KILL</button><br>" + result;
     }
     
     this.clearDebug = function () {
         lastDebug = "";
-        document.getElementById("debugcontent").innerHTML = "Run graph to get debug output.";
+        kill();
+        document.getElementById("debugcontent").innerHTML = "<button class='button inputnode right' onclick='WebUI.startDebug()'>START</button><br>Run graph to get debug output.";
+    }
+    
+    this.startDebug = function() {
+        if (that.changed == true) {
+			var name = prompt("Autosave: Please enter graph name", WebUI.graphName);
+			if (name == null) {
+				return;
+			}
+			WebUI.graphName = name;
+			WebUI.saveGraph(WebUI.graphName);
+			that.changed = false;
+        }
+        that.setDebug("Started Graph: " + that.graphName);
+	    start(that.graphName, that.setDebug, that.setDebug);
     }
 }

@@ -383,6 +383,30 @@
     "desc": "Trigger arg.val every arg.time s."
 },
 {
+    "name": "Database SQLite",
+    "code": "database.databasesqlite",
+    "inputs": {},
+    "outputs": {},
+    "args": {"db_id": "bla", "file": "bla.db"},
+    "desc": "Setup the database as SQLite."
+},
+{
+    "name": "Database SQL",
+    "code": "database.databasesql",
+    "inputs": {},
+    "outputs": {},
+    "args": {"host": "localhost", "password": "bla", "db_id": "bla", "db": "bla", "user": "bla"},
+    "desc": "Creates a connection to a database."
+},
+{
+    "name": "Query Database",
+    "code": "database.query",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "Object"},
+    "args": {"code": "c = db.cursor()\nresult = value[\"val\"]", "db_id": "bla"},
+    "desc": "Interact with a db."
+},
+{
     "name": "Record",
     "code": "computervision.record",
     "inputs": {"img": "Image"},
@@ -535,34 +559,10 @@
     "desc": "Split the flow by topic"
 },
 {
-    "name": "Database SQLite",
-    "code": "bla.databasesqlite",
-    "inputs": {},
-    "outputs": {},
-    "args": {"db_id": "bla", "file": "bla.db"},
-    "desc": "Setup the database as SQLite."
-},
-{
-    "name": "Database",
-    "code": "bla.database",
-    "inputs": {"val": "Object"},
-    "outputs": {"result": "Object"},
-    "args": {"code": "result = value[\"val\"]", "db_id": "bla"},
-    "desc": "Interact with a db."
-},
-{
     "name": "Authenticate",
     "code": "bla.authenticate",
     "inputs": {"val": "Object"},
     "outputs": {"false": "Object", "true": "Object"},
     "args": {"code": "result = value[\"val\"]\nerror = None"},
     "desc": "Authenticates a connection."
-},
-{
-    "name": "Database SQL",
-    "code": "bla.databasesql",
-    "inputs": {},
-    "outputs": {},
-    "args": {"host": "localhost", "password": "bla", "db_id": "bla", "db": "bla", "user": "bla"},
-    "desc": "Creates a connection to a database."
 }]
