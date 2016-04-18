@@ -128,7 +128,9 @@ class GraphEx(object):
                 if not abort:
                     # Add the node to the active calculations list and start a calculation thread.
                     self.activeCalculations.append(node)
-                    Thread(target=self.executeNode, args=(node, node.inputBuffer)).start()
+                    t = Thread(target=self.executeNode, args=(node, node.inputBuffer))
+                    t.setDaemon(True)
+                    t.start()
 
 
     def executeNode(self, node, value):
