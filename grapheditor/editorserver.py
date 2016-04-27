@@ -54,6 +54,8 @@ class myHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path[1:] or "index.html"
         path = unquote(path)
+        if path.startswith("/"):
+            path = path[1:]
         if path.startswith("api"):
             GET = {}
             args = path.split('?')[1].split('&')
@@ -98,6 +100,8 @@ class myHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         path = self.path[1:] or "index.html"
         path = unquote(path)
+        if path.startswith("/"):
+            path = path[1:]
         if not path.startswith("api"):
             self.do_GET()
             return
