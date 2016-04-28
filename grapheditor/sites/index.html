@@ -8,21 +8,21 @@
   <meta name="mobile-web-app-capable" content="yes">
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <script type="text/javascript" src="lib/helpers.js"></script>
-  <script type="text/javascript" src="lib/vars.js"></script>
-  <script type="text/javascript" src="lib/CRenderEngine.js"></script>
-  <script type="text/javascript" src="lib/CKeyListener.js"></script>
-  <script type="text/javascript" src="lib/CWebUI.js"></script>
+  <script type="text/javascript" src="graph/lib/helpers.js"></script>
+  <script type="text/javascript" src="graph/lib/vars.js"></script>
+  <script type="text/javascript" src="graph/lib/CRenderEngine.js"></script>
+  <script type="text/javascript" src="graph/lib/CKeyListener.js"></script>
+  <script type="text/javascript" src="graph/lib/CWebUI.js"></script>
   
-  <link rel="stylesheet" href="lib/codemirror-5.13.2/lib/codemirror.css">
-  <link rel="stylesheet" href="lib/codemirror-5.13.2/theme/lesser-dark.css">
-  <script src="lib/codemirror-5.13.2/lib/codemirror.js"></script>
-  <script src="lib/codemirror-5.13.2/mode/python/python.js"></script>
-  <link id="pagestyle" rel="stylesheet" type="text/css" href="light.css">
+  <link rel="stylesheet" href="graph/lib/codemirror-5.13.2/lib/codemirror.css">
+  <link rel="stylesheet" href="graph/lib/codemirror-5.13.2/theme/lesser-dark.css">
+  <script src="graph/lib/codemirror-5.13.2/lib/codemirror.js"></script>
+  <script src="graph/lib/codemirror-5.13.2/mode/python/python.js"></script>
+  <link id="pagestyle" rel="stylesheet" type="text/css" href="graph/light.css">
   
   <script type="text/javascript">
     function swapTheme(theme){
-	    document.getElementById('pagestyle').setAttribute('href', theme + ".css");
+	    document.getElementById('pagestyle').setAttribute('href', "graph/" + theme + ".css");
         WebUI.setTheme(theme);
         localStorage.theme = theme;
     }

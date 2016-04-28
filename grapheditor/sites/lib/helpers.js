@@ -58,7 +58,7 @@ function sendViaPost(params, callback, callbackFailure) {
             }
         }
     }
-    xmlhttp.open("POST", "/api",true);
+    xmlhttp.open("POST", "graph/api",true);
     //Send the proper header information along with the request
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(params);
@@ -85,7 +85,7 @@ function sendViaPostRaw(params, callback, callbackFailure) {
             }
         }
     }
-    xmlhttp.open("POST", "/api",true);
+    xmlhttp.open("POST", "graph/api",true);
     //Send the proper header information along with the request
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(params);
@@ -112,7 +112,7 @@ function execute(graph, callback, callbackFailure) {
         }
     }
     var params = "execGraph=" + graph;
-    xmlhttp.open("POST", "/api",true);
+    xmlhttp.open("POST", "graph/api",true);
     //Send the proper header information along with the request
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(params);
@@ -138,7 +138,7 @@ function start(graph, callback, callbackFailure) {
         }
     }
     var params = "startGraph=" + graph;
-    xmlhttp.open("POST", "/api",true);
+    xmlhttp.open("POST", "graph/api",true);
     //Send the proper header information along with the request
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(params);
@@ -161,7 +161,7 @@ function update(graph, callback, callbackFailure) {
         }
     }
     var params = "updateGraph=" + graph;
-    xmlhttp.open("POST", "/api",true);
+    xmlhttp.open("POST", "graph/api",true);
     //Send the proper header information along with the request
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(params);
@@ -188,7 +188,7 @@ function kill() {
         }
     }
     var params = "killGraph=" + true;
-    xmlhttp.open("POST", "/api",true);
+    xmlhttp.open("POST", "graph/api",true);
     //Send the proper header information along with the request
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send(params);
@@ -215,6 +215,6 @@ function sendViaGet(params, callback, callbackFailure) {
             }
         }
     }
-    xmlhttp.open("POST", "/api?"+params,true);
+    xmlhttp.open("POST", "graph/api?"+params,true);
     xmlhttp.send();
 }
