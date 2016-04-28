@@ -448,8 +448,8 @@ function WebUI_CRenderEngine() {
 		renderButton("NEW NODE", 50, 145, colorAlgorithmNode);
 		renderButton("DELETE", 50, 185, colorOutputNode);
 		//renderButton("RUN", 50, 225, "dimgray");
-		renderButton("START", 50, 265, colorInputNode);
-		renderButton("KILL", 50, 305, colorOutputNode);
+		//renderButton("START", 50, 265, colorInputNode);
+		//renderButton("KILL", 50, 305, colorOutputNode);
         
 		renderButton("ZOOM OUT", canvas.width - 50, 25, colorStructureNode);
 		renderButton("ZOOM IN", canvas.width - 50, 65, colorStructureNode);
