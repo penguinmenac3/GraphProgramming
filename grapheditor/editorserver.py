@@ -14,11 +14,13 @@ import os.path
 import signal
 from threading import Thread
 import subprocess
+import sys
 
 PORT_NUMBER = 8088
 execProcess = None
 result = None
-
+SERVER_URL = sys.argv[1] if len(sys.argv) == 2 else ""
+print("SERVER_URL: " + SERVER_URL)
 
 def pollPipe():
     global execProcess
@@ -88,6 +90,7 @@ class myHandler(BaseHTTPRequestHandler):
                 self.send_header('Content-type', 'text/html')
             self.end_headers()
                # Send the html message
+            data = data.replace("###REPLACE###", SERVER_URL)
             self.wfile.write(data.encode("utf-8"))
         except:
             self.send_response(404)

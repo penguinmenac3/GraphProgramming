@@ -8,21 +8,21 @@
   <meta name="mobile-web-app-capable" content="yes">
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <script type="text/javascript" src="graph/lib/helpers.js"></script>
-  <script type="text/javascript" src="graph/lib/vars.js"></script>
-  <script type="text/javascript" src="graph/lib/CRenderEngine.js"></script>
-  <script type="text/javascript" src="graph/lib/CKeyListener.js"></script>
-  <script type="text/javascript" src="graph/lib/CWebUI.js"></script>
+  <script type="text/javascript" src="###REPLACE###lib/helpers.js"></script>
+  <script type="text/javascript" src="###REPLACE###lib/vars.js"></script>
+  <script type="text/javascript" src="###REPLACE###lib/CRenderEngine.js"></script>
+  <script type="text/javascript" src="###REPLACE###lib/CKeyListener.js"></script>
+  <script type="text/javascript" src="###REPLACE###lib/CWebUI.js"></script>
   
-  <link rel="stylesheet" href="graph/lib/codemirror-5.13.2/lib/codemirror.css">
-  <link rel="stylesheet" href="graph/lib/codemirror-5.13.2/theme/lesser-dark.css">
-  <script src="graph/lib/codemirror-5.13.2/lib/codemirror.js"></script>
-  <script src="graph/lib/codemirror-5.13.2/mode/python/python.js"></script>
-  <link id="pagestyle" rel="stylesheet" type="text/css" href="graph/light.css">
+  <link rel="stylesheet" href="###REPLACE###lib/codemirror-5.13.2/lib/codemirror.css">
+  <link rel="stylesheet" href="###REPLACE###lib/codemirror-5.13.2/theme/lesser-dark.css">
+  <script src="###REPLACE###lib/codemirror-5.13.2/lib/codemirror.js"></script>
+  <script src="###REPLACE###lib/codemirror-5.13.2/mode/python/python.js"></script>
+  <link id="pagestyle" rel="stylesheet" type="text/css" href="###REPLACE###light.css">
   
   <script type="text/javascript">
     function swapTheme(theme){
-	    document.getElementById('pagestyle').setAttribute('href', "graph/" + theme + ".css");
+	    document.getElementById('pagestyle').setAttribute('href', "###REPLACE###" + theme + ".css");
         WebUI.setTheme(theme);
         localStorage.theme = theme;
     }
