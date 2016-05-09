@@ -231,6 +231,22 @@
     "desc": "If condition pass to true otherwise to false."
 },
 {
+    "name": "Array const",
+    "code": "arrays.const",
+    "inputs": {},
+    "outputs": {"result": "Array"},
+    "args": {"vals": [0, 1, 2, 3, 4, 5]},
+    "desc": "A constant input array."
+},
+{
+    "name": "Array Generator",
+    "code": "arrays.generate",
+    "inputs": {},
+    "outputs": {"result": "Array"},
+    "args": {"range": 100, "code": "y = x", "repeating": false, "time": 1},
+    "desc": "Executes the argument function as python code."
+},
+{
     "name": "Arg trigger",
     "code": "arrays.argtrigger",
     "inputs": {},
@@ -239,12 +255,68 @@
     "desc": "Get triggers from commandline."
 },
 {
+    "name": "Gaussian Generator",
+    "code": "arrays.gaussian",
+    "inputs": {},
+    "outputs": {"result": "Array"},
+    "args": {"range": 100, "sigma": 1},
+    "desc": "Executes the argument function as python code."
+},
+{
+    "name": "Subtract",
+    "code": "arrays.subtract",
+    "inputs": {"right": "Array", "left": "Array"},
+    "outputs": {"result": "Array"},
+    "args": {},
+    "desc": "Left minus right."
+},
+{
+    "name": "Multiply (:Matrix)",
+    "code": "arrays.multInflate",
+    "inputs": {"right": "Array", "left": "Array"},
+    "outputs": {"result": "Matrix"},
+    "args": {},
+    "desc": "Multiply two values as product resulting in a matrix."
+},
+{
     "name": "Arg const",
     "code": "arrays.argconst",
     "inputs": {},
     "outputs": {"result": "String"},
     "args": "arg",
     "desc": "Get triggers from commandline."
+},
+{
+    "name": "Convolute",
+    "code": "arrays.convolute",
+    "inputs": {"kernel": "Array", "data": "Array"},
+    "outputs": {"result": "Array"},
+    "args": {},
+    "desc": "Convolute two arrays."
+},
+{
+    "name": "Add",
+    "code": "arrays.add",
+    "inputs": {"right": "Array", "left": "Array"},
+    "outputs": {"result": "Array"},
+    "args": {},
+    "desc": "A constant input array."
+},
+{
+    "name": "Multiply",
+    "code": "arrays.mult",
+    "inputs": {"right": "Array", "left": "Array"},
+    "outputs": {"result": "Double"},
+    "args": {},
+    "desc": "Multiply two values as scalar product."
+},
+{
+    "name": "Array trigger",
+    "code": "arrays.trigger",
+    "inputs": {},
+    "outputs": {"result": "Array"},
+    "args": {"vals": [0, 1, 2, 3, 4, 5], "time": 1.0},
+    "desc": "A constant input array."
 },
 {
     "name": "TCP Network",
@@ -429,6 +501,14 @@
     "outputs": {"result": "Boolean"},
     "args": {"val": true, "time": 1.0},
     "desc": "Trigger arg.val every arg.time s."
+},
+{
+    "name": "[WIP] Plot Array",
+    "code": "matplotlib.plotarray",
+    "inputs": {"data": "Array"},
+    "outputs": {},
+    "args": {"subplot": 111, "ion": true, "clear": true, "title": "Debug"},
+    "desc": "Plot an array."
 },
 {
     "name": "Database SQLite",

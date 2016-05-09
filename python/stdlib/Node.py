@@ -19,7 +19,9 @@ class Node(object):
     @:param isInput optional if the node is an input node
     @:param isRepeating optional if the node is a repeating node
     """
-    def __init__(self, name, code, defaultArgs, inputs, outputs, description, verbose, isInput=False, isRepeating=False):
+    def __init__(self, name, code, defaultArgs, inputs, outputs, description, verbose, isInput=False, isRepeating=False,
+                 needs_foreground = False):
+        self.needs_foreground = needs_foreground
         self.name = name
         self.inputs = inputs
         self.outputs = outputs
@@ -71,6 +73,9 @@ class Node(object):
 
     def toString(self):
         return self.getName() + " (" + self.getDescription() + ") [repeating:" + str(self.isRepeating()) + ", input:" + str(self.isInput()) + "]"
+
+    def needsForeground(self):
+        return self.needs_foreground
 
     def toJson(self):
         return '''{

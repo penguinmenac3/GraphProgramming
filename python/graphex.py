@@ -128,15 +128,18 @@ class GraphEx(object):
                 if not abort:
                     # Add the node to the active calculations list and start a calculation thread.
                     self.activeCalculations.append(node)
-                    t = Thread(target=self.executeNode, args=(node, node.inputBuffer))
-                    t.setDaemon(True)
-                    t.start()
+                    if node.needsForeground():
+                        self.executeNode(node, node.inputBuffer)
+                    else:
+                        t = Thread(target=self.executeNode, args=(node, node.inputBuffer))
+                        t.setDaemon(True)
+                        t.start()
 
 
     def executeNode(self, node, value):
         # Tick the node and then add the result to calculated.
         result = node.tick(value)
-        #print(result)
+
         for key in node.outs:
             for elem in node.outs[key]:
                 resultNode = elem["node"]
