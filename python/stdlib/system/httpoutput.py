@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("HTTP Output", "system.httpoutput", {},
+        super(Node, self).__init__("[WIP] HTTP Output", "system.httpoutput", {},
                                    {"val": "String"},
                                    {},
                                    "Output value to http connection.", verbose)

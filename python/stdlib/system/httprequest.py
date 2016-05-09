@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("HTTP Request", "system.httprequest", {"host": "localhost", "port":80, "method":"get"},
+        super(Node, self).__init__("[WIP] HTTP Request", "system.httprequest", {"host": "localhost", "port":80, "method":"get"},
                                    {"val": "Object"},
                                    {"result": "Object"},
                                    "Execute an http request on a host.", verbose)

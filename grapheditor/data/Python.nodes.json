@@ -255,7 +255,7 @@
     "desc": "Send input over network and wait for result."
 },
 {
-    "name": "WebSocket",
+    "name": "[WIP] WebSocket",
     "code": "system.websocketoutput",
     "inputs": {"val": "Object"},
     "outputs": {},
@@ -279,7 +279,7 @@
     "desc": "Execute a subgraph."
 },
 {
-    "name": "WebSocket",
+    "name": "[WIP] WebSocket",
     "code": "system.websocketrequest",
     "inputs": {"val": "Object"},
     "outputs": {"result": "Object"},
@@ -319,7 +319,7 @@
     "desc": "Send message over tcp network."
 },
 {
-    "name": "HTTP Output",
+    "name": "[WIP] HTTP Output",
     "code": "system.httpoutput",
     "inputs": {"val": "String"},
     "outputs": {},
@@ -327,7 +327,7 @@
     "desc": "Output value to http connection."
 },
 {
-    "name": "HTTP Request",
+    "name": "[WIP] HTTP Request",
     "code": "system.httprequest",
     "inputs": {"val": "Object"},
     "outputs": {"result": "Object"},
@@ -335,7 +335,7 @@
     "desc": "Execute an http request on a host."
 },
 {
-    "name": "WebSocket",
+    "name": "[WIP] WebSocket",
     "code": "system.websocketinput",
     "inputs": {},
     "outputs": {"result": "Object"},
@@ -343,7 +343,7 @@
     "desc": "Wait for websocket inputs."
 },
 {
-    "name": "HTTP Input",
+    "name": "[WIP] HTTP Input",
     "code": "system.httpinput",
     "inputs": {},
     "outputs": {"put": "Object", "post": "Object", "delete": "Object", "get": "Object"},

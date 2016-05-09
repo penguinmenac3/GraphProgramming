@@ -65,7 +65,7 @@ class myHandler(BaseHTTPRequestHandler):
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("HTTP Input", "system.httpinput", {"port":80},
+        super(Node, self).__init__("[WIP] HTTP Input", "system.httpinput", {"port":80},
                                    {},
                                    {"get": "Object", "post": "Object", "put": "Object", "delete": "Object"},
                                    "Wait for http requests.", verbose)
