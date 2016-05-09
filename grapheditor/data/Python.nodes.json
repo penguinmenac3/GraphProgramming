@@ -255,6 +255,14 @@
     "desc": "Send input over network and wait for result."
 },
 {
+    "name": "WebSocket",
+    "code": "system.websocketoutput",
+    "inputs": {"val": "Object"},
+    "outputs": {},
+    "args": {},
+    "desc": "Output on a websocket."
+},
+{
     "name": "Output",
     "code": "system.output",
     "inputs": {"arg": "String"},
@@ -269,6 +277,14 @@
     "outputs": {"result": "Object"},
     "args": "DefaultGraph",
     "desc": "Execute a subgraph."
+},
+{
+    "name": "WebSocket",
+    "code": "system.websocketrequest",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "Object"},
+    "args": {},
+    "desc": "Request on a websocket."
 },
 {
     "name": "Print",
@@ -317,6 +333,14 @@
     "outputs": {"result": "Object"},
     "args": {"host": "localhost", "port": 80, "method": "get"},
     "desc": "Execute an http request on a host."
+},
+{
+    "name": "WebSocket",
+    "code": "system.websocketinput",
+    "inputs": {},
+    "outputs": {"result": "Object"},
+    "args": {},
+    "desc": "Wait for websocket inputs."
 },
 {
     "name": "HTTP Input",
