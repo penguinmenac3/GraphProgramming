@@ -94,29 +94,38 @@ class GraphEx(object):
             inputNode.outs[outputQualifier].append({"node":outputNode,"var":inputQualifier});
             outputNode.prevNodes.append(inputNode)
             outputNode.ins[inputQualifier] = {"var":outputQualifier}
-
-    def execute(self):
+    def prepareExecution(self):
         # Initialize all lists.
         self.toCalculate = []
+        self.toCalculateMainThread = []
         self.activeCalculations = []
         self.ops = 0
 
         # add the input nodes to the nodes that should be calculated.
         self.toCalculate.extend(self.input_nodes.values())
 
+    def executeThreaded(self):        
+        t = Thread(target=self.execute)
+        t.setDaemon(True)
+        t.start()
+        
         # Execute nodes until there is no more nodes to calculate and no nodes in calculation.
         while self.shouldStillRun():
             # When there are only active calculations and nothing new, wait.
-            if not self.toCalculate:
+            if not self.toCalculateMainThread:
                 time.sleep(0.01)
                 continue
 
+            self.lock.acquire()
             # Select the node to execute and check if it can be executed.
-            node = self.toCalculate[0]
-            self.toCalculate = [value for value in self.toCalculate if value != node]
+            node = self.toCalculateMainThread[0]
+            self.toCalculateMainThread = [value for value in self.toCalculateMainThread if value != node]
             if node in self.activeCalculations:
-                self.toCalculate.append(node)
+                self.toCalculateMainThread.append(node)
+                self.lock.release()
                 continue
+            self.lock.release()
+            
             if self.checkIfReady(node):
                 # Prepare the input value set for the node.
                 abort = False
@@ -128,12 +137,46 @@ class GraphEx(object):
                 if not abort:
                     # Add the node to the active calculations list and start a calculation thread.
                     self.activeCalculations.append(node)
-                    if node.needsForeground():
-                        self.executeNode(node, node.inputBuffer)
-                    else:
-                        t = Thread(target=self.executeNode, args=(node, node.inputBuffer))
-                        t.setDaemon(True)
-                        t.start()
+                    self.executeNode(node, node.inputBuffer)
+                    
+    def execute(self):
+        # Execute nodes until there is no more nodes to calculate and no nodes in calculation.
+        while self.shouldStillRun():
+            # When there are only active calculations and nothing new, wait.
+            if not self.toCalculate:
+                time.sleep(0.01)
+                continue
+
+            self.lock.acquire()
+            # Select the node to execute and check if it can be executed.
+            node = self.toCalculate[0]
+            self.toCalculate = [value for value in self.toCalculate if value != node]
+            if node in self.activeCalculations:
+                self.toCalculate.append(node)
+                self.lock.release()
+                continue
+            
+            # Check if node needs main thread if so cannot be started in this thread.    
+            if node.needsForeground():
+                self.toCalculateMainThread.append(node)
+                self.lock.release()
+                continue
+            self.lock.release()
+                
+            if self.checkIfReady(node):
+                # Prepare the input value set for the node.
+                abort = False
+                for key in node.inputBuffer:
+                    if node.inputBuffer[key] is None:
+                        abort = True
+                        break
+
+                if not abort:
+                    # Add the node to the active calculations list and start a calculation thread.
+                    self.activeCalculations.append(node)
+                    t = Thread(target=self.executeNode, args=(node, node.inputBuffer))
+                    t.setDaemon(True)
+                    t.start()
 
 
     def executeNode(self, node, value):
@@ -158,7 +201,7 @@ class GraphEx(object):
 
     def shouldStillRun(self):
         self.lock.acquire()
-        should_run = (self.toCalculate or self.activeCalculations) and not builtins.registry["kill"]
+        should_run = (self.toCalculate or self.toCalculateMainThread or self.activeCalculations) and not builtins.registry["kill"]
         self.lock.release()
         return should_run
 
@@ -177,7 +220,9 @@ if __name__ == "__main__":
         if len(sys.argv) > 2:
             builtins.registry = json.loads(" ".join(sys.argv[2:]))
         builtins.registry["kill"] = False
-        GraphEx(sys.argv[1]).execute()
+        gex = GraphEx(sys.argv[1])
+        gex.prepareExecution()
+        gex.executeThreaded()
         for hook in builtins.shutdown_hook:
             hook()
         print(json.dumps(builtins.registry_output))
