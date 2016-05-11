@@ -3,8 +3,12 @@ try:
 except ValueError:
     from stdlib import Node as base
 
-import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use("qt4agg")
+from matplotlib import pyplot as plt
 
+import time
+import sys
 
 class Node(base.Node):
     def __init__(self, verbose, args):
@@ -18,17 +22,24 @@ class Node(base.Node):
         self.ax1 = None
 
     def tick(self, value):
-        if self.args["ion"]:
-            plt.ion()
-
+        #t = time.time()
+        #if self.args["ion"]:
+            #plt.ion()
+            
         data = value["data"]
         # TODO more features and more specific stuff.
-        self.fig = plt.figure(self.args["title"])
-        self.ax1 = self.fig.add_subplot(self.args["subplot"])
+        if not self.fig and not self.ax1:
+        	self.fig = plt.figure(self.args["title"])
+        	self.ax1 = self.fig.add_subplot(self.args["subplot"])
         if self.args["clear"]:
-            plt.cla()
+            self.ax1.cla()
 
         self.ax1.plot(data)
-        plt.show()
-        plt.pause(0.0001)
+        if not self.args["ion"]:
+        	plt.show()
+        else:
+        	plt.pause(0.0001)
+        #elapsed = time.time() - t
+        #print(elapsed)
+        #sys.stdout.flush()
         return {}

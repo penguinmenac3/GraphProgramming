@@ -1,23 +1,24 @@
 {
 	"nodes": [
 		{
-			"name": "Video Input Stream",
-			"code": "cv.video",
+			"name": "ud57d",
+			"code": "computervision.video",
 			"inputs": {},
 			"outputs": {
 				"result": "Image"
 			},
 			"args": {
-				"fps": 10,
-				"resource": 0
+				"resource": "/home/michael/Videos/Robotour/parkwalk.mp4",
+				"fps": 30
 			},
-			"desc": "Get videos from {resource}.",
-			"x": 26,
-			"y": -476.5
+			"desc": "Capture video.",
+			"displayname": "Video",
+			"x": 234,
+			"y": -600
 		},
 		{
-			"name": "Resize",
-			"code": "cv.resize",
+			"name": "Ih0GC",
+			"code": "computervision.resize",
 			"inputs": {
 				"img": "Image"
 			},
@@ -29,61 +30,13 @@
 				"height": 240
 			},
 			"desc": "Resize an image.",
-			"x": -9,
-			"y": -376.5
+			"displayname": "Resize",
+			"x": 202,
+			"y": -512
 		},
 		{
-			"name": "Show Image",
-			"code": "cv.show",
-			"inputs": {
-				"img": "Image"
-			},
-			"outputs": {},
-			"args": {
-				"title": "Drivable Regions"
-			},
-			"desc": "Resize an image.",
-			"x": 87,
-			"y": 739.5
-		},
-		{
-			"name": "InRange",
-			"code": "cv.inrange",
-			"inputs": {
-				"img": "Image"
-			},
-			"outputs": {
-				"result": "Image"
-			},
-			"args": {
-				"lh": 0,
-				"ls": 0,
-				"lv": 0,
-				"uh": 255,
-				"us": 40,
-				"uv": 255
-			},
-			"desc": "In range operation on image.",
-			"x": 48,
-			"y": 637.5
-		},
-		{
-			"name": "Convert bgr 2 hsv",
-			"code": "cv.bgr2hsv",
-			"inputs": {
-				"img": "Image"
-			},
-			"outputs": {
-				"result": "Image"
-			},
-			"args": {},
-			"desc": "Convert a bgr to hsv image.",
-			"x": -86,
-			"y": -175.5
-		},
-		{
-			"name": "Blur Image",
-			"code": "cv.medianblur",
+			"name": "2xUB5",
+			"code": "computervision.medianblur",
 			"inputs": {
 				"img": "Image"
 			},
@@ -91,13 +44,29 @@
 				"result": "Image"
 			},
 			"args": 10,
-			"desc": "Blur Image with median blur.",
-			"x": -49,
-			"y": -275.5
+			"desc": "Apply median blur on image.",
+			"displayname": "Median Blur",
+			"x": 176,
+			"y": -284
 		},
 		{
-			"name": "Fixed Intensity",
-			"code": "cv.fixedintensity",
+			"name": "o74HY",
+			"code": "computervision.bgr2hsv",
+			"inputs": {
+				"img": "Image"
+			},
+			"outputs": {
+				"result": "Image"
+			},
+			"args": "",
+			"desc": "Convert BGR image to HSV image.",
+			"displayname": "BGR to HSV",
+			"x": 141,
+			"y": -193
+		},
+		{
+			"name": "TNt3F",
+			"code": "computervision.fixedintensity",
 			"inputs": {
 				"img": "Image"
 			},
@@ -105,27 +74,45 @@
 				"result": "Image"
 			},
 			"args": 127,
-			"desc": "Fixed intensity to {args}.",
-			"x": -121,
-			"y": -74.5
+			"desc": "Set the intensity to a fixed value.",
+			"displayname": "Fixed Intensity",
+			"x": 96,
+			"y": -97
 		},
 		{
-			"name": "Convert hsv 2 bgr",
-			"code": "cv.hsv2bgr",
+			"name": "fYg4m",
+			"code": "computervision.hsv2bgr",
 			"inputs": {
 				"img": "Image"
 			},
 			"outputs": {
 				"result": "Image"
 			},
-			"args": {},
-			"desc": "Convert a hsv to bgr image.",
-			"x": -152,
-			"y": 27.5
+			"args": "",
+			"desc": "Convert HSV image to BGR image.",
+			"displayname": "HSV to BGR",
+			"x": 62,
+			"y": -11
 		},
 		{
-			"name": "Blur Image Gaussian",
-			"code": "cv.gaussianblur",
+			"name": "JKA7d",
+			"code": "default.splitflow",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"right": "Object",
+				"left": "Object"
+			},
+			"args": "",
+			"desc": "Splits the flow.",
+			"displayname": "Splitflow 2",
+			"x": 22,
+			"y": 86
+		},
+		{
+			"name": "6NOzV",
+			"code": "computervision.gaussianblur",
 			"inputs": {
 				"img": "Image"
 			},
@@ -133,225 +120,471 @@
 				"result": "Image"
 			},
 			"args": 1,
-			"desc": "Blur Image with gaussian blur.",
-			"x": 16,
-			"y": 234.5
+			"desc": "Apply gaussian blur on image.",
+			"displayname": "Gaussian Blur",
+			"x": 149,
+			"y": 170
 		},
 		{
-			"name": "Split Flow",
-			"code": "default.splitflow",
+			"name": "6kR9t",
+			"code": "computervision.addweighted",
 			"inputs": {
-				"val": "Object"
-			},
-			"outputs": {
-				"left": "Object",
-				"right": "Object"
-			},
-			"desc": "Passes the variable to both outputs.",
-			"x": -123,
-			"y": 130.5,
-			"args": {}
-		},
-		{
-			"name": "Add Weighted",
-			"code": "cv.addweighted",
-			"inputs": {
-				"left": "Image",
-				"right": "Image"
+				"right": "Image",
+				"left": "Image"
 			},
 			"outputs": {
 				"result": "Image"
 			},
 			"args": {
-				"left": 1.75,
-				"right": -0.75
+				"right": 1.75,
+				"left": -0.75
 			},
-			"desc": "Add images with weights.",
-			"x": -120,
-			"y": 334.5
+			"desc": "Add the two images weighted.",
+			"displayname": "Add Weighted",
+			"x": 48,
+			"y": 256
 		},
 		{
-			"name": "Convert bgr 2 hsv (2)",
-			"code": "cv.bgr2hsv",
+			"name": "BlPhn",
+			"code": "computervision.bgr2hsv",
 			"inputs": {
 				"img": "Image"
 			},
 			"outputs": {
 				"result": "Image"
 			},
-			"args": {},
-			"desc": "Convert a bgr to hsv image.",
-			"x": 16,
-			"y": 535.5
+			"args": "",
+			"desc": "Convert BGR image to HSV image.",
+			"displayname": "BGR to HSV",
+			"x": 122,
+			"y": 426
 		},
 		{
-			"name": "Split Flow (2)",
-			"code": "default.splitflow",
-			"inputs": {
-				"val": "Object"
-			},
-			"outputs": {
-				"left": "Object",
-				"right": "Object"
-			},
-			"desc": "Passes the variable to both outputs.",
-			"x": -83,
-			"y": 434.5,
-			"args": {}
-		},
-		{
-			"name": "Show Image (2)",
-			"code": "cv.show",
+			"name": "PjI6Z",
+			"code": "computervision.inrange",
 			"inputs": {
 				"img": "Image"
+			},
+			"outputs": {
+				"result": "Image"
+			},
+			"args": {
+				"uv": 255,
+				"us": 40,
+				"lv": 0,
+				"ls": 0,
+				"lh": 0,
+				"uh": 255
+			},
+			"desc": "Apply an inRange operation on the image.",
+			"displayname": "In Range",
+			"x": 158,
+			"y": 514
+		},
+		{
+			"name": "6PFoF",
+			"code": "computervision.img2distribution",
+			"inputs": {
+				"img": "Image"
+			},
+			"outputs": {
+				"result": "Array"
+			},
+			"args": "",
+			"desc": "Convert an image to a distribution.",
+			"displayname": "Image to distribution",
+			"x": 410,
+			"y": 785
+		},
+		{
+			"name": "MBprv",
+			"code": "matplotlib.plotarray",
+			"inputs": {
+				"data": "Array"
 			},
 			"outputs": {},
 			"args": {
-				"title": "Preprocessed"
+				"subplot": 223,
+				"ion": true,
+				"clear": true,
+				"title": "Debug"
 			},
-			"desc": "Show an image.",
-			"x": -198,
-			"y": 539.5
+			"desc": "Plot an array.",
+			"displayname": "[WIP] Plot Array",
+			"x": 368,
+			"y": 984
+		},
+		{
+			"name": "jzZD2",
+			"code": "arrays.gaussian",
+			"inputs": {},
+			"outputs": {
+				"result": "Array"
+			},
+			"args": {
+				"range": 10,
+				"sigma": 2
+			},
+			"desc": "Executes the argument function as python code.",
+			"displayname": "Gaussian Generator",
+			"x": 646,
+			"y": 874
+		},
+		{
+			"name": "ieVlb",
+			"code": "default.splitflow",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"right": "Object",
+				"left": "Object"
+			},
+			"args": "",
+			"desc": "Splits the flow.",
+			"displayname": "Splitflow 2",
+			"x": 434,
+			"y": 886
+		},
+		{
+			"name": "LA4j9",
+			"code": "arrays.convolute",
+			"inputs": {
+				"kernel": "Array",
+				"data": "Array"
+			},
+			"outputs": {
+				"result": "Array"
+			},
+			"args": {},
+			"desc": "Convolute two arrays.",
+			"displayname": "Convolute",
+			"x": 568,
+			"y": 984
+		},
+		{
+			"name": "IgYBY",
+			"code": "matplotlib.plotarray",
+			"inputs": {
+				"data": "Array"
+			},
+			"outputs": {},
+			"args": {
+				"subplot": 224,
+				"ion": true,
+				"clear": true,
+				"title": "Debug"
+			},
+			"desc": "Plot an array.",
+			"displayname": "[WIP] Plot Array",
+			"x": 603,
+			"y": 1085
+		},
+		{
+			"name": "1DTy8",
+			"code": "computervision.resize",
+			"inputs": {
+				"img": "Image"
+			},
+			"outputs": {
+				"result": "Image"
+			},
+			"args": {
+				"width": 80,
+				"height": 60
+			},
+			"desc": "Resize an image.",
+			"displayname": "Resize",
+			"x": 376,
+			"y": 679
+		},
+		{
+			"name": "foa1g",
+			"code": "default.splitflow",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"right": "Object",
+				"left": "Object"
+			},
+			"args": "",
+			"desc": "Splits the flow.",
+			"displayname": "Splitflow 2",
+			"x": 190,
+			"y": 601
+		},
+		{
+			"name": "QJMOY",
+			"code": "matplotlib.plotimg",
+			"inputs": {
+				"data": "Image"
+			},
+			"outputs": {},
+			"args": {
+				"subplot": 222,
+				"ion": true,
+				"clear": true,
+				"title": "Debug"
+			},
+			"desc": "Plot an image.",
+			"displayname": "[WIP] Plot Image",
+			"x": 22,
+			"y": 694
+		},
+		{
+			"name": "XjOVQ",
+			"code": "matplotlib.plotimg",
+			"inputs": {
+				"data": "Image"
+			},
+			"outputs": {},
+			"args": {
+				"subplot": 221,
+				"ion": true,
+				"clear": true,
+				"title": "Debug"
+			},
+			"desc": "Plot an image.",
+			"displayname": "[WIP] Plot Image",
+			"x": -25,
+			"y": -298
+		},
+		{
+			"name": "9ZrMR",
+			"code": "default.splitflow",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"right": "Object",
+				"left": "Object"
+			},
+			"args": "",
+			"desc": "Splits the flow.",
+			"displayname": "Splitflow 2",
+			"x": 181,
+			"y": -404
 		}
 	],
 	"connections": [
 		{
 			"input": {
-				"node": "Video Input Stream",
+				"node": "ud57d",
 				"output": "result"
 			},
 			"output": {
-				"node": "Resize",
+				"node": "Ih0GC",
 				"input": "img"
 			}
 		},
 		{
 			"input": {
-				"node": "InRange",
+				"node": "2xUB5",
 				"output": "result"
 			},
 			"output": {
-				"node": "Show Image",
+				"node": "o74HY",
 				"input": "img"
 			}
 		},
 		{
 			"input": {
-				"node": "Resize",
+				"node": "o74HY",
 				"output": "result"
 			},
 			"output": {
-				"node": "Blur Image",
+				"node": "TNt3F",
 				"input": "img"
 			}
 		},
 		{
 			"input": {
-				"node": "Blur Image",
+				"node": "TNt3F",
 				"output": "result"
 			},
 			"output": {
-				"node": "Convert bgr 2 hsv",
+				"node": "fYg4m",
 				"input": "img"
 			}
 		},
 		{
 			"input": {
-				"node": "Convert bgr 2 hsv",
+				"node": "fYg4m",
 				"output": "result"
 			},
 			"output": {
-				"node": "Fixed Intensity",
-				"input": "img"
-			}
-		},
-		{
-			"input": {
-				"node": "Fixed Intensity",
-				"output": "result"
-			},
-			"output": {
-				"node": "Convert hsv 2 bgr",
-				"input": "img"
-			}
-		},
-		{
-			"input": {
-				"node": "Convert hsv 2 bgr",
-				"output": "result"
-			},
-			"output": {
-				"node": "Split Flow",
+				"node": "JKA7d",
 				"input": "val"
 			}
 		},
 		{
 			"input": {
-				"node": "Split Flow",
-				"output": "right"
+				"node": "JKA7d",
+				"output": "left"
 			},
 			"output": {
-				"node": "Blur Image Gaussian",
+				"node": "6NOzV",
 				"input": "img"
 			}
 		},
 		{
 			"input": {
-				"node": "Blur Image Gaussian",
-				"output": "result"
+				"node": "JKA7d",
+				"output": "right"
 			},
 			"output": {
-				"node": "Add Weighted",
+				"node": "6kR9t",
 				"input": "right"
 			}
 		},
 		{
 			"input": {
-				"node": "Split Flow",
-				"output": "left"
+				"node": "6NOzV",
+				"output": "result"
 			},
 			"output": {
-				"node": "Add Weighted",
+				"node": "6kR9t",
 				"input": "left"
 			}
 		},
 		{
 			"input": {
-				"node": "Split Flow (2)",
-				"output": "left"
+				"node": "BlPhn",
+				"output": "result"
 			},
 			"output": {
-				"node": "Show Image (2)",
+				"node": "PjI6Z",
 				"input": "img"
 			}
 		},
 		{
 			"input": {
-				"node": "Add Weighted",
+				"node": "6PFoF",
 				"output": "result"
 			},
 			"output": {
-				"node": "Split Flow (2)",
+				"node": "ieVlb",
 				"input": "val"
 			}
 		},
 		{
 			"input": {
-				"node": "Split Flow (2)",
+				"node": "ieVlb",
 				"output": "right"
 			},
 			"output": {
-				"node": "Convert bgr 2 hsv (2)",
+				"node": "MBprv",
+				"input": "data"
+			}
+		},
+		{
+			"input": {
+				"node": "ieVlb",
+				"output": "left"
+			},
+			"output": {
+				"node": "LA4j9",
+				"input": "data"
+			}
+		},
+		{
+			"input": {
+				"node": "LA4j9",
+				"output": "result"
+			},
+			"output": {
+				"node": "IgYBY",
+				"input": "data"
+			}
+		},
+		{
+			"input": {
+				"node": "jzZD2",
+				"output": "result"
+			},
+			"output": {
+				"node": "LA4j9",
+				"input": "kernel"
+			}
+		},
+		{
+			"input": {
+				"node": "1DTy8",
+				"output": "result"
+			},
+			"output": {
+				"node": "6PFoF",
 				"input": "img"
 			}
 		},
 		{
 			"input": {
-				"node": "Convert bgr 2 hsv (2)",
+				"node": "PjI6Z",
 				"output": "result"
 			},
 			"output": {
-				"node": "InRange",
+				"node": "foa1g",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "foa1g",
+				"output": "left"
+			},
+			"output": {
+				"node": "1DTy8",
+				"input": "img"
+			}
+		},
+		{
+			"input": {
+				"node": "foa1g",
+				"output": "right"
+			},
+			"output": {
+				"node": "QJMOY",
+				"input": "data"
+			}
+		},
+		{
+			"input": {
+				"node": "9ZrMR",
+				"output": "right"
+			},
+			"output": {
+				"node": "XjOVQ",
+				"input": "data"
+			}
+		},
+		{
+			"input": {
+				"node": "6kR9t",
+				"output": "result"
+			},
+			"output": {
+				"node": "BlPhn",
+				"input": "img"
+			}
+		},
+		{
+			"input": {
+				"node": "Ih0GC",
+				"output": "result"
+			},
+			"output": {
+				"node": "9ZrMR",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "9ZrMR",
+				"output": "left"
+			},
+			"output": {
+				"node": "2xUB5",
 				"input": "img"
 			}
 		}

@@ -175,7 +175,7 @@
     "desc": "Executes the argument as pyton code."
 },
 {
-    "name": "Splitflow",
+    "name": "Splitflow 2",
     "code": "default.splitflow",
     "inputs": {"val": "Object"},
     "outputs": {"right": "Object", "left": "Object"},
@@ -191,7 +191,7 @@
     "desc": "If any input is present pass it."
 },
 {
-    "name": "Splitflow",
+    "name": "Splitflow 5",
     "code": "default.splitflow5",
     "inputs": {"val": "Object"},
     "outputs": {"1": "Object", "3": "Object", "2": "Object", "5": "Object", "4": "Object"},
@@ -511,6 +511,14 @@
     "desc": "Plot an array."
 },
 {
+    "name": "[WIP] Plot Image",
+    "code": "matplotlib.plotimg",
+    "inputs": {"data": "Image"},
+    "outputs": {},
+    "args": {"subplot": 111, "ion": true, "clear": true, "title": "Debug"},
+    "desc": "Plot an image."
+},
+{
     "name": "Database SQLite",
     "code": "database.databasesqlite",
     "inputs": {},
@@ -555,7 +563,7 @@
     "code": "computervision.addweighted",
     "inputs": {"right": "Image", "left": "Image"},
     "outputs": {"result": "Image"},
-    "args": {"right": "Number", "left": "Number"},
+    "args": {"right": 0.5, "left": 0.5},
     "desc": "Add the two images weighted."
 },
 {
@@ -564,7 +572,7 @@
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": {"width": 320, "height": 240},
-    "desc": "Apply gaussian blur on image."
+    "desc": "Resize an image."
 },
 {
     "name": "Plot features",

@@ -12,7 +12,7 @@ class Node(base.Node):
                                    {"width": 320, "height": 240},
                                    {"img": "Image"},
                                    {"result": "Image"},
-                                   "Apply gaussian blur on image.", verbose)
+                                   "Resize an image.", verbose)
         self.args = args
 
     def tick(self, value):
