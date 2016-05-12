@@ -160,28 +160,6 @@
 			"y": 426
 		},
 		{
-			"name": "PjI6Z",
-			"code": "computervision.inrange",
-			"inputs": {
-				"img": "Image"
-			},
-			"outputs": {
-				"result": "Image"
-			},
-			"args": {
-				"uv": 255,
-				"us": 40,
-				"lv": 0,
-				"ls": 0,
-				"lh": 0,
-				"uh": 255
-			},
-			"desc": "Apply an inRange operation on the image.",
-			"displayname": "In Range",
-			"x": 158,
-			"y": 514
-		},
-		{
 			"name": "6PFoF",
 			"code": "computervision.img2distribution",
 			"inputs": {
@@ -365,6 +343,28 @@
 			"displayname": "Splitflow 2",
 			"x": 181,
 			"y": -404
+		},
+		{
+			"name": "JIoqi",
+			"code": "computervision.inrange",
+			"inputs": {
+				"img": "Image"
+			},
+			"outputs": {
+				"result": "Image"
+			},
+			"args": {
+				"lower-value": 0,
+				"upper-value": 255,
+				"lower-saturisation": 0,
+				"upper-hue": 255,
+				"lower-hue": 0,
+				"upper-saturisation": 40
+			},
+			"desc": "Apply an inRange operation on the image.",
+			"displayname": "In Range",
+			"x": 156,
+			"y": 511
 		}
 	],
 	"connections": [
@@ -450,16 +450,6 @@
 		},
 		{
 			"input": {
-				"node": "BlPhn",
-				"output": "result"
-			},
-			"output": {
-				"node": "PjI6Z",
-				"input": "img"
-			}
-		},
-		{
-			"input": {
 				"node": "6PFoF",
 				"output": "result"
 			},
@@ -520,16 +510,6 @@
 		},
 		{
 			"input": {
-				"node": "PjI6Z",
-				"output": "result"
-			},
-			"output": {
-				"node": "foa1g",
-				"input": "val"
-			}
-		},
-		{
-			"input": {
 				"node": "foa1g",
 				"output": "left"
 			},
@@ -586,6 +566,26 @@
 			"output": {
 				"node": "2xUB5",
 				"input": "img"
+			}
+		},
+		{
+			"input": {
+				"node": "BlPhn",
+				"output": "result"
+			},
+			"output": {
+				"node": "JIoqi",
+				"input": "img"
+			}
+		},
+		{
+			"input": {
+				"node": "JIoqi",
+				"output": "result"
+			},
+			"output": {
+				"node": "foa1g",
+				"input": "val"
 			}
 		}
 	]

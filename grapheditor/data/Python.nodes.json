@@ -611,7 +611,7 @@
     "code": "computervision.inrange",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
-    "args": {"uv": 255, "us": 255, "lv": 0, "ls": 0, "lh": 0, "uh": 255},
+    "args": {"lower-value": 0, "upper-value": 255, "lower-saturisation": 0, "upper-hue": 255, "lower-hue": 0, "upper-saturisation": 255},
     "desc": "Apply an inRange operation on the image."
 },
 {

@@ -10,19 +10,19 @@ except ValueError:
 class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("In Range", "computervision.inrange",
-                                   {"lh": 0, "ls": 0, "lv": 0, "uh": 255, "us": 255, "uv": 255},
+                                   {"lower-hue": 0, "lower-saturisation": 0, "lower-value": 0, "upper-hue": 255, "upper-saturisation": 255, "upper-value": 255},
                                    {"img": "Image"},
                                    {"result": "Image"},
                                    "Apply an inRange operation on the image.", verbose)
         self.args = args
 
     def tick(self, value):
-        lh = self.args["lh"]
-        ls = self.args["ls"]
-        lv = self.args["lv"]
-        uh = self.args["uh"]
-        us = self.args["us"]
-        uv = self.args["uv"]
+        lh = self.args["lower-hue"]
+        ls = self.args["lower-saturisation"]
+        lv = self.args["lower-value"]
+        uh = self.args["upper-hue"]
+        us = self.args["upper-saturisation"]
+        uv = self.args["upper-value"]
 
         img = value["img"]
         lower = np.array((lh, ls, lv), dtype=np.uint8, ndmin=1)
