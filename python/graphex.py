@@ -3,6 +3,7 @@ import sys
 import time
 from threading import Thread
 from threading import Lock
+import debugger
 
 try:
     import builtins
@@ -67,6 +68,7 @@ class GraphEx(object):
 
             # Create node and add lists for connecting them.
             currentNode = module.Node(self.verbose, node["args"])
+            currentNode.node_uid = node["name"]
             currentNode.nextNodes = []
             currentNode.prevNodes = []
             currentNode.ins = {}
@@ -217,8 +219,12 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: Pass graph json files to execute as parameters.")
     else:
-        if len(sys.argv) > 2:
-            builtins.registry = json.loads(" ".join(sys.argv[2:]))
+        offset = 2
+        if len(sys.argv) > offset and sys.argv[offset] == "debug":
+            builtins.registry["debugger"] = debugger.Debugger()
+            offset += 1
+        if len(sys.argv) > offset:
+            builtins.registry = json.loads(" ".join(sys.argv[offset:]))
         builtins.registry["kill"] = False
         gex = GraphEx(sys.argv[1])
         gex.prepareExecution()

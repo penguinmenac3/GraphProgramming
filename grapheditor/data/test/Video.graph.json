@@ -14,7 +14,7 @@
 			"desc": "Capture video.",
 			"displayname": "Video",
 			"x": 234,
-			"y": -600
+			"y": -614
 		},
 		{
 			"name": "Ih0GC",
@@ -77,7 +77,7 @@
 			"desc": "Set the intensity to a fixed value.",
 			"displayname": "Fixed Intensity",
 			"x": 96,
-			"y": -97
+			"y": -105
 		},
 		{
 			"name": "fYg4m",
@@ -175,24 +175,6 @@
 			"y": 785
 		},
 		{
-			"name": "MBprv",
-			"code": "matplotlib.plotarray",
-			"inputs": {
-				"data": "Array"
-			},
-			"outputs": {},
-			"args": {
-				"subplot": 223,
-				"ion": true,
-				"clear": true,
-				"title": "Debug"
-			},
-			"desc": "Plot an array.",
-			"displayname": "[WIP] Plot Array",
-			"x": 368,
-			"y": 984
-		},
-		{
 			"name": "jzZD2",
 			"code": "arrays.gaussian",
 			"inputs": {},
@@ -207,22 +189,6 @@
 			"displayname": "Gaussian Generator",
 			"x": 646,
 			"y": 874
-		},
-		{
-			"name": "ieVlb",
-			"code": "default.splitflow",
-			"inputs": {
-				"val": "Object"
-			},
-			"outputs": {
-				"right": "Object",
-				"left": "Object"
-			},
-			"args": "",
-			"desc": "Splits the flow.",
-			"displayname": "Splitflow 2",
-			"x": 434,
-			"y": 886
 		},
 		{
 			"name": "LA4j9",
@@ -241,24 +207,6 @@
 			"y": 984
 		},
 		{
-			"name": "IgYBY",
-			"code": "matplotlib.plotarray",
-			"inputs": {
-				"data": "Array"
-			},
-			"outputs": {},
-			"args": {
-				"subplot": 224,
-				"ion": true,
-				"clear": true,
-				"title": "Debug"
-			},
-			"desc": "Plot an array.",
-			"displayname": "[WIP] Plot Array",
-			"x": 603,
-			"y": 1085
-		},
-		{
 			"name": "1DTy8",
 			"code": "computervision.resize",
 			"inputs": {
@@ -275,74 +223,6 @@
 			"displayname": "Resize",
 			"x": 376,
 			"y": 679
-		},
-		{
-			"name": "foa1g",
-			"code": "default.splitflow",
-			"inputs": {
-				"val": "Object"
-			},
-			"outputs": {
-				"right": "Object",
-				"left": "Object"
-			},
-			"args": "",
-			"desc": "Splits the flow.",
-			"displayname": "Splitflow 2",
-			"x": 190,
-			"y": 601
-		},
-		{
-			"name": "QJMOY",
-			"code": "matplotlib.plotimg",
-			"inputs": {
-				"data": "Image"
-			},
-			"outputs": {},
-			"args": {
-				"subplot": 222,
-				"ion": true,
-				"clear": true,
-				"title": "Debug"
-			},
-			"desc": "Plot an image.",
-			"displayname": "[WIP] Plot Image",
-			"x": 22,
-			"y": 694
-		},
-		{
-			"name": "XjOVQ",
-			"code": "matplotlib.plotimg",
-			"inputs": {
-				"data": "Image"
-			},
-			"outputs": {},
-			"args": {
-				"subplot": 221,
-				"ion": true,
-				"clear": true,
-				"title": "Debug"
-			},
-			"desc": "Plot an image.",
-			"displayname": "[WIP] Plot Image",
-			"x": -25,
-			"y": -298
-		},
-		{
-			"name": "9ZrMR",
-			"code": "default.splitflow",
-			"inputs": {
-				"val": "Object"
-			},
-			"outputs": {
-				"right": "Object",
-				"left": "Object"
-			},
-			"args": "",
-			"desc": "Splits the flow.",
-			"displayname": "Splitflow 2",
-			"x": 181,
-			"y": -404
 		},
 		{
 			"name": "JIoqi",
@@ -365,6 +245,84 @@
 			"displayname": "In Range",
 			"x": 156,
 			"y": 511
+		},
+		{
+			"name": "N9L2C",
+			"code": "debug.view",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"result": "Object"
+			},
+			"args": {},
+			"desc": "Views (in IDE) and passes the object.",
+			"displayname": "View",
+			"x": 186,
+			"y": -399
+		},
+		{
+			"name": "uRuit",
+			"code": "debug.view",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"result": "Object"
+			},
+			"args": {},
+			"desc": "Views (in IDE) and passes the object.",
+			"displayname": "View",
+			"x": 267,
+			"y": 595
+		},
+		{
+			"name": "psJUe",
+			"code": "debug.view",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"result": "Object"
+			},
+			"args": {},
+			"desc": "Views (in IDE) and passes the object.",
+			"displayname": "View",
+			"x": 448,
+			"y": 881
+		},
+		{
+			"name": "5nKpC",
+			"code": "debug.view",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"result": "Object"
+			},
+			"args": {},
+			"desc": "Views (in IDE) and passes the object.",
+			"displayname": "View",
+			"x": 587,
+			"y": 1103
+		},
+		{
+			"name": "ZSxhB",
+			"code": "matplotlib.plotarray",
+			"inputs": {
+				"data": "Array"
+			},
+			"outputs": {},
+			"args": {
+				"subplot": 111,
+				"ion": true,
+				"clear": true,
+				"title": "Debug"
+			},
+			"desc": "Plot an array.",
+			"displayname": "[WIP] Plot Array",
+			"x": 594,
+			"y": 1220
 		}
 	],
 	"connections": [
@@ -450,46 +408,6 @@
 		},
 		{
 			"input": {
-				"node": "6PFoF",
-				"output": "result"
-			},
-			"output": {
-				"node": "ieVlb",
-				"input": "val"
-			}
-		},
-		{
-			"input": {
-				"node": "ieVlb",
-				"output": "right"
-			},
-			"output": {
-				"node": "MBprv",
-				"input": "data"
-			}
-		},
-		{
-			"input": {
-				"node": "ieVlb",
-				"output": "left"
-			},
-			"output": {
-				"node": "LA4j9",
-				"input": "data"
-			}
-		},
-		{
-			"input": {
-				"node": "LA4j9",
-				"output": "result"
-			},
-			"output": {
-				"node": "IgYBY",
-				"input": "data"
-			}
-		},
-		{
-			"input": {
 				"node": "jzZD2",
 				"output": "result"
 			},
@@ -510,36 +428,6 @@
 		},
 		{
 			"input": {
-				"node": "foa1g",
-				"output": "left"
-			},
-			"output": {
-				"node": "1DTy8",
-				"input": "img"
-			}
-		},
-		{
-			"input": {
-				"node": "foa1g",
-				"output": "right"
-			},
-			"output": {
-				"node": "QJMOY",
-				"input": "data"
-			}
-		},
-		{
-			"input": {
-				"node": "9ZrMR",
-				"output": "right"
-			},
-			"output": {
-				"node": "XjOVQ",
-				"input": "data"
-			}
-		},
-		{
-			"input": {
 				"node": "6kR9t",
 				"output": "result"
 			},
@@ -550,26 +438,6 @@
 		},
 		{
 			"input": {
-				"node": "Ih0GC",
-				"output": "result"
-			},
-			"output": {
-				"node": "9ZrMR",
-				"input": "val"
-			}
-		},
-		{
-			"input": {
-				"node": "9ZrMR",
-				"output": "left"
-			},
-			"output": {
-				"node": "2xUB5",
-				"input": "img"
-			}
-		},
-		{
-			"input": {
 				"node": "BlPhn",
 				"output": "result"
 			},
@@ -580,12 +448,82 @@
 		},
 		{
 			"input": {
+				"node": "Ih0GC",
+				"output": "result"
+			},
+			"output": {
+				"node": "N9L2C",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "N9L2C",
+				"output": "result"
+			},
+			"output": {
+				"node": "2xUB5",
+				"input": "img"
+			}
+		},
+		{
+			"input": {
 				"node": "JIoqi",
 				"output": "result"
 			},
 			"output": {
-				"node": "foa1g",
+				"node": "uRuit",
 				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "uRuit",
+				"output": "result"
+			},
+			"output": {
+				"node": "1DTy8",
+				"input": "img"
+			}
+		},
+		{
+			"input": {
+				"node": "6PFoF",
+				"output": "result"
+			},
+			"output": {
+				"node": "psJUe",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "psJUe",
+				"output": "result"
+			},
+			"output": {
+				"node": "LA4j9",
+				"input": "data"
+			}
+		},
+		{
+			"input": {
+				"node": "LA4j9",
+				"output": "result"
+			},
+			"output": {
+				"node": "5nKpC",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "5nKpC",
+				"output": "result"
+			},
+			"output": {
+				"node": "ZSxhB",
+				"input": "data"
 			}
 		}
 	]

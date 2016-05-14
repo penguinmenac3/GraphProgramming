@@ -167,6 +167,22 @@
     "desc": "Trigger value every time seconds."
 },
 {
+    "name": "View",
+    "code": "debug.view",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "Object"},
+    "args": {},
+    "desc": "Views (in IDE) and passes the object."
+},
+{
+    "name": "Breakpoint",
+    "code": "debug.breakpoint",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "Object"},
+    "args": {},
+    "desc": "Stops the execution until it's signaled to continue."
+},
+{
     "name": "Function",
     "code": "default.function",
     "inputs": {"val": "Object"},

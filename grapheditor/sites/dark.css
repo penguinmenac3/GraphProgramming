@@ -104,6 +104,9 @@ body {
     .structurenode{
         background-color: darkslategray;
     }
+    .debugnode{
+        background-color: darkviolet;
+    }
     .outputnode {
         background-color: #AB0000;
     }

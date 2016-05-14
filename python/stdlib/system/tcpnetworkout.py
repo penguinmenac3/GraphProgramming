@@ -27,14 +27,14 @@ class Node(base.Node):
         while not success:
           try:
             if s is None:
-            	s = socket.socket()
-            	s.connect((host, port))
+                s = socket.socket()
+                s.connect((host, port))
             s.send((value["msg"] + "\n").encode("utf-8"))
             if self.args["closeAfterSend"]:
                 if "tags" in value and "msg" in value["tags"]:
-                  value["tags"]["msg"]["closeSock"](s)
+                    value["tags"]["msg"]["closeSock"](s)
                 else:
-                  s.close()
+                    s.close()
             success = True
           except:
             if "tags" in value and "msg" in value["tags"]:

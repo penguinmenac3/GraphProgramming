@@ -15,11 +15,19 @@ import signal
 from threading import Thread
 import subprocess
 import sys
+import socket
+import time
+from autobahn.twisted.websocket import WebSocketServerProtocol, WebSocketServerFactory
+from twisted.internet import reactor
+# or: from autobahn.asyncio.websocket import WebSocketServerProtocol
 
 PORT_NUMBER = 8088
 execProcess = None
 result = None
 SERVER_URL = sys.argv[1] if len(sys.argv) == 2 else ""
+DEBUG_WS = None
+DEBUG_SOCK = None
+DEBUG_KEY = "wasd" # TODO make generic uid
 print("SERVER_URL: " + SERVER_URL)
 
 def pollPipe():
@@ -48,8 +56,84 @@ def pollErrPipe():
     execProcess = None
 
 
-#This class will handles any incoming request from
-#the browser
+def debugger():
+    global DEBUG_WS
+    global DEBUG_SOCK
+    time.sleep(1)
+    s = socket.socket()
+    connected = False
+    i = 0
+    while not connected and i < 30:
+        try:
+            s.connect(("localhost", 25923))
+            connected = True
+        except:
+            print("Connection refused")
+            i += 1
+            time.sleep(1)
+    if i >= 30:
+        print("Connection refused completely.")
+        return
+    DEBUG_SOCK = s
+    print("Connected")
+    sf = s.makefile()
+    while True:
+        try:
+            line = sf.readline()
+            if line == "":
+                print("Connection closed")
+                break
+            if DEBUG_WS is not None:
+                #print(line)
+                DEBUG_WS.sendMessage(line, False)
+        except:
+            print("Closed with error.")
+            break
+    s.close()
+    DEBUG_SOCK = None
+
+
+class MyServerProtocol(WebSocketServerProtocol):
+    def onConnect(self, request):
+        print("Client connecting: {}".format(request.peer))
+
+    def onOpen(self):
+        print("WebSocket connection open.")
+
+    def onMessage(self, payload, isBinary):
+        global DEBUG_WS
+        global DEBUG_SOCK
+        global DEBUG_KEY
+        if isBinary:
+            print("Binary message received: {} bytes".format(len(payload)))
+        else:
+            if self is not DEBUG_WS:
+                if payload == DEBUG_KEY:
+                    DEBUG_WS = self
+                else:
+                    self.closedByMe()
+            else:
+                DEBUG_SOCK.send(payload)
+
+    def onClose(self, wasClean, code, reason):
+        global DEBUG_WS
+        if DEBUG_WS is self:
+            DEBUG_WS = None
+        DEBUG_SOCK.close()
+        print("WebSocket connection closed: {}".format(reason))
+
+
+def debugWS():
+    factory = WebSocketServerFactory(u"ws://127.0.0.1:9000")
+    factory.protocol = MyServerProtocol
+    # factory.setProtocolOptions(maxConnections=2)
+
+    reactor.listenTCP(9000, factory)
+    reactor.run()
+
+
+# This class will handles any incoming request from
+# the browser
 class myHandler(BaseHTTPRequestHandler):
 
     #Handler for the GET requests
@@ -142,10 +226,10 @@ class myHandler(BaseHTTPRequestHandler):
             preex = None
             try:
                 preex = os.setsid
-                cmd = ["python ../python/graphex.py " + cmd]
+                cmd = ["python ../python/graphex.py " + cmd + " debug"]
             except AttributeError:
                 print("Windows: Feature not availible.")
-                cmd = ["python2", "../python/graphex.py ", cmd]
+                cmd = ["python2", "../python/graphex.py ", cmd, "debug"]
             execProcess = subprocess.Popen(
                 cmd,
                  stdout=subprocess.PIPE, stderr=subprocess.PIPE,
@@ -153,6 +237,7 @@ class myHandler(BaseHTTPRequestHandler):
             result = ""
             Thread(target=pollPipe).start()
             Thread(target=pollErrPipe).start()
+            Thread(target=debugger).start()
             self.send_response(200)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
@@ -253,7 +338,9 @@ class myHandler(BaseHTTPRequestHandler):
             self.wfile.write("Invalid api operation.".encode("utf-8"))
         return
 
-try:
+
+def webserver():
+    try:
         #Create a web server and define the handler to manage the
         #incoming request
         server = HTTPServer(('', PORT_NUMBER), myHandler)
@@ -262,7 +349,16 @@ try:
         #Wait forever for incoming htto requests
         server.serve_forever()
 
-except KeyboardInterrupt:
+    except KeyboardInterrupt:
         print('^C received, shutting down the web server')
         server.socket.close()
         running = False
+
+
+def main():
+    t = Thread(target=webserver)
+    t.setDaemon(True)
+    t.start()
+    debugWS()
+
+main()

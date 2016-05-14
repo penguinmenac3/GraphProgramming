@@ -13,29 +13,24 @@ class Node(base.Node):
                                    {"title": "Debug View", "fullscreen": True},
                                    {"img": "Image"},
                                    {},
-                                   "Show an image.", verbose)
+                                   "Show an image.", verbose, False, False, True)
         self.args = args
         self.started = False
         self.img = None
 
     def tick(self, value):
+        window_title = self.args["title"]
         if not self.started:
-            Thread(target=self.uithread).start()
+            if not self.args["fullscreen"]:
+            	cv2.namedWindow(window_title)
+            else:
+            	cv2.namedWindow(window_title, cv2.WND_PROP_FULLSCREEN)          
+            	cv2.setWindowProperty(window_title, cv2.WND_PROP_FULLSCREEN, cv2.cv.CV_WINDOW_FULLSCREEN)
             self.started = True
         self.img = value["img"]
-        return {}
-
-    def uithread(self):
-        window_title = self.args["title"]
-        if not self.args["fullscreen"]:
-            cv2.namedWindow(window_title)
-        else:
-            cv2.namedWindow(window_title, cv2.WND_PROP_FULLSCREEN)          
-            cv2.setWindowProperty(window_title, cv2.WND_PROP_FULLSCREEN, cv2.cv.CV_WINDOW_FULLSCREEN)
-        while True:
-            if not self.img is None:
-                cv2.imshow(window_title, self.img)
-                if cv2.waitKey(2) == 27:
-                    global registry
-                    registry["kill"] = True
-                    break
+        cv2.imshow(window_title, self.img)
+        if cv2.waitKey(2) == 27:
+            global registry
+            registry["kill"] = True
+        return {}            
+                

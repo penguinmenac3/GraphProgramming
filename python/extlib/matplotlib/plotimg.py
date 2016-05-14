@@ -4,7 +4,7 @@ except ValueError:
     from stdlib import Node as base
 
 import matplotlib
-matplotlib.use("qt4agg")
+#matplotlib.use("qt4agg")
 from matplotlib import pyplot as plt
 
 import time
@@ -29,16 +29,16 @@ class Node(base.Node):
         data = value["data"]
         # TODO more features and more specific stuff.
         if not self.fig and not self.ax1:
-        	self.fig = plt.figure(self.args["title"])
-        	self.ax1 = self.fig.add_subplot(self.args["subplot"])
+            self.fig = plt.figure(self.args["title"])
+            self.ax1 = self.fig.add_subplot(self.args["subplot"])
         if self.args["clear"]:
             self.ax1.cla()
 
         self.ax1.imshow(data, interpolation = 'nearest')
         if not self.args["ion"]:
-        	plt.show()
+            plt.show()
         else:
-        	plt.pause(0.0001)
+            plt.pause(0.0001)
         #elapsed = time.time() - t
         #print(elapsed)
         #sys.stdout.flush()

@@ -24,6 +24,7 @@ function WebUI_CRenderEngine() {
     var colorInputNode = "#3CB371";
     var colorAlgorithmNode = "orange";
     var colorStructureNode = "darkslategray";
+    var colorDebugNode = "red";
     var colorOutputNode = "indianred";
     var colorConnector = "rgba(128,128,128,0.6)";
     var colorMarked = "rgb(128,128,128)";
@@ -33,11 +34,12 @@ function WebUI_CRenderEngine() {
         isDirty = 1;
     };
     
-    this.setTheme = function(clear, input, algorithm, structural, output, connector, marked, origin) {
+    this.setTheme = function(clear, input, algorithm, structural, debug, output, connector, marked, origin) {
         clearColor = clear;
         colorInputNode = input;
         colorAlgorithmNode = algorithm;
         colorStructureNode = structural;
+        colorDebugNode = debug;
         colorOutputNode = output;
         colorConnector = connector;
         colorMarked = marked;
@@ -383,6 +385,8 @@ function WebUI_CRenderEngine() {
             fillStyleLarge = colorOutputNode;
         } else if (node.code.lastIndexOf("structures", 0) === 0 || (node.code.lastIndexOf("default", 0) === 0 && node.code.lastIndexOf("function", "default.".length) < 0)) {
             fillStyleLarge = colorStructureNode;
+        } else if (node.code.lastIndexOf("debug") === 0) {
+            fillStyleLarge = colorDebugNode;
         }
 
 		/* Draw rect symbol for robot */

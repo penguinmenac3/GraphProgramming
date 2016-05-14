@@ -36,14 +36,14 @@ class Node(base.Node):
             line, sock = self.server_styled_pull(host, port, password)
         result = {"result": line}
         if self.args["passSocketAsTag"]:
-            result["tags"] = {"result": {"sock":sock, "closeSock": self.closeSock}}
+            result["tags"] = {"result": {"sock":sock, "closeSock": self.close_sock}}
         else:
             sock.close()
         return result
                               
-    def closeSock(self, sock):
-         sock.close()
-         self.sockets.remove(sock)
+    def close_sock(self, sock):
+        sock.close()
+        self.sockets.remove(sock)
 
     def server_styled_pull(self, host, port, password):
         line = None
@@ -74,7 +74,7 @@ class Node(base.Node):
               try:
                 sf = sock.makefile()
               except:
-                self.closeSock(sock)
+                self.close_sock(sock)
                 sock = None
         line = sf.readline().rstrip('\n')
         return line, sock

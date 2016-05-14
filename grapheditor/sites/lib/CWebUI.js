@@ -9,6 +9,7 @@ function WebUI_CWebUI() {
     var moveOffsetY = 0;
     var codeMirror = null;
     var codeTheme = "default";
+    this.debugger = null;
     this.currentNode = null;
 	this.keyboard_input_state = true;
 	this.mouse_click_listener = null;
@@ -51,10 +52,10 @@ function WebUI_CWebUI() {
     this.setTheme = function(theme) {
         that.theme = theme;
         if (theme == "dark") {
-            RenderEngine.setTheme("#333333", "green", "#D75813", "darkslategray", "#AB0000", "rgba(150,150,150,0.6)", "darkgray", "#AB0000");
+            RenderEngine.setTheme("#333333", "green", "#D75813", "darkslategray", "darkviolet", "#AB0000", "rgba(150,150,150,0.6)", "darkgray", "#AB0000");
             codeTheme = "lesser-dark";
         } else if (theme == "light") {    
-            RenderEngine.setTheme("white", "#3CB371", "orange", "darkslategray", "indianred", "rgba(128,128,128,0.6)", "rgb(128,128,128)", "red");
+            RenderEngine.setTheme("white", "#3CB371", "orange", "darkslategray", "violet", "indianred", "rgba(128,128,128,0.6)", "rgb(128,128,128)", "red");
             codeTheme = "default";
         }
     }
@@ -223,6 +224,8 @@ function WebUI_CWebUI() {
                         nodetype = "outputnode";
                     } else if (node.code.lastIndexOf("structures", 0) === 0 || (node.code.lastIndexOf("default", 0) === 0 && node.code.lastIndexOf("function", "default.".length) < 0)) {
                         nodetype = "structurenode";
+                    } else if (node.code.lastIndexOf("debug") === 0) {
+                        nodetype = "debugnode";
                     }
                     var cur = node.code.split(".")[0];
                     if (!classes[cur]) {
@@ -705,6 +708,7 @@ class Node(base.Node):
     this.clearDebug = function () {
         lastDebug = "";
         kill();
+        that.debugger.close();
         document.getElementById("debugcontent").innerHTML = "<button class='button inputnode right' onclick='WebUI.startDebug()'>START</button><br>Run graph to get debug output.";
     }
     
@@ -720,5 +724,6 @@ class Node(base.Node):
         }
         that.setDebug("Started Graph: " + that.graphName);
 	    start(that.graphName, that.setDebug, that.setDebug);
+        that.debugger = new CDebugger("localhost", "wasd", RenderEngine);
     }
 }
