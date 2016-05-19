@@ -303,6 +303,14 @@
     "desc": "Get triggers from commandline."
 },
 {
+    "name": "Crop Values",
+    "code": "arrays.crop",
+    "inputs": {"val": "Array"},
+    "outputs": {"result": "Array"},
+    "args": {"map_to_max": 1, "map_to_zero": 0},
+    "desc": "Crop the array by value."
+},
+{
     "name": "Convolute",
     "code": "arrays.convolute",
     "inputs": {"kernel": "Array", "data": "Array"},
@@ -325,6 +333,14 @@
     "outputs": {"result": "Double"},
     "args": {},
     "desc": "Multiply two values as scalar product."
+},
+{
+    "name": "Derive",
+    "code": "arrays.derive",
+    "inputs": {"val": "Array"},
+    "outputs": {"result": "Array"},
+    "args": {"delta_index": 1},
+    "desc": "Derive the array."
 },
 {
     "name": "Array trigger",
@@ -639,12 +655,28 @@
     "desc": "Dilate an image."
 },
 {
+    "name": "Find Contours",
+    "code": "computervision.findcontours",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Contours"},
+    "args": {},
+    "desc": "Contours in an image."
+},
+{
     "name": "Fixed Intensity",
     "code": "computervision.fixedintensity",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": 127,
     "desc": "Set the intensity to a fixed value."
+},
+{
+    "name": "Render Boxes",
+    "code": "computervision.renderboxes",
+    "inputs": {"boxes": "Boxes", "img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"r": 255, "b": 0, "g": 0},
+    "desc": "Render boxes in image."
 },
 {
     "name": "Show",
@@ -693,6 +725,14 @@
     "outputs": {"result": "Image"},
     "args": 4,
     "desc": "Apply median blur on image."
+},
+{
+    "name": "Bounding Boxes",
+    "code": "computervision.boundingbox",
+    "inputs": {"cnts": "Contours"},
+    "outputs": {"result": "Boxes"},
+    "args": {},
+    "desc": "Calc bounding boxes for contour."
 },
 {
     "name": "Video",

@@ -351,6 +351,81 @@ function WebUI_CRenderEngine() {
         }
 	}
 
+	function renderNodeDebugArray(node, foregroundColor, fillStyle) {
+	    var paneWidth = that.nodeWidth * 2;
+	    var paneHeight = that.nodeWidth * 1.5;
+	    var x = node.x + that.nodeWidth / 2 + paneWidth / 2;
+	    var y = node.y - that.nodeHeight / 2 + paneHeight / 2;
+	    var marked = node == that.marked;
+
+		ctx.beginPath();
+		ctx.fillStyle = fillStyle;
+		ctx.rect(renderOffsetX * scale + x * scale + width/2-paneWidth/2 * scale,renderOffsetY * scale + y * scale + height/2-paneHeight/2 * scale,paneWidth * scale,paneHeight * scale);
+		ctx.fill();
+        if (!marked) {
+		  ctx.lineWidth="0";
+		  ctx.strokeStyle=fillStyle;
+        } else {
+		  ctx.lineWidth="5";
+		  ctx.strokeStyle=colorMarked;
+		  ctx.stroke();
+        }
+
+        var data = node.data;
+        var len = data.length;
+        var max = 0;
+        for (var i = 0; i < len; i++) {
+            max = Math.max(max, Math.abs(data[i]));
+        }
+        var px1 = paneWidth * 0.8 / len - paneWidth / 2 + x + paneWidth * 0.1;
+        var px2 = len * paneWidth * 0.8 / len - paneWidth / 2 + x + paneWidth * 0.1;
+        var py1 = 0.5 * paneHeight * 0.8 - paneHeight / 2 + y + paneHeight * 0.1;
+        var py2 = 0.5 * paneHeight * 0.8 - paneHeight / 2 + y + paneHeight * 0.1;
+        ctx.beginPath();
+		ctx.lineWidth="1";
+		ctx.strokeStyle=foregroundColor;
+		ctx.moveTo(renderOffsetX * scale + px1 * scale + width/2,renderOffsetY * scale + py1 * scale + height/2);
+		ctx.lineTo(renderOffsetX * scale + px2 * scale + width/2,renderOffsetY * scale + py2 * scale + height/2);
+		ctx.stroke();
+        for (var i = 1; i < len; i++) {
+            var px1 = (i-1) * paneWidth * 0.8 / len - paneWidth / 2 + x + paneWidth * 0.1;
+            var px2 = (i) * paneWidth * 0.8 / len - paneWidth / 2 + x + paneWidth * 0.1;
+            var py1 = (0.5-data[i-1]/(2*max)) * paneHeight * 0.8 - paneHeight / 2 + y + paneHeight * 0.1;
+            var py2 = (0.5-data[i]/(2*max)) * paneHeight * 0.8 - paneHeight / 2 + y + paneHeight * 0.1;
+            ctx.beginPath();
+		    ctx.lineWidth="2";
+		    ctx.strokeStyle=foregroundColor;
+		    ctx.moveTo(renderOffsetX * scale + px1 * scale + width/2,renderOffsetY * scale + py1 * scale + height/2);
+		    ctx.lineTo(renderOffsetX * scale + px2 * scale + width/2,renderOffsetY * scale + py2 * scale + height/2);
+		    ctx.stroke();
+        }
+        renderNodeText("Max: " + Math.floor(max*1000)/1000.0, x-paneWidth*0.5+45, y-paneHeight*0.5+4, 0, 0, foregroundColor, 16);
+	}
+
+	function renderNodeDebugImage(node, foregroundColor, fillStyle) {
+	    var paneWidth = that.nodeWidth * 2;
+	    var paneHeight = that.nodeWidth * 1.5;
+	    var x = node.x + that.nodeWidth / 2 + paneWidth / 2;
+	    var y = node.y - that.nodeHeight / 2 + paneHeight / 2;
+	    var marked = node == that.marked;
+
+		ctx.beginPath();
+		ctx.fillStyle = fillStyle;
+		ctx.rect(renderOffsetX * scale + x * scale + width/2-paneWidth/2 * scale,renderOffsetY * scale + y * scale + height/2-paneHeight/2 * scale,paneWidth * scale,paneHeight * scale);
+		ctx.fill();
+        if (!marked) {
+		  ctx.lineWidth="0";
+		  ctx.strokeStyle=fillStyle;
+        } else {
+		  ctx.lineWidth="5";
+		  ctx.strokeStyle=colorMarked;
+		  ctx.stroke();
+        }
+
+        var img = node.data_img;
+        ctx.drawImage(img,renderOffsetX * scale + x * scale + width/2-paneWidth/2 * scale,renderOffsetY * scale + y * scale + height/2-paneHeight/2 * scale,paneWidth * scale,paneHeight * scale)
+	}
+
 	function renderGraph() {
 		if (WebUI.graph != null) {
 			graph = WebUI.graph;
@@ -391,6 +466,24 @@ function WebUI_CRenderEngine() {
 
 		/* Draw rect symbol for robot */
 		renderNodeRect(node.x, node.y, node == that.marked, fillStyleLarge);
+		if (node.data && node.data != null) {
+		    if( Object.prototype.toString.call( node.data ) === '[object Array]' ) {
+		        renderNodeDebugArray(node, foregroundColor, colorConnector);
+		    }
+		    else if( node.data  == 'image' ) {
+		        var image = null;
+                    if (node.data_img && node.data_img != null && Object.prototype.toString.call( node.data_img ) === '[object HTMLImageElement]') {
+                        image = node.data_img;
+                    } else {
+                        image = new Image()
+                    }
+                    image.src = 'data:image/png;base64,' + node.data_str;
+                    node.data_img = image;
+		        renderNodeDebugImage(node, foregroundColor, colorConnector);
+		    } else {
+		        console.log(Object.prototype.toString.call( node.data ));
+		    }
+		}
 
 		/* Write text with speed and curve info */
         var nname = node.displayname;

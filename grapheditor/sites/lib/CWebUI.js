@@ -489,6 +489,15 @@ class Node(base.Node):
 		return result;
 	}
 
+	this.findNode = function(name) {
+	    var result = null;
+	    graph.nodes.forEach(function(node) {
+	        if (node.name == name) {
+	            result = node;
+	        }
+	    });
+	    return result;
+    }
 	this.moveSelected = function(x, y) {
         var scale = RenderEngine.getScale();
 		var absX = x + RenderEngine.getOffsetX() + RenderEngine.getSize().width / 2;
@@ -724,6 +733,6 @@ class Node(base.Node):
         }
         that.setDebug("Started Graph: " + that.graphName);
 	    start(that.graphName, that.setDebug, that.setDebug);
-        that.debugger = new CDebugger("localhost", "wasd", RenderEngine);
+        that.debugger = new CDebugger("localhost", "wasd", that, RenderEngine);
     }
 }
