@@ -733,6 +733,6 @@ class Node(base.Node):
         }
         that.setDebug("Started Graph: " + that.graphName);
 	    start(that.graphName, that.setDebug, that.setDebug);
-        that.debugger = new CDebugger("localhost", "wasd", that, RenderEngine);
+        that.debugger = new CDebugger(location.host.split(":")[0], "wasd", that, RenderEngine);
     }
 }
