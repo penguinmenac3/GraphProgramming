@@ -48,8 +48,12 @@ function sendViaPost(params, callback, callbackFailure) {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
             if (xmlhttp.responseText != "") {
                 if (callback != null) {
-                    var inobject = JSON.parse(xmlhttp.responseText);
-                    callback(inobject);
+                    try{
+                        var inobject = JSON.parse(xmlhttp.responseText);
+                        callback(inobject);
+                    } catch (err) {
+                        console.log(xmlhttp.responseText);
+                    }
                 }
             }
         } else if (xmlhttp.readyState==4) {
@@ -182,9 +186,7 @@ function kill() {
                 }
             }
         } else if (xmlhttp.readyState==4) {
-            if (callbackFailure != null) {
-                console.log(xmlhttp.responseText);
-            }
+            console.log(xmlhttp.responseText);
         }
     }
     var params = "killGraph=" + true;

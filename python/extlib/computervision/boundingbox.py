@@ -11,8 +11,8 @@ class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("Bounding Boxes", "computervision.boundingbox",
                                    {},
-                                   {"cnts": "Contours"},
-                                   {"result": "Boxes"},
+                                   {"cnts": "PolygonArray"},
+                                   {"result": "PolygonArray"},
                                    "Calc bounding boxes for contour.", verbose)
         self.args = args
 

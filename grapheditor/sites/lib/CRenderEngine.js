@@ -373,25 +373,92 @@ function WebUI_CRenderEngine() {
 
         var data = node.data;
         var len = data.length;
-        var max = 0;
-        for (var i = 0; i < len; i++) {
-            max = Math.max(max, Math.abs(data[i]));
+
+        var max_x = 0;
+        var max_y = 0;
+        var xs = 1;
+        var ys = 1;
+        if (Object.prototype.toString.call( data[0] ) === '[object Array]') {
+            if (Object.prototype.toString.call( data[0][0] ) === '[object Array]') {
+                polygon = true;
+                for (var i = 0; i < len; i++) {
+                    for (var j = 0; j < data[i].length; j++) {
+                        max_x = Math.max(max_x, Math.abs(data[i][j][0]));
+                        max_y = Math.max(max_y, Math.abs(data[i][j][1]));
+                        if (data[i][j][0] < 0) {
+                            xs = 2;
+                        }
+                        if (data[i][j][1] < 0) {
+                            ys = 2;
+                        }
+                    }
+                }
+                for (var i = 0; i < len; i++) {
+                    renderLineStrip(data[i], paneWidth, paneHeight, x, y, max_x, max_y, foregroundColor, xs, ys);
+                }
+            } else {
+                points = true;
+
+                for (var i = 0; i < len; i++) {
+                    max_x = Math.max(max_x, Math.abs(data[i][0]));
+                    max_y = Math.max(max_y, Math.abs(data[i][1]));
+                    if (data[i][0] < 0) {
+                        xs = 2;
+                    }
+                    if (data[i][1] < 0) {
+                        ys = 2;
+                    }
+                }
+                renderLineStrip(data, paneWidth, paneHeight, x, y, max_x, max_y, foregroundColor, xs, ys);
+            }
+        } else {
+            for (var i = 0; i < len; i++) {
+                max_y = Math.max(max_y, Math.abs(data[i]));
+                if (data[i] < 0) {
+                    ys = 2;
+                }
+            }
+            max_x = len;
+            xs = 1;
+            for (var i = 0; i < len; i++) {
+                data[i] = [i, data[i]];
+            }
+            renderLineStrip(data, paneWidth, paneHeight, x, y, max_x, max_y, foregroundColor, xs, ys);
         }
-        var px1 = paneWidth * 0.8 / len - paneWidth / 2 + x + paneWidth * 0.1;
-        var px2 = len * paneWidth * 0.8 / len - paneWidth / 2 + x + paneWidth * 0.1;
-        var py1 = 0.5 * paneHeight * 0.8 - paneHeight / 2 + y + paneHeight * 0.1;
-        var py2 = 0.5 * paneHeight * 0.8 - paneHeight / 2 + y + paneHeight * 0.1;
+
+        var px1 = - paneWidth / 2 + x + paneWidth * 0.1;
+        var px2 = - paneWidth / 2 + x + paneWidth * 0.1 + paneWidth * 0.8;
+        var py1 = (2-ys) * paneHeight * 0.4 + y;
+        var py2 = (2-ys) * paneHeight * 0.4 + y;
         ctx.beginPath();
 		ctx.lineWidth="1";
 		ctx.strokeStyle=foregroundColor;
 		ctx.moveTo(renderOffsetX * scale + px1 * scale + width/2,renderOffsetY * scale + py1 * scale + height/2);
 		ctx.lineTo(renderOffsetX * scale + px2 * scale + width/2,renderOffsetY * scale + py2 * scale + height/2);
 		ctx.stroke();
-        for (var i = 1; i < len; i++) {
-            var px1 = (i-1) * paneWidth * 0.8 / len - paneWidth / 2 + x + paneWidth * 0.1;
-            var px2 = (i) * paneWidth * 0.8 / len - paneWidth / 2 + x + paneWidth * 0.1;
-            var py1 = (0.5-data[i-1]/(2*max)) * paneHeight * 0.8 - paneHeight / 2 + y + paneHeight * 0.1;
-            var py2 = (0.5-data[i]/(2*max)) * paneHeight * 0.8 - paneHeight / 2 + y + paneHeight * 0.1;
+
+		var px1 = -(2-xs) * paneWidth * 0.4 + x;
+        var px2 = -(2-xs) * paneWidth * 0.4 + x;
+        var py1 = - paneHeight / 2 + y + paneHeight * 0.1;
+        var py2 = - paneHeight / 2 + y + paneHeight * 0.1 + paneHeight * 0.8;
+        ctx.beginPath();
+		ctx.lineWidth="1";
+		ctx.strokeStyle=foregroundColor;
+		ctx.moveTo(renderOffsetX * scale + px1 * scale + width/2,renderOffsetY * scale + py1 * scale + height/2);
+		ctx.lineTo(renderOffsetX * scale + px2 * scale + width/2,renderOffsetY * scale + py2 * scale + height/2);
+		ctx.stroke();
+
+        renderNodeText("Y: " + Math.floor(max_y*1000)/1000.0, x-paneWidth*0.5+30, y-paneHeight*0.5+4, 0, 0, foregroundColor, 16);
+        renderNodeText("X: " + Math.floor(max_x*1000)/1000.0, x+paneWidth*0.5-30, y+paneHeight*0.5-20, 0, 0, foregroundColor, 16);
+	}
+
+	function renderLineStrip(data, paneWidth, paneHeight, x, y, max_x, max_y, foregroundColor, xs, ys) {
+        var len = data.length;
+	    for (var i = 1; i < len; i++) {
+            var px1 = ((xs-1)/2 + data[i-1][0]/(xs*max_x)) * paneWidth * 0.8  - paneWidth / 2  + x + paneWidth * 0.1;
+            var px2 = ((xs-1)/2 + data[i][0]  /(xs*max_x)) * paneWidth * 0.8  - paneWidth / 2  + x + paneWidth * 0.1;
+            var py1 = (1/ys - data[i-1][1]/(ys*max_y)) * paneHeight * 0.8 - paneHeight / 2 + y + paneHeight * 0.1;
+            var py2 = (1/ys - data[i][1]  /(ys*max_y)) * paneHeight * 0.8 - paneHeight / 2 + y + paneHeight * 0.1;
             ctx.beginPath();
 		    ctx.lineWidth="2";
 		    ctx.strokeStyle=foregroundColor;
@@ -399,7 +466,6 @@ function WebUI_CRenderEngine() {
 		    ctx.lineTo(renderOffsetX * scale + px2 * scale + width/2,renderOffsetY * scale + py2 * scale + height/2);
 		    ctx.stroke();
         }
-        renderNodeText("Max: " + Math.floor(max*1000)/1000.0, x-paneWidth*0.5+45, y-paneHeight*0.5+4, 0, 0, foregroundColor, 16);
 	}
 
 	function renderNodeDebugImage(node, foregroundColor, fillStyle) {

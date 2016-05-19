@@ -658,7 +658,7 @@
     "name": "Find Contours",
     "code": "computervision.findcontours",
     "inputs": {"img": "Image"},
-    "outputs": {"result": "Contours"},
+    "outputs": {"result": "PolygonArray"},
     "args": {},
     "desc": "Contours in an image."
 },
@@ -673,7 +673,7 @@
 {
     "name": "Render Boxes",
     "code": "computervision.renderboxes",
-    "inputs": {"boxes": "Boxes", "img": "Image"},
+    "inputs": {"boxes": "PolygonArray", "img": "Image"},
     "outputs": {"result": "Image"},
     "args": {"r": 255, "b": 0, "g": 0},
     "desc": "Render boxes in image."
@@ -729,8 +729,8 @@
 {
     "name": "Bounding Boxes",
     "code": "computervision.boundingbox",
-    "inputs": {"cnts": "Contours"},
-    "outputs": {"result": "Boxes"},
+    "inputs": {"cnts": "PolygonArray"},
+    "outputs": {"result": "PolygonArray"},
     "args": {},
     "desc": "Calc bounding boxes for contour."
 },
@@ -741,6 +741,30 @@
     "outputs": {"result": "Image"},
     "args": {"resource": 0, "fps": 30},
     "desc": "Capture video."
+},
+{
+    "name": "Track",
+    "code": "geometry.track",
+    "inputs": {"val": "PointArray"},
+    "outputs": {"result": "PolygonArray"},
+    "args": {"threshold": 10},
+    "desc": "Track points."
+},
+{
+    "name": "Centerpoint",
+    "code": "geometry.centerpoint",
+    "inputs": {"val": "Polygon"},
+    "outputs": {"result": "Point"},
+    "args": {},
+    "desc": "Calculates average for polygon."
+},
+{
+    "name": "Centerpoints",
+    "code": "geometry.centerpoints",
+    "inputs": {"val": "PolygonArray"},
+    "outputs": {"result": "PointArray"},
+    "args": {},
+    "desc": "Calculates average per polygon."
 },
 {
     "name": "Split Topic",

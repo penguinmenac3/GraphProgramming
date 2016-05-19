@@ -12,7 +12,7 @@ class Node(base.Node):
         super(Node, self).__init__("Find Contours", "computervision.findcontours",
                                    {},
                                    {"img": "Image"},
-                                   {"result": "Contours"},
+                                   {"result": "PolygonArray"},
                                    "Contours in an image.", verbose)
         self.args = args
 
