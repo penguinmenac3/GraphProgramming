@@ -535,6 +535,22 @@
     "desc": "Trigger arg.val every arg.time s."
 },
 {
+    "name": "Listen",
+    "code": "ros.input",
+    "inputs": {},
+    "outputs": {"result": "Object"},
+    "args": {"topic": "/lidar_front"},
+    "desc": "Listen on topic."
+},
+{
+    "name": "Publish",
+    "code": "ros.input",
+    "inputs": {"val": "Object"},
+    "outputs": {},
+    "args": {"topic": "/image"},
+    "desc": "Publish on topic."
+},
+{
     "name": "[WIP] Plot Array",
     "code": "matplotlib.plotarray",
     "inputs": {"data": "Array"},
@@ -747,8 +763,16 @@
     "code": "geometry.track",
     "inputs": {"val": "PointArray"},
     "outputs": {"result": "PolygonArray"},
-    "args": {"threshold": 10},
+    "args": {"threshold": 10, "max_length": 0},
     "desc": "Track points."
+},
+{
+    "name": "Array 2 Polar",
+    "code": "geometry.arraytopolar",
+    "inputs": {"val": "Array"},
+    "outputs": {"result": "PointArray"},
+    "args": {"total_degree": 270, "center": 0},
+    "desc": "Transpose points."
 },
 {
     "name": "Centerpoint",
@@ -765,6 +789,30 @@
     "outputs": {"result": "PointArray"},
     "args": {},
     "desc": "Calculates average per polygon."
+},
+{
+    "name": "Polar 2 Euler",
+    "code": "geometry.polartoeuler",
+    "inputs": {"val": "PointArray"},
+    "outputs": {"result": "PointArray"},
+    "args": {},
+    "desc": "Convert display style."
+},
+{
+    "name": "Transpose",
+    "code": "geometry.transpose",
+    "inputs": {"val": "PointArray"},
+    "outputs": {"result": "PointArray"},
+    "args": {},
+    "desc": "Transpose points."
+},
+{
+    "name": "Euler 2 Image",
+    "code": "geometry.plotpointarraycv",
+    "inputs": {"val": "PointArray"},
+    "outputs": {"result": "Image"},
+    "args": {"view_size": 10.0, "img_size": 320},
+    "desc": "Plot to cv_image."
 },
 {
     "name": "Split Topic",
