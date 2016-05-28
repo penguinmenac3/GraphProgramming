@@ -1,6 +1,6 @@
 import time
 import cv2
-import cv2.cv as cv
+#import cv2.cv as cv
 
 try:
     from ...stdlib import Node as base
@@ -19,9 +19,10 @@ class Node(base.Node):
         self.cap = None
 
     def set_res(self, x,y):
-        self.cap.set(cv.CV_CAP_PROP_FRAME_WIDTH, int(x))
-        self.cap.set(cv.CV_CAP_PROP_FRAME_HEIGHT, int(y))
-        return self.cap.get(cv.CV_CAP_PROP_FRAME_WIDTH), self.cap.get(cv.CV_CAP_PROP_FRAME_HEIGHT)
+        pass
+        #self.cap.set(cv.CV_CAP_PROP_FRAME_WIDTH, int(x))
+        #self.cap.set(cv.CV_CAP_PROP_FRAME_HEIGHT, int(y))
+        #return self.cap.get(cv.CV_CAP_PROP_FRAME_WIDTH), self.cap.get(cv.CV_CAP_PROP_FRAME_HEIGHT)
 
     def tick(self, value):
         if self.cap is None:
