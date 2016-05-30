@@ -711,14 +711,18 @@ class Node(base.Node):
         lastDebug = result;
         showInfo();
         result = result.replace(new RegExp("\n", 'g'), "<br>");
-        document.getElementById("debugcontent").innerHTML = "<button class='button outputnode right' onclick='WebUI.clearDebug()'>KILL</button><br>" + result;
+        document.getElementById("debugcontent").innerHTML = "<button class='button outputnode right' onclick='WebUI.clearDebug()'>CLEAR</button><br>" + result;
+    }
+    
+    this.killDebug = function() {
+        kill();
+        that.debugger.close();
+        document.getElementById("killbtn").style.display = "None";
     }
     
     this.clearDebug = function () {
         lastDebug = "";
-        kill();
-        that.debugger.close();
-        document.getElementById("debugcontent").innerHTML = "<button class='button inputnode right' onclick='WebUI.startDebug()'>START</button><br>Run graph to get debug output.";
+        document.getElementById("debugcontent").innerHTML = "Run graph to get debug output.";
     }
     
     this.startDebug = function() {
@@ -731,8 +735,9 @@ class Node(base.Node):
 			WebUI.saveGraph(WebUI.graphName);
 			that.changed = false;
         }
+        document.getElementById("killbtn").style.display = "inline-block";
         that.setDebug("Started Graph: " + that.graphName);
-	    start(that.graphName, that.setDebug, that.setDebug);
+	    start(that.graphName, that.setDebug, that.setDebug, that.killDebug);
         that.debugger = new CDebugger(location.host.split(":")[0], "wasd", that, RenderEngine);
     }
 }
