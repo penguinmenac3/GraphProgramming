@@ -303,8 +303,8 @@ function WebUI_CWebUI() {
 			var y2 = node.y * scale + RenderEngine.nodeHeight/2 * scale;
 			if (x > x1 && x < x2 && y > y1 && y < y2) {
 				that.selectedNode = node;
-                moveOffsetX = node.x - x;
-                moveOffsetY = node.y - y;
+                moveOffsetX = node.x * scale - x;
+                moveOffsetY = node.y * scale - y;
                 moved = false;
 				return;
 			}
@@ -509,8 +509,8 @@ class Node(base.Node):
 			var pos = RenderEngine.getNodeOutputPosition(that.graph, that.selectedNode.name, that.selectedOutputConnection);
 			RenderEngine.tmpNodeLine(pos.x, pos.y, x / scale, y / scale);
 		} else if (that.selectedNode != null) {
-			that.selectedNode.x = x / scale + moveOffsetX;
-			that.selectedNode.y = y / scale + moveOffsetY;
+			that.selectedNode.x = x / scale + moveOffsetX / scale;
+			that.selectedNode.y = y / scale + moveOffsetY / scale;
             moved = true;
             RenderEngine.setDirty();
 		} else if (that.startPos != null) {
@@ -522,8 +522,8 @@ class Node(base.Node):
 
 	this.unselect = function(x, y) {
         var scale = RenderEngine.getScale();
-		var absX = x + RenderEngine.getOffsetX() + RenderEngine.getSize().width / 2;
-		var absY = y + RenderEngine.getOffsetY() + RenderEngine.getSize().height / 2;
+		var absX = x + RenderEngine.getOffsetX() * scale + RenderEngine.getSize().width / 2;
+		var absY = y + RenderEngine.getOffsetY() * scale + RenderEngine.getSize().height / 2;
 		var spos = that.startPos;
 		that.startPos = null;
 		if (that.selectedInputConnection != null) {
@@ -618,8 +618,8 @@ class Node(base.Node):
                 showInfo();
                 RenderEngine.setDirty();
 			} else {
-			    that.selectedNode.x = x / scale + moveOffsetX;
-		    	that.selectedNode.y = y / scale + moveOffsetY;
+			    that.selectedNode.x = x / scale + moveOffsetX / scale;
+		    	that.selectedNode.y = y / scale + moveOffsetY / scale;
                 RenderEngine.setDirty();
 
 			    if (absX > 10 && absX < 90 && absY > 170 && absY < 200) {
@@ -717,12 +717,20 @@ class Node(base.Node):
     this.killDebug = function() {
         kill();
         that.debugger.close();
-        document.getElementById("killbtn").style.display = "None";
+        document.getElementById("killbtn").style.display = "none";
+        document.getElementById("restartbtn").style.display = "none";
+        document.getElementById("startbtn").style.display = "inline-block";
     }
     
     this.clearDebug = function () {
         lastDebug = "";
         document.getElementById("debugcontent").innerHTML = "Run graph to get debug output.";
+    }
+    
+    this.restartDebug = function() {
+        that.killDebug();
+        window.setTimeout(that.startDebug,1000);
+        that;
     }
     
     this.startDebug = function() {
@@ -736,6 +744,8 @@ class Node(base.Node):
 			that.changed = false;
         }
         document.getElementById("killbtn").style.display = "inline-block";
+        document.getElementById("restartbtn").style.display = "inline-block";
+        document.getElementById("startbtn").style.display = "none";
         that.setDebug("Started Graph: " + that.graphName);
 	    start(that.graphName, that.setDebug, that.setDebug, that.killDebug);
         that.debugger = new CDebugger(location.host.split(":")[0], "wasd", that, RenderEngine);

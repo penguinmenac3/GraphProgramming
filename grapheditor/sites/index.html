@@ -56,8 +56,9 @@
         <div id="startup" class="tab">
             <h2>Startup</h2>
             <p>Server: <input class='hinput' id='debug_server' value='localhost:8088' /></p>
-            <button class='button inputnode right' style="display:none" onclick='WebUI.startDebug()'>RUN</button>
-            <button class='button algorithmnode right' onclick='WebUI.startDebug()'>DEBUG</button>
+            <button id="deploybtn" class='button inputnode right' style="display:none" onclick='WebUI.startDebug()'>DEPLOY</button>
+            <button id="startbtn" class='button algorithmnode right' onclick='WebUI.startDebug()'>DEBUG</button>
+            <button id="restartbtn" class='button algorithmnode right' style="display:none" onclick='WebUI.restartDebug()'>RESTART</button>
             <button id="killbtn" class='button outputnode right' style="display:none" onclick='WebUI.killDebug()'>KILL</button>
         </div>
          <div id="info" class="tab">
