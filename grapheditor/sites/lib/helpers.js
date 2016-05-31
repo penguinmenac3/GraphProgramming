@@ -27,6 +27,11 @@ function getGraph(graph, callback, callbackFailure) {
     sendViaPost(params, callback, callbackFailure)
 }
 
+function listGraphs(callback, callbackFailure) {
+    var params = "listGraphs=" + true;
+    sendViaPost(params, callback, callbackFailure)
+}
+
 function getNodes(graph, callback, callbackFailure) {
     var params = "getnodes=" + graph;
     sendViaPost(params, callback, callbackFailure)

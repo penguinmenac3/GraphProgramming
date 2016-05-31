@@ -19,6 +19,7 @@ import socket
 import time
 from autobahn.twisted.websocket import WebSocketServerProtocol, WebSocketServerFactory
 from twisted.internet import reactor
+import json
 # or: from autobahn.asyncio.websocket import WebSocketServerProtocol
 
 PORT_NUMBER = 8088
@@ -213,6 +214,22 @@ class myHandler(BaseHTTPRequestHandler):
         path = None
         global execProcess
         global result
+        if "listGraphs" in data:
+            graphs = []
+            for root, dirs, files in os.walk(u'data'):
+                for f in files:
+                    if f.endswith('.graph.json'):
+                        graphs.append(os.path.join(root, f))
+            for root, dirs, files in os.walk(u'data/private'):
+                for f in files:
+                    if f.endswith('.graph.json'):
+                        graphs.append(os.path.join(root, f))
+            self.send_response(200)
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
+            # Send the html message
+            self.wfile.write(json.dumps(graphs).encode("utf-8"))
+            return
         if "startGraph" in data:
             #data["execGraph"] = re.sub(r'(\W|/)+', '', data["execGraph"])
             print(("Starting: " + data["startGraph"]))

@@ -103,6 +103,58 @@ function WebUI_CWebUI() {
 
         return text;
     }
+    
+    this.openGraph = function(graphs) {
+        var classes = {};
+		graphs.forEach(function(graph) {
+		    graph = graph.substring(5, graph.length - 11);
+            var nodetype = "outputnode";
+            if (graph.lastIndexOf("private", 0) === 0) {
+                nodetype = "inputnode";
+            } else if (graph.lastIndexOf("test", 0) === 0) {
+                nodetype = "debugnode";
+            } else if (graph.lastIndexOf("ignored", 0) === 0 || graph.lastIndexOf("samples", 0) === 0) {
+                nodetype = "algorithmnode";
+            }
+            var split = graph.split("/");
+            var cur = "default";
+            var graphName = split[0];
+            if (split.length > 1) {
+                cur = split[0];
+                graphName = split[1];
+            }
+            if (!classes[cur]) {
+                prefix = cur;
+                classes[cur] = "<h2>" + prefix.toUpperCase() + "</h2>";
+            }
+			classes[cur] += '<button onclick="WebUI.loadGraph(\'' + graph + '\')" class="node ' + nodetype + '">' + graphName + '</button>';
+		});
+        var classesStr = "";
+        var keys = [];
+        for (var key in classes) {
+            if (classes.hasOwnProperty(key)) {
+                keys.push(key);
+            }
+        }
+        keys = keys.sort();
+        for (var key in keys) {
+            classesStr += classes[keys[key]];
+        }
+        document.getElementById("innergraphselector").innerHTML = classesStr;
+        document.getElementById("graphselector").style.display = "";
+    }
+    
+    this.loadGraph = function(name) {
+		if (name == null) {
+			return;
+		}
+		WebUI.graphName = name;
+        that.graphStack = new Array();
+        that.graphNameStack = new Array();
+        RenderEngine.setHasParent(false);
+		getGraph(WebUI.graphName, WebUI.setGraph, WebUI.printError);
+		that.hideGraphSelector();
+    }
 
     this.createNode = function(nodeclass) {
 				if (nodeclass == null) {
@@ -134,6 +186,10 @@ function WebUI_CWebUI() {
     
     this.hideNodeSelector = function() {
         document.getElementById("nodeselector").style.display = "none";
+    };
+    
+    this.hideGraphSelector = function() {
+        document.getElementById("graphselector").style.display = "none";
     };
     
     this.changeLanguage = function(language) {
@@ -186,15 +242,7 @@ function WebUI_CWebUI() {
         }
 		if (absX > 10 && absX < 90) {
 			if (absY > 10 && absY < 40) {
-				var name = prompt("Please enter graph name", WebUI.graphName);
-				if (name == null) {
-					return;
-				}
-				WebUI.graphName = name;
-                that.graphStack = new Array();
-                that.graphNameStack = new Array();
-                RenderEngine.setHasParent(false);
-				getGraph(WebUI.graphName, WebUI.setGraph, WebUI.printError);
+			    listGraphs(that.openGraph, that.printError);
 				return;
 			}
 			if (absY > 50 && absY < 80) {
