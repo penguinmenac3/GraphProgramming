@@ -3,6 +3,8 @@ Code can be interpreted as a graph. Actually compilers already do that. However,
 
 ![Image of the graph programming ui.](https://raw.githubusercontent.com/penguinmenac3/GraphProgramming/master/images/GraphProgrammingIDE.png)
 
+For install instructions see installation section.
+
 # Motivation
 The world gets smarter and more connected. But who will programm all those smart bits in the internet of things?
 A simple answer would be programmers. However, there is so much that you can do and so few programmers that can implement it.
@@ -29,15 +31,66 @@ And yet there is more you can do with it.
 Parallelism in algorithms can sometimes be difficult.
 What if I told you, when modeling your program as a graph the execution environment can automatically detect what parts can be running in paralell and do all the synchronisation stuff.
 
-# Good News
-Did the motivation sound like nice to you?
+# Installation
 
-I have good news. Such a solution can be implemented. There is already a graph executor written in python in this repo, as well as some sample graphs.
+## Linux
 
-Also a full editor implementation exists. However, it does no type checking.
+There are a few simple steps to get up and running on linux.
 
-Maybe there will also be implementations for other languages than python.
+Before we can start you need all prerequisits.
 
+```bash
+sudo apt-get install python python-dev git
+sudo pip install autobahn[twisted]
+
+# Optional but recommended
+sudo apt-get install libopencv-dev
+```
+
+First make a Graphs and a GraphLib folder somewhere where you want your data to be stored.
+(Having full access to this folder is crutial for graph programming to work.)
+
+```bash
+# The user executing the server needs full access here!
+cd ~
+mkdir Graphs
+mkdir GraphLib
+touch GraphLib/__init__.py
+```
+
+Now clone the repository to a location where you want to install graph programming and cd into the folder.
+
+```bash
+# The user executing the server needs full access here!
+cd /dir/where/to/install
+git clone https://github.com/penguinmenac3/GraphProgramming.git
+cd GraphProgramming
+```
+
+Next setup the links to your Data folders.
+```bash
+ln -s /home/<username>/Graphs grapheditor/data/private
+ln -s /home/<username>/GraphLib python/privatelib
+```
+
+Now add your binaries to your home.
+```bash
+ln -s /dir/where/to/install/GraphProgramming/graphex.sh ~/graphex.sh
+ln -s /dir/where/to/install/GraphProgramming/graphedit.sh ~/graphedit.sh
+```
+
+Finally test it.
+```bash
+~/graphedit.sh
+```
+
+Visit [localhost:8088](localhost:8088) in a Browser (e.g. Chrome, NOT Internet Explorer or Edge)
+
+## Windows
+
+Install linux and follow the linux guide.
+
+Just kidding, there is no windows tutorial yet, however you can try similar to linux.
 
 # One more thing
 
