@@ -35,7 +35,7 @@
     "code": "geometry.track",
     "inputs": {"val": "PointArray"},
     "outputs": {"result": "PolygonArray"},
-    "args": {"threshold": 10, "max_length": 0},
+    "args": {"threshold": 10, "max_length": 0, "forget_after": 0},
     "desc": "Track points."
 },
 {
