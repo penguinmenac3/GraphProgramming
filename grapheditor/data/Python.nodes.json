@@ -247,12 +247,12 @@
     "desc": "Calc bounding boxes for contour."
 },
 {
-    "name": "Record",
+    "name": "[WIP] Record",
     "code": "computervision.record",
     "inputs": {"img": "Image"},
     "outputs": {},
-    "args": {"resource": "test.mp4"},
-    "desc": "Apply gaussian blur on image."
+    "args": {"resource": "~/Videos/test.avi"},
+    "desc": "Record video."
 },
 {
     "name": "Split Topic",

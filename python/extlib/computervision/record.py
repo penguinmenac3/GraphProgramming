@@ -8,11 +8,11 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Record", "computervision.record",
-                                   {"resource":"test.mp4"},
+        super(Node, self).__init__("[WIP] Record", "computervision.record",
+                                   {"resource":"~/Videos/test.avi"},
                                    {"img": "Image"},
                                    {},
-                                   "Apply gaussian blur on image.", verbose)
+                                   "Record video.", verbose)
         self.args = args
         self.writer = None
 
