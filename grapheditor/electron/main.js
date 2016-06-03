@@ -34,6 +34,9 @@ function createWindow () {
 
   // and load the index.html of the app.
   mainWindow.loadURL("http://127.0.0.1:8088")
+  
+  // Hide menu
+  mainWindow.setMenu(null);
 
   // Open the DevTools.
   //mainWindow.webContents.openDevTools()
