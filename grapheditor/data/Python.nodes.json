@@ -687,6 +687,14 @@
     "desc": "Set the intensity to a fixed value."
 },
 {
+    "name": "Crop Image",
+    "code": "computervision.crop",
+    "inputs": {"val": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"y": 0, "x": 0, "height": 240, "width": 320},
+    "desc": "Crop the image"
+},
+{
     "name": "Render Boxes",
     "code": "computervision.renderboxes",
     "inputs": {"boxes": "PolygonArray", "img": "Image"},
