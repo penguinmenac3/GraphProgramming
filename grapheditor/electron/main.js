@@ -4,14 +4,17 @@ const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 const spawn = require('child_process').spawn;
+var exec = require('child_process').exec;
 var sleep = require('sleep');
+
+var ls = null
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
 function startEditorServer() {
-  const ls = spawn('../../graphedit.sh');
+  ls = spawn('../../graphedit.sh');
 
   ls.stdout.on('data', (data) => {
     console.log(`stdout: ${data}`);
@@ -47,6 +50,8 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null
+    console.log("Closed window")
+    exec('ps -ef | grep "python editorserver.py" | awk \'{print $2}\' | xargs kill');
   })
 }
 
