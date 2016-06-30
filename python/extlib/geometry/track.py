@@ -7,18 +7,20 @@ import sys
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Track", "geometry.track", {"threshold": 10, "max_length": 0, "forget_after": 0},
+        super(Node, self).__init__("Track", "geometry.track", {"threshold_x": 10, "threshold_y": 10, "max_length": 0, "forget_after": 0},
                                    {"val": "PointArray"},
                                    {"result": "PolygonArray"},
                                    "Track points.", verbose)
         self.args = args
         self.tracks = []
         self.entry_age_queue = []
-        self.tresh2 = 100
+        self.tresh2_x = 100
+        self.tresh2_y = 100
         self.max_length = 0
         self.forget_after = 20
-        if "threshold" in self.args:
-            self.tresh2 = self.args["threshold"] * self.args["threshold"]
+        if "threshold_x" in self.args:
+            self.tresh2_x = self.args["threshold_x"] * self.args["threshold_x"]
+            self.tresh2_y = self.args["threshold_y"] * self.args["threshold_y"]
         if "max_length" in self.args:
             self.max_length = self.args["max_length"]
         if "forget_after" in self.args:
@@ -62,7 +64,9 @@ class Node(base.Node):
                 y = t[-1][1]
                 dx = x - p[0]
                 dy = y - p[1]
-                if len(t) > 0 and dx*dx + dy*dy < self.tresh2:
+                if len(t) > 0 and (
+                  (self.tresh2_y <= 0 and dx*dx + dy*dy < self.tresh2_x) or
+                  (self.tresh2_y > 0 and self.tresh2_x > dx*dx and self.tresh2_y > dy*dy)):
                     match = t
                     index = i
             if match:
