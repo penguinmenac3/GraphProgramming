@@ -18,7 +18,8 @@ class Node(base.Node):
         self.args = args
         self.cap = None
 
-    #def set_res(self, x,y):
+    def set_res(self, x,y):
+        pass
         #self.cap.set(cv.CV_CAP_PROP_FRAME_WIDTH, int(x))
         #self.cap.set(cv.CV_CAP_PROP_FRAME_HEIGHT, int(y))
         #return self.cap.get(cv.CV_CAP_PROP_FRAME_WIDTH), self.cap.get(cv.CV_CAP_PROP_FRAME_HEIGHT)
