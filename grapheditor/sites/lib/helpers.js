@@ -27,6 +27,11 @@ function getGraph(graph, callback, callbackFailure) {
     sendViaPost(params, callback, callbackFailure)
 }
 
+function listGraphs(callback, callbackFailure) {
+    var params = "listGraphs=" + true;
+    sendViaPost(params, callback, callbackFailure)
+}
+
 function getNodes(graph, callback, callbackFailure) {
     var params = "getnodes=" + graph;
     sendViaPost(params, callback, callbackFailure)
@@ -122,7 +127,7 @@ function execute(graph, callback, callbackFailure) {
     xmlhttp.send(params);
 }
 
-function start(graph, callback, callbackFailure) {
+function start(graph, callback, callbackFailure, callbackError) {
     var xmlhttp;
     if (window.XMLHttpRequest) {
         xmlhttp = new XMLHttpRequest();
@@ -131,7 +136,7 @@ function start(graph, callback, callbackFailure) {
     }
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-            update(graph, callback, callbackFailure);
+            update(graph, callback, callbackFailure, callbackError);
             if (callback != null) {
                 callback(xmlhttp.responseText);
             }
@@ -139,6 +144,10 @@ function start(graph, callback, callbackFailure) {
             if (callbackFailure != null) {
                 callbackFailure(xmlhttp.responseText);
             }
+        }
+        if (xmlhttp.status === 404) {
+            callbackError();
+            return;
         }
     }
     var params = "startGraph=" + graph;
@@ -148,7 +157,7 @@ function start(graph, callback, callbackFailure) {
     xmlhttp.send(params);
 }
 
-function update(graph, callback, callbackFailure) {
+function update(graph, callback, callbackFailure, callbackError) {
     var xmlhttp;
     if (window.XMLHttpRequest) {
         xmlhttp = new XMLHttpRequest();
@@ -157,11 +166,15 @@ function update(graph, callback, callbackFailure) {
     }
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-            update(graph, callback, callbackFailure);
+            update(graph, callback, callbackFailure, callbackError);
             if (callback != null) {
                 callback(xmlhttp.responseText);
             }
         } else if (xmlhttp.readyState==4) {
+        }
+        if (xmlhttp.status === 404) {
+            callbackError();
+            return;
         }
     }
     var params = "updateGraph=" + graph;

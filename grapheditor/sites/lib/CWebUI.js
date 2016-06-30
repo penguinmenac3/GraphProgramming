@@ -9,6 +9,7 @@ function WebUI_CWebUI() {
     var moveOffsetY = 0;
     var codeMirror = null;
     var codeTheme = "default";
+    var promptCallback = null;
     this.debugger = null;
     this.currentNode = null;
 	this.keyboard_input_state = true;
@@ -103,6 +104,58 @@ function WebUI_CWebUI() {
 
         return text;
     }
+    
+    this.openGraph = function(graphs) {
+        var classes = {};
+		graphs.forEach(function(graph) {
+		    graph = graph.substring(5, graph.length - 11);
+            var nodetype = "outputnode";
+            if (graph.lastIndexOf("private", 0) === 0) {
+                nodetype = "inputnode";
+            } else if (graph.lastIndexOf("test", 0) === 0) {
+                nodetype = "debugnode";
+            } else if (graph.lastIndexOf("ignored", 0) === 0 || graph.lastIndexOf("samples", 0) === 0) {
+                nodetype = "algorithmnode";
+            }
+            var split = graph.split("/");
+            var cur = "default";
+            var graphName = split[0];
+            if (split.length > 1) {
+                cur = split[0];
+                graphName = split[1];
+            }
+            if (!classes[cur]) {
+                prefix = cur;
+                classes[cur] = "<h2>" + prefix.toUpperCase() + "</h2>";
+            }
+			classes[cur] += '<button onclick="WebUI.loadGraph(\'' + graph + '\')" class="node ' + nodetype + '">' + graphName + '</button>';
+		});
+        var classesStr = "";
+        var keys = [];
+        for (var key in classes) {
+            if (classes.hasOwnProperty(key)) {
+                keys.push(key);
+            }
+        }
+        keys = keys.sort();
+        for (var key in keys) {
+            classesStr += classes[keys[key]];
+        }
+        document.getElementById("innergraphselector").innerHTML = classesStr;
+        document.getElementById("graphselector").style.display = "";
+    }
+    
+    this.loadGraph = function(name) {
+		if (name == null) {
+			return;
+		}
+		WebUI.graphName = name;
+        that.graphStack = new Array();
+        that.graphNameStack = new Array();
+        RenderEngine.setHasParent(false);
+		getGraph(WebUI.graphName, WebUI.setGraph, WebUI.printError);
+		that.hideGraphSelector();
+    }
 
     this.createNode = function(nodeclass) {
 				if (nodeclass == null) {
@@ -119,21 +172,57 @@ function WebUI_CWebUI() {
 				if (selectedNode == null) {
 					return;
 				}
-				var nodename = prompt("Node Name", selectedNode.name);
-				if (nodename == null) {
-					return;
-				}
-				selectedNode = JSON.parse(JSON.stringify(selectedNode));
-				selectedNode.name = makeid();
-                selectedNode.displayname = nodename;
-				graph.nodes.push(selectedNode);
-                RenderEngine.setDirty();
+				WebUI.prompt("Node Name", selectedNode.name,
+                    function(nodename) {
+                        if (nodename == null) {
+					        return;
+				        }
+				        selectedNode = JSON.parse(JSON.stringify(selectedNode));
+				        selectedNode.name = makeid();
+                        selectedNode.displayname = nodename;
+				        graph.nodes.push(selectedNode);
+                        RenderEngine.setDirty();
 
-				that.changed = true;
+				        that.changed = true;
+                    }
+                );
+    };
+    
+    this.prompt = function(text, value, callback) {
+        promptCallback = callback;
+        var html = "<h1>"+text+"</h1>"+
+            "<div><input id='promptinput' class='hinput' value='" + value + "' /></div>"+
+            "<div style='padding-top:1em'>"+
+            "<button onclick='WebUI.cancelPrompt()' class='button outputnode right'>CANCEL</button>"+
+            "<button onclick='WebUI.successPrompt()' class='button inputnode right'>OK</button>"+
+            "</div>";
+        document.getElementById("innerprompt").innerHTML = html;
+        //callback(prompt(text, value));
+        document.getElementById("prompt").style.display = "";
+    };
+    
+    this.cancelPrompt = function() {
+        if (promptCallback != null) {
+            promptCallback(null);
+        }
+        promptCallback = null;
+        document.getElementById("prompt").style.display = "none";
+    };
+    
+    this.successPrompt = function() {
+        if (promptCallback != null) {
+            promptCallback(document.getElementById("promptinput").value);
+        }
+        promptCallback = null;
+        document.getElementById("prompt").style.display = "none";
     };
     
     this.hideNodeSelector = function() {
         document.getElementById("nodeselector").style.display = "none";
+    };
+    
+    this.hideGraphSelector = function() {
+        document.getElementById("graphselector").style.display = "none";
     };
     
     this.changeLanguage = function(language) {
@@ -186,27 +275,21 @@ function WebUI_CWebUI() {
         }
 		if (absX > 10 && absX < 90) {
 			if (absY > 10 && absY < 40) {
-				var name = prompt("Please enter graph name", WebUI.graphName);
-				if (name == null) {
-					return;
-				}
-				WebUI.graphName = name;
-                that.graphStack = new Array();
-                that.graphNameStack = new Array();
-                RenderEngine.setHasParent(false);
-				getGraph(WebUI.graphName, WebUI.setGraph, WebUI.printError);
+			    listGraphs(that.openGraph, that.printError);
 				return;
 			}
 			if (absY > 50 && absY < 80) {
 				if (that.changed == true) {
-					var name = prompt("Save: Please enter graph name", WebUI.graphName);
-					if (name == null) {
-						console.log("Abortion");
-						return;
-					}
-					WebUI.graphName = name;
-					WebUI.saveGraph(WebUI.graphName);
-					that.changed = false;
+					WebUI.prompt("Save: Please enter graph name", WebUI.graphName,
+                        function(name) {
+					        if (name == null) {
+						        console.log("Abortion");
+						        return;
+					        }
+					        WebUI.graphName = name;
+					        WebUI.saveGraph(WebUI.graphName);
+					        that.changed = false;
+                        });
 				}
 				return;
 			}
@@ -303,8 +386,8 @@ function WebUI_CWebUI() {
 			var y2 = node.y * scale + RenderEngine.nodeHeight/2 * scale;
 			if (x > x1 && x < x2 && y > y1 && y < y2) {
 				that.selectedNode = node;
-                moveOffsetX = node.x - x;
-                moveOffsetY = node.y - y;
+                moveOffsetX = node.x * scale - x;
+                moveOffsetY = node.y * scale - y;
                 moved = false;
 				return;
 			}
@@ -509,8 +592,8 @@ class Node(base.Node):
 			var pos = RenderEngine.getNodeOutputPosition(that.graph, that.selectedNode.name, that.selectedOutputConnection);
 			RenderEngine.tmpNodeLine(pos.x, pos.y, x / scale, y / scale);
 		} else if (that.selectedNode != null) {
-			that.selectedNode.x = x / scale + moveOffsetX;
-			that.selectedNode.y = y / scale + moveOffsetY;
+			that.selectedNode.x = x / scale + moveOffsetX / scale;
+			that.selectedNode.y = y / scale + moveOffsetY / scale;
             moved = true;
             RenderEngine.setDirty();
 		} else if (that.startPos != null) {
@@ -522,8 +605,8 @@ class Node(base.Node):
 
 	this.unselect = function(x, y) {
         var scale = RenderEngine.getScale();
-		var absX = x + RenderEngine.getOffsetX() + RenderEngine.getSize().width / 2;
-		var absY = y + RenderEngine.getOffsetY() + RenderEngine.getSize().height / 2;
+		var absX = x + RenderEngine.getOffsetX() * scale + RenderEngine.getSize().width / 2;
+		var absY = y + RenderEngine.getOffsetY() * scale + RenderEngine.getSize().height / 2;
 		var spos = that.startPos;
 		that.startPos = null;
 		if (that.selectedInputConnection != null) {
@@ -618,8 +701,8 @@ class Node(base.Node):
                 showInfo();
                 RenderEngine.setDirty();
 			} else {
-			    that.selectedNode.x = x / scale + moveOffsetX;
-		    	that.selectedNode.y = y / scale + moveOffsetY;
+			    that.selectedNode.x = x / scale + moveOffsetX / scale;
+		    	that.selectedNode.y = y / scale + moveOffsetY / scale;
                 RenderEngine.setDirty();
 
 			    if (absX > 10 && absX < 90 && absY > 170 && absY < 200) {
@@ -711,28 +794,54 @@ class Node(base.Node):
         lastDebug = result;
         showInfo();
         result = result.replace(new RegExp("\n", 'g'), "<br>");
-        document.getElementById("debugcontent").innerHTML = "<button class='button outputnode right' onclick='WebUI.clearDebug()'>KILL</button><br>" + result;
+        document.getElementById("debugcontent").innerHTML = "<button class='button outputnode right' onclick='WebUI.clearDebug()'>CLEAR</button><br>" + result;
+    }
+    
+    this.killDebug = function() {
+        kill();
+        that.debugger.close();
+        document.getElementById("killbtn").style.display = "none";
+        document.getElementById("restartbtn").style.display = "none";
+        document.getElementById("startbtn").style.display = "inline-block";
     }
     
     this.clearDebug = function () {
         lastDebug = "";
-        kill();
-        that.debugger.close();
-        document.getElementById("debugcontent").innerHTML = "<button class='button inputnode right' onclick='WebUI.startDebug()'>START</button><br>Run graph to get debug output.";
+        document.getElementById("debugcontent").innerHTML = "Run graph to get debug output.";
+    }
+    
+    this.restartDebug = function() {
+        that.killDebug();
+        window.setTimeout(that.startDebug,1000);
+        that;
     }
     
     this.startDebug = function() {
+        startup = function() {
+            document.getElementById("killbtn").style.display = "inline-block";
+            document.getElementById("restartbtn").style.display = "inline-block";
+            document.getElementById("startbtn").style.display = "none";
+            that.setDebug("Started Graph: " + that.graphName);
+	        start(that.graphName, that.setDebug, that.setDebug, that.killDebug);
+            that.debugger = new CDebugger(location.host.split(":")[0], "wasd", that, RenderEngine);
+        };
+        
         if (that.changed == true) {
-			var name = prompt("Autosave: Please enter graph name", WebUI.graphName);
-			if (name == null) {
-				return;
-			}
-			WebUI.graphName = name;
-			WebUI.saveGraph(WebUI.graphName);
-			that.changed = false;
+			WebUI.prompt("Autosave: Please enter graph name", WebUI.graphName,
+                function(name) {
+                    if (name == null) {
+				        return;
+			        }
+			        WebUI.graphName = name;
+			        WebUI.saveGraph(WebUI.graphName);
+			        that.changed = false;
+                    startup()
+                }
+            );
+			
+        } else {
+            startup();
         }
-        that.setDebug("Started Graph: " + that.graphName);
-	    start(that.graphName, that.setDebug, that.setDebug);
-        that.debugger = new CDebugger(location.host.split(":")[0], "wasd", that, RenderEngine);
+        
     }
 }

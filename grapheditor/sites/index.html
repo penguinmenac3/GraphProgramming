@@ -53,6 +53,14 @@
         <a class="buttonlight" onclick="swapTheme('light')">Switch Theme (Light)</a>
         <a class="buttondark" onclick="swapTheme('dark')">Switch Theme (Dark)</a>
         <a class="buttondev newnode" onclick="toggleDev()">Toggle Dev. Mode</a>
+        <div id="startup" class="tab">
+            <h2>Startup</h2>
+            <p>Server: <input class='hinput' id='debug_server' value='localhost:8088' /></p>
+            <button id="deploybtn" class='button inputnode right' style="display:none" onclick='WebUI.startDebug()'>DEPLOY</button>
+            <button id="startbtn" class='button algorithmnode right' onclick='WebUI.startDebug()'>DEBUG</button>
+            <button id="restartbtn" class='button algorithmnode right' style="display:none" onclick='WebUI.restartDebug()'>RESTART</button>
+            <button id="killbtn" class='button outputnode right' style="display:none" onclick='WebUI.killDebug()'>KILL</button>
+        </div>
          <div id="info" class="tab">
             <h2>Info</h2>
             <div id="infocontent" class="info">
@@ -62,7 +70,6 @@
          <div id="debug" class="tab">
             <h2>Debug</h2>
             <div id="debugcontent" class="debug">
-                <button class='button inputnode right' onclick='WebUI.startDebug()'>START</button><br>
                 Run graph to get debug output.
             </div>
          </div>
@@ -72,8 +79,18 @@
          <!-- Nodes that can be created -->
         </div>
      </div>
+     <div id="graphselector" style="display:none" class="overlay" onclick="WebUI.hideGraphSelector()">
+        <div id="innergraphselector" class="inneroverlay" onclick="event.cancelBubble=true;">
+         <!-- Nodes that can be created -->
+        </div>
+     </div>
      <div id="codeeditor" style="display:none" class="overlay">
         <div id="innercodeeditor" class="inneroverlay" onclick="event.cancelBubble=true;">
+         <!-- Nodes that can be created -->
+        </div>
+     </div>
+     <div id="prompt" style="display:none" class="overlay" onclick="WebUI.cancelPrompt()">
+        <div id="innerprompt" class="inneroverlay" onclick="event.cancelBubble=true;">
          <!-- Nodes that can be created -->
         </div>
      </div>

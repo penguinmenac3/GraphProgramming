@@ -16,5 +16,4 @@
 ## Editor
 
 1. Improve subgraph handling and editing, autodetect inputs and outputs for upper graph-level node.
-2. List availible graphs.
 3. Buttons should be HTML and not canvas. (Allows simpler png export of graphs for showing something)

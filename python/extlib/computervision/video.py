@@ -28,7 +28,7 @@ class Node(base.Node):
         if self.cap is None:
             self.cap = cv2.VideoCapture(self.args["resource"])
             # self.set_res(1024.0, 768.0)
-            self.set_res(1280,720)
+            #self.set_res(1280,720)
             if not self.cap.isOpened():
                 raise Exception("Cannot open the given resource: ", self.args["resource"])
         time.sleep(1/self.args["fps"])

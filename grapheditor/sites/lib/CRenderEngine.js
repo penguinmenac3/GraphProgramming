@@ -512,8 +512,8 @@ function WebUI_CRenderEngine() {
 
 	function renderNode(node) {
 		if (typeof node.x === "undefined" || typeof node.y === "undefined") {
-			node.x = 0;
-			node.y = 0;
+			node.x = -renderOffsetX;
+			node.y = -renderOffsetY;
 			console.log("Default position for: " + node.name)
 		}
         
