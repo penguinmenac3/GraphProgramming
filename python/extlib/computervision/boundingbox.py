@@ -6,7 +6,8 @@ try:
 except ValueError:
     from stdlib import Node as base
 
-
+import sys
+    
 class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("Bounding Boxes", "computervision.boundingbox",
@@ -21,8 +22,10 @@ class Node(base.Node):
         result = []
         cnts = value["cnts"]
         for cnt in cnts:
+            #print(cnt)
+            #sys.stdout.flush()
             rect = cv2.minAreaRect(cnt)
-            box = cv2.cv.BoxPoints(rect)
+            box = cv2.boxPoints(rect)
             box = np.int0(box)
             result.append(box)
 
