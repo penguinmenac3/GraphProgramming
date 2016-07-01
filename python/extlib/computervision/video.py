@@ -1,6 +1,6 @@
 import time
 import cv2
-#import cv2.cv as cv
+import sys
 
 try:
     from ...stdlib import Node as base
@@ -25,7 +25,8 @@ class Node(base.Node):
         return self.cap.get(3), self.cap.get(4)
       
     def set_exposure(self, exposure):
-        self.cap.set(15, exposure)
+        if exposure > 0:
+            self.cap.set(15, exposure)
 
     def tick(self, value):
         if self.cap is None:

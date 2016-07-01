@@ -4,6 +4,9 @@ import time
 from threading import Thread
 from threading import Lock
 import debugger
+from concurrent.futures import ThreadPoolExecutor
+import multiprocessing
+from Queue import Queue
 
 try:
     import builtins
@@ -102,6 +105,7 @@ class GraphEx(object):
         self.toCalculateMainThread = []
         self.activeCalculations = []
         self.ops = 0
+        self.done_tasks = Queue()
 
         # add the input nodes to the nodes that should be calculated.
         self.toCalculate.extend(self.input_nodes.values())
@@ -126,7 +130,6 @@ class GraphEx(object):
                 self.toCalculateMainThread.append(node)
                 self.lock.release()
                 continue
-            self.lock.release()
             
             if self.checkIfReady(node):
                 # Prepare the input value set for the node.
@@ -139,11 +142,31 @@ class GraphEx(object):
                 if not abort:
                     # Add the node to the active calculations list and start a calculation thread.
                     self.activeCalculations.append(node)
+                    self.lock.release()
                     self.executeNode(node, node.inputBuffer)
+            else:
+                self.lock.release()
                     
     def execute(self):
+        # create a thread pool executor
+        n = multiprocessing.cpu_count()
+        executor = ThreadPoolExecutor(n*16)
+
         # Execute nodes until there is no more nodes to calculate and no nodes in calculation.
         while self.shouldStillRun():
+            if not self.done_tasks.empty():
+                node = self.done_tasks.get()
+                self.lock.acquire()
+                # Add the nodes that follow in the graph to the to calculate list and remove self from active nodes.
+                self.toCalculate.extend(node.nextNodes)
+                if node in self.activeCalculations:
+                    self.activeCalculations.remove(node)
+                if node.isRepeating():
+                    self.toCalculate.append(node)
+                self.lock.release()
+                self.done_tasks.task_done()
+                continue
+
             # When there are only active calculations and nothing new, wait.
             if not self.toCalculate:
                 time.sleep(0.01)
@@ -163,7 +186,6 @@ class GraphEx(object):
                 self.toCalculateMainThread.append(node)
                 self.lock.release()
                 continue
-            self.lock.release()
                 
             if self.checkIfReady(node):
                 # Prepare the input value set for the node.
@@ -176,9 +198,8 @@ class GraphEx(object):
                 if not abort:
                     # Add the node to the active calculations list and start a calculation thread.
                     self.activeCalculations.append(node)
-                    t = Thread(target=self.executeNode, args=(node, node.inputBuffer))
-                    t.setDaemon(True)
-                    t.start()
+                    executor.submit(self.executeNode, node, node.inputBuffer)
+            self.lock.release()
 
 
     def executeNode(self, node, value):
@@ -192,14 +213,7 @@ class GraphEx(object):
                 if "tags" in result and key in result["tags"]:
                     resultNode.inputBuffer["tags"][elem["var"]] = result["tags"][key]
                 #print(resultNode.inputBuffer)
-
-        # Add the nodes that follow in the graph to the to calculate list and remove self from active nodes.
-        self.lock.acquire()
-        self.toCalculate.extend(node.nextNodes)
-        self.activeCalculations.remove(node)
-        if node.isRepeating():
-            self.toCalculate.append(node)
-        self.lock.release()
+        self.done_tasks.put(node)
 
     def shouldStillRun(self):
         self.lock.acquire()

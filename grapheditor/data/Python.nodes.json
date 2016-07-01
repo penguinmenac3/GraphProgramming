@@ -1,554 +1,18 @@
 [{
-    "name": "View",
-    "code": "debug.view",
-    "inputs": {"val": "Object"},
-    "outputs": {"result": "Object"},
-    "args": {},
-    "desc": "Views (in IDE) and passes the object."
-},
-{
-    "name": "Breakpoint",
-    "code": "debug.breakpoint",
-    "inputs": {"val": "Object"},
-    "outputs": {"result": "Object"},
-    "args": {},
-    "desc": "Stops the execution until it's signaled to continue."
-},
-{
-    "name": "Starts with",
-    "code": "string.startswith",
-    "inputs": {"ref": "String", "str": "String"},
-    "outputs": {"result": "Boolean"},
-    "args": "",
-    "desc": "String starts with ref."
-},
-{
-    "name": "String Argument Trigger",
-    "code": "string.argtrigger",
-    "inputs": {},
-    "outputs": {"result": "String"},
-    "args": {"val": "arg", "time": 1.0},
-    "desc": "Pass the argument of the program."
-},
-{
-    "name": "Ends with",
-    "code": "string.endswith",
-    "inputs": {"ref": "String", "str": "String"},
-    "outputs": {"result": "Boolean"},
-    "args": "",
-    "desc": "Check if a string ends with the reference."
-},
-{
-    "name": "Trigger string",
-    "code": "string.trigger",
-    "inputs": {},
-    "outputs": {"result": "String"},
-    "args": {"val": "Hello World!", "time": 1.0},
-    "desc": "Trigger string."
-},
-{
-    "name": "Split",
-    "code": "string.split",
-    "inputs": {"splitter": "String", "str": "String"},
-    "outputs": {"result": "Array"},
-    "args": "",
-    "desc": "Split a string by a splitter."
-},
-{
-    "name": "String Argument",
-    "code": "string.argconst",
-    "inputs": {},
-    "outputs": {"result": "String"},
-    "args": "arg",
-    "desc": "Pass the argument of the program."
-},
-{
-    "name": "Equal",
-    "code": "string.equal",
-    "inputs": {"1": "String", "3": "String", "2": "String", "5": "String", "4": "String"},
-    "outputs": {"result": "Boolean"},
-    "args": 5,
-    "desc": "Check if values are equal."
-},
-{
-    "name": "Index of",
-    "code": "string.indexof",
-    "inputs": {"ref": "String", "str": "String", "offset": "Number"},
-    "outputs": {"result": "Number"},
-    "args": "",
-    "desc": "Get the index of a ref in a string."
-},
-{
-    "name": "String Concat",
-    "code": "string.concat",
-    "inputs": {"right": "String", "left": "String"},
-    "outputs": {"result": "String"},
-    "args": "",
-    "desc": "Concat the two strings."
-},
-{
-    "name": "String Constant",
-    "code": "string.const",
-    "inputs": {},
-    "outputs": {"result": "String"},
-    "args": "Hello World!",
-    "desc": "Pass the string arg as output."
-},
-{
-    "name": "While greater",
-    "code": "structures.whilegreater",
-    "inputs": {"initial": "Number", "val": "Number"},
-    "outputs": {"leave": "Number", "loop": "Number"},
-    "args": "",
-    "desc": "Loop while initial is greater than val."
-},
-{
-    "name": "Leaky Integrator",
-    "code": "structures.leakyintegrator",
-    "inputs": {"val": "Number"},
-    "outputs": {"result": "Boolean"},
-    "args": {"decay": 1.0, "time": 1.0},
-    "desc": "Leaky integrator."
-},
-{
-    "name": "While less",
-    "code": "structures.whileless",
-    "inputs": {"initial": "Number", "val": "Number"},
-    "outputs": {"leave": "Number", "loop": "Number"},
-    "args": "",
-    "desc": "Loop while initial is less than val."
-},
-{
-    "name": "If",
-    "code": "structures.if",
-    "inputs": {"val": "Object", "condition": "Boolean"},
-    "outputs": {"false": "Object", "true": "Object"},
-    "args": "",
-    "desc": "If condition pass to true otherwise to false."
-},
-{
-    "name": "Parse Json",
-    "code": "json.parse",
-    "inputs": {"val": "String"},
-    "outputs": {"result": "Object"},
-    "args": "",
-    "desc": "Parse a json string into an object."
-},
-{
-    "name": "Stringify Json",
-    "code": "json.stringify",
-    "inputs": {"val": "Object"},
-    "outputs": {"result": "String"},
-    "args": "",
-    "desc": "Makes a json string out of an object."
-},
-{
-    "name": "Number Argument Trigger",
-    "code": "number.argtrigger",
-    "inputs": {},
-    "outputs": {"result": "Number"},
-    "args": {"val": "arg", "time": 1.0},
-    "desc": "Pass the argument of the program."
-},
-{
-    "name": "Trigger Number",
-    "code": "number.trigger",
-    "inputs": {},
-    "outputs": {"result": "Number"},
-    "args": {"val": 42, "time": 1.0},
-    "desc": "Trigger value every time seconds."
-},
-{
-    "name": "Sum",
-    "code": "number.sum",
-    "inputs": {"right": "Number", "left": "Number"},
-    "outputs": {"result": "Number"},
-    "args": "",
-    "desc": "Sum left and right."
-},
-{
-    "name": "Divide",
-    "code": "number.div",
-    "inputs": {"right": "Number", "left": "Number"},
-    "outputs": {"result": "Number"},
-    "args": "",
-    "desc": "Divide left by right."
-},
-{
-    "name": "Number Argument",
-    "code": "number.argconst",
-    "inputs": {},
-    "outputs": {"result": "Number"},
-    "args": "arg",
-    "desc": "Pass the argument of the program."
-},
-{
-    "name": "Equal",
-    "code": "number.equal",
-    "inputs": {"1": "Number", "3": "Number", "2": "Number", "5": "Number", "4": "Number"},
-    "outputs": {"result": "Boolean"},
-    "args": 5,
-    "desc": "Check if values are equal."
-},
-{
-    "name": "Greater than",
-    "code": "number.greater",
-    "inputs": {"right": "Number", "left": "Number"},
-    "outputs": {"result": "Number"},
-    "args": "",
-    "desc": "Check if left > right."
-},
-{
-    "name": "Multiply",
-    "code": "number.mult",
-    "inputs": {"right": "Number", "left": "Number"},
-    "outputs": {"result": "Number"},
-    "args": "",
-    "desc": "Multiply values with each other."
-},
-{
-    "name": "Less than",
-    "code": "number.less",
-    "inputs": {"right": "Number", "left": "Number"},
-    "outputs": {"result": "Number"},
-    "args": "",
-    "desc": "Check if left < right."
-},
-{
-    "name": "Subtract",
-    "code": "number.subtract",
-    "inputs": {"right": "Number", "left": "Number"},
-    "outputs": {"result": "Number"},
-    "args": "",
-    "desc": "Subtract right from left."
-},
-{
-    "name": "Number Constant",
-    "code": "number.const",
-    "inputs": {},
-    "outputs": {"result": "Number"},
-    "args": 1.0,
-    "desc": "Pass the number arg as output."
-},
-{
-    "name": "Arg trigger",
-    "code": "boolean.argconst",
-    "inputs": {},
-    "outputs": {"result": "Boolean"},
-    "args": {"val": "arg", "time": 1.0},
-    "desc": "Get input from arguments."
-},
-{
-    "name": "Trigger",
-    "code": "boolean.trigger",
-    "inputs": {},
-    "outputs": {"result": "Boolean"},
-    "args": {"val": true, "time": 1.0},
-    "desc": "Trigger arg.val every arg.time s."
-},
-{
-    "name": "Not",
-    "code": "boolean.not",
-    "inputs": {"val": "Boolean"},
-    "outputs": {"result": "Boolean"},
-    "args": "",
-    "desc": "Output the inverted input."
-},
-{
-    "name": "Arg const",
-    "code": "boolean.argconst",
-    "inputs": {},
-    "outputs": {"result": "Boolean"},
-    "args": "arg",
-    "desc": "Get input from arguments."
-},
-{
-    "name": "Equal",
-    "code": "boolean.equal",
-    "inputs": {"1": "Boolean", "3": "Boolean", "2": "Boolean", "5": "Boolean", "4": "Boolean"},
-    "outputs": {"result": "Boolean"},
-    "args": 5,
-    "desc": "Checks if the first arg inputs are equal."
-},
-{
-    "name": "Or",
-    "code": "boolean.or",
-    "inputs": {"right": "Boolean", "left": "Boolean"},
-    "outputs": {"result": "Boolean"},
-    "args": "",
-    "desc": "Output the or of the inputs."
-},
-{
-    "name": "And",
-    "code": "boolean.and",
-    "inputs": {"right": "Boolean", "left": "Boolean"},
-    "outputs": {"result": "Boolean"},
-    "args": "",
-    "desc": "Combine inputs with and."
-},
-{
-    "name": "Const",
-    "code": "boolean.const",
-    "inputs": {},
-    "outputs": {"result": "Boolean"},
-    "args": true,
-    "desc": "Output the arg."
-},
-{
-    "name": "Function",
-    "code": "default.function",
-    "inputs": {"val": "Object"},
-    "outputs": {"result": "Object"},
-    "args": {"code": "result = value[\"val\"]"},
-    "desc": "Executes the argument as pyton code."
-},
-{
-    "name": "Accept any input",
-    "code": "default.any",
-    "inputs": {"val": "Object"},
-    "outputs": {"result": "Object"},
-    "args": "",
-    "desc": "If any input is present pass it."
-},
-{
-    "name": "Splitflow 5",
-    "code": "default.splitflow5",
-    "inputs": {"val": "Object"},
-    "outputs": {"1": "Object", "3": "Object", "2": "Object", "5": "Object", "4": "Object"},
-    "args": "",
-    "desc": "Splits the flow."
-},
-{
-    "name": "Splitflow 2",
-    "code": "default.splitflow",
-    "inputs": {"val": "Object"},
-    "outputs": {"right": "Object", "left": "Object"},
-    "args": "",
-    "desc": "Splits the flow."
-},
-{
-    "name": "Derive",
-    "code": "arrays.derive",
-    "inputs": {"val": "Array"},
-    "outputs": {"result": "Array"},
-    "args": {"delta_index": 1},
-    "desc": "Derive the array."
-},
-{
-    "name": "Arg trigger",
-    "code": "arrays.argtrigger",
-    "inputs": {},
-    "outputs": {"result": "String"},
-    "args": {"val": "arg", "time": 1.0},
-    "desc": "Get triggers from commandline."
-},
-{
-    "name": "Convolute",
-    "code": "arrays.convolute",
-    "inputs": {"kernel": "Array", "data": "Array"},
-    "outputs": {"result": "Array"},
-    "args": {},
-    "desc": "Convolute two arrays."
-},
-{
-    "name": "Array trigger",
-    "code": "arrays.trigger",
-    "inputs": {},
-    "outputs": {"result": "Array"},
-    "args": {"vals": [0, 1, 2, 3, 4, 5], "time": 1.0},
-    "desc": "A constant input array."
-},
-{
-    "name": "Crop Values",
-    "code": "arrays.crop",
-    "inputs": {"val": "Array"},
-    "outputs": {"result": "Array"},
-    "args": {"map_to_max": 1, "map_to_zero": 0},
-    "desc": "Crop the array by value."
-},
-{
-    "name": "Multiply (:Matrix)",
-    "code": "arrays.multInflate",
-    "inputs": {"right": "Array", "left": "Array"},
-    "outputs": {"result": "Matrix"},
-    "args": {},
-    "desc": "Multiply two values as product resulting in a matrix."
-},
-{
-    "name": "Arg const",
-    "code": "arrays.argconst",
-    "inputs": {},
-    "outputs": {"result": "String"},
-    "args": "arg",
-    "desc": "Get triggers from commandline."
-},
-{
-    "name": "Array Generator",
-    "code": "arrays.generate",
-    "inputs": {},
-    "outputs": {"result": "Array"},
-    "args": {"range": 100, "code": "y = x", "repeating": false, "time": 1},
-    "desc": "Executes the argument function as python code."
-},
-{
-    "name": "Add",
-    "code": "arrays.add",
-    "inputs": {"right": "Array", "left": "Array"},
-    "outputs": {"result": "Array"},
-    "args": {},
-    "desc": "A constant input array."
-},
-{
-    "name": "Gaussian Generator",
-    "code": "arrays.gaussian",
-    "inputs": {},
-    "outputs": {"result": "Array"},
-    "args": {"range": 100, "sigma": 1},
-    "desc": "Executes the argument function as python code."
-},
-{
-    "name": "Multiply",
-    "code": "arrays.mult",
-    "inputs": {"right": "Array", "left": "Array"},
-    "outputs": {"result": "Double"},
-    "args": {},
-    "desc": "Multiply two values as scalar product."
-},
-{
-    "name": "Subtract",
-    "code": "arrays.subtract",
-    "inputs": {"right": "Array", "left": "Array"},
-    "outputs": {"result": "Array"},
-    "args": {},
-    "desc": "Left minus right."
-},
-{
-    "name": "Array const",
-    "code": "arrays.const",
-    "inputs": {},
-    "outputs": {"result": "Array"},
-    "args": {"vals": [0, 1, 2, 3, 4, 5]},
-    "desc": "A constant input array."
-},
-{
-    "name": "Execute",
-    "code": "system.executable",
-    "inputs": {"arg": "String"},
-    "outputs": {"result": "String"},
-    "args": {"escapeArgs": false, "executable": "python graphex.py"},
-    "desc": "Execute executable with given args."
-},
-{
-    "name": "[WIP] HTTP Output",
-    "code": "system.httpoutput",
-    "inputs": {"val": "String"},
+    "name": "RcCar",
+    "code": "raspberrypi.rccar",
+    "inputs": {"speed": "Number", "turn": "Number"},
     "outputs": {},
-    "args": {},
-    "desc": "Output value to http connection."
+    "args": {"maxSpeed": 0.5},
+    "desc": "Set turn and speed of rccar."
 },
 {
-    "name": "[WIP] HTTP Request",
-    "code": "system.httprequest",
-    "inputs": {"val": "Object"},
-    "outputs": {"result": "Object"},
-    "args": {"host": "localhost", "port": 80, "method": "get"},
-    "desc": "Execute an http request on a host."
-},
-{
-    "name": "[WIP] WebSocket",
-    "code": "system.websocketoutput",
-    "inputs": {"val": "Object"},
-    "outputs": {},
-    "args": {},
-    "desc": "Output on a websocket."
-},
-{
-    "name": "TCP Network",
-    "code": "system.tcpnetwork",
-    "inputs": {"msg": "String"},
-    "outputs": {"result": "String"},
-    "args": {"host": "127.0.0.1", "password": null, "port": 25555},
-    "desc": "Send input over network and wait for result."
-},
-{
-    "name": "[WIP] HTTP Input",
-    "code": "system.httpinput",
+    "name": "Database SQLite",
+    "code": "database.databasesqlite",
     "inputs": {},
-    "outputs": {"put": "Object", "post": "Object", "delete": "Object", "get": "Object"},
-    "args": {"port": 80},
-    "desc": "Wait for http requests."
-},
-{
-    "name": "TCP Network",
-    "code": "system.tcpnetworkin",
-    "inputs": {},
-    "outputs": {"result": "String"},
-    "args": {"server": true, "host": "127.0.0.1", "passDummy": null, "passSocketAsTag": true, "password": null, "port": 25555},
-    "desc": "Wait for input over network."
-},
-{
-    "name": "[WIP] WebSocket",
-    "code": "system.websocketinput",
-    "inputs": {},
-    "outputs": {"result": "Object"},
-    "args": {},
-    "desc": "Wait for websocket inputs."
-},
-{
-    "name": "Subgraph",
-    "code": "system.subgraph",
-    "inputs": {"arg": "Object"},
-    "outputs": {"result": "Object"},
-    "args": "DefaultGraph",
-    "desc": "Execute a subgraph."
-},
-{
-    "name": "[WIP] WebSocket",
-    "code": "system.websocketrequest",
-    "inputs": {"val": "Object"},
-    "outputs": {"result": "Object"},
-    "args": {},
-    "desc": "Request on a websocket."
-},
-{
-    "name": "TCP Network",
-    "code": "system.tcpnetworkout",
-    "inputs": {"msg": "String"},
     "outputs": {},
-    "args": {"closeAfterSend": true, "host": "127.0.0.1", "password": null, "port": 25555},
-    "desc": "Send message over tcp network."
-},
-{
-    "name": "Print",
-    "code": "system.print",
-    "inputs": {"val": "String"},
-    "outputs": {},
-    "args": "",
-    "desc": "Print input to console."
-},
-{
-    "name": "Output",
-    "code": "system.output",
-    "inputs": {"arg": "String"},
-    "outputs": {},
-    "args": "arg",
-    "desc": "Set an output arg."
-},
-{
-    "name": "Split Topic",
-    "code": "bla.splittopic",
-    "inputs": {"val": "Object"},
-    "outputs": {"put": "Object", "none": "Object", "event": "Object", "get": "Object"},
-    "args": {},
-    "desc": "Split the flow by topic"
-},
-{
-    "name": "Authenticate",
-    "code": "bla.authenticate",
-    "inputs": {"val": "Object"},
-    "outputs": {"false": "Object", "true": "Object"},
-    "args": {"code": "result = value[\"val\"]\nerror = None"},
-    "desc": "Authenticates a connection."
+    "args": {"file": "bla.db", "db_id": "bla"},
+    "desc": "Setup the database as SQLite."
 },
 {
     "name": "Query Database",
@@ -559,30 +23,6 @@
     "desc": "Interact with a db."
 },
 {
-    "name": "Database SQL",
-    "code": "database.databasesql",
-    "inputs": {},
-    "outputs": {},
-    "args": {"host": "localhost", "password": "bla", "db_id": "bla", "db": "bla", "user": "bla"},
-    "desc": "Creates a connection to a database."
-},
-{
-    "name": "Database SQLite",
-    "code": "database.databasesqlite",
-    "inputs": {},
-    "outputs": {},
-    "args": {"db_id": "bla", "file": "bla.db"},
-    "desc": "Setup the database as SQLite."
-},
-{
-    "name": "Track",
-    "code": "geometry.track",
-    "inputs": {"val": "PointArray"},
-    "outputs": {"result": "PolygonArray"},
-    "args": {"max_length": 0, "forget_after": 0, "threshold_y": 10, "threshold_x": 10},
-    "desc": "Track points."
-},
-{
     "name": "Polar 2 Euler",
     "code": "geometry.polartoeuler",
     "inputs": {"val": "PointArray"},
@@ -591,20 +31,20 @@
     "desc": "Convert display style."
 },
 {
-    "name": "Euler 2 Image",
-    "code": "geometry.plotpointarraycv",
-    "inputs": {"val": "PointArray"},
-    "outputs": {"result": "Image"},
-    "args": {"view_size": 10.0, "img_size": 320},
-    "desc": "Plot to cv_image."
-},
-{
     "name": "Array 2 Polar",
     "code": "geometry.arraytopolar",
     "inputs": {"val": "Array"},
     "outputs": {"result": "PointArray"},
     "args": {"total_degree": 270, "center": 0},
     "desc": "Transpose points."
+},
+{
+    "name": "Track",
+    "code": "geometry.track",
+    "inputs": {"val": "PointArray"},
+    "outputs": {"result": "PolygonArray"},
+    "args": {"forget_after": 0, "threshold_y": 10, "threshold_x": 10, "max_length": 0},
+    "desc": "Track points."
 },
 {
     "name": "Centerpoints",
@@ -623,20 +63,20 @@
     "desc": "Calculates average for polygon."
 },
 {
+    "name": "Euler 2 Image",
+    "code": "geometry.plotpointarraycv",
+    "inputs": {"val": "PointArray"},
+    "outputs": {"result": "Image"},
+    "args": {"view_size": 10.0, "img_size": 320},
+    "desc": "Plot to cv_image."
+},
+{
     "name": "Transpose",
     "code": "geometry.transpose",
     "inputs": {"val": "PointArray"},
     "outputs": {"result": "PointArray"},
     "args": {},
     "desc": "Transpose points."
-},
-{
-    "name": "Listen",
-    "code": "ros.input",
-    "inputs": {},
-    "outputs": {"result": "Object"},
-    "args": {"topic": "/lidar_front"},
-    "desc": "Listen on topic."
 },
 {
     "name": "Publish",
@@ -647,12 +87,12 @@
     "desc": "Publish on topic."
 },
 {
-    "name": "[WIP] Record",
-    "code": "computervision.record",
-    "inputs": {"img": "Image"},
-    "outputs": {},
-    "args": {"resource": "~/Videos/test.avi"},
-    "desc": "Record video."
+    "name": "Listen",
+    "code": "ros.input",
+    "inputs": {},
+    "outputs": {"result": "Object"},
+    "args": {"topic": "/lidar_front"},
+    "desc": "Listen on topic."
 },
 {
     "name": "Dilate",
@@ -663,148 +103,12 @@
     "desc": "Dilate an image."
 },
 {
-    "name": "Render Boxes",
-    "code": "computervision.renderboxes",
-    "inputs": {"boxes": "PolygonArray", "img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": {"r": 255, "b": 0, "g": 0},
-    "desc": "Render boxes in image."
-},
-{
     "name": "Fixed Saturisation",
     "code": "computervision.fixedsaturisation",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": 127,
     "desc": "Set the saturisation to a fixed value."
-},
-{
-    "name": "BGR to HSV",
-    "code": "computervision.bgr2hsv",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": "",
-    "desc": "Convert BGR image to HSV image."
-},
-{
-    "name": "Show",
-    "code": "computervision.show",
-    "inputs": {"img": "Image"},
-    "outputs": {},
-    "args": {"fullscreen": true, "title": "Debug View"},
-    "desc": "Show an image."
-},
-{
-    "name": "Crop Image",
-    "code": "computervision.crop",
-    "inputs": {"val": "Image"},
-    "outputs": {"result": "Image"},
-    "args": {"y": 0, "x": 0, "height": 240, "width": 320},
-    "desc": "Crop the image"
-},
-{
-    "name": "Fixed Hue",
-    "code": "computervision.fixedhue",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": 127,
-    "desc": "Set the hue to a fixed value."
-},
-{
-    "name": "HSV to BGR",
-    "code": "computervision.hsv2bgr",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": "",
-    "desc": "Convert HSV image to BGR image."
-},
-{
-    "name": "In Range",
-    "code": "computervision.inrange",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": {"lower-value": 0, "upper-value": 255, "lower-saturisation": 0, "upper-hue": 255, "lower-hue": 0, "upper-saturisation": 255},
-    "desc": "Apply an inRange operation on the image."
-},
-{
-    "name": "Image to distribution",
-    "code": "computervision.img2distribution",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Array"},
-    "args": "",
-    "desc": "Convert an image to a distribution."
-},
-{
-    "name": "Bounding Boxes",
-    "code": "computervision.boundingbox",
-    "inputs": {"cnts": "PolygonArray"},
-    "outputs": {"result": "PolygonArray"},
-    "args": {},
-    "desc": "Calc bounding boxes for contour."
-},
-{
-    "name": "Sift",
-    "code": "computervision.sift",
-    "inputs": {"img": "Image"},
-    "outputs": {"features": "Array", "img": "Image"},
-    "args": "",
-    "desc": "Detect sift features."
-},
-{
-    "name": "Resize",
-    "code": "computervision.resize",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": {"width": 320, "height": 240},
-    "desc": "Resize an image."
-},
-{
-    "name": "Find Contours",
-    "code": "computervision.findcontours",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "PolygonArray"},
-    "args": {},
-    "desc": "Contours in an image."
-},
-{
-    "name": "Errode",
-    "code": "computervision.errode",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": {"iterations": 1, "size": 5},
-    "desc": "Errode an image."
-},
-{
-    "name": "Gaussian Blur",
-    "code": "computervision.gaussianblur",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": 4,
-    "desc": "Apply gaussian blur on image."
-},
-{
-    "name": "Median Blur",
-    "code": "computervision.medianblur",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": 4,
-    "desc": "Apply median blur on image."
-},
-{
-    "name": "Add Weighted",
-    "code": "computervision.addweighted",
-    "inputs": {"right": "Image", "left": "Image"},
-    "outputs": {"result": "Image"},
-    "args": {"right": 0.5, "left": 0.5},
-    "desc": "Add the two images weighted."
-},
-{
-    "name": "Video",
-    "code": "computervision.video",
-    "inputs": {},
-    "outputs": {"result": "Image"},
-    "args": {"resource": 0, "fps": 30, "exposure": 0.1},
-    "desc": "Capture video."
 },
 {
     "name": "Plot features",
@@ -815,6 +119,94 @@
     "desc": "Plot features into an image."
 },
 {
+    "name": "BGR to HSV",
+    "code": "computervision.bgr2hsv",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert BGR image to HSV image."
+},
+{
+    "name": "Render Boxes",
+    "code": "computervision.renderboxes",
+    "inputs": {"boxes": "PolygonArray", "img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"r": 255, "b": 0, "g": 0},
+    "desc": "Render boxes in image."
+},
+{
+    "name": "Errode",
+    "code": "computervision.errode",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"iterations": 1, "size": 5},
+    "desc": "Errode an image."
+},
+{
+    "name": "Crop Image",
+    "code": "computervision.crop",
+    "inputs": {"val": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"x": 0, "width": 320, "y": 0, "height": 240},
+    "desc": "Crop the image"
+},
+{
+    "name": "Image to distribution",
+    "code": "computervision.img2distribution",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Array"},
+    "args": "",
+    "desc": "Convert an image to a distribution."
+},
+{
+    "name": "In Range",
+    "code": "computervision.inrange",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"upper-hue": 255, "upper-saturisation": 255, "lower-hue": 0, "lower-value": 0, "upper-value": 255, "lower-saturisation": 0},
+    "desc": "Apply an inRange operation on the image."
+},
+{
+    "name": "Show",
+    "code": "computervision.show",
+    "inputs": {"img": "Image"},
+    "outputs": {},
+    "args": {"title": "Debug View", "fullscreen": true},
+    "desc": "Show an image."
+},
+{
+    "name": "Fixed Hue",
+    "code": "computervision.fixedhue",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": 127,
+    "desc": "Set the hue to a fixed value."
+},
+{
+    "name": "Gaussian Blur",
+    "code": "computervision.gaussianblur",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": 4,
+    "desc": "Apply gaussian blur on image."
+},
+{
+    "name": "Add Weighted",
+    "code": "computervision.addweighted",
+    "inputs": {"right": "Image", "left": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"right": 0.5, "left": 0.5},
+    "desc": "Add the two images weighted."
+},
+{
+    "name": "[WIP] Record",
+    "code": "computervision.record",
+    "inputs": {"img": "Image"},
+    "outputs": {},
+    "args": {"resource": "~/Videos/test.avi"},
+    "desc": "Record video."
+},
+{
     "name": "Fixed Intensity",
     "code": "computervision.fixedintensity",
     "inputs": {"img": "Image"},
@@ -823,18 +215,594 @@
     "desc": "Set the intensity to a fixed value."
 },
 {
-    "name": "[WIP] Plot Array",
-    "code": "matplotlib.plotarray",
-    "inputs": {"data": "Array"},
-    "outputs": {},
-    "args": {"subplot": 111, "ion": true, "clear": true, "title": "Debug"},
-    "desc": "Plot an array."
+    "name": "Median Blur",
+    "code": "computervision.medianblur",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": 4,
+    "desc": "Apply median blur on image."
 },
 {
-    "name": "[WIP] Plot Image",
-    "code": "matplotlib.plotimg",
-    "inputs": {"data": "Image"},
+    "name": "HSV to BGR",
+    "code": "computervision.hsv2bgr",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert HSV image to BGR image."
+},
+{
+    "name": "Find Contours",
+    "code": "computervision.findcontours",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "PolygonArray"},
+    "args": {},
+    "desc": "Contours in an image."
+},
+{
+    "name": "Resize",
+    "code": "computervision.resize",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"height": 240, "width": 320},
+    "desc": "Resize an image."
+},
+{
+    "name": "Bounding Boxes",
+    "code": "computervision.boundingbox",
+    "inputs": {"cnts": "PolygonArray"},
+    "outputs": {"result": "PolygonArray"},
+    "args": {},
+    "desc": "Calc bounding boxes for contour."
+},
+{
+    "name": "Video",
+    "code": "computervision.video",
+    "inputs": {},
+    "outputs": {"result": "Image"},
+    "args": {"resource": 0, "fps": 30, "exposure": 0.1},
+    "desc": "Capture video."
+},
+{
+    "name": "Sift",
+    "code": "computervision.sift",
+    "inputs": {"img": "Image"},
+    "outputs": {"features": "Array", "img": "Image"},
+    "args": "",
+    "desc": "Detect sift features."
+},
+{
+    "name": "Const",
+    "code": "boolean.const",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args": true,
+    "desc": "Output the arg."
+},
+{
+    "name": "Not",
+    "code": "boolean.not",
+    "inputs": {"val": "Boolean"},
+    "outputs": {"result": "Boolean"},
+    "args": "",
+    "desc": "Output the inverted input."
+},
+{
+    "name": "And",
+    "code": "boolean.and",
+    "inputs": {"right": "Boolean", "left": "Boolean"},
+    "outputs": {"result": "Boolean"},
+    "args": "",
+    "desc": "Combine inputs with and."
+},
+{
+    "name": "Arg const",
+    "code": "boolean.argconst",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args": "arg",
+    "desc": "Get input from arguments."
+},
+{
+    "name": "Arg trigger",
+    "code": "boolean.argconst",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args": {"val": "arg", "time": 1.0},
+    "desc": "Get input from arguments."
+},
+{
+    "name": "Or",
+    "code": "boolean.or",
+    "inputs": {"right": "Boolean", "left": "Boolean"},
+    "outputs": {"result": "Boolean"},
+    "args": "",
+    "desc": "Output the or of the inputs."
+},
+{
+    "name": "Equal",
+    "code": "boolean.equal",
+    "inputs": {"2": "Boolean", "3": "Boolean", "4": "Boolean", "5": "Boolean", "1": "Boolean"},
+    "outputs": {"result": "Boolean"},
+    "args": 5,
+    "desc": "Checks if the first arg inputs are equal."
+},
+{
+    "name": "Trigger",
+    "code": "boolean.trigger",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args": {"val": true, "time": 1.0},
+    "desc": "Trigger arg.val every arg.time s."
+},
+{
+    "name": "TCP Network",
+    "code": "system.tcpnetworkin",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": {"password": null, "passDummy": null, "port": 25555, "passSocketAsTag": true, "server": true, "host": "127.0.0.1"},
+    "desc": "Wait for input over network."
+},
+{
+    "name": "Subgraph",
+    "code": "system.subgraph",
+    "inputs": {"arg": "Object"},
+    "outputs": {"result": "Object"},
+    "args": "DefaultGraph",
+    "desc": "Execute a subgraph."
+},
+{
+    "name": "[WIP] WebSocket",
+    "code": "system.websocketinput",
+    "inputs": {},
+    "outputs": {"result": "Object"},
+    "args": {},
+    "desc": "Wait for websocket inputs."
+},
+{
+    "name": "TCP Network",
+    "code": "system.tcpnetwork",
+    "inputs": {"msg": "String"},
+    "outputs": {"result": "String"},
+    "args": {"password": null, "host": "127.0.0.1", "port": 25555},
+    "desc": "Send input over network and wait for result."
+},
+{
+    "name": "[WIP] WebSocket",
+    "code": "system.websocketoutput",
+    "inputs": {"val": "Object"},
     "outputs": {},
-    "args": {"subplot": 111, "ion": true, "clear": true, "title": "Debug"},
-    "desc": "Plot an image."
+    "args": {},
+    "desc": "Output on a websocket."
+},
+{
+    "name": "[WIP] HTTP Input",
+    "code": "system.httpinput",
+    "inputs": {},
+    "outputs": {"get": "Object", "put": "Object", "post": "Object", "delete": "Object"},
+    "args": {"port": 80},
+    "desc": "Wait for http requests."
+},
+{
+    "name": "[WIP] HTTP Output",
+    "code": "system.httpoutput",
+    "inputs": {"val": "String"},
+    "outputs": {},
+    "args": {},
+    "desc": "Output value to http connection."
+},
+{
+    "name": "Output",
+    "code": "system.output",
+    "inputs": {"arg": "String"},
+    "outputs": {},
+    "args": "arg",
+    "desc": "Set an output arg."
+},
+{
+    "name": "Execute",
+    "code": "system.executable",
+    "inputs": {"arg": "String"},
+    "outputs": {"result": "String"},
+    "args": {"escapeArgs": false, "executable": "python graphex.py"},
+    "desc": "Execute executable with given args."
+},
+{
+    "name": "Print",
+    "code": "system.print",
+    "inputs": {"val": "String"},
+    "outputs": {},
+    "args": "",
+    "desc": "Print input to console."
+},
+{
+    "name": "TCP Network",
+    "code": "system.tcpnetworkout",
+    "inputs": {"msg": "String"},
+    "outputs": {},
+    "args": {"password": null, "closeAfterSend": true, "host": "127.0.0.1", "port": 25555},
+    "desc": "Send message over tcp network."
+},
+{
+    "name": "[WIP] WebSocket",
+    "code": "system.websocketrequest",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "Object"},
+    "args": {},
+    "desc": "Request on a websocket."
+},
+{
+    "name": "[WIP] HTTP Request",
+    "code": "system.httprequest",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "Object"},
+    "args": {"method": "get", "host": "localhost", "port": 80},
+    "desc": "Execute an http request on a host."
+},
+{
+    "name": "Index of",
+    "code": "string.indexof",
+    "inputs": {"offset": "Number", "str": "String", "ref": "String"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Get the index of a ref in a string."
+},
+{
+    "name": "Ends with",
+    "code": "string.endswith",
+    "inputs": {"str": "String", "ref": "String"},
+    "outputs": {"result": "Boolean"},
+    "args": "",
+    "desc": "Check if a string ends with the reference."
+},
+{
+    "name": "String Constant",
+    "code": "string.const",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": "Hello World!",
+    "desc": "Pass the string arg as output."
+},
+{
+    "name": "Split",
+    "code": "string.split",
+    "inputs": {"str": "String", "splitter": "String"},
+    "outputs": {"result": "Array"},
+    "args": "",
+    "desc": "Split a string by a splitter."
+},
+{
+    "name": "String Argument",
+    "code": "string.argconst",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": "arg",
+    "desc": "Pass the argument of the program."
+},
+{
+    "name": "String Argument Trigger",
+    "code": "string.argtrigger",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": {"val": "arg", "time": 1.0},
+    "desc": "Pass the argument of the program."
+},
+{
+    "name": "Starts with",
+    "code": "string.startswith",
+    "inputs": {"str": "String", "ref": "String"},
+    "outputs": {"result": "Boolean"},
+    "args": "",
+    "desc": "String starts with ref."
+},
+{
+    "name": "Equal",
+    "code": "string.equal",
+    "inputs": {"2": "String", "3": "String", "4": "String", "5": "String", "1": "String"},
+    "outputs": {"result": "Boolean"},
+    "args": 5,
+    "desc": "Check if values are equal."
+},
+{
+    "name": "String Concat",
+    "code": "string.concat",
+    "inputs": {"right": "String", "left": "String"},
+    "outputs": {"result": "String"},
+    "args": "",
+    "desc": "Concat the two strings."
+},
+{
+    "name": "Trigger string",
+    "code": "string.trigger",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": {"val": "Hello World!", "time": 1.0},
+    "desc": "Trigger string."
+},
+{
+    "name": "Breakpoint",
+    "code": "debug.breakpoint",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "Object"},
+    "args": {},
+    "desc": "Stops the execution until it's signaled to continue."
+},
+{
+    "name": "View",
+    "code": "debug.view",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "Object"},
+    "args": {},
+    "desc": "Views (in IDE) and passes the object."
+},
+{
+    "name": "Parse Json",
+    "code": "json.parse",
+    "inputs": {"val": "String"},
+    "outputs": {"result": "Object"},
+    "args": "",
+    "desc": "Parse a json string into an object."
+},
+{
+    "name": "Stringify Json",
+    "code": "json.stringify",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "String"},
+    "args": "",
+    "desc": "Makes a json string out of an object."
+},
+{
+    "name": "Multiply (:Matrix)",
+    "code": "arrays.multInflate",
+    "inputs": {"right": "Array", "left": "Array"},
+    "outputs": {"result": "Matrix"},
+    "args": {},
+    "desc": "Multiply two values as product resulting in a matrix."
+},
+{
+    "name": "Array const",
+    "code": "arrays.const",
+    "inputs": {},
+    "outputs": {"result": "Array"},
+    "args": {"vals": [0, 1, 2, 3, 4, 5]},
+    "desc": "A constant input array."
+},
+{
+    "name": "Multiply",
+    "code": "arrays.mult",
+    "inputs": {"right": "Array", "left": "Array"},
+    "outputs": {"result": "Double"},
+    "args": {},
+    "desc": "Multiply two values as scalar product."
+},
+{
+    "name": "Crop Values",
+    "code": "arrays.crop",
+    "inputs": {"val": "Array"},
+    "outputs": {"result": "Array"},
+    "args": {"map_to_zero": 0, "map_to_max": 1},
+    "desc": "Crop the array by value."
+},
+{
+    "name": "Array Generator",
+    "code": "arrays.generate",
+    "inputs": {},
+    "outputs": {"result": "Array"},
+    "args": {"repeating": false, "code": "y = x", "time": 1, "range": 100},
+    "desc": "Executes the argument function as python code."
+},
+{
+    "name": "Arg const",
+    "code": "arrays.argconst",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": "arg",
+    "desc": "Get triggers from commandline."
+},
+{
+    "name": "Convolute",
+    "code": "arrays.convolute",
+    "inputs": {"kernel": "Array", "data": "Array"},
+    "outputs": {"result": "Array"},
+    "args": {},
+    "desc": "Convolute two arrays."
+},
+{
+    "name": "Arg trigger",
+    "code": "arrays.argtrigger",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": {"val": "arg", "time": 1.0},
+    "desc": "Get triggers from commandline."
+},
+{
+    "name": "Gaussian Generator",
+    "code": "arrays.gaussian",
+    "inputs": {},
+    "outputs": {"result": "Array"},
+    "args": {"sigma": 1, "range": 100},
+    "desc": "Executes the argument function as python code."
+},
+{
+    "name": "Derive",
+    "code": "arrays.derive",
+    "inputs": {"val": "Array"},
+    "outputs": {"result": "Array"},
+    "args": {"delta_index": 1},
+    "desc": "Derive the array."
+},
+{
+    "name": "Subtract",
+    "code": "arrays.subtract",
+    "inputs": {"right": "Array", "left": "Array"},
+    "outputs": {"result": "Array"},
+    "args": {},
+    "desc": "Left minus right."
+},
+{
+    "name": "Add",
+    "code": "arrays.add",
+    "inputs": {"right": "Array", "left": "Array"},
+    "outputs": {"result": "Array"},
+    "args": {},
+    "desc": "A constant input array."
+},
+{
+    "name": "Array trigger",
+    "code": "arrays.trigger",
+    "inputs": {},
+    "outputs": {"result": "Array"},
+    "args": {"vals": [0, 1, 2, 3, 4, 5], "time": 1.0},
+    "desc": "A constant input array."
+},
+{
+    "name": "Sum",
+    "code": "number.sum",
+    "inputs": {"right": "Number", "left": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Sum left and right."
+},
+{
+    "name": "Number Constant",
+    "code": "number.const",
+    "inputs": {},
+    "outputs": {"result": "Number"},
+    "args": 1.0,
+    "desc": "Pass the number arg as output."
+},
+{
+    "name": "Multiply",
+    "code": "number.mult",
+    "inputs": {"right": "Number", "left": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Multiply values with each other."
+},
+{
+    "name": "Greater than",
+    "code": "number.greater",
+    "inputs": {"right": "Number", "left": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Check if left > right."
+},
+{
+    "name": "Less than",
+    "code": "number.less",
+    "inputs": {"right": "Number", "left": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Check if left < right."
+},
+{
+    "name": "Number Argument",
+    "code": "number.argconst",
+    "inputs": {},
+    "outputs": {"result": "Number"},
+    "args": "arg",
+    "desc": "Pass the argument of the program."
+},
+{
+    "name": "Number Argument Trigger",
+    "code": "number.argtrigger",
+    "inputs": {},
+    "outputs": {"result": "Number"},
+    "args": {"val": "arg", "time": 1.0},
+    "desc": "Pass the argument of the program."
+},
+{
+    "name": "Subtract",
+    "code": "number.subtract",
+    "inputs": {"right": "Number", "left": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Subtract right from left."
+},
+{
+    "name": "Divide",
+    "code": "number.div",
+    "inputs": {"right": "Number", "left": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Divide left by right."
+},
+{
+    "name": "Equal",
+    "code": "number.equal",
+    "inputs": {"2": "Number", "3": "Number", "4": "Number", "5": "Number", "1": "Number"},
+    "outputs": {"result": "Boolean"},
+    "args": 5,
+    "desc": "Check if values are equal."
+},
+{
+    "name": "Trigger Number",
+    "code": "number.trigger",
+    "inputs": {},
+    "outputs": {"result": "Number"},
+    "args": {"val": 42, "time": 1.0},
+    "desc": "Trigger value every time seconds."
+},
+{
+    "name": "While greater",
+    "code": "structures.whilegreater",
+    "inputs": {"val": "Number", "initial": "Number"},
+    "outputs": {"leave": "Number", "loop": "Number"},
+    "args": "",
+    "desc": "Loop while initial is greater than val."
+},
+{
+    "name": "While less",
+    "code": "structures.whileless",
+    "inputs": {"val": "Number", "initial": "Number"},
+    "outputs": {"leave": "Number", "loop": "Number"},
+    "args": "",
+    "desc": "Loop while initial is less than val."
+},
+{
+    "name": "Leaky Integrator",
+    "code": "structures.leakyintegrator",
+    "inputs": {"val": "Number"},
+    "outputs": {"result": "Boolean"},
+    "args": {"decay": 1.0, "time": 1.0},
+    "desc": "Leaky integrator."
+},
+{
+    "name": "If",
+    "code": "structures.if",
+    "inputs": {"val": "Object", "condition": "Boolean"},
+    "outputs": {"true": "Object", "false": "Object"},
+    "args": "",
+    "desc": "If condition pass to true otherwise to false."
+},
+{
+    "name": "Accept any input",
+    "code": "default.any",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "Object"},
+    "args": "",
+    "desc": "If any input is present pass it."
+},
+{
+    "name": "Function",
+    "code": "default.function",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "Object"},
+    "args": {"code": "result = value[\"val\"]"},
+    "desc": "Executes the argument as pyton code."
+},
+{
+    "name": "Splitflow 2",
+    "code": "default.splitflow",
+    "inputs": {"val": "Object"},
+    "outputs": {"right": "Object", "left": "Object"},
+    "args": "",
+    "desc": "Splits the flow."
+},
+{
+    "name": "Splitflow 5",
+    "code": "default.splitflow5",
+    "inputs": {"val": "Object"},
+    "outputs": {"2": "Object", "3": "Object", "4": "Object", "5": "Object", "1": "Object"},
+    "args": "",
+    "desc": "Splits the flow."
 }]

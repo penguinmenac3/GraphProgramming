@@ -2,6 +2,7 @@
 
 sudo apt-get install -y python python-dev python-pip
 sudo pip install autobahn[twisted]
+sudo pip install futures
 
 # Absolute path to this script. /home/user/bin/foo.sh
 SCRIPT=$(readlink -f $0)
