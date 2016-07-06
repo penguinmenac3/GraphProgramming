@@ -36,7 +36,7 @@ class Node(base.Node):
                 data_str = "json:" + json.dumps(value["val"])
             elif type(value["val"]) == np.ndarray:
                 img = value["val"]
-                img = cv2.resize(img.copy(), (80, 60), 0, 0, cv2.INTER_CUBIC)
+                img = cv2.resize(img.copy(), (160, 120), 0, 0, cv2.INTER_CUBIC)
                 cnt = cv2.imencode('.png', img)[1]
                 b64 = base64.encodestring(cnt)
                 data_str = ("img:" + b64).replace("\n", "")
