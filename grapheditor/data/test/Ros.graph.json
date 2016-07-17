@@ -1,0 +1,111 @@
+{
+	"nodes": [
+		{
+			"name": "OUjgF",
+			"code": "stdlib.system.print",
+			"inputs": {
+				"val": "String"
+			},
+			"outputs": {},
+			"args": "",
+			"desc": "Print input to console.",
+			"displayname": "Print",
+			"heat": 9,
+			"running": 18,
+			"x": 251,
+			"y": 98
+		},
+		{
+			"name": "B2uuR",
+			"code": "extlib.ros.rosnode",
+			"inputs": {},
+			"outputs": {},
+			"args": {
+				"name": "graphex"
+			},
+			"desc": "Create a ros node.",
+			"displayname": "Ros Node",
+			"heat": 1,
+			"running": 0,
+			"x": -227,
+			"y": -249
+		},
+		{
+			"name": "vIYMb",
+			"code": "extlib.ros.output",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {},
+			"args": {
+				"topic": "/test",
+				"code": "from std_msgs.msg import String as topic_type"
+			},
+			"desc": "Publish on topic.",
+			"displayname": "Publish",
+			"heat": 10,
+			"running": 8,
+			"x": -2,
+			"y": 100
+		},
+		{
+			"name": "ntUje",
+			"code": "stdlib.string.trigger",
+			"inputs": {},
+			"outputs": {
+				"result": "String"
+			},
+			"args": {
+				"val": "Hello World!",
+				"time": 1
+			},
+			"desc": "Trigger string.",
+			"displayname": "Trigger string",
+			"heat": 11,
+			"running": 20,
+			"x": -3,
+			"y": -106
+		},
+		{
+			"name": "g15ll",
+			"code": "extlib.ros.input",
+			"inputs": {},
+			"outputs": {
+				"result": "Object"
+			},
+			"args": {
+				"topic": "/test",
+				"rate": 10,
+				"code": "from std_msgs.msg import String as topic_type"
+			},
+			"desc": "Listen on topic.",
+			"displayname": "Listen",
+			"heat": 100,
+			"running": 20,
+			"x": 250,
+			"y": -110
+		}
+	],
+	"connections": [
+		{
+			"input": {
+				"node": "ntUje",
+				"output": "result"
+			},
+			"output": {
+				"node": "vIYMb",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "g15ll",
+				"output": "result"
+			},
+			"output": {
+				"node": "OUjgF",
+				"input": "val"
+			}
+		}
+	]
+}

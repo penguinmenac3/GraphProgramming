@@ -400,6 +400,8 @@ function WebUI_CRenderEngine() {
                     for (var j = 0; j < data[i].length; j++) {
                         max_x = Math.max(max_x, Math.abs(data[i][j][0]));
                         max_y = Math.max(max_y, Math.abs(data[i][j][1]));
+						max_x = Math.max(max_x, max_y);
+						max_y = Math.max(max_x, max_y);
                         if (data[i][j][0] < 0) {
                             xs = 2;
                         }
@@ -417,6 +419,8 @@ function WebUI_CRenderEngine() {
                 for (var i = 0; i < len; i++) {
                     max_x = Math.max(max_x, Math.abs(data[i][0]));
                     max_y = Math.max(max_y, Math.abs(data[i][1]));
+					max_x = Math.max(max_x, max_y);
+					max_y = Math.max(max_x, max_y);
                     if (data[i][0] < 0) {
                         xs = 2;
                     }
@@ -468,7 +472,7 @@ function WebUI_CRenderEngine() {
 	}
 
 	function renderLineStrip(data, paneWidth, paneHeight, x, y, max_x, max_y, foregroundColor, xs, ys) {
-        var len = data.length;
+		var len = data.length;
 	    for (var i = 1; i < len; i++) {
             var px1 = ((xs-1)/2 + data[i-1][0]/(xs*max_x)) * paneWidth * 0.8  - paneWidth / 2  + x + paneWidth * 0.1;
             var px2 = ((xs-1)/2 + data[i][0]  /(xs*max_x)) * paneWidth * 0.8  - paneWidth / 2  + x + paneWidth * 0.1;

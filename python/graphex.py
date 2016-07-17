@@ -8,6 +8,10 @@ from concurrent.futures import ThreadPoolExecutor
 import multiprocessing
 from Queue import Queue
 import traceback
+try:
+    import rospy
+except:
+    pass
 
 try:
     import builtins
@@ -199,8 +203,9 @@ class GraphEx(object):
     def executeNode(self, node, value):
         try:
             # Tick the node and then add the result to calculated.
-            #print(node.name)
-            #sys.stdout.flush()
+            if self.verbose:
+                print(node.name)
+                sys.stdout.flush()
             if "debugger" in builtins.registry:
                 node.heat += 1
                 dat = {"state": True, "heat": node.heat}
@@ -229,14 +234,19 @@ class GraphEx(object):
             print(tb)
             print("***************************")
             sys.stdout.flush()
-        
-        #print("Finished: " + node.name)
-        #sys.stdout.flush()
+        if self.verbose:
+            print("Finished: " + node.name)
+            sys.stdout.flush()
 
     def shouldStillRun(self):
         self.lock.acquire()
         should_run = (self.toCalculate or self.toCalculateMainThread or self.activeCalculations) and not builtins.registry["kill"]
         self.lock.release()
+
+        try:
+            should_run = should_run and not rospy.is_shutdown()
+        except:
+            pass
         return should_run
 
     def checkIfReady(self, node):

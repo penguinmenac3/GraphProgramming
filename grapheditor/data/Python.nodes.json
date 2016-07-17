@@ -377,6 +377,14 @@
     "desc": "A constant input array."
 },
 {
+    "name": "Join",
+    "code": "stdlib.arrays.join",
+    "inputs": {"a": "Array", "b": "Array"},
+    "outputs": {"result": "Array"},
+    "args": {},
+    "desc": "Executes the argument as pyton code."
+},
+{
     "name": "Crop Values",
     "code": "stdlib.arrays.crop",
     "inputs": {"val": "Array"},
@@ -653,15 +661,23 @@
     "code": "extlib.ros.input",
     "inputs": {},
     "outputs": {"result": "Object"},
-    "args": {"topic": "/lidar_front"},
+    "args": {"topic": "/test", "rate": 10, "code": "from std_msgs.msg import String as topic_type"},
     "desc": "Listen on topic."
 },
 {
+    "name": "Ros Node",
+    "code": "extlib.ros.rosnode",
+    "inputs": {},
+    "outputs": {},
+    "args": {"name": "graphex"},
+    "desc": "Create a ros node."
+},
+{
     "name": "Publish",
-    "code": "extlib.ros.input",
+    "code": "extlib.ros.output",
     "inputs": {"val": "Object"},
     "outputs": {},
-    "args": {"topic": "/image"},
+    "args": {"topic": "/test", "code": "from std_msgs.msg import String as topic_type"},
     "desc": "Publish on topic."
 },
 {
@@ -995,16 +1011,16 @@
 {
     "name": "eval accuracy",
     "code": "extlib.tensorflow.evalaccuracy",
-    "inputs": {"x_values": "Tensor", "trigger": "Object", "y_": "Tensor", "x": "Tensor", "y_values": "Tensor", "accuracy": "Tensor"},
+    "inputs": {"x_values": "Tensor", "trigger": "TFSession", "y_": "Tensor", "x": "Tensor", "y_values": "Tensor", "accuracy": "Tensor"},
     "outputs": {"result": "Number"},
-    "args": {"code": "result = value[\"val\"]"},
+    "args": {},
     "desc": "eval the accuracy."
 },
 {
     "name": "Train",
     "code": "extlib.tensorflow.train",
     "inputs": {"x": "Tensor", "session": "TFSession", "train_step": "Tensor", "y_": "Tensor", "batch": "Tensor"},
-    "outputs": {"result": "Object"},
+    "outputs": {"result": "TFSession"},
     "args": {},
     "desc": "Executes a train step"
 },
