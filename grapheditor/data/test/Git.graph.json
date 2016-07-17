@@ -1,1 +1,295 @@
-{"nodes":[{"name":"Print to console","code":"sys.print","inputs":{"val":"Object"},"outputs":{},"args":{},"desc":"Print the input.","x":58,"y":231.5},{"name":"Git","code":"sys.executable","inputs":{"arg":"String"},"outputs":{"result":"String"},"args":{"executable":"git","escapeArgs":false},"desc":"Call {args} with input as param","x":54.5,"y":96},{"name":"Add Command","code":"string.const","inputs":{},"outputs":{"result":"String"},"args":"add ","desc":"Outputs {arg}","x":-386.5,"y":-335.5},{"name":"Files To Commit","code":"string.const","inputs":{},"outputs":{"result":"String"},"args":"--all :/","desc":"Outputs {arg}","x":-237.5,"y":-467.5},{"name":"Commit Command","code":"string.const","inputs":{},"outputs":{"result":"String"},"args":"commit -m \"","desc":"Outputs {arg}","x":-61,"y":-351.5},{"name":"Commit Command End","code":"string.const","inputs":{},"outputs":{"result":"String"},"args":"\"","desc":"Outputs {arg}","x":236,"y":-334.5},{"name":"Commit Message","code":"string.const","inputs":{},"outputs":{"result":"String"},"args":"A git management graph.","desc":"Outputs {arg}","x":67,"y":-490.5},{"name":"Concat Commit Left","code":"string.concat","inputs":{"left":"String","right":"String"},"outputs":{"result":"String"},"args":{},"desc":"Concat the two inputs.","x":34,"y":-226.5},{"name":"Concat Add","code":"string.concat","inputs":{"left":"String","right":"String"},"outputs":{"result":"String"},"args":{},"desc":"Concat the two inputs.","x":-119,"y":-93.5},{"name":"Concat Commit Right","code":"string.concat","inputs":{"left":"String","right":"String"},"outputs":{"result":"String"},"args":{},"desc":"Concat the two inputs.","x":94,"y":-93.5},{"name":"Push Command","code":"string.const","inputs":{},"outputs":{"result":"String"},"args":"push","desc":"Outputs {arg}","x":306,"y":-94.5},{"name":"Pull Command","code":"string.const","inputs":{},"outputs":{"result":"String"},"args":"pull","desc":"Outputs {arg}","x":513,"y":-95.5},{"name":"Status Command","code":"string.const","inputs":{},"outputs":{"result":"String"},"args":"status","desc":"Outputs {arg}","x":-339.5,"y":-92.5}],"connections":[{"input":{"node":"Commit Command","output":"result"},"output":{"node":"Concat Commit Left","input":"left"}},{"input":{"node":"Commit Message","output":"result"},"output":{"node":"Concat Commit Left","input":"right"}},{"input":{"node":"Add Command","output":"result"},"output":{"node":"Concat Add","input":"left"}},{"input":{"node":"Files To Commit","output":"result"},"output":{"node":"Concat Add","input":"right"}},{"input":{"node":"Concat Commit Left","output":"result"},"output":{"node":"Concat Commit Right","input":"left"}},{"input":{"node":"Commit Command End","output":"result"},"output":{"node":"Concat Commit Right","input":"right"}},{"input":{"node":"Git","output":"result"},"output":{"node":"Print to console","input":"val"}},{"input":{"node":"Status Command","output":"result"},"output":{"node":"Git","input":"arg"}}]}
+{
+	"connections": [
+		{
+			"input": {
+				"node": "Commit Command",
+				"output": "result"
+			},
+			"output": {
+				"input": "left",
+				"node": "Concat Commit Left"
+			}
+		},
+		{
+			"input": {
+				"node": "Commit Message",
+				"output": "result"
+			},
+			"output": {
+				"input": "right",
+				"node": "Concat Commit Left"
+			}
+		},
+		{
+			"input": {
+				"node": "Add Command",
+				"output": "result"
+			},
+			"output": {
+				"input": "left",
+				"node": "Concat Add"
+			}
+		},
+		{
+			"input": {
+				"node": "Files To Commit",
+				"output": "result"
+			},
+			"output": {
+				"input": "right",
+				"node": "Concat Add"
+			}
+		},
+		{
+			"input": {
+				"node": "Concat Commit Left",
+				"output": "result"
+			},
+			"output": {
+				"input": "left",
+				"node": "Concat Commit Right"
+			}
+		},
+		{
+			"input": {
+				"node": "Commit Command End",
+				"output": "result"
+			},
+			"output": {
+				"input": "right",
+				"node": "Concat Commit Right"
+			}
+		},
+		{
+			"input": {
+				"node": "Status Command",
+				"output": "result"
+			},
+			"output": {
+				"node": "ctibS",
+				"input": "arg"
+			}
+		},
+		{
+			"input": {
+				"node": "ctibS",
+				"output": "result"
+			},
+			"output": {
+				"node": "P1oPI",
+				"input": "val"
+			}
+		}
+	],
+	"nodes": [
+		{
+			"args": "add ",
+			"code": "stdlib.string.const",
+			"desc": "Outputs {arg}",
+			"inputs": {},
+			"name": "Add Command",
+			"outputs": {
+				"result": "String"
+			},
+			"x": -386.5,
+			"y": -335.5,
+			"heat": 1,
+			"running": 0,
+			"displayname": "add"
+		},
+		{
+			"args": "--all :/",
+			"code": "stdlib.string.const",
+			"desc": "Outputs {arg}",
+			"inputs": {},
+			"name": "Files To Commit",
+			"outputs": {
+				"result": "String"
+			},
+			"x": -237.5,
+			"y": -467.5,
+			"heat": 1,
+			"running": 0,
+			"displayname": "--all"
+		},
+		{
+			"args": "commit -m \"",
+			"code": "stdlib.string.const",
+			"desc": "Outputs {arg}",
+			"inputs": {},
+			"name": "Commit Command",
+			"outputs": {
+				"result": "String"
+			},
+			"x": -61,
+			"y": -351.5,
+			"heat": 1,
+			"running": 0,
+			"displayname": "commit"
+		},
+		{
+			"args": "\"",
+			"code": "stdlib.string.const",
+			"desc": "Outputs {arg}",
+			"inputs": {},
+			"name": "Commit Command End",
+			"outputs": {
+				"result": "String"
+			},
+			"x": 237,
+			"y": -334.5,
+			"heat": 1,
+			"running": 0,
+			"displayname": "commit end"
+		},
+		{
+			"args": "A git management graph.",
+			"code": "stdlib.string.const",
+			"desc": "Outputs {arg}",
+			"inputs": {},
+			"name": "Commit Message",
+			"outputs": {
+				"result": "String"
+			},
+			"x": 67,
+			"y": -490.5,
+			"heat": 1,
+			"running": 0,
+			"displayname": "Commit MSG"
+		},
+		{
+			"args": {},
+			"code": "stdlib.string.concat",
+			"desc": "Concat the two inputs.",
+			"inputs": {
+				"left": "String",
+				"right": "String"
+			},
+			"name": "Concat Commit Left",
+			"outputs": {
+				"result": "String"
+			},
+			"x": 34,
+			"y": -226.5,
+			"heat": 1,
+			"running": 0,
+			"displayname": "concat"
+		},
+		{
+			"args": {},
+			"code": "stdlib.string.concat",
+			"desc": "Concat the two inputs.",
+			"inputs": {
+				"left": "String",
+				"right": "String"
+			},
+			"name": "Concat Add",
+			"outputs": {
+				"result": "String"
+			},
+			"x": -119,
+			"y": -93.5,
+			"heat": 1,
+			"running": 10,
+			"displayname": "concat"
+		},
+		{
+			"args": {},
+			"code": "stdlib.string.concat",
+			"desc": "Concat the two inputs.",
+			"inputs": {
+				"left": "String",
+				"right": "String"
+			},
+			"name": "Concat Commit Right",
+			"outputs": {
+				"result": "String"
+			},
+			"x": 94,
+			"y": -93.5,
+			"heat": 1,
+			"running": 6,
+			"displayname": "concat"
+		},
+		{
+			"args": "push",
+			"code": "stdlib.string.const",
+			"desc": "Outputs {arg}",
+			"inputs": {},
+			"name": "Push Command",
+			"outputs": {
+				"result": "String"
+			},
+			"x": 306,
+			"y": -94.5,
+			"heat": 1,
+			"running": 0,
+			"displayname": "push"
+		},
+		{
+			"args": "pull",
+			"code": "stdlib.string.const",
+			"desc": "Outputs {arg}",
+			"inputs": {},
+			"name": "Pull Command",
+			"outputs": {
+				"result": "String"
+			},
+			"x": 513,
+			"y": -95.5,
+			"heat": 1,
+			"running": 12,
+			"displayname": "pull"
+		},
+		{
+			"args": "status",
+			"code": "stdlib.string.const",
+			"desc": "Outputs {arg}",
+			"inputs": {},
+			"name": "Status Command",
+			"outputs": {
+				"result": "String"
+			},
+			"x": -339.5,
+			"y": -92.5,
+			"heat": 1,
+			"running": 0,
+			"displayname": "status"
+		},
+		{
+			"name": "P1oPI",
+			"code": "stdlib.system.print",
+			"inputs": {
+				"val": "String"
+			},
+			"outputs": {},
+			"args": "",
+			"desc": "Print input to console.",
+			"displayname": "Print",
+			"heat": 1,
+			"running": 18,
+			"x": 58,
+			"y": 233
+		},
+		{
+			"name": "ctibS",
+			"code": "stdlib.system.executable",
+			"inputs": {
+				"arg": "String"
+			},
+			"outputs": {
+				"result": "String"
+			},
+			"args": {
+				"escapeArgs": false,
+				"executable": "git"
+			},
+			"desc": "Execute git",
+			"displayname": "Execute",
+			"heat": 1,
+			"running": 14,
+			"x": 3,
+			"y": 76
+		}
+	]
+}

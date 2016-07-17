@@ -9,7 +9,7 @@ class Node(base.Node):
         super(Node, self).__init__("Variable", "extlib.tensorflow.variable", {"dimensions": [2,2]},
                                    {"session": "TFSession"},
                                    {"session": "TFSession", "result": "Tensor"},
-                                   "A tensorflow variable.", verbose)
+                                   "A tensorflow variable.", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):

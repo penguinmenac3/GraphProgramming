@@ -7,6 +7,7 @@ import debugger
 from concurrent.futures import ThreadPoolExecutor
 import multiprocessing
 from Queue import Queue
+import traceback
 
 try:
     import builtins
@@ -144,6 +145,11 @@ class GraphEx(object):
                 node = self.done_tasks.get()
                 self.lock.acquire()
                 # Add the nodes that follow in the graph to the to calculate list and remove self from active nodes.
+                #debug_str = "["
+                #for x in node.nextNodes:
+                #    debug_str += x.name + ","
+                #print(debug_str + "]")
+                #sys.stdout.flush()
                 self.toCalculate.extend(node.nextNodes)
                 if node in self.activeCalculations:
                     self.activeCalculations.remove(node)
@@ -169,6 +175,8 @@ class GraphEx(object):
             
             # Check if node needs main thread if so cannot be started in this thread.    
             if node.needsForeground():
+                #print("Needs foreground: "+ node.name)
+                #sys.stdout.flush()
                 self.toCalculateMainThread.append(node)
                 self.lock.release()
                 continue
@@ -189,29 +197,41 @@ class GraphEx(object):
 
 
     def executeNode(self, node, value):
-        # Tick the node and then add the result to calculated.
-        #print(node.name)
+        try:
+            # Tick the node and then add the result to calculated.
+            #print(node.name)
+            #sys.stdout.flush()
+            if "debugger" in builtins.registry:
+                node.heat += 1
+                dat = {"state": True, "heat": node.heat}
+                data_str = "running:" + json.dumps(dat)
+                builtins.registry["debugger"].send("data_" + node.node_uid + ":" + data_str)
+            result = node.tick(value)
+
+            if "debugger" in builtins.registry:
+                dat = {"state": False, "heat": node.heat}
+                data_str = "running:" + json.dumps(dat)
+                builtins.registry["debugger"].send("data_" + node.node_uid + ":" + data_str)
+
+            for key in node.outs:
+                for elem in node.outs[key]:
+                    resultNode = elem["node"]
+                    resultNode.inputBuffer[elem["var"]] = result[key]
+                    if "tags" in result and key in result["tags"]:
+                        resultNode.inputBuffer["tags"][elem["var"]] = result["tags"][key]
+                    #print(resultNode.inputBuffer)
+            self.done_tasks.put(node)
+        except:
+        #except Exception as e:
+            tb = traceback.format_exc()
+            print("***************************")
+            print(node.name)
+            print(tb)
+            print("***************************")
+            sys.stdout.flush()
+        
+        #print("Finished: " + node.name)
         #sys.stdout.flush()
-        if "debugger" in builtins.registry:
-            node.heat += 1
-            dat = {"state": True, "heat": node.heat}
-            data_str = "running:" + json.dumps(dat)
-            builtins.registry["debugger"].send("data_" + node.node_uid + ":" + data_str)
-        result = node.tick(value)
-
-        if "debugger" in builtins.registry:
-            dat = {"state": False, "heat": node.heat}
-            data_str = "running:" + json.dumps(dat)
-            builtins.registry["debugger"].send("data_" + node.node_uid + ":" + data_str)
-
-        for key in node.outs:
-            for elem in node.outs[key]:
-                resultNode = elem["node"]
-                resultNode.inputBuffer[elem["var"]] = result[key]
-                if "tags" in result and key in result["tags"]:
-                    resultNode.inputBuffer["tags"][elem["var"]] = result["tags"][key]
-                #print(resultNode.inputBuffer)
-        self.done_tasks.put(node)
 
     def shouldStillRun(self):
         self.lock.acquire()

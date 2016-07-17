@@ -1,3 +1,4 @@
 *.nja
 .idea
 .vscode
+grapheditor/MNIST_data

@@ -6,10 +6,10 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("eval accuracy", "extlib.tensorflow.evalaccuracy", {"code": 'result = value["val"]'},
-                                   {"trigger": "Object", "accuracy": "Tensor", "x": "Tensor", "y_": "Tensor", "x_values": "Tensor", "y_values": "Tensor"},
+        super(Node, self).__init__("eval accuracy", "extlib.tensorflow.evalaccuracy", {},
+                                   {"trigger": "TFSession", "accuracy": "Tensor", "x": "Tensor", "y_": "Tensor", "x_values": "Tensor", "y_values": "Tensor"},
                                    {"result": "Number"},
-                                   "eval the accuracy.", verbose)
+                                   "eval the accuracy.", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):
@@ -23,7 +23,8 @@ class Node(base.Node):
         y_ = value["y_"]
         x_values = value["x_values"]
         y_values = value["y_values"]
-        result = accuracy.eval(feed_dict={x: x_values, y_: y_values})
+        session = value["trigger"]
+        result = session.run(accuracy, feed_dict={x: x_values, y_: y_values})
         
         if tag:
             return {"result": result, "tags":{"result":tag}}

@@ -11,7 +11,7 @@ class Node(base.Node):
         super(Node, self).__init__("MNIST", "extlib.tensorflow.mnist", {},
                                    {},
                                    {"result": "MNIST"},
-                                   "Loads the mnist dataset", verbose)
+                                   "Loads the mnist dataset", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):

@@ -9,7 +9,7 @@ class Node(base.Node):
         super(Node, self).__init__("Reduce Sum", "extlib.tensorflow.reducesum", {"code": 'result = value["val"]'},
                                    {"val": "Tensor"},
                                    {"result": "Tensor"},
-                                   "Reduce the sum", verbose)
+                                   "Reduce the sum", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):

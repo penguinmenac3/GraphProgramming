@@ -1,0 +1,75 @@
+{
+	"nodes": [
+		{
+			"name": "bAAYd",
+			"code": "stdlib.system.print",
+			"inputs": {
+				"val": "String"
+			},
+			"outputs": {},
+			"args": "",
+			"desc": "Print input to console.",
+			"displayname": "Print",
+			"heat": 1,
+			"x": 4,
+			"y": 136,
+			"running": false
+		},
+		{
+			"name": "s6iIH",
+			"code": "stdlib.string.const",
+			"inputs": {},
+			"outputs": {
+				"result": "String"
+			},
+			"args": "Hello ",
+			"desc": "Pass the string arg as output.",
+			"displayname": "Hello",
+			"heat": 1,
+			"x": -1,
+			"y": -122,
+			"running": false
+		},
+		{
+			"name": "RyvE3",
+			"code": "stdlib.default.function",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"result": "Object"
+			},
+			"args": {
+				"code": "result = value[\"val\"]\n\nraise ValueError"
+			},
+			"desc": "Executes the argument as pyton code.",
+			"displayname": "Function",
+			"heat": 0,
+			"running": 0,
+			"x": 2,
+			"y": 16
+		}
+	],
+	"connections": [
+		{
+			"input": {
+				"node": "RyvE3",
+				"output": "result"
+			},
+			"output": {
+				"node": "bAAYd",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "s6iIH",
+				"output": "result"
+			},
+			"output": {
+				"node": "RyvE3",
+				"input": "val"
+			}
+		}
+	]
+}

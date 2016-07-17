@@ -1,1 +1,76 @@
-{"nodes":[{"name":"Initial Value","code":"number.const","inputs":{},"outputs":{"result":"Double"},"args":10,"desc":"Outputs {arg}","x":7,"y":-231.5},{"name":"Leaky Integrator","code":"structures.leakyintegrator","inputs":{"val":"Double"},"outputs":{"result":"Boolean"},"args":{"time":1,"decay":1},"desc":"Adds inputs and looses {decay} per {time} s.","x":9,"y":-62.5},{"name":"Print to console","code":"sys.print","inputs":{"val":"Object"},"outputs":{},"args":{},"desc":"Print the input.","x":6,"y":124.5}],"connections":[{"input":{"node":"Initial Value","output":"result"},"output":{"node":"Leaky Integrator","input":"val"}},{"input":{"node":"Leaky Integrator","output":"result"},"output":{"node":"Print to console","input":"val"}}]}
+{
+	"connections": [
+		{
+			"input": {
+				"node": "Initial Value",
+				"output": "result"
+			},
+			"output": {
+				"input": "val",
+				"node": "Leaky Integrator"
+			}
+		},
+		{
+			"input": {
+				"node": "Leaky Integrator",
+				"output": "result"
+			},
+			"output": {
+				"node": "FrRtC",
+				"input": "val"
+			}
+		}
+	],
+	"nodes": [
+		{
+			"args": 10,
+			"code": "stdlib.number.const",
+			"desc": "Outputs {arg}",
+			"inputs": {},
+			"name": "Initial Value",
+			"outputs": {
+				"result": "Double"
+			},
+			"x": 6,
+			"y": -231.5,
+			"heat": 1,
+			"running": 0,
+			"displayname": "Number"
+		},
+		{
+			"args": {
+				"decay": 1,
+				"time": 1
+			},
+			"code": "stdlib.structures.leakyintegrator",
+			"desc": "Adds inputs and looses {decay} per {time} s.",
+			"inputs": {
+				"val": "Double"
+			},
+			"name": "Leaky Integrator",
+			"outputs": {
+				"result": "Boolean"
+			},
+			"x": 3,
+			"y": -69.5,
+			"heat": 10,
+			"running": 14,
+			"displayname": "Leaky Integrator"
+		},
+		{
+			"name": "FrRtC",
+			"code": "stdlib.system.print",
+			"inputs": {
+				"val": "String"
+			},
+			"outputs": {},
+			"args": "",
+			"desc": "Print input to console.",
+			"displayname": "Print",
+			"heat": 10,
+			"running": 18,
+			"x": 0,
+			"y": 80
+		}
+	]
+}

@@ -9,7 +9,7 @@ class Node(base.Node):
         super(Node, self).__init__("softmax", "extlib.tensorflow.softmax", {},
                                    {"val": "Tensor"},
                                    {"result": "Tensor"},
-                                   "Tensorflow softmax node.", verbose)
+                                   "Tensorflow softmax node.", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):

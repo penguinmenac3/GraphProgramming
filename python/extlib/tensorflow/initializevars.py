@@ -7,10 +7,10 @@ import tensorflow as tf
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Initialize Variables", "extlib.tensorflow.initializevars", {"code": 'result = value["val"]'},
+        super(Node, self).__init__("Initialize Variables", "extlib.tensorflow.initializevars", {},
                                    {"session": "TFSession"},
                                    {"session": "TFSession"},
-                                   "Initialize vars in session.", verbose)
+                                   "Initialize vars in session.", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):

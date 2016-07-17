@@ -352,9 +352,9 @@ function WebUI_CRenderEngine() {
 		ctx.fillStyle = fillStyle;
 		ctx.rect(renderOffsetX * scale + x * scale + width/2-that.nodeWidth/2 * scale,renderOffsetY * scale + y * scale + height/2-that.nodeHeight/2 * scale,that.nodeWidth * scale,that.nodeHeight * scale);
 		ctx.fill();
-		if (running) {
+		if (running > 0) {
 		  ctx.lineWidth="5";
-		  ctx.strokeStyle="green";
+		  ctx.strokeStyle=rgba(0, 20, running, 1.0);
 		  ctx.stroke();
 		} else if (!marked) {
 		  ctx.lineWidth="0";
@@ -519,6 +519,9 @@ function WebUI_CRenderEngine() {
 				if (typeof node.heat === "undefined") {
 					node.heat = 0;
 				}
+				if (typeof node.running === "undefined") {
+					node.running = 0;
+				}
 				min_heat = Math.min(min_heat, node.heat);
 				max_heat = Math.max(max_heat, node.heat);
 			});
@@ -526,6 +529,33 @@ function WebUI_CRenderEngine() {
 			//console.log(max_heat);
 			graph.nodes.forEach(function(node) {
 				renderNode(node, min_heat, max_heat);
+			});
+		}
+	}
+
+	that.cooldown = function() {
+		if (WebUI.graph != null) {
+			graph = WebUI.graph;
+			
+			graph.nodes.forEach(function(node) {
+				if (typeof node.running === "undefined") {
+					node.running = 0;
+				}
+				if (node.running < 20) {
+					node.running -= 1;
+				}
+				node.running = Math.max(0, node.running);
+			});
+		}
+	}
+
+	that.resetHeat = function() {
+		if (WebUI.graph != null) {
+			graph = WebUI.graph;
+			
+			graph.nodes.forEach(function(node) {
+				node.running = 0;
+				node.heat = 0;
 			});
 		}
 	}
@@ -558,7 +588,7 @@ function WebUI_CRenderEngine() {
         }
 
 		/* Draw rect symbol for robot */
-		renderNodeRect(node.x, node.y, node == that.marked, fillStyleLarge, node.running && node.running != null && node.running == true);
+		renderNodeRect(node.x, node.y, node == that.marked, fillStyleLarge, node.running);
 		if (node.data && node.data != null) {
 		    if( Object.prototype.toString.call( node.data ) === '[object Array]' ) {
 		        renderNodeDebugArray(node, foregroundColor, colorConnector);
@@ -601,7 +631,7 @@ function WebUI_CRenderEngine() {
   			if (node.outputs.hasOwnProperty(key)) {
   				pos = getPosition(node, key, node.outputs, false);
 				isRunningDelta = 0;
-				if (node.running && node.running != null && node.running == true) {
+				if (node.running == 20) {
 					isRunningDelta = 1;
 				}
     			renderDot(pos.x, pos.y, node == that.marked, fillStyle, key, node.heat - isRunningDelta, min_heat, max_heat);

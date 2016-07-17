@@ -95,6 +95,14 @@
     "desc": "Pass the string arg as output."
 },
 {
+    "name": "Barrier",
+    "code": "stdlib.structures.barrier",
+    "inputs": {"trigger": "Object", "val": "Object"},
+    "outputs": {"trigger": "Object", "val": "Object"},
+    "args": {},
+    "desc": "Only pass if both are there."
+},
+{
     "name": "While greater",
     "code": "stdlib.structures.whilegreater",
     "inputs": {"initial": "Number", "val": "Number"},
@@ -869,7 +877,7 @@
     "code": "extlib.tensorflow.initializevars",
     "inputs": {"session": "TFSession"},
     "outputs": {"session": "TFSession"},
-    "args": {"code": "result = value[\"val\"]"},
+    "args": {},
     "desc": "Initialize vars in session."
 },
 {
@@ -995,7 +1003,7 @@
 {
     "name": "Train",
     "code": "extlib.tensorflow.train",
-    "inputs": {"x": "Tensor", "train_step": "Tensor", "y_": "Tensor", "batch": "Tensor"},
+    "inputs": {"x": "Tensor", "session": "TFSession", "train_step": "Tensor", "y_": "Tensor", "batch": "Tensor"},
     "outputs": {"result": "Object"},
     "args": {},
     "desc": "Executes a train step"

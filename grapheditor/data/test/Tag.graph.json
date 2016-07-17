@@ -1,172 +1,172 @@
 {
-	"nodes": [
-		{
-			"name": "Print_f2rVH",
-			"code": "system.print",
-			"inputs": {
-				"val": "String"
-			},
-			"outputs": {},
-			"args": "",
-			"desc": "Print input to console.",
-			"x": -158,
-			"y": 310,
-			"displayname": "Print"
-		},
-		{
-			"name": "nNTFj",
-			"code": "string.const",
-			"inputs": {},
-			"outputs": {
-				"result": "String"
-			},
-			"args": "Hello World!",
-			"desc": "Hello World",
-			"displayname": "String",
-			"x": -71,
-			"y": -338
-		},
-		{
-			"name": "BXx8s",
-			"code": "default.function",
-			"inputs": {
-				"val": "Object"
-			},
-			"outputs": {
-				"result": "Object"
-			},
-			"args": {
-				"code": "result = value[\"tags\"][\"val\"]"
-			},
-			"desc": "Extract tag from node",
-			"displayname": "Extract Tag",
-			"x": -161,
-			"y": 183
-		},
-		{
-			"name": "5CmKG",
-			"code": "default.function",
-			"inputs": {
-				"val": "Object"
-			},
-			"outputs": {
-				"result": "Object"
-			},
-			"args": {
-				"code": "result = value[\"val\"]\ntag = \"foobar\""
-			},
-			"desc": "Add tag to node",
-			"displayname": "Add Tag",
-			"x": -72,
-			"y": -174
-		},
-		{
-			"name": "FQtUl",
-			"code": "default.splitflow",
-			"inputs": {
-				"val": "Object"
-			},
-			"outputs": {
-				"left": "Object",
-				"right": "Object"
-			},
-			"args": "",
-			"desc": "Splits the flow.",
-			"displayname": "Splitflow",
-			"x": -72,
-			"y": 62
-		},
-		{
-			"name": "ZASAm",
-			"code": "system.print",
-			"inputs": {
-				"val": "String"
-			},
-			"outputs": {},
-			"args": "",
-			"desc": "Print input to console.",
-			"displayname": "Print",
-			"x": 35,
-			"y": 184
-		},
-		{
-			"name": "0xUCe",
-			"code": "default.function",
-			"inputs": {
-				"val": "Object"
-			},
-			"outputs": {
-				"result": "Object"
-			},
-			"args": {
-				"code": "result = value[\"val\"]"
-			},
-			"desc": "Do nothing",
-			"displayname": "Identity",
-			"x": -74,
-			"y": -55
-		}
-	],
-	"connections": [
-		{
-			"input": {
-				"node": "BXx8s",
-				"output": "result"
-			},
-			"output": {
-				"node": "Print_f2rVH",
-				"input": "val"
-			}
-		},
-		{
-			"input": {
-				"node": "nNTFj",
-				"output": "result"
-			},
-			"output": {
-				"node": "5CmKG",
-				"input": "val"
-			}
-		},
-		{
-			"input": {
-				"node": "FQtUl",
-				"output": "left"
-			},
-			"output": {
-				"node": "BXx8s",
-				"input": "val"
-			}
-		},
-		{
-			"input": {
-				"node": "FQtUl",
-				"output": "right"
-			},
-			"output": {
-				"node": "ZASAm",
-				"input": "val"
-			}
-		},
-		{
-			"input": {
-				"node": "5CmKG",
-				"output": "result"
-			},
-			"output": {
-				"node": "0xUCe",
-				"input": "val"
-			}
-		},
-		{
-			"input": {
-				"node": "0xUCe",
-				"output": "result"
-			},
-			"output": {
-				"node": "FQtUl",
-				"input": "val"
-			}
-		}
-	]
+    "connections": [
+        {
+            "input": {
+                "node": "BXx8s", 
+                "output": "result"
+            }, 
+            "output": {
+                "input": "val", 
+                "node": "Print_f2rVH"
+            }
+        }, 
+        {
+            "input": {
+                "node": "nNTFj", 
+                "output": "result"
+            }, 
+            "output": {
+                "input": "val", 
+                "node": "5CmKG"
+            }
+        }, 
+        {
+            "input": {
+                "node": "FQtUl", 
+                "output": "left"
+            }, 
+            "output": {
+                "input": "val", 
+                "node": "BXx8s"
+            }
+        }, 
+        {
+            "input": {
+                "node": "FQtUl", 
+                "output": "right"
+            }, 
+            "output": {
+                "input": "val", 
+                "node": "ZASAm"
+            }
+        }, 
+        {
+            "input": {
+                "node": "5CmKG", 
+                "output": "result"
+            }, 
+            "output": {
+                "input": "val", 
+                "node": "0xUCe"
+            }
+        }, 
+        {
+            "input": {
+                "node": "0xUCe", 
+                "output": "result"
+            }, 
+            "output": {
+                "input": "val", 
+                "node": "FQtUl"
+            }
+        }
+    ], 
+    "nodes": [
+        {
+            "args": "", 
+            "code": "stdlib.system.print", 
+            "desc": "Print input to console.", 
+            "displayname": "Print", 
+            "inputs": {
+                "val": "String"
+            }, 
+            "name": "Print_f2rVH", 
+            "outputs": {}, 
+            "x": -158, 
+            "y": 310
+        }, 
+        {
+            "args": "Hello World!", 
+            "code": "stdlib.string.const", 
+            "desc": "Hello World", 
+            "displayname": "String", 
+            "inputs": {}, 
+            "name": "nNTFj", 
+            "outputs": {
+                "result": "String"
+            }, 
+            "x": -71, 
+            "y": -338
+        }, 
+        {
+            "args": {
+                "code": "result = value[\"tags\"][\"val\"]"
+            }, 
+            "code": "stdlib.default.function", 
+            "desc": "Extract tag from node", 
+            "displayname": "Extract Tag", 
+            "inputs": {
+                "val": "Object"
+            }, 
+            "name": "BXx8s", 
+            "outputs": {
+                "result": "Object"
+            }, 
+            "x": -161, 
+            "y": 183
+        }, 
+        {
+            "args": {
+                "code": "result = value[\"val\"]\ntag = \"foobar\""
+            }, 
+            "code": "stdlib.default.function", 
+            "desc": "Add tag to node", 
+            "displayname": "Add Tag", 
+            "inputs": {
+                "val": "Object"
+            }, 
+            "name": "5CmKG", 
+            "outputs": {
+                "result": "Object"
+            }, 
+            "x": -72, 
+            "y": -174
+        }, 
+        {
+            "args": "", 
+            "code": "stdlib.default.splitflow", 
+            "desc": "Splits the flow.", 
+            "displayname": "Splitflow", 
+            "inputs": {
+                "val": "Object"
+            }, 
+            "name": "FQtUl", 
+            "outputs": {
+                "left": "Object", 
+                "right": "Object"
+            }, 
+            "x": -72, 
+            "y": 62
+        }, 
+        {
+            "args": "", 
+            "code": "stdlib.system.print", 
+            "desc": "Print input to console.", 
+            "displayname": "Print", 
+            "inputs": {
+                "val": "String"
+            }, 
+            "name": "ZASAm", 
+            "outputs": {}, 
+            "x": 35, 
+            "y": 184
+        }, 
+        {
+            "args": {
+                "code": "result = value[\"val\"]"
+            }, 
+            "code": "stdlib.default.function", 
+            "desc": "Do nothing", 
+            "displayname": "Identity", 
+            "inputs": {
+                "val": "Object"
+            }, 
+            "name": "0xUCe", 
+            "outputs": {
+                "result": "Object"
+            }, 
+            "x": -74, 
+            "y": -55
+        }
+    ]
 }

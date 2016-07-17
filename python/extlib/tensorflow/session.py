@@ -9,7 +9,7 @@ class Node(base.Node):
         super(Node, self).__init__("Session", "extlib.tensorflow.session", {},
                                    {},
                                    {"result": "TFSession"},
-                                   "A tensorflow session.", verbose)
+                                   "A tensorflow session.", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):

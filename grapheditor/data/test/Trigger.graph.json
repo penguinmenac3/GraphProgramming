@@ -1,1 +1,111 @@
-{"nodes":[{"name":"Trigger","code":"string.trigger","inputs":{},"outputs":{"result":"String"},"args":{"time":5,"val":"Hello World!"},"desc":"Outputs {arg}","x":-189,"y":-266.5},{"name":"Wait for network","code":"sys.networkinput","inputs":{},"outputs":{"result":"Object"},"args":{"host":"localhost","port":25555},"desc":"Wait for a network node to do it's job.","x":180,"y":-268.5},{"name":"Print to console","code":"sys.print","inputs":{"val":"Object"},"outputs":{},"args":{},"desc":"Print the input.","x":-2,"y":147.5},{"name":"Pass Any","code":"default.any","inputs":{"val":"Object"},"outputs":{"result":"Object"},"loopback":["val"],"args":{},"desc":"Just pipes value through. Picks any input.","x":-3,"y":-80.5}],"connections":[{"input":{"node":"Trigger","output":"result"},"output":{"node":"Pass Any","input":"val"}},{"input":{"node":"Wait for network","output":"result"},"output":{"node":"Pass Any","input":"val"}},{"input":{"node":"Pass Any","output":"result"},"output":{"node":"Print to console","input":"val"}}]}
+{
+	"connections": [
+		{
+			"input": {
+				"node": "Trigger",
+				"output": "result"
+			},
+			"output": {
+				"input": "val",
+				"node": "Pass Any"
+			}
+		},
+		{
+			"input": {
+				"node": "sk6J9",
+				"output": "result"
+			},
+			"output": {
+				"node": "Pass Any",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "Pass Any",
+				"output": "result"
+			},
+			"output": {
+				"node": "Wo6bX",
+				"input": "val"
+			}
+		}
+	],
+	"nodes": [
+		{
+			"args": {
+				"time": 5,
+				"val": "Hello World!"
+			},
+			"code": "stdlib.string.trigger",
+			"desc": "Outputs {arg}",
+			"inputs": {},
+			"name": "Trigger",
+			"outputs": {
+				"result": "String"
+			},
+			"x": -138,
+			"y": -255.5,
+			"heat": 5,
+			"running": 20,
+			"displayname": "Trigger"
+		},
+		{
+			"args": {},
+			"code": "stdlib.default.any",
+			"desc": "Just pipes value through. Picks any input.",
+			"inputs": {
+				"val": "Object"
+			},
+			"loopback": [
+				"val"
+			],
+			"name": "Pass Any",
+			"outputs": {
+				"result": "Object"
+			},
+			"x": -3,
+			"y": -80.5,
+			"heat": 4,
+			"running": 12,
+			"displayname": "Any"
+		},
+		{
+			"name": "sk6J9",
+			"code": "stdlib.system.tcpnetworkin",
+			"inputs": {},
+			"outputs": {
+				"result": "String"
+			},
+			"args": {
+				"server": false,
+				"host": "127.0.0.1",
+				"passDummy": null,
+				"passSocketAsTag": true,
+				"password": null,
+				"port": 25555
+			},
+			"desc": "Wait for input over network.",
+			"displayname": "TCP Network",
+			"heat": 1,
+			"running": 20,
+			"x": 136,
+			"y": -255
+		},
+		{
+			"name": "Wo6bX",
+			"code": "stdlib.system.print",
+			"inputs": {
+				"val": "String"
+			},
+			"outputs": {},
+			"args": "",
+			"desc": "Print input to console.",
+			"displayname": "Print",
+			"heat": 4,
+			"running": 18,
+			"x": -4,
+			"y": 91
+		}
+	]
+}

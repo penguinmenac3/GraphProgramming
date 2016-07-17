@@ -828,6 +828,7 @@ class Node(base.Node):
             that.debugger = new CDebugger(location.host.split(":")[0], "wasd", that, RenderEngine);
         };
         
+        RenderEngine.resetHeat();
         if (that.changed == true) {
 			WebUI.prompt("Autosave: Please enter graph name", WebUI.graphName,
                 function(name) {

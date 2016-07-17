@@ -10,7 +10,7 @@ class Node(base.Node):
         super(Node, self).__init__("Equal", "extlib.tensorflow.equal", {},
                                    {"a": "Tensor", "b": "Tensor"},
                                    {"result": "Tensor"},
-                                   "Check for each position if a equals b.", verbose)
+                                   "Check for each position if a equals b.", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):

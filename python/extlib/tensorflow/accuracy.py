@@ -10,7 +10,7 @@ class Node(base.Node):
         super(Node, self).__init__("Accuracy", "extlib.tensorflow.accuracy", {},
                                    {"y": "Tensor", "y_": "Tensor"},
                                    {"result": "Tensor"},
-                                   "Accuracy model.", verbose)
+                                   "Accuracy model.", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):

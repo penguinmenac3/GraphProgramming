@@ -9,7 +9,7 @@ class Node(base.Node):
         super(Node, self).__init__("Add", "extlib.tensorflow.add", {},
                                    {"a": "Tensor", "b": "Tensor"},
                                    {"result": "Tensor"},
-                                   "Calculate a + b.", verbose)
+                                   "Calculate a + b.", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):

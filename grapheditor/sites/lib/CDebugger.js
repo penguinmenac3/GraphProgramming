@@ -25,9 +25,15 @@ function CDebugger(url, passwd, ui, renderer) {
                     console.log("Cannot find node: " + node);
                 } else {
                     console.log(data_data);
+                    renderer.cooldown();
                     var data_obj = JSON.parse(data_data);
                     node_obj.heat = data_obj["heat"];
-                    node_obj.running = data_obj["state"];
+                    if (data_obj["state"]) {
+                        node_obj.running = 20;
+                    } else {
+                        node_obj.running = 19;
+                    }
+                    renderer.cooldown();
                     renderer.setDirty();
                 }
             } else if (data_type == "json") {

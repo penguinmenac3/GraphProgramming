@@ -10,7 +10,7 @@ class Node(base.Node):
         super(Node, self).__init__("Placeholder", "extlib.tensorflow.placeholder", {"batch_size":None, "dimension": 0},
                                    {},
                                    {"result": "Object"},
-                                   "A tensorflow placeholder.", verbose)
+                                   "A tensorflow placeholder.", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):
@@ -19,7 +19,7 @@ class Node(base.Node):
         if "tags" in value and "val" in value["tags"]:
             tag = value["tags"]["val"]
         
-        result = tf.placeholder(tf.float32, shape=[self.args["batch_size"], self.args["dimension"]])
+        result = tf.placeholder(tf.float32, [self.args["batch_size"], self.args["dimension"]])
         
         if tag:
             return {"result": result, "tags":{"result":tag}}

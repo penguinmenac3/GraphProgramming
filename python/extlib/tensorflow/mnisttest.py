@@ -9,7 +9,7 @@ class Node(base.Node):
         super(Node, self).__init__("MNIST Test", "extlib.tensorflow.mnisttest", {"code": 'result = value["val"]'},
                                    {"val": "MNIST"},
                                    {"images": "Tensor", "labels": "Tensor"},
-                                   "Get test data from mnist.", verbose)
+                                   "Get test data from mnist.", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):
@@ -17,6 +17,7 @@ class Node(base.Node):
         if "tags" in value and "val" in value["tags"]:
             tag = value["tags"]["val"]
         
+        mnist = value["val"]
         images = mnist.test.images
         labels = mnist.test.labels
         

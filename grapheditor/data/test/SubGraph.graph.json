@@ -1,54 +1,12 @@
 {
-	"nodes": [
-		{
-			"name": "Call graph",
-			"code": "sys.subgraph",
-			"inputs": {
-				"arg": "Object"
-			},
-			"outputs": {
-				"result": "Object"
-			},
-			"args": "test/Args",
-			"desc": "Call graph with {args} as param",
-			"x": -126,
-			"y": -180.5
-		},
-		{
-			"name": "Print to console",
-			"code": "sys.print",
-			"inputs": {
-				"val": "Object"
-			},
-			"outputs": {},
-			"args": {},
-			"desc": "Print the input.",
-			"x": -117,
-			"y": 42.5
-		},
-		{
-			"name": "String Constant",
-			"code": "string.const",
-			"inputs": {},
-			"outputs": {
-				"result": "String"
-			},
-			"args": {
-				"test": true
-			},
-			"desc": "Outputs {arg}",
-			"x": -176,
-			"y": -363.5
-		}
-	],
 	"connections": [
 		{
 			"input": {
-				"node": "Call graph",
+				"node": "lFJaJ",
 				"output": "result"
 			},
 			"output": {
-				"node": "Print to console",
+				"node": "06ovV",
 				"input": "val"
 			}
 		},
@@ -58,9 +16,60 @@
 				"output": "result"
 			},
 			"output": {
-				"node": "Call graph",
+				"node": "lFJaJ",
 				"input": "arg"
 			}
+		}
+	],
+	"nodes": [
+		{
+			"args": {
+				"test": true
+			},
+			"code": "stdlib.string.const",
+			"desc": "Outputs {arg}",
+			"inputs": {},
+			"name": "String Constant",
+			"outputs": {
+				"result": "String"
+			},
+			"x": -111,
+			"y": -336.5,
+			"heat": 1,
+			"running": 10,
+			"displayname": "String"
+		},
+		{
+			"name": "lFJaJ",
+			"code": "stdlib.system.subgraph",
+			"inputs": {
+				"arg": "Object"
+			},
+			"outputs": {
+				"result": "Object"
+			},
+			"args": "test/Args",
+			"desc": "Execute a subgraph.",
+			"displayname": "Subgraph",
+			"heat": 1,
+			"running": 14,
+			"x": -112,
+			"y": -164
+		},
+		{
+			"name": "06ovV",
+			"code": "stdlib.system.print",
+			"inputs": {
+				"val": "String"
+			},
+			"outputs": {},
+			"args": "",
+			"desc": "Print input to console.",
+			"displayname": "Print",
+			"heat": 1,
+			"running": 18,
+			"x": -110,
+			"y": -12
 		}
 	]
 }

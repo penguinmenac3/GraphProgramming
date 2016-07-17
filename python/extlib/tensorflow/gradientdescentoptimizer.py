@@ -10,7 +10,7 @@ class Node(base.Node):
         super(Node, self).__init__("GD Optimizer", "extlib.tensorflow.gradientdescentoptimizer", {"step_length": 0.01},
                                    {"val": "Tensor"},
                                    {"train_step": "Tensor"},
-                                   "Gradient Descent Optimizer", verbose)
+                                   "Gradient Descent Optimizer", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):
@@ -22,6 +22,6 @@ class Node(base.Node):
         result = tf.train.GradientDescentOptimizer(self.args["step_length"]).minimize(value["val"])
         
         if tag:
-            return {"result": result, "tags":{"result":tag}}
+            return {"train_step": result, "tags":{"train_step":tag}}
         else:
-            return {"result": result}
+            return {"train_step": result}

@@ -9,7 +9,7 @@ class Node(base.Node):
         super(Node, self).__init__("Negate", "extlib.tensorflow.negate", {"code": 'result = value["val"]'},
                                    {"val": "Tensor"},
                                    {"result": "Tensor"},
-                                   "Negates a value (-val)", verbose)
+                                   "Negates a value (-val)", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):

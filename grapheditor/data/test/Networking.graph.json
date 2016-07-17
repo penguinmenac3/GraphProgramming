@@ -1,73 +1,73 @@
 {
-	"nodes": [
-		{
-			"name": "vt130",
-			"code": "system.httpinput",
-			"inputs": {},
-			"outputs": {
-				"put": "Object",
-				"post": "Object",
-				"delete": "Object",
-				"get": "Object"
-			},
-			"args": {
-				"port": 80
-			},
-			"desc": "Wait for http requests.",
-			"displayname": "HTTP Input",
-			"x": -33,
-			"y": -144
-		},
-		{
-			"name": "AHz9C",
-			"code": "system.httpoutput",
-			"inputs": {
-				"val": "String"
-			},
-			"outputs": {},
-			"args": {},
-			"desc": "Output value to http connection.",
-			"displayname": "HTTP Output",
-			"x": -48,
-			"y": 107
-		},
-		{
-			"name": "zcxrx",
-			"code": "system.websocketinput",
-			"inputs": {},
-			"outputs": {
-				"result": "Object"
-			},
-			"args": {},
-			"desc": "Wait for websocket inputs.",
-			"displayname": "WebSocket",
-			"x": 187,
-			"y": -142
-		},
-		{
-			"name": "xp5kV",
-			"code": "system.websocketoutput",
-			"inputs": {
-				"val": "Object"
-			},
-			"outputs": {},
-			"args": {},
-			"desc": "Output on a websocket.",
-			"displayname": "WebSocket",
-			"x": 179,
-			"y": 106
-		}
-	],
-	"connections": [
-		{
-			"input": {
-				"node": "zcxrx",
-				"output": "result"
-			},
-			"output": {
-				"node": "xp5kV",
-				"input": "val"
-			}
-		}
-	]
+    "connections": [
+        {
+            "input": {
+                "node": "zcxrx", 
+                "output": "result"
+            }, 
+            "output": {
+                "input": "val", 
+                "node": "xp5kV"
+            }
+        }
+    ], 
+    "nodes": [
+        {
+            "args": {
+                "port": 80
+            }, 
+            "code": "stdlib.system.httpinput", 
+            "desc": "Wait for http requests.", 
+            "displayname": "HTTP Input", 
+            "inputs": {}, 
+            "name": "vt130", 
+            "outputs": {
+                "delete": "Object", 
+                "get": "Object", 
+                "post": "Object", 
+                "put": "Object"
+            }, 
+            "x": -33, 
+            "y": -144
+        }, 
+        {
+            "args": {}, 
+            "code": "stdlib.system.httpoutput", 
+            "desc": "Output value to http connection.", 
+            "displayname": "HTTP Output", 
+            "inputs": {
+                "val": "String"
+            }, 
+            "name": "AHz9C", 
+            "outputs": {}, 
+            "x": -48, 
+            "y": 107
+        }, 
+        {
+            "args": {}, 
+            "code": "stdlib.system.websocketinput", 
+            "desc": "Wait for websocket inputs.", 
+            "displayname": "WebSocket", 
+            "inputs": {}, 
+            "name": "zcxrx", 
+            "outputs": {
+                "result": "Object"
+            }, 
+            "x": 187, 
+            "y": -142
+        }, 
+        {
+            "args": {}, 
+            "code": "stdlib.system.websocketoutput", 
+            "desc": "Output on a websocket.", 
+            "displayname": "WebSocket", 
+            "inputs": {
+                "val": "Object"
+            }, 
+            "name": "xp5kV", 
+            "outputs": {}, 
+            "x": 179, 
+            "y": 106
+        }
+    ]
 }

@@ -10,7 +10,7 @@ class Node(base.Node):
         super(Node, self).__init__("Argmax", "extlib.tensorflow.argmax", {"param": 1},
                                    {"val": "Tensor"},
                                    {"result": "Tensor"},
-                                   "tf.argmax(val, param)", verbose)
+                                   "tf.argmax(val, param)", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):

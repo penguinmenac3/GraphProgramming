@@ -10,7 +10,7 @@ class Node(base.Node):
         super(Node, self).__init__("Cross entropy", "extlib.tensorflow.crossentropy", {"code": 'result = value["val"]'},
                                    {"y_": "Tensor", "y": "Tensor"},
                                    {"result": "Tensor"},
-                                   "Calculate the cross entropy", verbose)
+                                   "Calculate the cross entropy", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):

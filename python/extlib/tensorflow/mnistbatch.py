@@ -9,7 +9,7 @@ class Node(base.Node):
         super(Node, self).__init__("Mnist Batch", "extlib.tensorflow.mnistbatch", {},
                                    {"val": "Object", "mnist": "MNIST"},
                                    {"result": "Tensor"},
-                                   "Get the next batch from mnist", verbose)
+                                   "Get the next batch from mnist", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):
@@ -18,6 +18,7 @@ class Node(base.Node):
         if "tags" in value and "val" in value["tags"]:
             tag = value["tags"]["val"]
         
+        mnist = value["mnist"]
         result = mnist.train.next_batch(50)
         
         if tag:
