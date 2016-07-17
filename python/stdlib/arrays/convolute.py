@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Convolute", "arrays.convolute", {},
+        super(Node, self).__init__("Convolute", "stdlib.arrays.convolute", {},
                                    {"data": "Array", "kernel": "Array"},
                                    {"result": "Array"},
                                    "Convolute two arrays.", verbose, False, False)

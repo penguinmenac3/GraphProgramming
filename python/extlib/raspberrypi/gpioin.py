@@ -9,7 +9,7 @@ import numbers
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("GPIO In", "raspberrypi.gpioin", 10, {},
+        super(Node, self).__init__("GPIO In", "extlib.raspberrypi.gpioin", 10, {},
                                    {"result": "Boolean"},
                                    "Read if a gpio has a signal.", verbose, True, True)
         self.args = args

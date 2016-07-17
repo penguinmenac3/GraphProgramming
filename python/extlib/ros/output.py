@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Publish", "ros.input", {"topic": "/image"},
+        super(Node, self).__init__("Publish", "extlib.ros.input", {"topic": "/image"},
                                    {"val": "Object"},
                                    {},
                                    "Publish on topic.", verbose)

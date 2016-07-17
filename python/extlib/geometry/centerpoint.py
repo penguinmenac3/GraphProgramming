@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Centerpoint", "geometry.centerpoint", {},
+        super(Node, self).__init__("Centerpoint", "extlib.geometry.centerpoint", {},
                                    {"val": "Polygon"},
                                    {"result": "Point"},
                                    "Calculates average for polygon.", verbose)

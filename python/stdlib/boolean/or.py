@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Or", "boolean.or", "", {"left": "Boolean", "right": "Boolean"},
+        super(Node, self).__init__("Or", "stdlib.boolean.or", "", {"left": "Boolean", "right": "Boolean"},
                                    {"result": "Boolean"}, "Output the or of the inputs.", verbose)
 
     def tick(self, value):

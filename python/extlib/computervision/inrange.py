@@ -9,7 +9,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("In Range", "computervision.inrange",
+        super(Node, self).__init__("In Range", "extlib.computervision.inrange",
                                    {"lower-hue": 0, "lower-saturisation": 0, "lower-value": 0, "upper-hue": 255, "upper-saturisation": 255, "upper-value": 255},
                                    {"img": "Image"},
                                    {"result": "Image"},

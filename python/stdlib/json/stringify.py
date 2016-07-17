@@ -8,7 +8,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Stringify Json", "json.stringify", "", {"val": "Object"}, {"result": "String"},
+        super(Node, self).__init__("Stringify Json", "stdlib.json.stringify", "", {"val": "Object"}, {"result": "String"},
                                    "Makes a json string out of an object.", verbose)
 
     def tick(self, value):

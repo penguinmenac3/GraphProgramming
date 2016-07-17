@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Index of", "string.indexof", "",
+        super(Node, self).__init__("Index of", "stdlib.string.indexof", "",
                                    {"str": "String", "ref": "String", "offset": "Number"},
                                    {"result": "Number"},
                                    "Get the index of a ref in a string.", verbose)

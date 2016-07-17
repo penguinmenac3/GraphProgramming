@@ -7,7 +7,7 @@ from math import pi, sqrt, exp
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Gaussian Generator", "arrays.gaussian", {"range": 100, "sigma":1},
+        super(Node, self).__init__("Gaussian Generator", "stdlib.arrays.gaussian", {"range": 100, "sigma":1},
                                    {},
                                    {"result": "Array"},
                                    "Executes the argument function as python code.", verbose, True, False)

@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Starts with", "string.startswith", "", {"str":"String", "ref":"String"},
+        super(Node, self).__init__("Starts with", "stdlib.string.startswith", "", {"str":"String", "ref":"String"},
                                    {"result": "Boolean"},
                                    "String starts with ref.", verbose)
 

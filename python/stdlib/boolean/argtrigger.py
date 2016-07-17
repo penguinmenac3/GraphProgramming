@@ -8,7 +8,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Arg trigger", "boolean.argconst", {"val":"arg", "time":1.0}, {},
+        super(Node, self).__init__("Arg trigger", "stdlib.boolean.argconst", {"val":"arg", "time":1.0}, {},
                                    {"result": "Boolean"}, "Get input from arguments.", verbose, True, True)
         self.args = args
 

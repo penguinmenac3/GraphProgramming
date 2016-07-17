@@ -9,7 +9,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Render Boxes", "computervision.renderboxes",
+        super(Node, self).__init__("Render Boxes", "extlib.computervision.renderboxes",
                                    {"r":255, "g":0, "b":0},
                                    {"img": "Image", "boxes": "PolygonArray"},
                                    {"result": "Image"},

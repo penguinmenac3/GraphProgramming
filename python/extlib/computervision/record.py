@@ -4,11 +4,11 @@ try:
     from ...stdlib import Node as base
 except ValueError:
     from stdlib import Node as base
-
+import sys
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("[WIP] Record", "computervision.record",
+        super(Node, self).__init__("[WIP] Record", "extlib.computervision.record",
                                    {"resource":"~/Videos/test.avi"},
                                    {"img": "Image"},
                                    {},
@@ -25,11 +25,12 @@ class Node(base.Node):
         except:
             height, width = img.shape
         if self.writer is None:
-            self.writer = cv2.VideoWriter(self.args["resource"], -1, 20, (width, height))
+            self.writer = cv2.VideoWriter(self.args["resource"], -1, 20.0, (width, height))
             print("Recording: " + self.args["resource"] + " " + str(width) + "x" + str(height))
-        # if not self.writer.isOpened():
-        #	raise Exception("Cannot open the given resource: ", self.args["resource"])
-        # frame = cv2.flip(img,0)
-        frame = img
+            sys.stdout.flush()
+        if not self.writer.isOpened():
+            raise Exception("Cannot open the given resource: ", self.args["resource"])
+        frame = cv2.flip(img,0)
+        #frame = img
         self.writer.write(frame)
         return {}

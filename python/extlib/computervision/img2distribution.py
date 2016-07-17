@@ -7,7 +7,7 @@ import sys
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Image to distribution", "computervision.img2distribution",
+        super(Node, self).__init__("Image to distribution", "extlib.computervision.img2distribution",
                                    "",
                                    {"img": "Image"},
                                    {"result": "Array"},

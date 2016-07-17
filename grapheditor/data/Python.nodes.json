@@ -1,6 +1,6 @@
 [{
     "name": "View",
-    "code": "debug.view",
+    "code": "stdlib.debug.view",
     "inputs": {"val": "Object"},
     "outputs": {"result": "Object"},
     "args": {},
@@ -8,7 +8,7 @@
 },
 {
     "name": "Breakpoint",
-    "code": "debug.breakpoint",
+    "code": "stdlib.debug.breakpoint",
     "inputs": {"val": "Object"},
     "outputs": {"result": "Object"},
     "args": {},
@@ -16,7 +16,7 @@
 },
 {
     "name": "Starts with",
-    "code": "string.startswith",
+    "code": "stdlib.string.startswith",
     "inputs": {"ref": "String", "str": "String"},
     "outputs": {"result": "Boolean"},
     "args": "",
@@ -24,7 +24,7 @@
 },
 {
     "name": "String Argument Trigger",
-    "code": "string.argtrigger",
+    "code": "stdlib.string.argtrigger",
     "inputs": {},
     "outputs": {"result": "String"},
     "args": {"val": "arg", "time": 1.0},
@@ -32,7 +32,7 @@
 },
 {
     "name": "Ends with",
-    "code": "string.endswith",
+    "code": "stdlib.string.endswith",
     "inputs": {"ref": "String", "str": "String"},
     "outputs": {"result": "Boolean"},
     "args": "",
@@ -40,7 +40,7 @@
 },
 {
     "name": "Trigger string",
-    "code": "string.trigger",
+    "code": "stdlib.string.trigger",
     "inputs": {},
     "outputs": {"result": "String"},
     "args": {"val": "Hello World!", "time": 1.0},
@@ -48,7 +48,7 @@
 },
 {
     "name": "Split",
-    "code": "string.split",
+    "code": "stdlib.string.split",
     "inputs": {"splitter": "String", "str": "String"},
     "outputs": {"result": "Array"},
     "args": "",
@@ -56,7 +56,7 @@
 },
 {
     "name": "String Argument",
-    "code": "string.argconst",
+    "code": "stdlib.string.argconst",
     "inputs": {},
     "outputs": {"result": "String"},
     "args": "arg",
@@ -64,7 +64,7 @@
 },
 {
     "name": "Equal",
-    "code": "string.equal",
+    "code": "stdlib.string.equal",
     "inputs": {"1": "String", "3": "String", "2": "String", "5": "String", "4": "String"},
     "outputs": {"result": "Boolean"},
     "args": 5,
@@ -72,7 +72,7 @@
 },
 {
     "name": "Index of",
-    "code": "string.indexof",
+    "code": "stdlib.string.indexof",
     "inputs": {"ref": "String", "str": "String", "offset": "Number"},
     "outputs": {"result": "Number"},
     "args": "",
@@ -80,7 +80,7 @@
 },
 {
     "name": "String Concat",
-    "code": "string.concat",
+    "code": "stdlib.string.concat",
     "inputs": {"right": "String", "left": "String"},
     "outputs": {"result": "String"},
     "args": "",
@@ -88,7 +88,7 @@
 },
 {
     "name": "String Constant",
-    "code": "string.const",
+    "code": "stdlib.string.const",
     "inputs": {},
     "outputs": {"result": "String"},
     "args": "Hello World!",
@@ -96,7 +96,7 @@
 },
 {
     "name": "While greater",
-    "code": "structures.whilegreater",
+    "code": "stdlib.structures.whilegreater",
     "inputs": {"initial": "Number", "val": "Number"},
     "outputs": {"leave": "Number", "loop": "Number"},
     "args": "",
@@ -104,7 +104,7 @@
 },
 {
     "name": "Leaky Integrator",
-    "code": "structures.leakyintegrator",
+    "code": "stdlib.structures.leakyintegrator",
     "inputs": {"val": "Number"},
     "outputs": {"result": "Boolean"},
     "args": {"decay": 1.0, "time": 1.0},
@@ -112,15 +112,24 @@
 },
 {
     "name": "While less",
-    "code": "structures.whileless",
+    "code": "stdlib.structures.whileless",
     "inputs": {"initial": "Number", "val": "Number"},
     "outputs": {"leave": "Number", "loop": "Number"},
     "args": "",
     "desc": "Loop while initial is less than val."
 },
 {
+    "name": "For",
+    "code": "stdlib.structures.for",
+    "inputs": {"trigger": "Object"},
+    "outputs": {"done": "Object", "loop": "Object"},
+    "args": {"n": 1000},
+    "desc": "Do n times.",
+"loopback": "trigger"
+},
+{
     "name": "If",
-    "code": "structures.if",
+    "code": "stdlib.structures.if",
     "inputs": {"val": "Object", "condition": "Boolean"},
     "outputs": {"false": "Object", "true": "Object"},
     "args": "",
@@ -128,7 +137,7 @@
 },
 {
     "name": "Parse Json",
-    "code": "json.parse",
+    "code": "stdlib.json.parse",
     "inputs": {"val": "String"},
     "outputs": {"result": "Object"},
     "args": "",
@@ -136,7 +145,7 @@
 },
 {
     "name": "Stringify Json",
-    "code": "json.stringify",
+    "code": "stdlib.json.stringify",
     "inputs": {"val": "Object"},
     "outputs": {"result": "String"},
     "args": "",
@@ -144,7 +153,7 @@
 },
 {
     "name": "Number Argument Trigger",
-    "code": "number.argtrigger",
+    "code": "stdlib.number.argtrigger",
     "inputs": {},
     "outputs": {"result": "Number"},
     "args": {"val": "arg", "time": 1.0},
@@ -152,7 +161,7 @@
 },
 {
     "name": "Trigger Number",
-    "code": "number.trigger",
+    "code": "stdlib.number.trigger",
     "inputs": {},
     "outputs": {"result": "Number"},
     "args": {"val": 42, "time": 1.0},
@@ -160,7 +169,7 @@
 },
 {
     "name": "Sum",
-    "code": "number.sum",
+    "code": "stdlib.number.sum",
     "inputs": {"right": "Number", "left": "Number"},
     "outputs": {"result": "Number"},
     "args": "",
@@ -168,7 +177,7 @@
 },
 {
     "name": "Divide",
-    "code": "number.div",
+    "code": "stdlib.number.div",
     "inputs": {"right": "Number", "left": "Number"},
     "outputs": {"result": "Number"},
     "args": "",
@@ -176,7 +185,7 @@
 },
 {
     "name": "Number Argument",
-    "code": "number.argconst",
+    "code": "stdlib.number.argconst",
     "inputs": {},
     "outputs": {"result": "Number"},
     "args": "arg",
@@ -184,7 +193,7 @@
 },
 {
     "name": "Equal",
-    "code": "number.equal",
+    "code": "stdlib.number.equal",
     "inputs": {"1": "Number", "3": "Number", "2": "Number", "5": "Number", "4": "Number"},
     "outputs": {"result": "Boolean"},
     "args": 5,
@@ -192,7 +201,7 @@
 },
 {
     "name": "Greater than",
-    "code": "number.greater",
+    "code": "stdlib.number.greater",
     "inputs": {"right": "Number", "left": "Number"},
     "outputs": {"result": "Number"},
     "args": "",
@@ -200,7 +209,7 @@
 },
 {
     "name": "Multiply",
-    "code": "number.mult",
+    "code": "stdlib.number.mult",
     "inputs": {"right": "Number", "left": "Number"},
     "outputs": {"result": "Number"},
     "args": "",
@@ -208,7 +217,7 @@
 },
 {
     "name": "Less than",
-    "code": "number.less",
+    "code": "stdlib.number.less",
     "inputs": {"right": "Number", "left": "Number"},
     "outputs": {"result": "Number"},
     "args": "",
@@ -216,7 +225,7 @@
 },
 {
     "name": "Subtract",
-    "code": "number.subtract",
+    "code": "stdlib.number.subtract",
     "inputs": {"right": "Number", "left": "Number"},
     "outputs": {"result": "Number"},
     "args": "",
@@ -224,7 +233,7 @@
 },
 {
     "name": "Number Constant",
-    "code": "number.const",
+    "code": "stdlib.number.const",
     "inputs": {},
     "outputs": {"result": "Number"},
     "args": 1.0,
@@ -232,7 +241,7 @@
 },
 {
     "name": "Arg trigger",
-    "code": "boolean.argconst",
+    "code": "stdlib.boolean.argconst",
     "inputs": {},
     "outputs": {"result": "Boolean"},
     "args": {"val": "arg", "time": 1.0},
@@ -240,7 +249,7 @@
 },
 {
     "name": "Trigger",
-    "code": "boolean.trigger",
+    "code": "stdlib.boolean.trigger",
     "inputs": {},
     "outputs": {"result": "Boolean"},
     "args": {"val": true, "time": 1.0},
@@ -248,7 +257,7 @@
 },
 {
     "name": "Not",
-    "code": "boolean.not",
+    "code": "stdlib.boolean.not",
     "inputs": {"val": "Boolean"},
     "outputs": {"result": "Boolean"},
     "args": "",
@@ -256,7 +265,7 @@
 },
 {
     "name": "Arg const",
-    "code": "boolean.argconst",
+    "code": "stdlib.boolean.argconst",
     "inputs": {},
     "outputs": {"result": "Boolean"},
     "args": "arg",
@@ -264,7 +273,7 @@
 },
 {
     "name": "Equal",
-    "code": "boolean.equal",
+    "code": "stdlib.boolean.equal",
     "inputs": {"1": "Boolean", "3": "Boolean", "2": "Boolean", "5": "Boolean", "4": "Boolean"},
     "outputs": {"result": "Boolean"},
     "args": 5,
@@ -272,7 +281,7 @@
 },
 {
     "name": "Or",
-    "code": "boolean.or",
+    "code": "stdlib.boolean.or",
     "inputs": {"right": "Boolean", "left": "Boolean"},
     "outputs": {"result": "Boolean"},
     "args": "",
@@ -280,7 +289,7 @@
 },
 {
     "name": "And",
-    "code": "boolean.and",
+    "code": "stdlib.boolean.and",
     "inputs": {"right": "Boolean", "left": "Boolean"},
     "outputs": {"result": "Boolean"},
     "args": "",
@@ -288,7 +297,7 @@
 },
 {
     "name": "Const",
-    "code": "boolean.const",
+    "code": "stdlib.boolean.const",
     "inputs": {},
     "outputs": {"result": "Boolean"},
     "args": true,
@@ -296,7 +305,7 @@
 },
 {
     "name": "Function",
-    "code": "default.function",
+    "code": "stdlib.default.function",
     "inputs": {"val": "Object"},
     "outputs": {"result": "Object"},
     "args": {"code": "result = value[\"val\"]"},
@@ -304,15 +313,16 @@
 },
 {
     "name": "Accept any input",
-    "code": "default.any",
+    "code": "stdlib.default.any",
     "inputs": {"val": "Object"},
     "outputs": {"result": "Object"},
     "args": "",
-    "desc": "If any input is present pass it."
+    "desc": "If any input is present pass it.",
+"loopback": "val"
 },
 {
     "name": "Splitflow 5",
-    "code": "default.splitflow5",
+    "code": "stdlib.default.splitflow5",
     "inputs": {"val": "Object"},
     "outputs": {"1": "Object", "3": "Object", "2": "Object", "5": "Object", "4": "Object"},
     "args": "",
@@ -320,7 +330,7 @@
 },
 {
     "name": "Splitflow 2",
-    "code": "default.splitflow",
+    "code": "stdlib.default.splitflow",
     "inputs": {"val": "Object"},
     "outputs": {"right": "Object", "left": "Object"},
     "args": "",
@@ -328,7 +338,7 @@
 },
 {
     "name": "Derive",
-    "code": "arrays.derive",
+    "code": "stdlib.arrays.derive",
     "inputs": {"val": "Array"},
     "outputs": {"result": "Array"},
     "args": {"delta_index": 1},
@@ -336,7 +346,7 @@
 },
 {
     "name": "Arg trigger",
-    "code": "arrays.argtrigger",
+    "code": "stdlib.arrays.argtrigger",
     "inputs": {},
     "outputs": {"result": "String"},
     "args": {"val": "arg", "time": 1.0},
@@ -344,7 +354,7 @@
 },
 {
     "name": "Convolute",
-    "code": "arrays.convolute",
+    "code": "stdlib.arrays.convolute",
     "inputs": {"kernel": "Array", "data": "Array"},
     "outputs": {"result": "Array"},
     "args": {},
@@ -352,7 +362,7 @@
 },
 {
     "name": "Array trigger",
-    "code": "arrays.trigger",
+    "code": "stdlib.arrays.trigger",
     "inputs": {},
     "outputs": {"result": "Array"},
     "args": {"vals": [0, 1, 2, 3, 4, 5], "time": 1.0},
@@ -360,7 +370,7 @@
 },
 {
     "name": "Crop Values",
-    "code": "arrays.crop",
+    "code": "stdlib.arrays.crop",
     "inputs": {"val": "Array"},
     "outputs": {"result": "Array"},
     "args": {"map_to_max": 1, "map_to_zero": 0},
@@ -368,7 +378,7 @@
 },
 {
     "name": "Multiply (:Matrix)",
-    "code": "arrays.multInflate",
+    "code": "stdlib.arrays.multInflate",
     "inputs": {"right": "Array", "left": "Array"},
     "outputs": {"result": "Matrix"},
     "args": {},
@@ -376,7 +386,7 @@
 },
 {
     "name": "Arg const",
-    "code": "arrays.argconst",
+    "code": "stdlib.arrays.argconst",
     "inputs": {},
     "outputs": {"result": "String"},
     "args": "arg",
@@ -384,7 +394,7 @@
 },
 {
     "name": "Array Generator",
-    "code": "arrays.generate",
+    "code": "stdlib.arrays.generate",
     "inputs": {},
     "outputs": {"result": "Array"},
     "args": {"range": 100, "code": "y = x", "repeating": false, "time": 1},
@@ -392,7 +402,7 @@
 },
 {
     "name": "Add",
-    "code": "arrays.add",
+    "code": "stdlib.arrays.add",
     "inputs": {"right": "Array", "left": "Array"},
     "outputs": {"result": "Array"},
     "args": {},
@@ -400,7 +410,7 @@
 },
 {
     "name": "Gaussian Generator",
-    "code": "arrays.gaussian",
+    "code": "stdlib.arrays.gaussian",
     "inputs": {},
     "outputs": {"result": "Array"},
     "args": {"range": 100, "sigma": 1},
@@ -408,7 +418,7 @@
 },
 {
     "name": "Multiply",
-    "code": "arrays.mult",
+    "code": "stdlib.arrays.mult",
     "inputs": {"right": "Array", "left": "Array"},
     "outputs": {"result": "Double"},
     "args": {},
@@ -416,7 +426,7 @@
 },
 {
     "name": "Subtract",
-    "code": "arrays.subtract",
+    "code": "stdlib.arrays.subtract",
     "inputs": {"right": "Array", "left": "Array"},
     "outputs": {"result": "Array"},
     "args": {},
@@ -424,7 +434,7 @@
 },
 {
     "name": "Array const",
-    "code": "arrays.const",
+    "code": "stdlib.arrays.const",
     "inputs": {},
     "outputs": {"result": "Array"},
     "args": {"vals": [0, 1, 2, 3, 4, 5]},
@@ -432,7 +442,7 @@
 },
 {
     "name": "Execute",
-    "code": "system.executable",
+    "code": "stdlib.system.executable",
     "inputs": {"arg": "String"},
     "outputs": {"result": "String"},
     "args": {"escapeArgs": false, "executable": "python graphex.py"},
@@ -440,7 +450,7 @@
 },
 {
     "name": "[WIP] HTTP Output",
-    "code": "system.httpoutput",
+    "code": "stdlib.system.httpoutput",
     "inputs": {"val": "String"},
     "outputs": {},
     "args": {},
@@ -448,7 +458,7 @@
 },
 {
     "name": "[WIP] HTTP Request",
-    "code": "system.httprequest",
+    "code": "stdlib.system.httprequest",
     "inputs": {"val": "Object"},
     "outputs": {"result": "Object"},
     "args": {"host": "localhost", "port": 80, "method": "get"},
@@ -456,7 +466,7 @@
 },
 {
     "name": "[WIP] WebSocket",
-    "code": "system.websocketoutput",
+    "code": "stdlib.system.websocketoutput",
     "inputs": {"val": "Object"},
     "outputs": {},
     "args": {},
@@ -464,7 +474,7 @@
 },
 {
     "name": "TCP Network",
-    "code": "system.tcpnetwork",
+    "code": "stdlib.system.tcpnetwork",
     "inputs": {"msg": "String"},
     "outputs": {"result": "String"},
     "args": {"host": "127.0.0.1", "password": null, "port": 25555},
@@ -472,7 +482,7 @@
 },
 {
     "name": "[WIP] HTTP Input",
-    "code": "system.httpinput",
+    "code": "stdlib.system.httpinput",
     "inputs": {},
     "outputs": {"put": "Object", "post": "Object", "delete": "Object", "get": "Object"},
     "args": {"port": 80},
@@ -480,7 +490,7 @@
 },
 {
     "name": "TCP Network",
-    "code": "system.tcpnetworkin",
+    "code": "stdlib.system.tcpnetworkin",
     "inputs": {},
     "outputs": {"result": "String"},
     "args": {"server": true, "host": "127.0.0.1", "passDummy": null, "passSocketAsTag": true, "password": null, "port": 25555},
@@ -488,7 +498,7 @@
 },
 {
     "name": "[WIP] WebSocket",
-    "code": "system.websocketinput",
+    "code": "stdlib.system.websocketinput",
     "inputs": {},
     "outputs": {"result": "Object"},
     "args": {},
@@ -496,7 +506,7 @@
 },
 {
     "name": "Subgraph",
-    "code": "system.subgraph",
+    "code": "stdlib.system.subgraph",
     "inputs": {"arg": "Object"},
     "outputs": {"result": "Object"},
     "args": "DefaultGraph",
@@ -504,7 +514,7 @@
 },
 {
     "name": "[WIP] WebSocket",
-    "code": "system.websocketrequest",
+    "code": "stdlib.system.websocketrequest",
     "inputs": {"val": "Object"},
     "outputs": {"result": "Object"},
     "args": {},
@@ -512,7 +522,7 @@
 },
 {
     "name": "TCP Network",
-    "code": "system.tcpnetworkout",
+    "code": "stdlib.system.tcpnetworkout",
     "inputs": {"msg": "String"},
     "outputs": {},
     "args": {"closeAfterSend": true, "host": "127.0.0.1", "password": null, "port": 25555},
@@ -520,7 +530,7 @@
 },
 {
     "name": "Print",
-    "code": "system.print",
+    "code": "stdlib.system.print",
     "inputs": {"val": "String"},
     "outputs": {},
     "args": "",
@@ -528,7 +538,7 @@
 },
 {
     "name": "Output",
-    "code": "system.output",
+    "code": "stdlib.system.output",
     "inputs": {"arg": "String"},
     "outputs": {},
     "args": "arg",
@@ -536,7 +546,7 @@
 },
 {
     "name": "Split Topic",
-    "code": "bla.splittopic",
+    "code": "privatelib.bla.splittopic",
     "inputs": {"val": "Object"},
     "outputs": {"put": "Object", "none": "Object", "event": "Object", "get": "Object"},
     "args": {},
@@ -544,7 +554,7 @@
 },
 {
     "name": "Authenticate",
-    "code": "bla.authenticate",
+    "code": "privatelib.bla.authenticate",
     "inputs": {"val": "Object"},
     "outputs": {"false": "Object", "true": "Object"},
     "args": {"code": "result = value[\"val\"]\nerror = None"},
@@ -552,7 +562,7 @@
 },
 {
     "name": "Query Database",
-    "code": "database.query",
+    "code": "extlib.database.query",
     "inputs": {"val": "Object"},
     "outputs": {"result": "Object"},
     "args": {"code": "c = db.cursor()\nresult = value[\"val\"]", "db_id": "bla"},
@@ -560,7 +570,7 @@
 },
 {
     "name": "Database SQL",
-    "code": "database.databasesql",
+    "code": "extlib.database.databasesql",
     "inputs": {},
     "outputs": {},
     "args": {"host": "localhost", "password": "bla", "db_id": "bla", "db": "bla", "user": "bla"},
@@ -568,7 +578,7 @@
 },
 {
     "name": "Database SQLite",
-    "code": "database.databasesqlite",
+    "code": "extlib.database.databasesqlite",
     "inputs": {},
     "outputs": {},
     "args": {"db_id": "bla", "file": "bla.db"},
@@ -576,7 +586,7 @@
 },
 {
     "name": "Track",
-    "code": "geometry.track",
+    "code": "extlib.geometry.track",
     "inputs": {"val": "PointArray"},
     "outputs": {"result": "PolygonArray"},
     "args": {"max_length": 0, "forget_after": 0, "threshold_y": 10, "threshold_x": 10},
@@ -584,7 +594,7 @@
 },
 {
     "name": "Polar 2 Euler",
-    "code": "geometry.polartoeuler",
+    "code": "extlib.geometry.polartoeuler",
     "inputs": {"val": "PointArray"},
     "outputs": {"result": "PointArray"},
     "args": {},
@@ -592,7 +602,7 @@
 },
 {
     "name": "Euler 2 Image",
-    "code": "geometry.plotpointarraycv",
+    "code": "extlib.geometry.plotpointarraycv",
     "inputs": {"val": "PointArray"},
     "outputs": {"result": "Image"},
     "args": {"view_size": 10.0, "img_size": 320},
@@ -600,7 +610,7 @@
 },
 {
     "name": "Array 2 Polar",
-    "code": "geometry.arraytopolar",
+    "code": "extlib.geometry.arraytopolar",
     "inputs": {"val": "Array"},
     "outputs": {"result": "PointArray"},
     "args": {"total_degree": 270, "center": 0},
@@ -608,7 +618,7 @@
 },
 {
     "name": "Centerpoints",
-    "code": "geometry.centerpoints",
+    "code": "extlib.geometry.centerpoints",
     "inputs": {"val": "PolygonArray"},
     "outputs": {"result": "PointArray"},
     "args": {},
@@ -616,7 +626,7 @@
 },
 {
     "name": "Centerpoint",
-    "code": "geometry.centerpoint",
+    "code": "extlib.geometry.centerpoint",
     "inputs": {"val": "Polygon"},
     "outputs": {"result": "Point"},
     "args": {},
@@ -624,7 +634,7 @@
 },
 {
     "name": "Transpose",
-    "code": "geometry.transpose",
+    "code": "extlib.geometry.transpose",
     "inputs": {"val": "PointArray"},
     "outputs": {"result": "PointArray"},
     "args": {},
@@ -632,7 +642,7 @@
 },
 {
     "name": "Listen",
-    "code": "ros.input",
+    "code": "extlib.ros.input",
     "inputs": {},
     "outputs": {"result": "Object"},
     "args": {"topic": "/lidar_front"},
@@ -640,7 +650,7 @@
 },
 {
     "name": "Publish",
-    "code": "ros.input",
+    "code": "extlib.ros.input",
     "inputs": {"val": "Object"},
     "outputs": {},
     "args": {"topic": "/image"},
@@ -648,7 +658,7 @@
 },
 {
     "name": "[WIP] Record",
-    "code": "computervision.record",
+    "code": "extlib.computervision.record",
     "inputs": {"img": "Image"},
     "outputs": {},
     "args": {"resource": "~/Videos/test.avi"},
@@ -656,7 +666,7 @@
 },
 {
     "name": "Dilate",
-    "code": "computervision.dilate",
+    "code": "extlib.computervision.dilate",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": {"iterations": 1, "size": 5},
@@ -664,7 +674,7 @@
 },
 {
     "name": "Gray to BGR",
-    "code": "computervision.gray2bgr",
+    "code": "extlib.computervision.gray2bgr",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": "",
@@ -672,7 +682,7 @@
 },
 {
     "name": "Render Boxes",
-    "code": "computervision.renderboxes",
+    "code": "extlib.computervision.renderboxes",
     "inputs": {"boxes": "PolygonArray", "img": "Image"},
     "outputs": {"result": "Image"},
     "args": {"r": 255, "b": 0, "g": 0},
@@ -680,7 +690,7 @@
 },
 {
     "name": "Fixed Saturisation",
-    "code": "computervision.fixedsaturisation",
+    "code": "extlib.computervision.fixedsaturisation",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": 127,
@@ -688,7 +698,7 @@
 },
 {
     "name": "BGR to HSV",
-    "code": "computervision.bgr2hsv",
+    "code": "extlib.computervision.bgr2hsv",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": "",
@@ -696,7 +706,7 @@
 },
 {
     "name": "Show",
-    "code": "computervision.show",
+    "code": "extlib.computervision.show",
     "inputs": {"img": "Image"},
     "outputs": {},
     "args": {"fullscreen": true, "title": "Debug View"},
@@ -704,7 +714,7 @@
 },
 {
     "name": "Crop Image",
-    "code": "computervision.crop",
+    "code": "extlib.computervision.crop",
     "inputs": {"val": "Image"},
     "outputs": {"result": "Image"},
     "args": {"y": 0, "x": 0, "height": 240, "width": 320},
@@ -712,7 +722,7 @@
 },
 {
     "name": "Fixed Hue",
-    "code": "computervision.fixedhue",
+    "code": "extlib.computervision.fixedhue",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": 127,
@@ -720,7 +730,7 @@
 },
 {
     "name": "HSV to BGR",
-    "code": "computervision.hsv2bgr",
+    "code": "extlib.computervision.hsv2bgr",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": "",
@@ -728,7 +738,7 @@
 },
 {
     "name": "In Range",
-    "code": "computervision.inrange",
+    "code": "extlib.computervision.inrange",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": {"lower-value": 0, "upper-value": 255, "lower-saturisation": 0, "upper-hue": 255, "lower-hue": 0, "upper-saturisation": 255},
@@ -736,7 +746,7 @@
 },
 {
     "name": "Image to distribution",
-    "code": "computervision.img2distribution",
+    "code": "extlib.computervision.img2distribution",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Array"},
     "args": "",
@@ -744,7 +754,7 @@
 },
 {
     "name": "Bounding Boxes",
-    "code": "computervision.boundingbox",
+    "code": "extlib.computervision.boundingbox",
     "inputs": {"cnts": "PolygonArray"},
     "outputs": {"result": "PolygonArray"},
     "args": {},
@@ -752,7 +762,7 @@
 },
 {
     "name": "Sift",
-    "code": "computervision.sift",
+    "code": "extlib.computervision.sift",
     "inputs": {"img": "Image"},
     "outputs": {"features": "Array", "img": "Image", "descs": "Array"},
     "args": "",
@@ -760,7 +770,7 @@
 },
 {
     "name": "Resize",
-    "code": "computervision.resize",
+    "code": "extlib.computervision.resize",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": {"width": 320, "height": 240},
@@ -768,7 +778,7 @@
 },
 {
     "name": "Find Contours",
-    "code": "computervision.findcontours",
+    "code": "extlib.computervision.findcontours",
     "inputs": {"img": "Image"},
     "outputs": {"result": "PolygonArray"},
     "args": {},
@@ -776,7 +786,7 @@
 },
 {
     "name": "Errode",
-    "code": "computervision.errode",
+    "code": "extlib.computervision.errode",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": {"iterations": 1, "size": 5},
@@ -784,7 +794,7 @@
 },
 {
     "name": "Surf",
-    "code": "computervision.surf",
+    "code": "extlib.computervision.surf",
     "inputs": {"img": "Image"},
     "outputs": {"features": "Array", "img": "Image", "descs": "Array"},
     "args": "",
@@ -792,7 +802,7 @@
 },
 {
     "name": "Gaussian Blur",
-    "code": "computervision.gaussianblur",
+    "code": "extlib.computervision.gaussianblur",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": 4,
@@ -800,7 +810,7 @@
 },
 {
     "name": "Median Blur",
-    "code": "computervision.medianblur",
+    "code": "extlib.computervision.medianblur",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": 4,
@@ -808,7 +818,7 @@
 },
 {
     "name": "Add Weighted",
-    "code": "computervision.addweighted",
+    "code": "extlib.computervision.addweighted",
     "inputs": {"right": "Image", "left": "Image"},
     "outputs": {"result": "Image"},
     "args": {"right": 0.5, "left": 0.5},
@@ -816,7 +826,7 @@
 },
 {
     "name": "Video",
-    "code": "computervision.video",
+    "code": "extlib.computervision.video",
     "inputs": {},
     "outputs": {"result": "Image"},
     "args": {"resource": 0, "fps": 30, "exposure": 0.1},
@@ -824,23 +834,191 @@
 },
 {
     "name": "Plot features",
-    "code": "computervision.plotfeatures",
+    "code": "extlib.computervision.plotfeatures",
     "inputs": {"features": "Array", "img": "Image"},
     "outputs": {"img": "Image"},
-    "args": "",
+    "args": {"mode": "advanced"},
     "desc": "Plot features into an image."
 },
 {
     "name": "Fixed Intensity",
-    "code": "computervision.fixedintensity",
+    "code": "extlib.computervision.fixedintensity",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": 127,
     "desc": "Set the intensity to a fixed value."
 },
 {
+    "name": "softmax",
+    "code": "extlib.tensorflow.softmax",
+    "inputs": {"val": "Tensor"},
+    "outputs": {"result": "Tensor"},
+    "args": {},
+    "desc": "Tensorflow softmax node."
+},
+{
+    "name": "GD Optimizer",
+    "code": "extlib.tensorflow.gradientdescentoptimizer",
+    "inputs": {"val": "Tensor"},
+    "outputs": {"train_step": "Tensor"},
+    "args": {"step_length": 0.01},
+    "desc": "Gradient Descent Optimizer"
+},
+{
+    "name": "Initialize Variables",
+    "code": "extlib.tensorflow.initializevars",
+    "inputs": {"session": "TFSession"},
+    "outputs": {"session": "TFSession"},
+    "args": {"code": "result = value[\"val\"]"},
+    "desc": "Initialize vars in session."
+},
+{
+    "name": "Mnist Batch",
+    "code": "extlib.tensorflow.mnistbatch",
+    "inputs": {"mnist": "MNIST", "val": "Object"},
+    "outputs": {"result": "Tensor"},
+    "args": {},
+    "desc": "Get the next batch from mnist"
+},
+{
+    "name": "Reduce Sum",
+    "code": "extlib.tensorflow.reducesum",
+    "inputs": {"val": "Tensor"},
+    "outputs": {"result": "Tensor"},
+    "args": {"code": "result = value[\"val\"]"},
+    "desc": "Reduce the sum"
+},
+{
+    "name": "MNIST Test",
+    "code": "extlib.tensorflow.mnisttest",
+    "inputs": {"val": "MNIST"},
+    "outputs": {"images": "Tensor", "labels": "Tensor"},
+    "args": {"code": "result = value[\"val\"]"},
+    "desc": "Get test data from mnist."
+},
+{
+    "name": "Equal",
+    "code": "extlib.tensorflow.equal",
+    "inputs": {"a": "Tensor", "b": "Tensor"},
+    "outputs": {"result": "Tensor"},
+    "args": {},
+    "desc": "Check for each position if a equals b."
+},
+{
+    "name": "Add",
+    "code": "extlib.tensorflow.add",
+    "inputs": {"a": "Tensor", "b": "Tensor"},
+    "outputs": {"result": "Tensor"},
+    "args": {},
+    "desc": "Calculate a + b."
+},
+{
+    "name": "Accuracy",
+    "code": "extlib.tensorflow.accuracy",
+    "inputs": {"y": "Tensor", "y_": "Tensor"},
+    "outputs": {"result": "Tensor"},
+    "args": {},
+    "desc": "Accuracy model."
+},
+{
+    "name": "Cross entropy",
+    "code": "extlib.tensorflow.crossentropy",
+    "inputs": {"y": "Tensor", "y_": "Tensor"},
+    "outputs": {"result": "Tensor"},
+    "args": {"code": "result = value[\"val\"]"},
+    "desc": "Calculate the cross entropy"
+},
+{
+    "name": "Mult",
+    "code": "extlib.tensorflow.mult",
+    "inputs": {"a": "Tensor", "b": "Tensor"},
+    "outputs": {"result": "Tensor"},
+    "args": {},
+    "desc": "Calculate a * b"
+},
+{
+    "name": "Log",
+    "code": "extlib.tensorflow.log",
+    "inputs": {"val": "Tensor"},
+    "outputs": {"result": "Tensor"},
+    "args": {},
+    "desc": "Calculate log(val)"
+},
+{
+    "name": "Session",
+    "code": "extlib.tensorflow.session",
+    "inputs": {},
+    "outputs": {"result": "TFSession"},
+    "args": {},
+    "desc": "A tensorflow session."
+},
+{
+    "name": "Variable",
+    "code": "extlib.tensorflow.variable",
+    "inputs": {"session": "TFSession"},
+    "outputs": {"session": "TFSession", "result": "Tensor"},
+    "args": {"dimensions": [2, 2]},
+    "desc": "A tensorflow variable."
+},
+{
+    "name": "Argmax",
+    "code": "extlib.tensorflow.argmax",
+    "inputs": {"val": "Tensor"},
+    "outputs": {"result": "Tensor"},
+    "args": {"param": 1},
+    "desc": "tf.argmax(val, param)"
+},
+{
+    "name": "Placeholder",
+    "code": "extlib.tensorflow.placeholder",
+    "inputs": {},
+    "outputs": {"result": "Object"},
+    "args": {"dimension": 0, "batch_size": null},
+    "desc": "A tensorflow placeholder."
+},
+{
+    "name": "Negate",
+    "code": "extlib.tensorflow.negate",
+    "inputs": {"val": "Tensor"},
+    "outputs": {"result": "Tensor"},
+    "args": {"code": "result = value[\"val\"]"},
+    "desc": "Negates a value (-val)"
+},
+{
+    "name": "eval accuracy",
+    "code": "extlib.tensorflow.evalaccuracy",
+    "inputs": {"x_values": "Tensor", "trigger": "Object", "y_": "Tensor", "x": "Tensor", "y_values": "Tensor", "accuracy": "Tensor"},
+    "outputs": {"result": "Number"},
+    "args": {"code": "result = value[\"val\"]"},
+    "desc": "eval the accuracy."
+},
+{
+    "name": "Train",
+    "code": "extlib.tensorflow.train",
+    "inputs": {"x": "Tensor", "train_step": "Tensor", "y_": "Tensor", "batch": "Tensor"},
+    "outputs": {"result": "Object"},
+    "args": {},
+    "desc": "Executes a train step"
+},
+{
+    "name": "Matrix Mult",
+    "code": "extlib.tensorflow.matmul",
+    "inputs": {"a": "Tensor", "b": "Tensor"},
+    "outputs": {"result": "Tensor"},
+    "args": {},
+    "desc": "Calculate a * b"
+},
+{
+    "name": "MNIST",
+    "code": "extlib.tensorflow.mnist",
+    "inputs": {},
+    "outputs": {"result": "MNIST"},
+    "args": {},
+    "desc": "Loads the mnist dataset"
+},
+{
     "name": "[WIP] Plot Array",
-    "code": "matplotlib.plotarray",
+    "code": "extlib.matplotlib.plotarray",
     "inputs": {"data": "Array"},
     "outputs": {},
     "args": {"subplot": 111, "ion": true, "clear": true, "title": "Debug"},
@@ -848,7 +1026,7 @@
 },
 {
     "name": "[WIP] Plot Image",
-    "code": "matplotlib.plotimg",
+    "code": "extlib.matplotlib.plotimg",
     "inputs": {"data": "Image"},
     "outputs": {},
     "args": {"subplot": 111, "ion": true, "clear": true, "title": "Debug"},

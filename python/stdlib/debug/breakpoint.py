@@ -10,7 +10,7 @@ except ImportError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Breakpoint", "debug.breakpoint", {},
+        super(Node, self).__init__("Breakpoint", "stdlib.debug.breakpoint", {},
                                    {"val": "Object"},
                                    {"result": "Object"},
                                    "Stops the execution until it's signaled to continue.", verbose)

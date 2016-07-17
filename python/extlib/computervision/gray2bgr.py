@@ -8,7 +8,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Gray to BGR", "computervision.gray2bgr",
+        super(Node, self).__init__("Gray to BGR", "extlib.computervision.gray2bgr",
                                    "",
                                    {"img": "Image"},
                                    {"result": "Image"},

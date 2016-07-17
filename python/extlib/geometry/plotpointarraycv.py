@@ -9,7 +9,7 @@ import numpy as np
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Euler 2 Image", "geometry.plotpointarraycv", {"img_size":320, "view_size":10.0},
+        super(Node, self).__init__("Euler 2 Image", "extlib.geometry.plotpointarraycv", {"img_size":320, "view_size":10.0},
                                    {"val": "PointArray"},
                                    {"result": "Image"},
                                    "Plot to cv_image.", verbose)

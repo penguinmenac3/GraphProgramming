@@ -8,7 +8,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Print", "system.print",
+        super(Node, self).__init__("Print", "stdlib.system.print",
                                    "",
                                    {"val": "String"},
                                    {},

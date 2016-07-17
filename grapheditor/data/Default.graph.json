@@ -1,34 +1,53 @@
 {
 	"nodes": [
 		{
-			"name": "Print_f2rVH",
-			"code": "system.print",
+			"name": "bAAYd",
+			"code": "stdlib.system.print",
 			"inputs": {
 				"val": "String"
 			},
 			"outputs": {},
 			"args": "",
 			"desc": "Print input to console.",
-			"x": 2,
-			"y": 159,
-			"displayname": "Print"
+			"displayname": "Print",
+			"heat": 1,
+			"x": 0,
+			"y": 102,
+			"running": false
 		},
 		{
-			"name": "nNTFj",
-			"code": "string.const",
+			"name": "s6iIH",
+			"code": "stdlib.string.const",
 			"inputs": {},
 			"outputs": {
 				"result": "String"
 			},
-			"args": "Hello World!",
-			"desc": "Hello World",
-			"displayname": "String",
-			"x": -109,
-			"y": -195
+			"args": "Hello ",
+			"desc": "Pass the string arg as output.",
+			"displayname": "Hello",
+			"heat": 1,
+			"x": -134,
+			"y": -126,
+			"running": false
 		},
 		{
-			"name": "dbtLJ",
-			"code": "string.concat",
+			"name": "z14te",
+			"code": "stdlib.string.const",
+			"inputs": {},
+			"outputs": {
+				"result": "String"
+			},
+			"args": "World!",
+			"desc": "Pass the string arg as output.",
+			"displayname": "World!",
+			"heat": 1,
+			"x": 117,
+			"y": -128,
+			"running": false
+		},
+		{
+			"name": "Cmjdr",
+			"code": "stdlib.string.concat",
 			"inputs": {
 				"right": "String",
 				"left": "String"
@@ -39,52 +58,41 @@
 			"args": "",
 			"desc": "Concat the two strings.",
 			"displayname": "String Concat",
-			"x": -2,
-			"y": 2
-		},
-		{
-			"name": "u3dWL",
-			"code": "string.const",
-			"inputs": {},
-			"outputs": {
-				"result": "String"
-			},
-			"args": "\nHow are you?",
-			"desc": "How are you?",
-			"displayname": "String",
-			"x": 109,
-			"y": -195
+			"heat": 1,
+			"x": 0,
+			"y": -13,
+			"running": false
 		}
 	],
 	"connections": [
 		{
 			"input": {
-				"node": "dbtLJ",
+				"node": "s6iIH",
 				"output": "result"
 			},
 			"output": {
-				"node": "Print_f2rVH",
-				"input": "val"
-			}
-		},
-		{
-			"input": {
-				"node": "nNTFj",
-				"output": "result"
-			},
-			"output": {
-				"node": "dbtLJ",
+				"node": "Cmjdr",
 				"input": "left"
 			}
 		},
 		{
 			"input": {
-				"node": "u3dWL",
+				"node": "z14te",
 				"output": "result"
 			},
 			"output": {
-				"node": "dbtLJ",
+				"node": "Cmjdr",
 				"input": "right"
+			}
+		},
+		{
+			"input": {
+				"node": "Cmjdr",
+				"output": "result"
+			},
+			"output": {
+				"node": "bAAYd",
+				"input": "val"
 			}
 		}
 	]

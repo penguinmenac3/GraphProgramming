@@ -8,7 +8,7 @@ import math
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Polar 2 Euler", "geometry.polartoeuler", {},
+        super(Node, self).__init__("Polar 2 Euler", "extlib.geometry.polartoeuler", {},
                                    {"val": "PointArray"},
                                    {"result": "PointArray"},
                                    "Convert display style.", verbose)

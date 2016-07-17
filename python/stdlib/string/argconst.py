@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("String Argument", "string.argconst", "arg", {}, {"result": "String"},
+        super(Node, self).__init__("String Argument", "stdlib.string.argconst", "arg", {}, {"result": "String"},
                                    "Pass the argument of the program.", verbose, True, False)
         self.args = args
 

@@ -7,7 +7,6 @@ function CDebugger(url, passwd, ui, renderer) {
     }
     
     ws.onmessage = function(data) {
-        // TODO do something usefull with the data...
         if(data.data != "") {
             var d = data.data.split(":");
             var node = d[0].split("_")[1];
@@ -20,7 +19,18 @@ function CDebugger(url, passwd, ui, renderer) {
                     data_data += d[i];
                 }
             }
-            if (data_type == "json") {
+            if (data_type == "running") {
+                var node_obj = ui.findNode(node);
+                if (node_obj == null) {
+                    console.log("Cannot find node: " + node);
+                } else {
+                    console.log(data_data);
+                    var data_obj = JSON.parse(data_data);
+                    node_obj.heat = data_obj["heat"];
+                    node_obj.running = data_obj["state"];
+                    renderer.setDirty();
+                }
+            } else if (data_type == "json") {
                 var node_obj = ui.findNode(node);
                 if (node_obj == null) {
                     console.log("Cannot find node: " + node);

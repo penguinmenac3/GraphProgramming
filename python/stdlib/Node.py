@@ -20,7 +20,7 @@ class Node(object):
     @:param isRepeating optional if the node is a repeating node
     """
     def __init__(self, name, code, defaultArgs, inputs, outputs, description, verbose, isInput=False, isRepeating=False,
-                 needs_foreground = False):
+                 needs_foreground = False, loopback = None):
         self.needs_foreground = needs_foreground
         self.name = name
         self.inputs = inputs
@@ -31,6 +31,7 @@ class Node(object):
         self.input = isInput
         self.code = code
         self.defaultArgs = defaultArgs
+        self.loopback = loopback
         if verbose:
             print("Created " + name + "node.")
 
@@ -48,7 +49,7 @@ class Node(object):
     # ***************************************************************************
 
     def isInput(self):
-        return self.input
+        return self.input or len(self.inputs) == 0
 
     def isRepeating(self):
         return self.repeating
@@ -78,13 +79,17 @@ class Node(object):
         return self.needs_foreground
 
     def toJson(self):
+        loopback = ""
+        if self.loopback is not None:
+            loopback = ''',
+"loopback": "''' + self.loopback + '''"'''
         return '''{
     "name": "''' + self.getName() + '''",
     "code": "''' + self.getCode() + '''",
     "inputs": ''' + json.dumps(self.getInputs()) + ''',
     "outputs": ''' + json.dumps(self.getOutputs()) + ''',
     "args": ''' + json.dumps(self.getDefaultArgs()) + ''',
-    "desc": "''' + self.getDescription() + '''"
+    "desc": "''' + self.getDescription() + '''"''' + loopback + '''
 }'''
 
 if __name__ == "__main__":

@@ -8,7 +8,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Gaussian Blur", "computervision.gaussianblur",
+        super(Node, self).__init__("Gaussian Blur", "extlib.computervision.gaussianblur",
                                    4,
                                    {"img": "Image"},
                                    {"result": "Image"},

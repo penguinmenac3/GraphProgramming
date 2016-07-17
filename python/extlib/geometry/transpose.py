@@ -8,7 +8,7 @@ import math
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Transpose", "geometry.transpose", {},
+        super(Node, self).__init__("Transpose", "extlib.geometry.transpose", {},
                                    {"val": "PointArray"},
                                    {"result": "PointArray"},
                                    "Transpose points.", verbose)

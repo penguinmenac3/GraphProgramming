@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Add", "arrays.add", {},
+        super(Node, self).__init__("Add", "stdlib.arrays.add", {},
                                    {"left": "Array", "right": "Array"},
                                    {"result": "Array"},
                                    "A constant input array.", verbose, False, False)

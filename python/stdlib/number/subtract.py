@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Subtract", "number.subtract", "",
+        super(Node, self).__init__("Subtract", "stdlib.number.subtract", "",
                                    {"left": "Number", "right": "Number"},
                                    {"result": "Number"},
                                    "Subtract right from left.", verbose)

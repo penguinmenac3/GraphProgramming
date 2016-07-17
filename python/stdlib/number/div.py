@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Divide", "number.div", "", {"left":"Number", "right":"Number"},
+        super(Node, self).__init__("Divide", "stdlib.number.div", "", {"left":"Number", "right":"Number"},
                                    {"result": "Number"},
                                    "Divide left by right.", verbose)
 

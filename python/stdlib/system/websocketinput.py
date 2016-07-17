@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("[WIP] WebSocket", "system.websocketinput", {},
+        super(Node, self).__init__("[WIP] WebSocket", "stdlib.system.websocketinput", {},
                                    {},
                                    {"result": "Object"},
                                    "Wait for websocket inputs.", verbose)

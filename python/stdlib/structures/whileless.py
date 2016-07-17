@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("While less", "structures.whileless", "",
+        super(Node, self).__init__("While less", "stdlib.structures.whileless", "",
                                    {"initial":"Number", "val":"Number"},
                                    {"loop": "Number", "leave":"Number"},
                                    "Loop while initial is less than val.", verbose)

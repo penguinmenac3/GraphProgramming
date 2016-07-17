@@ -12,7 +12,7 @@ import sys
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("[WIP] Plot Array", "matplotlib.plotarray",
+        super(Node, self).__init__("[WIP] Plot Array", "extlib.matplotlib.plotarray",
                                    {"ion": True, "title": "Debug", "clear": True, "subplot": 111},
                                    {"data": "Array"},
                                    {},

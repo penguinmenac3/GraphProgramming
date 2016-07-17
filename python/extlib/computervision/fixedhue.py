@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Fixed Hue", "computervision.fixedhue",
+        super(Node, self).__init__("Fixed Hue", "extlib.computervision.fixedhue",
                                    127,
                                    {"img": "Image"},
                                    {"result": "Image"},

@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Crop Values", "arrays.crop", {"map_to_zero": 0, "map_to_max": 1},
+        super(Node, self).__init__("Crop Values", "stdlib.arrays.crop", {"map_to_zero": 0, "map_to_max": 1},
                                    {"val": "Array"},
                                    {"result": "Array"},
                                    "Crop the array by value.", verbose, False, False)

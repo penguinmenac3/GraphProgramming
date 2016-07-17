@@ -10,7 +10,7 @@ except ImportError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Database SQLite", "database.databasesqlite", {"db_id": "bla", "file": "bla.db"},
+        super(Node, self).__init__("Database SQLite", "extlib.database.databasesqlite", {"db_id": "bla", "file": "bla.db"},
                                    {},
                                    {},
                                    "Setup the database as SQLite.", verbose, True, False)

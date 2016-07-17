@@ -8,7 +8,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("String Argument Trigger", "string.argtrigger", {"val": "arg", "time": 1.0}, {},
+        super(Node, self).__init__("String Argument Trigger", "stdlib.string.argtrigger", {"val": "arg", "time": 1.0}, {},
                                    {"result": "String"},
                                    "Pass the argument of the program.", verbose, True, True)
         self.args = args

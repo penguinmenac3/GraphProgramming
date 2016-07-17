@@ -46,32 +46,16 @@ class GraphEx(object):
             try:
                 codeName = node["code"]
                 if self.verbose:
-                    print("Importing stdlib.%s" % codeName)
-                module = __import__("stdlib.%s" % codeName, fromlist=["Node"])
+                    print("Importing %s" % codeName)
+                module = __import__("%s" % codeName, fromlist=["Node"])
             except ImportError:
                 module = None
-            # Try to import the code required for a node.
-            if not module:
-                try:
-                    codeName = node["code"]
-                    if self.verbose:
-                        print("Importing extlib.%s" % codeName)
-                    module = __import__("extlib.%s" % codeName, fromlist=["Node"])
-                except ImportError:
-                    module = None
-            # Search in users private lib.
-            if not module:
-                try:
-                    codeName = node["code"]
-                    if self.verbose:
-                        print("Importing privatelib.%s" % codeName)
-                    module = __import__("privatelib.%s" % codeName, fromlist=["Node"])
-                except ImportError:
-                    raise ImportError("Cannot find implementation for node: " + node["code"])
+                raise ImportError("Cannot find implementation for node: " + node["code"])
 
             # Create node and add lists for connecting them.
             currentNode = module.Node(self.verbose, node["args"])
             currentNode.node_uid = node["name"]
+            currentNode.heat = 0
             currentNode.nextNodes = []
             currentNode.prevNodes = []
             currentNode.ins = {}
@@ -99,6 +83,8 @@ class GraphEx(object):
             inputNode.outs[outputQualifier].append({"node":outputNode,"var":inputQualifier});
             outputNode.prevNodes.append(inputNode)
             outputNode.ins[inputQualifier] = {"var":outputQualifier}
+
+
     def prepareExecution(self):
         # Initialize all lists.
         self.toCalculate = []
@@ -204,7 +190,19 @@ class GraphEx(object):
 
     def executeNode(self, node, value):
         # Tick the node and then add the result to calculated.
+        #print(node.name)
+        #sys.stdout.flush()
+        if "debugger" in builtins.registry:
+            node.heat += 1
+            dat = {"state": True, "heat": node.heat}
+            data_str = "running:" + json.dumps(dat)
+            builtins.registry["debugger"].send("data_" + node.node_uid + ":" + data_str)
         result = node.tick(value)
+
+        if "debugger" in builtins.registry:
+            dat = {"state": False, "heat": node.heat}
+            data_str = "running:" + json.dumps(dat)
+            builtins.registry["debugger"].send("data_" + node.node_uid + ":" + data_str)
 
         for key in node.outs:
             for elem in node.outs[key]:

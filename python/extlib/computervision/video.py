@@ -10,7 +10,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Video", "computervision.video",
+        super(Node, self).__init__("Video", "extlib.computervision.video",
                                    {"resource": 0, "fps": 30, "exposure":0.1},
                                    {},
                                    {"result": "Image"},

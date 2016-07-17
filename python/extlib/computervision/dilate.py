@@ -9,7 +9,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Dilate", "computervision.dilate",
+        super(Node, self).__init__("Dilate", "extlib.computervision.dilate",
                                    {"size":5, "iterations": 1},
                                    {"img": "Image"},
                                    {"result": "Image"},

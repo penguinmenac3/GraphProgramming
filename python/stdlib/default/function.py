@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Function", "default.function", {"code": 'result = value["val"]'},
+        super(Node, self).__init__("Function", "stdlib.default.function", {"code": 'result = value["val"]'},
                                    {"val": "Object"},
                                    {"result": "Object"},
                                    "Executes the argument as pyton code.", verbose)

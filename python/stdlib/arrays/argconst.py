@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Arg const", "arrays.argconst", "arg", {}, {"result": "String"},
+        super(Node, self).__init__("Arg const", "stdlib.arrays.argconst", "arg", {}, {"result": "String"},
                                    "Get triggers from commandline.", verbose, True, False)
         self.args = args
 

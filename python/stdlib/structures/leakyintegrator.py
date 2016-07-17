@@ -8,7 +8,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Leaky Integrator", "structures.leakyintegrator", {"time": 1.0, "decay": 1.0},
+        super(Node, self).__init__("Leaky Integrator", "stdlib.structures.leakyintegrator", {"time": 1.0, "decay": 1.0},
                                    {"val": "Number"},
                                    {"result": "Boolean"},
                                    "Leaky integrator.", verbose, True, True)

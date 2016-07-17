@@ -9,7 +9,7 @@ except ImportError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Query Database", "database.query", {"code": 'c = db.cursor()\nresult = value["val"]', "db_id": "bla"},
+        super(Node, self).__init__("Query Database", "extlib.database.query", {"code": 'c = db.cursor()\nresult = value["val"]', "db_id": "bla"},
                                    {"val": "Object"},
                                    {"result": "Object"},
                                    "Interact with a db.", verbose)

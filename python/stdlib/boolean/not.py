@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Not", "boolean.not", "", {"val": "Boolean"},
+        super(Node, self).__init__("Not", "stdlib.boolean.not", "", {"val": "Boolean"},
                                    {"result": "Boolean"}, "Output the inverted input.", verbose)
 
     def tick(self, value):

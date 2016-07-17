@@ -301,16 +301,18 @@ function WebUI_CWebUI() {
 				var classes = {};
 				that.nodes.forEach(function(node) {
                     var nodetype = "algorithmnode";
+                    var nodepackage = node.code.split(".")[1];
                     if (Object.keys(node.inputs).length == 0) {
                         nodetype = "inputnode";
                     } else if (Object.keys(node.outputs).length == 0) {
                         nodetype = "outputnode";
-                    } else if (node.code.lastIndexOf("structures", 0) === 0 || (node.code.lastIndexOf("default", 0) === 0 && node.code.lastIndexOf("function", "default.".length) < 0)) {
+                    } else if (nodepackage.lastIndexOf("structures", 0) === 0 || (nodepackage.lastIndexOf("default", 0) === 0 && nodepackage.lastIndexOf("function", "default.".length) < 0)) {
                         nodetype = "structurenode";
-                    } else if (node.code.lastIndexOf("debug") === 0) {
+                    } else if (nodepackage.lastIndexOf("debug") === 0) {
                         nodetype = "debugnode";
                     }
-                    var cur = node.code.split(".")[0];
+                    var cur = node.code.substring(0, node.code.lastIndexOf('.'));
+                    cur = nodepackage;
                     if (!classes[cur]) {
                         prefix = cur;
                         classes[cur] = "<h2>" + prefix.toUpperCase() + "</h2>";

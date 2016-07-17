@@ -8,7 +8,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Trigger string", "string.trigger", {"val": "Hello World!", "time": 1.0},
+        super(Node, self).__init__("Trigger string", "stdlib.string.trigger", {"val": "Hello World!", "time": 1.0},
                                    {},
                                    {"result": "String"},
                                    "Trigger string.", verbose, True, True)

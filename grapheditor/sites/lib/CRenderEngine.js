@@ -291,7 +291,7 @@ function WebUI_CRenderEngine() {
         that.setDirty();
 	};*/
 
-	function renderDot(px, py, marked, fillStyle, name) {        
+	function renderDot(px, py, marked, fillStyle, name, heat, min_heat, max_heat) {        
         ctx.font = parseInt(that.dotSize/2 * scale) + "px 'Helvetica'";
 		ctx.fillStyle = fillStyle;
 		ctx.textAlign = 'left';
@@ -302,6 +302,9 @@ function WebUI_CRenderEngine() {
         
 		ctx.beginPath();
 		ctx.fillStyle = fillStyle;
+		if (heat > 0) {
+			ctx.fillStyle = rgba(min_heat, max_heat, heat, 0.6);
+		}
 		ctx.rect(renderOffsetX * scale + px * scale - that.dotSize/2 * scale + width/2,renderOffsetY * scale + py * scale - that.dotSize/2 * scale + height/2,that.dotSize * scale,that.dotSize * scale);
 		ctx.fill();
         
@@ -313,6 +316,14 @@ function WebUI_CRenderEngine() {
 		  ctx.strokeStyle=colorMarked;
 		  ctx.stroke();
         }
+	}
+
+	function rgba(minimum, maximum, value, alpha) {
+		ratio = 2.0 * (value-minimum) / (maximum - minimum);
+		b = parseInt(Math.max(0, 255*(1-ratio)));
+		r = parseInt(Math.max(0, 255*(ratio-1)));
+		g = 255 - b - r
+		return "rgba("+r+","+g+","+b+","+alpha+")";
 	}
 
 	function renderDotConnection(px1, py1, px2, py2) {
@@ -336,12 +347,16 @@ function WebUI_CRenderEngine() {
 		ctx.fillText(text, renderOffsetX * scale + x * scale + width/2 + offsetX * scale, renderOffsetY * scale + y * scale + height/2 + offsetY * scale);
 	}
 
-	function renderNodeRect(x, y, marked, fillStyle) {
+	function renderNodeRect(x, y, marked, fillStyle, running) {
 		ctx.beginPath();
 		ctx.fillStyle = fillStyle;
 		ctx.rect(renderOffsetX * scale + x * scale + width/2-that.nodeWidth/2 * scale,renderOffsetY * scale + y * scale + height/2-that.nodeHeight/2 * scale,that.nodeWidth * scale,that.nodeHeight * scale);
 		ctx.fill();
-        if (!marked) {
+		if (running) {
+		  ctx.lineWidth="5";
+		  ctx.strokeStyle="green";
+		  ctx.stroke();
+		} else if (!marked) {
 		  ctx.lineWidth="0";
 		  ctx.strokeStyle=fillStyle;
         } else {
@@ -498,8 +513,19 @@ function WebUI_CRenderEngine() {
 			graph.connections.forEach(function(connection) {
 				renderConnection(graph, connection);
 			});
+			min_heat = Number.MAX_VALUE;
+			max_heat = 0;
 			graph.nodes.forEach(function(node) {
-				renderNode(node);
+				if (typeof node.heat === "undefined") {
+					node.heat = 0;
+				}
+				min_heat = Math.min(min_heat, node.heat);
+				max_heat = Math.max(max_heat, node.heat);
+			});
+			//console.log(min_heat);
+			//console.log(max_heat);
+			graph.nodes.forEach(function(node) {
+				renderNode(node, min_heat, max_heat);
 			});
 		}
 	}
@@ -510,7 +536,7 @@ function WebUI_CRenderEngine() {
 		renderDotConnection(pos1.x, pos1.y, pos2.x, pos2.y);
 	}
 
-	function renderNode(node) {
+	function renderNode(node, min_heat, max_heat) {
 		if (typeof node.x === "undefined" || typeof node.y === "undefined") {
 			node.x = -renderOffsetX;
 			node.y = -renderOffsetY;
@@ -520,18 +546,19 @@ function WebUI_CRenderEngine() {
         var fillStyle = colorConnector;
         var foregroundColor = "white";
         var fillStyleLarge = colorAlgorithmNode;
+		var nodePackage = node.code.split(".")[1];
         if (Object.keys(node.inputs).length == 0) {
             fillStyleLarge = colorInputNode;
         } else if (Object.keys(node.outputs).length == 0) {
             fillStyleLarge = colorOutputNode;
-        } else if (node.code.lastIndexOf("structures", 0) === 0 || (node.code.lastIndexOf("default", 0) === 0 && node.code.lastIndexOf("function", "default.".length) < 0)) {
+        } else if (nodePackage.lastIndexOf("structures", 0) === 0 || (nodePackage.lastIndexOf("default", 0) === 0 && nodePackage.lastIndexOf("function", "default.".length) < 0)) {
             fillStyleLarge = colorStructureNode;
-        } else if (node.code.lastIndexOf("debug") === 0) {
+        } else if (nodePackage.lastIndexOf("debug") === 0) {
             fillStyleLarge = colorDebugNode;
         }
 
 		/* Draw rect symbol for robot */
-		renderNodeRect(node.x, node.y, node == that.marked, fillStyleLarge);
+		renderNodeRect(node.x, node.y, node == that.marked, fillStyleLarge, node.running && node.running != null && node.running == true);
 		if (node.data && node.data != null) {
 		    if( Object.prototype.toString.call( node.data ) === '[object Array]' ) {
 		        renderNodeDebugArray(node, foregroundColor, colorConnector);
@@ -567,13 +594,17 @@ function WebUI_CRenderEngine() {
 		for (var key in node.inputs) {
   			if (node.inputs.hasOwnProperty(key)) {
   				pos = getPosition(node, key, node.inputs, true);
-    			renderDot(pos.x, pos.y, node == that.marked, fillStyle, key);
+    			renderDot(pos.x, pos.y, node == that.marked, fillStyle, key, node.heat, min_heat, max_heat);
   			}
 		}
 		for (var key in node.outputs) {
   			if (node.outputs.hasOwnProperty(key)) {
   				pos = getPosition(node, key, node.outputs, false);
-    			renderDot(pos.x, pos.y, node == that.marked, fillStyle, key);
+				isRunningDelta = 0;
+				if (node.running && node.running != null && node.running == true) {
+					isRunningDelta = 1;
+				}
+    			renderDot(pos.x, pos.y, node == that.marked, fillStyle, key, node.heat - isRunningDelta, min_heat, max_heat);
   			}
 		}
 		//renderDot(node.x - that.nodeWidth/2 + that.dotSize / 2, node.y - that.nodeHeight/2 + that.dotSize / 2, node == that.marked, fillStyle);

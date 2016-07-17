@@ -7,7 +7,7 @@ import time
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Array Generator", "arrays.generate",
+        super(Node, self).__init__("Array Generator", "stdlib.arrays.generate",
                                    {"code": 'y = x', "range": 100, "repeating": False, "time": 1},
                                    {},
                                    {"result": "Array"},

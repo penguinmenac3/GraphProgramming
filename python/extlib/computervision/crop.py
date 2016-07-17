@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Crop Image", "computervision.crop", {"x":0, "y":0, "width":320, "height":240},
+        super(Node, self).__init__("Crop Image", "extlib.computervision.crop", {"x":0, "y":0, "width":320, "height":240},
                                    {"val": "Image"},
                                    {"result": "Image"},
                                    "Crop the image", verbose)

@@ -10,7 +10,7 @@ import sys
     
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Bounding Boxes", "computervision.boundingbox",
+        super(Node, self).__init__("Bounding Boxes", "extlib.computervision.boundingbox",
                                    {},
                                    {"cnts": "PolygonArray"},
                                    {"result": "PolygonArray"},

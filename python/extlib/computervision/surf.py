@@ -9,7 +9,7 @@ import sys
     
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Surf", "computervision.surf",
+        super(Node, self).__init__("Surf", "extlib.computervision.surf",
                                    "",
                                    {"img": "Image"},
                                    {"img": "Image", "features":"Array", "descs":"Array"},

@@ -7,7 +7,7 @@ import sys
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Track", "geometry.track", {"threshold_x": 10, "threshold_y": 10, "max_length": 0, "forget_after": 0},
+        super(Node, self).__init__("Track", "extlib.geometry.track", {"threshold_x": 10, "threshold_y": 10, "max_length": 0, "forget_after": 0},
                                    {"val": "PointArray"},
                                    {"result": "PolygonArray"},
                                    "Track points.", verbose)

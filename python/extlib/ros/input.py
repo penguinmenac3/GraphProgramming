@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Listen", "ros.input", {"topic": "/lidar_front"},
+        super(Node, self).__init__("Listen", "extlib.ros.input", {"topic": "/lidar_front"},
                                    {},
                                    {"result": "Object"},
                                    "Listen on topic.", verbose)

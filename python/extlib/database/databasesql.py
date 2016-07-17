@@ -10,7 +10,7 @@ except ImportError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Database SQL", "database.databasesql", {"db_id": "bla", "db": "bla", "user": "bla", "password": "bla", "host": "localhost"},
+        super(Node, self).__init__("Database SQL", "extlib.database.databasesql", {"db_id": "bla", "db": "bla", "user": "bla", "password": "bla", "host": "localhost"},
                                    {},
                                    {},
                                    "Creates a connection to a database.", verbose, True, False)

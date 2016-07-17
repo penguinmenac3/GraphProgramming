@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("And", "boolean.and", "", {"left": "Boolean", "right": "Boolean"},
+        super(Node, self).__init__("And", "stdlib.boolean.and", "", {"left": "Boolean", "right": "Boolean"},
                                    {"result": "Boolean"}, "Combine inputs with and.", verbose)
         self.args = args
 

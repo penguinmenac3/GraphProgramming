@@ -12,7 +12,7 @@ import sys
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("[WIP] Plot Image", "matplotlib.plotimg",
+        super(Node, self).__init__("[WIP] Plot Image", "extlib.matplotlib.plotimg",
                                    {"ion": True, "title": "Debug", "clear": True, "subplot": 111},
                                    {"data": "Image"},
                                    {},

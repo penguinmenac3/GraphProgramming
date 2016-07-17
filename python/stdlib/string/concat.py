@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("String Concat", "string.concat", "", {"left": "String", "right": "String"},
+        super(Node, self).__init__("String Concat", "stdlib.string.concat", "", {"left": "String", "right": "String"},
                                    {"result": "String"},
                                    "Concat the two strings.", verbose)
 

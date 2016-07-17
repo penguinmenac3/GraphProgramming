@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Const", "boolean.const", True, {},
+        super(Node, self).__init__("Const", "stdlib.boolean.const", True, {},
                                    {"result": "Boolean"}, "Output the arg.", verbose, True, False)
         self.args = args
 

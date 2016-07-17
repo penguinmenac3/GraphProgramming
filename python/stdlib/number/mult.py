@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Multiply", "number.mult", "",
+        super(Node, self).__init__("Multiply", "stdlib.number.mult", "",
                                    {"left": "Number", "right": "Number"},
                                    {"result": "Number"},
                                    "Multiply values with each other.", verbose)

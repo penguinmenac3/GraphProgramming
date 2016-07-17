@@ -9,7 +9,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Show", "computervision.show",
+        super(Node, self).__init__("Show", "extlib.computervision.show",
                                    {"title": "Debug View", "fullscreen": True},
                                    {"img": "Image"},
                                    {},

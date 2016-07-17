@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Equal", "boolean.equal", 5,
+        super(Node, self).__init__("Equal", "stdlib.boolean.equal", 5,
                                    {"1": "Boolean", "2": "Boolean", "3": "Boolean", "4": "Boolean", "5": "Boolean"},
                                    {"result": "Boolean"}, "Checks if the first arg inputs are equal.", verbose)
         self.args = args

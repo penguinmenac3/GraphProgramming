@@ -8,7 +8,7 @@ import math
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Array 2 Polar", "geometry.arraytopolar", {"total_degree": 270, "center": 0},
+        super(Node, self).__init__("Array 2 Polar", "extlib.geometry.arraytopolar", {"total_degree": 270, "center": 0},
                                    {"val": "Array"},
                                    {"result": "PointArray"},
                                    "Transpose points.", verbose)

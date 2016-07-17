@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Output", "system.output",
+        super(Node, self).__init__("Output", "stdlib.system.output",
                                    "arg",
                                    {"arg": "String"},
                                    {},

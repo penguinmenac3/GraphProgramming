@@ -18,7 +18,7 @@ except:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("View", "debug.view", {},
+        super(Node, self).__init__("View", "stdlib.debug.view", {},
                                    {"val": "Object"},
                                    {"result": "Object"},
                                    "Views (in IDE) and passes the object.", verbose)

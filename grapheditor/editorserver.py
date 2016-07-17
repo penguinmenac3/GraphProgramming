@@ -296,18 +296,10 @@ class myHandler(BaseHTTPRequestHandler):
             path = "data/" + data["getnodes"] + ".nodes.json"
         if "getsrc" in data:
             node = data["getsrc"].decode("utf-8").replace(".", "/")
-            path = "../python/stdlib/" + node + ".py"
-            if not os.path.isfile(path):
-                path = "../python/extlib/" + node + ".py"
-            if not os.path.isfile(path):
-                path = "../python/privatelib/" + node + ".py"
+            path = "../python/" + node + ".py"
         if "setsrc" in data:
             node = data["setsrc"].decode("utf-8").replace(".", "/")
-            path = "../python/stdlib/" + node + ".py"
-            if not os.path.isfile(path):
-                path = "../python/extlib/" + node + ".py"
-            if not os.path.isfile(path):
-                path = "../python/privatelib/" + node + ".py"
+            path = "../python/" + node + ".py"
             print(os.path.dirname(path))
             if not os.path.exists(os.path.dirname(path)):
                 try:

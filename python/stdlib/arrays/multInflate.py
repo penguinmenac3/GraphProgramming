@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Multiply (:Matrix)", "arrays.multInflate", {},
+        super(Node, self).__init__("Multiply (:Matrix)", "stdlib.arrays.multInflate", {},
                                    {"left": "Array", "right": "Array"},
                                    {"result": "Matrix"},
                                    "Multiply two values as product resulting in a matrix.", verbose, False, False)

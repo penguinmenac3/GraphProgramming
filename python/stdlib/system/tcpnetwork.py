@@ -10,7 +10,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("TCP Network", "system.tcpnetwork",
+        super(Node, self).__init__("TCP Network", "stdlib.system.tcpnetwork",
                                    {"host": "127.0.0.1", "port": 25555, "password": None},
                                    {"msg": "String"},
                                    {"result": "String"},

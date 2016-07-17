@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Multiply", "arrays.mult", {},
+        super(Node, self).__init__("Multiply", "stdlib.arrays.mult", {},
                                    {"left": "Array", "right": "Array"},
                                    {"result": "Double"},
                                    "Multiply two values as scalar product.", verbose, False, False)

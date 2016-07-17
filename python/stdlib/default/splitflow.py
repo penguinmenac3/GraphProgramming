@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("Splitflow 2", "default.splitflow", "", {"val": "Object"},
+        super(Node, self).__init__("Splitflow 2", "stdlib.default.splitflow", "", {"val": "Object"},
                                    {"left": "Object", "right": "Object"},
                                    "Splits the flow.", verbose)
 
