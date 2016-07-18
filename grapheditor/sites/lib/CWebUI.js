@@ -75,6 +75,14 @@ function WebUI_CWebUI() {
 
 	this.setNodes = function(nodes) {
 		that.nodes = nodes;
+        var compare = function (a,b) {
+            if (a.name < b.name)
+                return -1;
+            if (a.name > b.name)
+                return 1;
+            return 0;
+        };
+        that.nodes.sort(compare);
 	};
 
 	this.saveGraph = function(name) {
@@ -297,8 +305,10 @@ function WebUI_CWebUI() {
                 document.getElementById("languageselector").style.display = "";
 				return;
 			}
+
 			if (absY > 130 && absY < 160) {
 				var classes = {};
+
 				that.nodes.forEach(function(node) {
                     var nodetype = "algorithmnode";
                     var nodepackage = node.code.split(".")[1];

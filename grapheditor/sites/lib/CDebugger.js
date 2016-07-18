@@ -24,7 +24,6 @@ function CDebugger(url, passwd, ui, renderer) {
                 if (node_obj == null) {
                     console.log("Cannot find node: " + node);
                 } else {
-                    console.log(data_data);
                     renderer.cooldown();
                     var data_obj = JSON.parse(data_data);
                     node_obj.heat = data_obj["heat"];

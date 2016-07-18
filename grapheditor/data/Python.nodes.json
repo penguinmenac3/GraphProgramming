@@ -95,14 +95,6 @@
     "desc": "Pass the string arg as output."
 },
 {
-    "name": "Barrier",
-    "code": "stdlib.structures.barrier",
-    "inputs": {"trigger": "Object", "val": "Object"},
-    "outputs": {"trigger": "Object", "val": "Object"},
-    "args": {},
-    "desc": "Only pass if both are there."
-},
-{
     "name": "While greater",
     "code": "stdlib.structures.whilegreater",
     "inputs": {"initial": "Number", "val": "Number"},
@@ -117,6 +109,14 @@
     "outputs": {"result": "Boolean"},
     "args": {"decay": 1.0, "time": 1.0},
     "desc": "Leaky integrator."
+},
+{
+    "name": "Sync",
+    "code": "stdlib.structures.sync",
+    "inputs": {"a": "Object", "b": "Object"},
+    "outputs": {"a": "Object", "b": "Object"},
+    "args": {},
+    "desc": "Only pass if both are there."
 },
 {
     "name": "While less",
@@ -327,6 +327,14 @@
     "args": "",
     "desc": "If any input is present pass it.",
 "loopback": "val"
+},
+{
+    "name": "Pass",
+    "code": "stdlib.default.pass",
+    "inputs": {"in": "Object"},
+    "outputs": {"out": "Object"},
+    "args": {},
+    "desc": "Pass the input to out."
 },
 {
     "name": "Splitflow 5",
@@ -625,12 +633,28 @@
     "desc": "Plot to cv_image."
 },
 {
+    "name": "Create Point",
+    "code": "extlib.geometry.createpoint",
+    "inputs": {"y": "Number", "x": "Number"},
+    "outputs": {"point": "Point"},
+    "args": {},
+    "desc": "Create a point from x and y."
+},
+{
     "name": "Array 2 Polar",
     "code": "extlib.geometry.arraytopolar",
     "inputs": {"val": "Array"},
     "outputs": {"result": "PointArray"},
     "args": {"total_degree": 270, "center": 0},
     "desc": "Transpose points."
+},
+{
+    "name": "Accumulate",
+    "code": "extlib.geometry.accumulate",
+    "inputs": {"p": "Point"},
+    "outputs": {"acc": "PointArray"},
+    "args": {},
+    "desc": "Just add the points to Pointarray"
 },
 {
     "name": "Centerpoints",
@@ -873,12 +897,20 @@
     "desc": "Set the intensity to a fixed value."
 },
 {
-    "name": "softmax",
+    "name": "Softmax",
     "code": "extlib.tensorflow.softmax",
     "inputs": {"val": "Tensor"},
     "outputs": {"result": "Tensor"},
     "args": {},
     "desc": "Tensorflow softmax node."
+},
+{
+    "name": "Complete Linear Layer",
+    "code": "extlib.tensorflow.linearcomplete",
+    "inputs": {"graph": "Tensor", "session": "TFSession"},
+    "outputs": {"graph": "Tensor", "session": "TFSession"},
+    "args": {"in_dimension": 100, "out_dimension": 10, "stddev": 0.1},
+    "desc": "A linear + ReLU layer in a net."
 },
 {
     "name": "GD Optimizer",
@@ -889,6 +921,30 @@
     "desc": "Gradient Descent Optimizer"
 },
 {
+    "name": "Train (dropout)",
+    "code": "extlib.tensorflow.traindropout",
+    "inputs": {"keep_prob": "Tensor", "batch": "Tensor", "session": "TFSession", "y_": "Tensor", "x": "Tensor", "train_step": "Tensor"},
+    "outputs": {"result": "TFSession"},
+    "args": {},
+    "desc": "Executes a train step"
+},
+{
+    "name": "Complete Conv Layer",
+    "code": "extlib.tensorflow.convcomplete",
+    "inputs": {"graph": "Tensor", "session": "TFSession"},
+    "outputs": {"graph": "Tensor", "session": "TFSession"},
+    "args": {"output_channels": 32, "patch_x": 5, "patch_y": 5, "stddev": 0.1, "input_channels": 1},
+    "desc": "A conv + relu + maxpool layer in a net."
+},
+{
+    "name": "Max Pool Layer",
+    "code": "extlib.tensorflow.maxpool",
+    "inputs": {"graph": "Tensor", "session": "TFSession"},
+    "outputs": {"graph": "Tensor", "session": "TFSession"},
+    "args": {},
+    "desc": "A max pooling layer in a net."
+},
+{
     "name": "Initialize Variables",
     "code": "extlib.tensorflow.initializevars",
     "inputs": {"session": "TFSession"},
@@ -897,10 +953,18 @@
     "desc": "Initialize vars in session."
 },
 {
+    "name": "Relu Layer",
+    "code": "extlib.tensorflow.relu",
+    "inputs": {"graph": "Tensor", "session": "TFSession"},
+    "outputs": {"graph": "Tensor", "session": "TFSession"},
+    "args": {},
+    "desc": "A ReLU layer in a net."
+},
+{
     "name": "Mnist Batch",
     "code": "extlib.tensorflow.mnistbatch",
-    "inputs": {"mnist": "MNIST", "val": "Object"},
-    "outputs": {"result": "Tensor"},
+    "inputs": {"trigger": "Object", "mnist": "MNIST"},
+    "outputs": {"batch": "Tensor"},
     "args": {},
     "desc": "Get the next batch from mnist"
 },
@@ -913,9 +977,41 @@
     "desc": "Reduce the sum"
 },
 {
+    "name": "Train MNIST (dropout)",
+    "code": "extlib.tensorflow.trainmnistdropout",
+    "inputs": {"keep_prob": "Tensor", "session": "TFSession", "y_": "Tensor", "y": "Tensor", "x": "Tensor", "train_step": "Tensor"},
+    "outputs": {"session": "TFSession", "iteration": "Number", "accuracy": "Number"},
+    "args": {},
+    "desc": "Trains the net on mnist."
+},
+{
+    "name": "Conv Layer",
+    "code": "extlib.tensorflow.conv",
+    "inputs": {"graph": "Tensor", "session": "TFSession"},
+    "outputs": {"graph": "Tensor", "session": "TFSession"},
+    "args": {"output_channels": 32, "patch_x": 5, "patch_y": 5, "stddev": 0.1, "input_channels": 1},
+    "desc": "A convolution layer in a net."
+},
+{
+    "name": "ADAM Optimizer",
+    "code": "extlib.tensorflow.adamoptimizer",
+    "inputs": {"graph": "Tensor", "session": "TFSession"},
+    "outputs": {"session": "TFSession", "train_step": "Tensor"},
+    "args": {"step_length": 0.001},
+    "desc": "ADAM Descent Optimizer"
+},
+{
+    "name": "Reshape 2 Conv Layer",
+    "code": "extlib.tensorflow.reshape2conv",
+    "inputs": {"graph": "Tensor", "session": "TFSession"},
+    "outputs": {"graph": "Tensor", "session": "TFSession"},
+    "args": {"img_height": 28, "img_width": 28, "output_channels": 1},
+    "desc": "Reshape for convolution."
+},
+{
     "name": "MNIST Test",
     "code": "extlib.tensorflow.mnisttest",
-    "inputs": {"val": "MNIST"},
+    "inputs": {"mnist": "MNIST"},
     "outputs": {"images": "Tensor", "labels": "Tensor"},
     "args": {"code": "result = value[\"val\"]"},
     "desc": "Get test data from mnist."
@@ -940,7 +1036,7 @@
     "name": "Accuracy",
     "code": "extlib.tensorflow.accuracy",
     "inputs": {"y": "Tensor", "y_": "Tensor"},
-    "outputs": {"result": "Tensor"},
+    "outputs": {"y_": "Tensor", "accuracy": "Tensor"},
     "args": {},
     "desc": "Accuracy model."
 },
@@ -948,7 +1044,7 @@
     "name": "Cross entropy",
     "code": "extlib.tensorflow.crossentropy",
     "inputs": {"y": "Tensor", "y_": "Tensor"},
-    "outputs": {"result": "Tensor"},
+    "outputs": {"y": "Tensor", "entropy": "Tensor", "y_": "Tensor"},
     "args": {"code": "result = value[\"val\"]"},
     "desc": "Calculate the cross entropy"
 },
@@ -967,6 +1063,14 @@
     "outputs": {"result": "Tensor"},
     "args": {},
     "desc": "Calculate log(val)"
+},
+{
+    "name": "Reshape 2 FC Layer",
+    "code": "extlib.tensorflow.reshape2fc",
+    "inputs": {"graph": "Tensor", "session": "TFSession"},
+    "outputs": {"graph": "Tensor", "session": "TFSession"},
+    "args": {"img_height": 7, "img_width": 7, "input_channels": 64},
+    "desc": "Reshape for fully connected."
 },
 {
     "name": "Session",
@@ -1009,7 +1113,7 @@
     "desc": "Negates a value (-val)"
 },
 {
-    "name": "eval accuracy",
+    "name": "Eval Accuracy",
     "code": "extlib.tensorflow.evalaccuracy",
     "inputs": {"x_values": "Tensor", "trigger": "TFSession", "y_": "Tensor", "x": "Tensor", "y_values": "Tensor", "accuracy": "Tensor"},
     "outputs": {"result": "Number"},
@@ -1025,6 +1129,14 @@
     "desc": "Executes a train step"
 },
 {
+    "name": "Dropout Layer",
+    "code": "extlib.tensorflow.dropout",
+    "inputs": {"graph": "Tensor", "keep_prob": "Tensor", "session": "TFSession"},
+    "outputs": {"graph": "Tensor", "session": "TFSession"},
+    "args": {},
+    "desc": "A linear layer in a net."
+},
+{
     "name": "Matrix Mult",
     "code": "extlib.tensorflow.matmul",
     "inputs": {"a": "Tensor", "b": "Tensor"},
@@ -1036,9 +1148,17 @@
     "name": "MNIST",
     "code": "extlib.tensorflow.mnist",
     "inputs": {},
-    "outputs": {"result": "MNIST"},
+    "outputs": {"mnist": "MNIST"},
     "args": {},
     "desc": "Loads the mnist dataset"
+},
+{
+    "name": "Linear Layer",
+    "code": "extlib.tensorflow.linear",
+    "inputs": {"graph": "Tensor", "session": "TFSession"},
+    "outputs": {"graph": "Tensor", "session": "TFSession"},
+    "args": {"in_dimension": 100, "out_dimension": 10, "stddev": 0.1},
+    "desc": "A linear layer in a net."
 },
 {
     "name": "[WIP] Plot Array",

@@ -2,76 +2,6 @@
 	"connections": [
 		{
 			"input": {
-				"node": "Nzym2",
-				"output": "result"
-			},
-			"output": {
-				"input": "session",
-				"node": "uB1zA"
-			}
-		},
-		{
-			"input": {
-				"node": "uB1zA",
-				"output": "session"
-			},
-			"output": {
-				"input": "session",
-				"node": "OYSUr"
-			}
-		},
-		{
-			"input": {
-				"node": "aOtkw",
-				"output": "result"
-			},
-			"output": {
-				"input": "a",
-				"node": "EtbM4"
-			}
-		},
-		{
-			"input": {
-				"node": "EtbM4",
-				"output": "result"
-			},
-			"output": {
-				"input": "val",
-				"node": "oEC9E"
-			}
-		},
-		{
-			"input": {
-				"node": "WgF50",
-				"output": "result"
-			},
-			"output": {
-				"input": "val",
-				"node": "cPfzT"
-			}
-		},
-		{
-			"input": {
-				"node": "cPfzT",
-				"output": "1"
-			},
-			"output": {
-				"input": "y_",
-				"node": "7Ffys"
-			}
-		},
-		{
-			"input": {
-				"node": "oEC9E",
-				"output": "result"
-			},
-			"output": {
-				"input": "val",
-				"node": "YQEUu"
-			}
-		},
-		{
-			"input": {
 				"node": "YQEUu",
 				"output": "right"
 			},
@@ -82,132 +12,172 @@
 		},
 		{
 			"input": {
-				"node": "SkHoO",
-				"output": "result"
+				"node": "gnVjP",
+				"output": "graph"
 			},
 			"output": {
-				"input": "accuracy",
-				"node": "biLps"
+				"node": "oEC9E",
+				"input": "val"
 			}
 		},
 		{
 			"input": {
-				"node": "apxKZ",
-				"output": "2"
+				"node": "HaSpn",
+				"output": "graph"
 			},
 			"output": {
-				"input": "x",
-				"node": "biLps"
+				"node": "zLJYi",
+				"input": "graph"
 			}
 		},
 		{
 			"input": {
-				"node": "cPfzT",
-				"output": "4"
-			},
-			"output": {
-				"input": "y_",
-				"node": "biLps"
-			}
-		},
-		{
-			"input": {
-				"node": "cPfzT",
-				"output": "3"
-			},
-			"output": {
-				"input": "y_",
-				"node": "SkHoO"
-			}
-		},
-		{
-			"input": {
-				"node": "HhCqF",
-				"output": "result"
-			},
-			"output": {
-				"input": "val",
-				"node": "84WHZ"
-			}
-		},
-		{
-			"input": {
-				"node": "84WHZ",
-				"output": "left"
-			},
-			"output": {
-				"input": "mnist",
-				"node": "JshLi"
-			}
-		},
-		{
-			"input": {
-				"node": "84WHZ",
-				"output": "right"
-			},
-			"output": {
-				"input": "val",
-				"node": "R0OaY"
-			}
-		},
-		{
-			"input": {
-				"node": "R0OaY",
-				"output": "images"
-			},
-			"output": {
-				"input": "x_values",
-				"node": "biLps"
-			}
-		},
-		{
-			"input": {
-				"node": "R0OaY",
-				"output": "labels"
-			},
-			"output": {
-				"input": "y_values",
-				"node": "biLps"
-			}
-		},
-		{
-			"input": {
-				"node": "uB1zA",
-				"output": "result"
-			},
-			"output": {
-				"node": "aOtkw",
-				"input": "b"
-			}
-		},
-		{
-			"input": {
-				"node": "apxKZ",
-				"output": "3"
-			},
-			"output": {
-				"node": "aOtkw",
-				"input": "a"
-			}
-		},
-		{
-			"input": {
-				"node": "Gz2n7",
+				"node": "HaSpn",
 				"output": "session"
 			},
 			"output": {
-				"node": "jiuUZ",
-				"input": "trigger"
+				"node": "zLJYi",
+				"input": "session"
 			}
 		},
 		{
 			"input": {
-				"node": "OYSUr",
+				"node": "zLJYi",
+				"output": "graph"
+			},
+			"output": {
+				"node": "hjEIF",
+				"input": "graph"
+			}
+		},
+		{
+			"input": {
+				"node": "zLJYi",
+				"output": "session"
+			},
+			"output": {
+				"node": "hjEIF",
+				"input": "session"
+			}
+		},
+		{
+			"input": {
+				"node": "hjEIF",
+				"output": "graph"
+			},
+			"output": {
+				"node": "m8dHd",
+				"input": "graph"
+			}
+		},
+		{
+			"input": {
+				"node": "hjEIF",
+				"output": "session"
+			},
+			"output": {
+				"node": "m8dHd",
+				"input": "session"
+			}
+		},
+		{
+			"input": {
+				"node": "Nzym2",
 				"output": "result"
 			},
 			"output": {
-				"node": "EtbM4",
-				"input": "b"
+				"node": "HaSpn",
+				"input": "session"
+			}
+		},
+		{
+			"input": {
+				"node": "m8dHd",
+				"output": "graph"
+			},
+			"output": {
+				"node": "ExdE9",
+				"input": "graph"
+			}
+		},
+		{
+			"input": {
+				"node": "m8dHd",
+				"output": "session"
+			},
+			"output": {
+				"node": "ExdE9",
+				"input": "session"
+			}
+		},
+		{
+			"input": {
+				"node": "ExdE9",
+				"output": "graph"
+			},
+			"output": {
+				"node": "C48A9",
+				"input": "graph"
+			}
+		},
+		{
+			"input": {
+				"node": "ExdE9",
+				"output": "session"
+			},
+			"output": {
+				"node": "C48A9",
+				"input": "session"
+			}
+		},
+		{
+			"input": {
+				"node": "C48A9",
+				"output": "graph"
+			},
+			"output": {
+				"node": "gnVjP",
+				"input": "graph"
+			}
+		},
+		{
+			"input": {
+				"node": "C48A9",
+				"output": "session"
+			},
+			"output": {
+				"node": "gnVjP",
+				"input": "session"
+			}
+		},
+		{
+			"input": {
+				"node": "POXwm",
+				"output": "result"
+			},
+			"output": {
+				"node": "vcvdS",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "vcvdS",
+				"output": "left"
+			},
+			"output": {
+				"node": "C48A9",
+				"input": "keep_prob"
+			}
+		},
+		{
+			"input": {
+				"node": "oEC9E",
+				"output": "result"
+			},
+			"output": {
+				"node": "YQEUu",
+				"input": "val"
 			}
 		},
 		{
@@ -216,13 +186,43 @@
 				"output": "result"
 			},
 			"output": {
-				"node": "apxKZ",
+				"node": "j11lU",
 				"input": "val"
 			}
 		},
 		{
 			"input": {
-				"node": "OYSUr",
+				"node": "j11lU",
+				"output": "left"
+			},
+			"output": {
+				"node": "HaSpn",
+				"input": "graph"
+			}
+		},
+		{
+			"input": {
+				"node": "7Ffys",
+				"output": "result"
+			},
+			"output": {
+				"node": "vBxY8",
+				"input": "graph"
+			}
+		},
+		{
+			"input": {
+				"node": "gnVjP",
+				"output": "session"
+			},
+			"output": {
+				"node": "vBxY8",
+				"input": "session"
+			}
+		},
+		{
+			"input": {
+				"node": "vBxY8",
 				"output": "session"
 			},
 			"output": {
@@ -232,32 +232,72 @@
 		},
 		{
 			"input": {
-				"node": "7Ffys",
+				"node": "WgF50",
 				"output": "result"
 			},
 			"output": {
-				"node": "f4F2E",
+				"node": "6f68V",
 				"input": "val"
 			}
 		},
 		{
 			"input": {
-				"node": "zHMFv",
-				"output": "trigger"
+				"node": "6f68V",
+				"output": "right"
 			},
 			"output": {
-				"node": "biLps",
-				"input": "trigger"
+				"node": "7Ffys",
+				"input": "y_"
 			}
 		},
 		{
 			"input": {
-				"node": "jiuUZ",
-				"output": "done"
+				"node": "vcvdS",
+				"output": "right"
 			},
 			"output": {
-				"node": "zHMFv",
-				"input": "trigger"
+				"node": "QUAfV",
+				"input": "in"
+			}
+		},
+		{
+			"input": {
+				"node": "j11lU",
+				"output": "right"
+			},
+			"output": {
+				"node": "CtFva",
+				"input": "in"
+			}
+		},
+		{
+			"input": {
+				"node": "QUAfV",
+				"output": "out"
+			},
+			"output": {
+				"node": "psABM",
+				"input": "keep_prob"
+			}
+		},
+		{
+			"input": {
+				"node": "Gz2n7",
+				"output": "session"
+			},
+			"output": {
+				"node": "psABM",
+				"input": "session"
+			}
+		},
+		{
+			"input": {
+				"node": "6f68V",
+				"output": "left"
+			},
+			"output": {
+				"node": "psABM",
+				"input": "y_"
 			}
 		},
 		{
@@ -266,108 +306,68 @@
 				"output": "left"
 			},
 			"output": {
-				"node": "zHMFv",
-				"input": "val"
-			}
-		},
-		{
-			"input": {
-				"node": "zHMFv",
-				"output": "val"
-			},
-			"output": {
-				"node": "SkHoO",
+				"node": "psABM",
 				"input": "y"
 			}
 		},
 		{
 			"input": {
-				"node": "apxKZ",
-				"output": "1"
+				"node": "CtFva",
+				"output": "out"
 			},
 			"output": {
-				"node": "K5loZ",
+				"node": "psABM",
 				"input": "x"
 			}
 		},
 		{
 			"input": {
-				"node": "JshLi",
-				"output": "result"
-			},
-			"output": {
-				"node": "K5loZ",
-				"input": "batch"
-			}
-		},
-		{
-			"input": {
-				"node": "f4F2E",
+				"node": "vBxY8",
 				"output": "train_step"
 			},
 			"output": {
-				"node": "K5loZ",
+				"node": "psABM",
 				"input": "train_step"
 			}
 		},
 		{
 			"input": {
-				"node": "cPfzT",
-				"output": "2"
+				"node": "psABM",
+				"output": "iteration"
 			},
 			"output": {
-				"node": "K5loZ",
-				"input": "y_"
+				"node": "eTvu1",
+				"input": "x"
 			}
 		},
 		{
 			"input": {
-				"node": "jiuUZ",
-				"output": "loop"
+				"node": "eTvu1",
+				"output": "point"
 			},
 			"output": {
-				"node": "DMKcw",
+				"node": "cCAFr",
+				"input": "p"
+			}
+		},
+		{
+			"input": {
+				"node": "cCAFr",
+				"output": "acc"
+			},
+			"output": {
+				"node": "v4dlr",
 				"input": "val"
 			}
 		},
 		{
 			"input": {
-				"node": "DMKcw",
-				"output": "right"
+				"node": "psABM",
+				"output": "accuracy"
 			},
 			"output": {
-				"node": "JshLi",
-				"input": "val"
-			}
-		},
-		{
-			"input": {
-				"node": "DMKcw",
-				"output": "left"
-			},
-			"output": {
-				"node": "K5loZ",
-				"input": "session"
-			}
-		},
-		{
-			"input": {
-				"node": "K5loZ",
-				"output": "result"
-			},
-			"output": {
-				"node": "jiuUZ",
-				"input": "trigger"
-			}
-		},
-		{
-			"input": {
-				"node": "biLps",
-				"output": "result"
-			},
-			"output": {
-				"node": "0rLzI",
-				"input": "val"
+				"node": "eTvu1",
+				"input": "y"
 			}
 		}
 	],
@@ -384,9 +384,9 @@
 			"outputs": {
 				"result": "Tensor"
 			},
-			"x": 255,
-			"y": -16,
-			"heat": 1,
+			"x": 161.62500000000006,
+			"y": -257.1874999999999,
+			"heat": 0,
 			"running": 0
 		},
 		{
@@ -403,9 +403,9 @@
 				"result": "Object"
 			},
 			"running": 0,
-			"x": 588,
-			"y": -132,
-			"heat": 1
+			"x": 608.8055555555555,
+			"y": -267.5694444444444,
+			"heat": 0
 		},
 		{
 			"args": {},
@@ -418,69 +418,9 @@
 				"result": "TFSession"
 			},
 			"running": 0,
-			"x": 32.39592526282792,
-			"y": -728.5656075183256,
-			"heat": 1
-		},
-		{
-			"args": {},
-			"code": "extlib.tensorflow.mnist",
-			"desc": "Loads the mnist dataset",
-			"displayname": "MNIST",
-			"inputs": {},
-			"name": "HhCqF",
-			"outputs": {
-				"result": "Tensor"
-			},
-			"running": 0,
-			"x": -382.4195601851852,
-			"y": 34.788773148148124,
-			"heat": 1
-		},
-		{
-			"args": {
-				"dimensions": [
-					784,
-					10
-				]
-			},
-			"code": "extlib.tensorflow.variable",
-			"desc": "Weights",
-			"displayname": "W",
-			"inputs": {
-				"session": "TFSession"
-			},
-			"name": "uB1zA",
-			"outputs": {
-				"result": "Tensor",
-				"session": "TFSession"
-			},
-			"running": 0,
-			"x": 10.415158872251155,
-			"y": -611.3393645109954,
-			"heat": 1
-		},
-		{
-			"args": {
-				"dimensions": [
-					10
-				]
-			},
-			"code": "extlib.tensorflow.variable",
-			"desc": "bias",
-			"displayname": "b",
-			"inputs": {
-				"session": "TFSession"
-			},
-			"name": "OYSUr",
-			"outputs": {
-				"result": "Tensor",
-				"session": "TFSession"
-			},
-			"running": 0,
-			"x": -87.81108413507908,
-			"y": -473.395925262828,
-			"heat": 1
+			"x": 274.3959252628279,
+			"y": -1131.5656075183256,
+			"heat": 0
 		},
 		{
 			"args": {
@@ -497,45 +437,9 @@
 				"session": "TFSession"
 			},
 			"running": 0,
-			"x": -314,
-			"y": -288,
-			"heat": 1
-		},
-		{
-			"args": {},
-			"code": "extlib.tensorflow.matmul",
-			"desc": "Calculate a * b",
-			"displayname": "Matrix Mult",
-			"inputs": {
-				"a": "Tensor",
-				"b": "Tensor"
-			},
-			"name": "aOtkw",
-			"outputs": {
-				"result": "Tensor"
-			},
-			"running": 0,
-			"x": 88,
-			"y": -212,
-			"heat": 2
-		},
-		{
-			"args": {},
-			"code": "extlib.tensorflow.add",
-			"desc": "Calculate a + b.",
-			"displayname": "Add",
-			"inputs": {
-				"a": "Tensor",
-				"b": "Tensor"
-			},
-			"name": "EtbM4",
-			"outputs": {
-				"result": "Tensor"
-			},
-			"x": 224,
-			"y": -123,
-			"heat": 2,
-			"running": 0
+			"x": 290.84027777777766,
+			"y": 143.2708333333334,
+			"heat": 0
 		},
 		{
 			"args": {
@@ -552,134 +456,16 @@
 			"outputs": {
 				"result": "Tensor"
 			},
-			"x": 468,
-			"y": 185,
-			"heat": 1,
-			"running": 0
-		},
-		{
-			"args": {
-				"step_length": 0.01
-			},
-			"code": "extlib.tensorflow.gradientdescentoptimizer",
-			"desc": "Gradient Descent Optimizer",
-			"displayname": "GD Optimizer",
-			"inputs": {
-				"val": "Tensor"
-			},
-			"name": "f4F2E",
-			"outputs": {
-				"train_step": "Tensor"
-			},
-			"x": 355,
-			"y": 282,
-			"heat": 1,
-			"running": 0
-		},
-		{
-			"args": {},
-			"code": "extlib.tensorflow.mnistbatch",
-			"desc": "Get the next batch from mnist",
-			"displayname": "Mnist Batch",
-			"inputs": {
-				"mnist": "MNIST",
-				"val": "Object"
-			},
-			"name": "JshLi",
-			"outputs": {
-				"result": "Tensor"
-			},
-			"x": 84.21477141203702,
-			"y": 332.9119646990741,
-			"heat": 823,
-			"running": 0
-		},
-		{
-			"args": {
-				"n": 1000
-			},
-			"code": "stdlib.structures.for",
-			"desc": "Do n times.",
-			"displayname": "For",
-			"inputs": {
-				"trigger": "Object"
-			},
-			"loopback": "trigger",
-			"name": "jiuUZ",
-			"outputs": {
-				"done": "Object",
-				"loop": "Object"
-			},
-			"x": -104,
-			"y": 22,
-			"heat": 1004,
-			"running": 0
-		},
-		{
-			"args": "",
-			"code": "stdlib.default.splitflow5",
-			"desc": "Splits the flow.",
-			"displayname": "Splitflow 5",
-			"inputs": {
-				"val": "Object"
-			},
-			"name": "apxKZ",
-			"outputs": {
-				"1": "Object",
-				"2": "Object",
-				"3": "Object",
-				"4": "Object",
-				"5": "Object"
-			},
-			"running": 0,
-			"x": -75,
-			"y": -305,
-			"heat": 1
-		},
-		{
-			"args": "",
-			"code": "stdlib.default.splitflow5",
-			"desc": "Splits the flow.",
-			"displayname": "Splitflow 5",
-			"inputs": {
-				"val": "Object"
-			},
-			"name": "cPfzT",
-			"outputs": {
-				"1": "Object",
-				"2": "Object",
-				"3": "Object",
-				"4": "Object",
-				"5": "Object"
-			},
-			"running": 0,
-			"x": 523,
-			"y": -25,
-			"heat": 1
-		},
-		{
-			"args": {},
-			"code": "extlib.tensorflow.accuracy",
-			"desc": "Accuracy model.",
-			"displayname": "Accuracy",
-			"inputs": {
-				"y": "Tensor",
-				"y_": "Tensor"
-			},
-			"name": "SkHoO",
-			"outputs": {
-				"result": "Tensor"
-			},
-			"x": 44,
-			"y": 584,
-			"heat": 2,
+			"x": 276.81250000000006,
+			"y": -60.944444444444436,
+			"heat": 0,
 			"running": 0
 		},
 		{
 			"args": "",
 			"code": "stdlib.default.splitflow",
 			"desc": "Splits the flow.",
-			"displayname": "Splitflow 2",
+			"displayname": "Pass y",
 			"inputs": {
 				"val": "Object"
 			},
@@ -688,72 +474,10 @@
 				"left": "Object",
 				"right": "Object"
 			},
-			"x": 335,
-			"y": 76,
-			"heat": 1,
+			"x": 123.06944444444446,
+			"y": -156.35416666666663,
+			"heat": 0,
 			"running": 0
-		},
-		{
-			"args": {
-				"code": "result = value[\"val\"]"
-			},
-			"code": "extlib.tensorflow.evalaccuracy",
-			"desc": "eval the accuracy.",
-			"displayname": "eval accuracy",
-			"inputs": {
-				"accuracy": "Tensor",
-				"trigger": "Object",
-				"x": "Tensor",
-				"x_values": "Tensor",
-				"y_": "Tensor",
-				"y_values": "Tensor"
-			},
-			"name": "biLps",
-			"outputs": {
-				"result": "Number"
-			},
-			"x": -3.0465931833526056,
-			"y": 738.9794492368346,
-			"heat": 3,
-			"running": 14
-		},
-		{
-			"args": "",
-			"code": "stdlib.default.splitflow",
-			"desc": "Splits the flow.",
-			"displayname": "Splitflow 2",
-			"inputs": {
-				"val": "Object"
-			},
-			"name": "84WHZ",
-			"outputs": {
-				"left": "Object",
-				"right": "Object"
-			},
-			"running": 0,
-			"x": -274.1405469611576,
-			"y": 138.796109500628,
-			"heat": 1
-		},
-		{
-			"args": {
-				"code": "result = value[\"val\"]"
-			},
-			"code": "extlib.tensorflow.mnisttest",
-			"desc": "Get test data from mnist.",
-			"displayname": "MNIST Test",
-			"inputs": {
-				"val": "MNIST"
-			},
-			"name": "R0OaY",
-			"outputs": {
-				"images": "Tensor",
-				"labels": "Tensor"
-			},
-			"running": 0,
-			"x": -303.52678836664376,
-			"y": 412.8325691083976,
-			"heat": 1
 		},
 		{
 			"name": "IZ7uj",
@@ -768,53 +492,193 @@
 			},
 			"desc": "Input Placeholder",
 			"displayname": "x",
-			"heat": 1,
+			"heat": 0,
 			"running": 0,
-			"x": 263,
-			"y": -487
+			"x": -112.18750000000001,
+			"y": -1206.5625
 		},
 		{
-			"name": "zHMFv",
-			"code": "stdlib.structures.barrier",
+			"name": "gnVjP",
+			"code": "extlib.tensorflow.linear",
 			"inputs": {
-				"trigger": "Object",
-				"val": "Object"
+				"graph": "Tensor",
+				"session": "TFSession"
 			},
 			"outputs": {
-				"trigger": "Object",
-				"val": "Object"
+				"graph": "Tensor",
+				"session": "TFSession"
 			},
-			"args": {},
-			"desc": "Only pass if both are there.",
-			"displayname": "Barrier",
-			"heat": 4,
+			"args": {
+				"in_dimension": 1024,
+				"out_dimension": 10,
+				"stddev": 0.1
+			},
+			"desc": "A linear layer in a net.",
+			"displayname": "fc4",
+			"heat": 0,
 			"running": 0,
-			"x": -47,
-			"y": 447
+			"x": 262,
+			"y": -350
 		},
 		{
-			"name": "K5loZ",
-			"code": "extlib.tensorflow.train",
+			"name": "zLJYi",
+			"code": "extlib.tensorflow.convcomplete",
 			"inputs": {
-				"x": "Tensor",
-				"session": "TFSession",
-				"train_step": "Tensor",
-				"y_": "Tensor",
-				"batch": "Tensor"
+				"graph": "Tensor",
+				"session": "TFSession"
 			},
+			"outputs": {
+				"graph": "Tensor",
+				"session": "TFSession"
+			},
+			"args": {
+				"output_channels": 32,
+				"patch_x": 5,
+				"patch_y": 5,
+				"stddev": 0.1,
+				"input_channels": 1
+			},
+			"desc": "A conv + relu + maxpool layer in a net.",
+			"displayname": "conv1",
+			"heat": 0,
+			"running": 0,
+			"x": 255,
+			"y": -907
+		},
+		{
+			"name": "HaSpn",
+			"code": "extlib.tensorflow.reshape2conv",
+			"inputs": {
+				"graph": "Tensor",
+				"session": "TFSession"
+			},
+			"outputs": {
+				"graph": "Tensor",
+				"session": "TFSession"
+			},
+			"args": {
+				"img_height": 28,
+				"img_width": 28,
+				"output_channels": 1
+			},
+			"desc": "Reshape for convolution.",
+			"displayname": "reshape2conv",
+			"heat": 0,
+			"running": 0,
+			"x": 254,
+			"y": -1013
+		},
+		{
+			"name": "hjEIF",
+			"code": "extlib.tensorflow.convcomplete",
+			"inputs": {
+				"graph": "Tensor",
+				"session": "TFSession"
+			},
+			"outputs": {
+				"graph": "Tensor",
+				"session": "TFSession"
+			},
+			"args": {
+				"output_channels": 64,
+				"patch_x": 5,
+				"patch_y": 5,
+				"stddev": 0.1,
+				"input_channels": 32
+			},
+			"desc": "A conv + relu + maxpool layer in a net.",
+			"displayname": "conv2",
+			"heat": 0,
+			"running": 0,
+			"x": 254,
+			"y": -802
+		},
+		{
+			"name": "m8dHd",
+			"code": "extlib.tensorflow.reshape2fc",
+			"inputs": {
+				"graph": "Tensor",
+				"session": "TFSession"
+			},
+			"outputs": {
+				"graph": "Tensor",
+				"session": "TFSession"
+			},
+			"args": {
+				"img_height": 7,
+				"img_width": 7,
+				"input_channels": 64
+			},
+			"desc": "Reshape for fully connected.",
+			"displayname": "reshape2fc",
+			"heat": 0,
+			"running": 0,
+			"x": 254,
+			"y": -692
+		},
+		{
+			"name": "ExdE9",
+			"code": "extlib.tensorflow.linearcomplete",
+			"inputs": {
+				"graph": "Tensor",
+				"session": "TFSession"
+			},
+			"outputs": {
+				"graph": "Tensor",
+				"session": "TFSession"
+			},
+			"args": {
+				"in_dimension": 3136,
+				"out_dimension": 1024,
+				"stddev": 0.1
+			},
+			"desc": "A linear + ReLU layer in a net.",
+			"displayname": "fc3",
+			"heat": 0,
+			"running": 0,
+			"x": 254,
+			"y": -578
+		},
+		{
+			"name": "C48A9",
+			"code": "extlib.tensorflow.dropout",
+			"inputs": {
+				"graph": "Tensor",
+				"keep_prob": "Tensor",
+				"session": "TFSession"
+			},
+			"outputs": {
+				"graph": "Tensor",
+				"session": "TFSession"
+			},
+			"args": {},
+			"desc": "A linear layer in a net.",
+			"displayname": "dropout3",
+			"heat": 0,
+			"running": 0,
+			"x": 258,
+			"y": -464
+		},
+		{
+			"name": "POXwm",
+			"code": "extlib.tensorflow.placeholder",
+			"inputs": {},
 			"outputs": {
 				"result": "Object"
 			},
-			"args": {},
-			"desc": "Executes a train step",
-			"displayname": "Train",
-			"heat": 1004,
+			"args": {
+				"dimension": null,
+				"batch_size": null
+			},
+			"desc": "A tensorflow placeholder.",
+			"displayname": "keep_prob",
+			"heat": 0,
 			"running": 0,
-			"x": 399.6794704861111,
-			"y": 413.3485966435185
+			"x": -263,
+			"y": -711
 		},
 		{
-			"name": "DMKcw",
+			"name": "vcvdS",
 			"code": "stdlib.default.splitflow",
 			"inputs": {
 				"val": "Object"
@@ -826,25 +690,319 @@
 			"args": "",
 			"desc": "Splits the flow.",
 			"displayname": "Splitflow 2",
-			"heat": 1000,
+			"heat": 0,
 			"running": 0,
-			"x": 48.66257282807067,
-			"y": 186.94811491973226
+			"x": -215,
+			"y": -601
 		},
 		{
-			"name": "0rLzI",
-			"code": "stdlib.system.print",
+			"name": "j11lU",
+			"code": "stdlib.default.splitflow",
 			"inputs": {
-				"val": "String"
+				"val": "Object"
 			},
-			"outputs": {},
+			"outputs": {
+				"right": "Object",
+				"left": "Object"
+			},
 			"args": "",
-			"desc": "Print input to console.",
-			"displayname": "Print",
-			"heat": 3,
-			"running": 18,
-			"x": 2.362958481688782,
-			"y": 888.5688271195932
+			"desc": "Splits the flow.",
+			"displayname": "Splitflow 2",
+			"heat": 0,
+			"running": 0,
+			"x": -55,
+			"y": -1098
+		},
+		{
+			"name": "vBxY8",
+			"code": "extlib.tensorflow.adamoptimizer",
+			"inputs": {
+				"graph": "Tensor",
+				"session": "TFSession"
+			},
+			"outputs": {
+				"session": "TFSession",
+				"train_step": "Tensor"
+			},
+			"args": {
+				"step_length": 0.001
+			},
+			"desc": "ADAM Descent Optimizer",
+			"displayname": "ADAM Optimizer",
+			"heat": 0,
+			"running": 0,
+			"x": 367.2135759790262,
+			"y": 29.214027819529065
+		},
+		{
+			"name": "6f68V",
+			"code": "stdlib.default.splitflow",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"right": "Object",
+				"left": "Object"
+			},
+			"args": "",
+			"desc": "Splits the flow.",
+			"displayname": "Splitflow y_",
+			"heat": 0,
+			"running": 0,
+			"x": 570.1706914280614,
+			"y": -158.59626613964875
+		},
+		{
+			"name": "CtFva",
+			"code": "stdlib.default.pass",
+			"inputs": {
+				"in": "Object"
+			},
+			"outputs": {
+				"out": "Object"
+			},
+			"args": {},
+			"desc": "Pass the input to out.",
+			"displayname": "Pass X",
+			"heat": 0,
+			"running": 0,
+			"x": -56.88888888888885,
+			"y": -87.66666666666667
+		},
+		{
+			"name": "QUAfV",
+			"code": "stdlib.default.pass",
+			"inputs": {
+				"in": "Object"
+			},
+			"outputs": {
+				"out": "Object"
+			},
+			"args": {},
+			"desc": "Pass the input to out.",
+			"displayname": "Pass keep_prob",
+			"heat": 0,
+			"running": 0,
+			"x": -211.05555555555563,
+			"y": -5.722222222222205
+		},
+		{
+			"name": "psABM",
+			"code": "extlib.tensorflow.trainmnistdropout",
+			"inputs": {
+				"keep_prob": "Tensor",
+				"session": "TFSession",
+				"y_": "Tensor",
+				"y": "Tensor",
+				"x": "Tensor",
+				"train_step": "Tensor"
+			},
+			"outputs": {
+				"session": "TFSession",
+				"iteration": "Number",
+				"accuracy": "Number"
+			},
+			"args": {},
+			"desc": "Trains the net on mnist.",
+			"displayname": "Train MNIST (dropout)",
+			"heat": 0,
+			"running": 0,
+			"x": 263.0927769175136,
+			"y": 356.9090751107334
+		},
+		{
+			"name": "eTvu1",
+			"code": "extlib.geometry.createpoint",
+			"inputs": {
+				"y": "Number",
+				"x": "Number"
+			},
+			"outputs": {
+				"point": "Point"
+			},
+			"args": {},
+			"desc": "Create a point from x and y.",
+			"displayname": "Create Point",
+			"heat": 0,
+			"running": 0,
+			"x": 280.0616115325162,
+			"y": 488.15528783265813
+		},
+		{
+			"name": "v4dlr",
+			"code": "stdlib.debug.view",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"result": "Object"
+			},
+			"args": {},
+			"desc": "Views (in IDE) and passes the object.",
+			"displayname": "View",
+			"heat": 0,
+			"running": 0,
+			"x": 332.3836904624795,
+			"y": 681.9849541215638,
+			"data": [
+				[
+					1,
+					7.999999821186066
+				],
+				[
+					2,
+					7.999999821186066
+				],
+				[
+					3,
+					7.999999821186066
+				],
+				[
+					4,
+					7.999999821186066
+				],
+				[
+					5,
+					7.999999821186066
+				],
+				[
+					6,
+					7.999999821186066
+				],
+				[
+					7,
+					7.999999821186066
+				],
+				[
+					8,
+					7.999999821186066
+				],
+				[
+					9,
+					7.999999821186066
+				],
+				[
+					10,
+					7.999999821186066
+				],
+				[
+					11,
+					7.999999821186066
+				],
+				[
+					11,
+					34.00000035762787
+				],
+				[
+					12,
+					34.00000035762787
+				],
+				[
+					13,
+					34.00000035762787
+				],
+				[
+					14,
+					34.00000035762787
+				],
+				[
+					15,
+					34.00000035762787
+				],
+				[
+					16,
+					34.00000035762787
+				],
+				[
+					17,
+					34.00000035762787
+				],
+				[
+					18,
+					34.00000035762787
+				],
+				[
+					19,
+					34.00000035762787
+				],
+				[
+					20,
+					34.00000035762787
+				],
+				[
+					21,
+					34.00000035762787
+				],
+				[
+					21,
+					62.00000047683716
+				],
+				[
+					22,
+					62.00000047683716
+				],
+				[
+					23,
+					62.00000047683716
+				],
+				[
+					24,
+					62.00000047683716
+				],
+				[
+					25,
+					62.00000047683716
+				],
+				[
+					26,
+					62.00000047683716
+				],
+				[
+					27,
+					62.00000047683716
+				],
+				[
+					28,
+					62.00000047683716
+				],
+				[
+					29,
+					62.00000047683716
+				],
+				[
+					30,
+					62.00000047683716
+				],
+				[
+					31,
+					62.00000047683716
+				],
+				[
+					31,
+					81.99999928474426
+				],
+				[
+					32,
+					81.99999928474426
+				]
+			]
+		},
+		{
+			"name": "cCAFr",
+			"code": "extlib.geometry.accumulate",
+			"inputs": {
+				"p": "Point"
+			},
+			"outputs": {
+				"acc": "PointArray"
+			},
+			"args": {},
+			"desc": "Just add the points to Pointarray",
+			"displayname": "Accumulate",
+			"heat": 0,
+			"running": 0,
+			"x": 322.86380642160947,
+			"y": 571.9777671968241
 		}
 	]
 }

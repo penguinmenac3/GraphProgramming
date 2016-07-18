@@ -291,15 +291,7 @@ function WebUI_CRenderEngine() {
         that.setDirty();
 	};*/
 
-	function renderDot(px, py, marked, fillStyle, name, heat, min_heat, max_heat) {        
-        ctx.font = parseInt(that.dotSize/2 * scale) + "px 'Helvetica'";
-		ctx.fillStyle = fillStyle;
-		ctx.textAlign = 'left';
-		ctx.textBaseline = 'top';
-        var offsetX = that.dotSize/2 + 4;
-        var offsetY = -that.dotSize/4;
-		ctx.fillText(name, renderOffsetX * scale + px * scale + width/2 + offsetX * scale, renderOffsetY * scale + py * scale + height/2 + offsetY * scale);
-        
+	function renderDot(px, py, marked, fillStyle, name, heat, min_heat, max_heat, output) {        
 		ctx.beginPath();
 		ctx.fillStyle = fillStyle;
 		if (heat > 0) {
@@ -316,6 +308,24 @@ function WebUI_CRenderEngine() {
 		  ctx.strokeStyle=colorMarked;
 		  ctx.stroke();
         }
+		
+		var fnt_size = parseInt(that.dotSize/3 * scale);     
+        ctx.font = fnt_size + "px 'Helvetica'";
+		ctx.fillStyle = "white";
+		ctx.textAlign = 'center';
+		ctx.textBaseline = 'center';
+        var offsetX = that.dotSize/2 + 4;
+        var offsetY = -that.dotSize/4;
+		if (output == true) {
+			offsetX = 0;
+			//offsetY = -that.dotSize/2 - fnt_size / 2 - 4;
+			offsetY = -4;
+		} else {
+			offsetX = 0;
+			//offsetY = that.dotSize/2 + fnt_size / 2 - 4;
+			offsetY = -4;
+		}
+		ctx.fillText(name, renderOffsetX * scale + px * scale + width/2 + offsetX * scale, renderOffsetY * scale + py * scale + height/2 + offsetY * scale);
 	}
 
 	function rgba(minimum, maximum, value, alpha) {
@@ -419,8 +429,8 @@ function WebUI_CRenderEngine() {
                 for (var i = 0; i < len; i++) {
                     max_x = Math.max(max_x, Math.abs(data[i][0]));
                     max_y = Math.max(max_y, Math.abs(data[i][1]));
-					max_x = Math.max(max_x, max_y);
-					max_y = Math.max(max_x, max_y);
+					//max_x = Math.max(max_x, max_y);
+					//max_y = Math.max(max_x, max_y);
                     if (data[i][0] < 0) {
                         xs = 2;
                     }
@@ -628,7 +638,7 @@ function WebUI_CRenderEngine() {
 		for (var key in node.inputs) {
   			if (node.inputs.hasOwnProperty(key)) {
   				pos = getPosition(node, key, node.inputs, true);
-    			renderDot(pos.x, pos.y, node == that.marked, fillStyle, key, node.heat, min_heat, max_heat);
+    			renderDot(pos.x, pos.y, node == that.marked, fillStyle, key, node.heat, min_heat, max_heat, false);
   			}
 		}
 		for (var key in node.outputs) {
@@ -638,7 +648,7 @@ function WebUI_CRenderEngine() {
 				if (node.running == 20) {
 					isRunningDelta = 1;
 				}
-    			renderDot(pos.x, pos.y, node == that.marked, fillStyle, key, node.heat - isRunningDelta, min_heat, max_heat);
+    			renderDot(pos.x, pos.y, node == that.marked, fillStyle, key, node.heat - isRunningDelta, min_heat, max_heat, true);
   			}
 		}
 		//renderDot(node.x - that.nodeWidth/2 + that.dotSize / 2, node.y - that.nodeHeight/2 + that.dotSize / 2, node == that.marked, fillStyle);
