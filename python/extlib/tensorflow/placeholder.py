@@ -19,7 +19,10 @@ class Node(base.Node):
         if "tags" in value and "val" in value["tags"]:
             tag = value["tags"]["val"]
         
-        result = tf.placeholder(tf.float32, [self.args["batch_size"], self.args["dimension"]])
+        if self.args["batch_size"] is None and self.args["dimension"] is None:
+            result = tf.placeholder(tf.float32)
+        else:
+            result = tf.placeholder(tf.float32, [self.args["batch_size"], self.args["dimension"]])
         
         if tag:
             return {"result": result, "tags":{"result":tag}}

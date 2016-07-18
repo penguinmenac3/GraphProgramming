@@ -7,21 +7,21 @@ except ValueError:
 class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("Mnist Batch", "extlib.tensorflow.mnistbatch", {},
-                                   {"val": "Object", "mnist": "MNIST"},
-                                   {"result": "Tensor"},
+                                   {"trigger": "Object", "mnist": "MNIST"},
+                                   {"batch": "Tensor"},
                                    "Get the next batch from mnist", verbose, needs_foreground=True)
         self.args = args
 
     def tick(self, value):
         result = {}
         tag = None
-        if "tags" in value and "val" in value["tags"]:
-            tag = value["tags"]["val"]
+        if "tags" in value and "trigger" in value["tags"]:
+            tag = value["tags"]["trigger"]
         
         mnist = value["mnist"]
         result = mnist.train.next_batch(50)
         
         if tag:
-            return {"result": result, "tags":{"result":tag}}
+            return {"batch": result, "tags":{"result":tag}}
         else:
-            return {"result": result}
+            return {"batch": result}

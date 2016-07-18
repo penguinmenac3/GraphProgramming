@@ -6,7 +6,7 @@ except ValueError:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("eval accuracy", "extlib.tensorflow.evalaccuracy", {},
+        super(Node, self).__init__("Eval Accuracy", "extlib.tensorflow.evalaccuracy", {},
                                    {"trigger": "TFSession", "accuracy": "Tensor", "x": "Tensor", "y_": "Tensor", "x_values": "Tensor", "y_values": "Tensor"},
                                    {"result": "Number"},
                                    "eval the accuracy.", verbose, needs_foreground=True)

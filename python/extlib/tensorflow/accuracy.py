@@ -9,7 +9,7 @@ class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("Accuracy", "extlib.tensorflow.accuracy", {},
                                    {"y": "Tensor", "y_": "Tensor"},
-                                   {"result": "Tensor"},
+                                   {"accuracy": "Tensor", "y_": "Tensor"},
                                    "Accuracy model.", verbose, needs_foreground=True)
         self.args = args
 
@@ -25,6 +25,6 @@ class Node(base.Node):
         result = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
         
         if tag:
-            return {"result": result, "tags":{"result":tag}}
+            return {"accuracy": result, "y_":y_, "tags":{"accuracy":tag, "y_":y_}}
         else:
-            return {"result": result}
+            return {"accuracy": result, "y_":y_}

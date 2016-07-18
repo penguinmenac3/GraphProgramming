@@ -9,7 +9,7 @@ class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("Cross entropy", "extlib.tensorflow.crossentropy", {"code": 'result = value["val"]'},
                                    {"y_": "Tensor", "y": "Tensor"},
-                                   {"result": "Tensor"},
+                                   {"y_": "Tensor", "y": "Tensor", "entropy": "Tensor"},
                                    "Calculate the cross entropy", verbose, needs_foreground=True)
         self.args = args
 
@@ -18,10 +18,13 @@ class Node(base.Node):
         tag = None
         if "tags" in value and "val" in value["tags"]:
             tag = value["tags"]["val"]
+            
+        y_ = value["y_"]
+        y = value["y"]
         
-        result = -tf.reduce_sum(value["y_"]*tf.log(value["y"]))
+        result = -tf.reduce_sum(y_*tf.log(y))
         
         if tag:
-            return {"result": result, "tags":{"result":tag}}
+            return {"result": result, "y": y, "y_": y_, "tags":{"result":tag}}
         else:
-            return {"result": result}
+            return {"result": result, "y": y, "y_": y_}

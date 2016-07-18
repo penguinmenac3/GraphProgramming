@@ -5,12 +5,11 @@ except ValueError:
 
 from tensorflow.examples.tutorials.mnist import input_data
 
-
 class Node(base.Node):
     def __init__(self, verbose, args):
         super(Node, self).__init__("MNIST", "extlib.tensorflow.mnist", {},
                                    {},
-                                   {"result": "MNIST"},
+                                   {"mnist": "MNIST"},
                                    "Loads the mnist dataset", verbose, needs_foreground=True)
         self.args = args
 
@@ -23,6 +22,6 @@ class Node(base.Node):
         result = input_data.read_data_sets("MNIST_data/", one_hot=True)
         
         if tag:
-            return {"result": result, "tags":{"result":tag}}
+            return {"mnist": result, "tags":{"mnist":tag}}
         else:
-            return {"result": result}
+            return {"mnist": result}

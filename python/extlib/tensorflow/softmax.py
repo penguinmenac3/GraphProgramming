@@ -6,7 +6,7 @@ import tensorflow as tf
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("softmax", "extlib.tensorflow.softmax", {},
+        super(Node, self).__init__("Softmax", "extlib.tensorflow.softmax", {},
                                    {"val": "Tensor"},
                                    {"result": "Tensor"},
                                    "Tensorflow softmax node.", verbose, needs_foreground=True)
