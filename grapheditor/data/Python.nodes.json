@@ -393,6 +393,14 @@
     "desc": "Convolute two arrays."
 },
 {
+    "name": "Divide Componentwise",
+    "code": "stdlib.arrays.divcomp",
+    "inputs": {"a": "Array", "b": "Array"},
+    "outputs": {"result": "Double"},
+    "args": {},
+    "desc": "Divide a componentwise by b."
+},
+{
     "name": "Array trigger",
     "code": "stdlib.arrays.trigger",
     "inputs": {},
@@ -761,6 +769,14 @@
     "desc": "Render boxes in image."
 },
 {
+    "name": "BGR to XYZ",
+    "code": "extlib.computervision.bgr2xyz",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert BGR image to XYZ image."
+},
+{
     "name": "Fixed Saturisation",
     "code": "extlib.computervision.fixedsaturisation",
     "inputs": {"img": "Image"},
@@ -769,12 +785,36 @@
     "desc": "Set the saturisation to a fixed value."
 },
 {
+    "name": "BGR to Gray",
+    "code": "extlib.computervision.bgr2gray",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert BGR image to Gray image."
+},
+{
     "name": "BGR to HSV",
     "code": "extlib.computervision.bgr2hsv",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": "",
     "desc": "Convert BGR image to HSV image."
+},
+{
+    "name": "Adaptive Thresh",
+    "code": "extlib.computervision.adathresh",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"blockSize": 11, "C": 2, "gaussian": false, "inverted": false},
+    "desc": "Adaptive threshold."
+},
+{
+    "name": "Mask",
+    "code": "extlib.computervision.mask",
+    "inputs": {"mask": "Image", "img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Apply a mask."
 },
 {
     "name": "Show",
@@ -793,12 +833,28 @@
     "desc": "Crop the image"
 },
 {
+    "name": "HLS to BGR",
+    "code": "extlib.computervision.hls2bgr",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert HLS image to BGR image."
+},
+{
     "name": "Fixed Hue",
     "code": "extlib.computervision.fixedhue",
     "inputs": {"img": "Image"},
     "outputs": {"result": "Image"},
     "args": 127,
     "desc": "Set the hue to a fixed value."
+},
+{
+    "name": "Invert Mask",
+    "code": "extlib.computervision.invertmask",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {},
+    "desc": "Invert the mask white and black."
 },
 {
     "name": "HSV to BGR",
@@ -817,6 +873,14 @@
     "desc": "Apply an inRange operation on the image."
 },
 {
+    "name": "2 Colors to Bin",
+    "code": "extlib.computervision.color2bin",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"imgSize": 80},
+    "desc": "Adaptive threshold."
+},
+{
     "name": "Image to distribution",
     "code": "extlib.computervision.img2distribution",
     "inputs": {"img": "Image"},
@@ -831,6 +895,22 @@
     "outputs": {"result": "PolygonArray"},
     "args": {},
     "desc": "Calc bounding boxes for contour."
+},
+{
+    "name": "BGR to Lab",
+    "code": "extlib.computervision.bgr2lab",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert BGR image to Lab image."
+},
+{
+    "name": "BGR to HLS",
+    "code": "extlib.computervision.bgr2hls",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert BGR image to HLS image."
 },
 {
     "name": "Sift",
@@ -897,6 +977,14 @@
     "desc": "Apply median blur on image."
 },
 {
+    "name": "XYZ to BGR",
+    "code": "extlib.computervision.xyz2bgr",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert XYZ image to BGR image."
+},
+{
     "name": "Add Weighted",
     "code": "extlib.computervision.addweighted",
     "inputs": {"right": "Image", "left": "Image"},
@@ -919,6 +1007,14 @@
     "outputs": {"img": "Image"},
     "args": {"mode": "advanced"},
     "desc": "Plot features into an image."
+},
+{
+    "name": "Lab to BGR",
+    "code": "extlib.computervision.lab2bgr",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert Lab image to BGR image."
 },
 {
     "name": "Fixed Intensity",
