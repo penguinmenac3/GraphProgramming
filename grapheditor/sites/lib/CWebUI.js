@@ -24,6 +24,7 @@ function WebUI_CWebUI() {
 	this.selectedConnection = null;
 	this.startPos = null;
 	this.clickNode = null;
+    this.graphRunning = false;
 	
 	this.start = function(fullscreen, container, initialGraph) {
 		/* check if dependencies are already existing */
@@ -449,6 +450,9 @@ function WebUI_CWebUI() {
         that.currentNode.displayname = document.getElementById("displayname").value;
 	    that.changed = true;
         RenderEngine.setDirty();
+        if (that.graphRunning == true) {
+            that.restartDebug();
+        }
     }
     
     this.saveCodeEdit = function (property) {
@@ -815,6 +819,8 @@ class Node(base.Node):
         document.getElementById("killbtn").style.display = "none";
         document.getElementById("restartbtn").style.display = "none";
         document.getElementById("startbtn").style.display = "inline-block";
+        console.log("Done");
+        that.graphRunning = false;
     }
     
     this.clearDebug = function () {
@@ -824,12 +830,16 @@ class Node(base.Node):
     
     this.restartDebug = function() {
         that.killDebug();
-        window.setTimeout(that.startDebug,1000);
-        that;
+        window.setTimeout(that.startDebugForceSave,1000);
+    }
+
+    this.startDebugForceSave = function() {
+        that.startDebug(true);
     }
     
-    this.startDebug = function() {
+    this.startDebug = function(forceSave=false) {
         startup = function() {
+            that.graphRunning = true;
             document.getElementById("killbtn").style.display = "inline-block";
             document.getElementById("restartbtn").style.display = "inline-block";
             document.getElementById("startbtn").style.display = "none";
@@ -840,7 +850,12 @@ class Node(base.Node):
         
         RenderEngine.resetHeat();
         if (that.changed == true) {
-			WebUI.prompt("Autosave: Please enter graph name", WebUI.graphName,
+            if (forceSave) {
+			    WebUI.saveGraph(WebUI.graphName);
+			    that.changed = false;
+                startup();
+            } else {
+			    WebUI.prompt("Autosave: Please enter graph name", WebUI.graphName,
                 function(name) {
                     if (name == null) {
 				        return;
@@ -850,7 +865,8 @@ class Node(base.Node):
 			        that.changed = false;
                     startup()
                 }
-            );
+                );
+            }
 			
         } else {
             startup();

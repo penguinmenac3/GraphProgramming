@@ -40,5 +40,6 @@ class Node(base.Node):
         success = False
         success, img = self.cap.read()
         if not success:
+            self.cap = None
             return {"result":None}
         return {"result":img}

@@ -18,7 +18,7 @@ except:
 
 class Node(base.Node):
     def __init__(self, verbose, args):
-        super(Node, self).__init__("View", "stdlib.debug.view", {},
+        super(Node, self).__init__("View", "stdlib.debug.view", {"width":0, "height": 0},
                                    {"val": "Object"},
                                    {"result": "Object"},
                                    "Views (in IDE) and passes the object.", verbose)
@@ -29,6 +29,13 @@ class Node(base.Node):
         tag = None
         if "tags" in value and "val" in value["tags"]:
             tag = value["tags"]["val"]
+            
+        width = 0
+        height = 0
+        if "width" in self.args:
+          width = self.args["width"]
+        if "height" in self.args:
+          height = self.args["height"]
 
         if "debugger" in builtins.registry:
             data_str = ""
@@ -36,7 +43,11 @@ class Node(base.Node):
                 data_str = "json:" + json.dumps(value["val"])
             elif type(value["val"]) == np.ndarray:
                 img = value["val"]
-                img = cv2.resize(img.copy(), (160, 120), 0, 0, cv2.INTER_CUBIC)
+                if width == 0:
+                  width = 160
+                if height == 0:
+                  height = 120
+                img = cv2.resize(img.copy(), (width, height), 0, 0, cv2.INTER_CUBIC)
                 cnt = cv2.imencode('.png', img)[1]
                 b64 = base64.encodestring(cnt)
                 data_str = ("img:" + b64).replace("\n", "")

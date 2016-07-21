@@ -3,7 +3,7 @@
     "code": "stdlib.debug.view",
     "inputs": {"val": "Object"},
     "outputs": {"result": "Object"},
-    "args": {},
+    "args": {"width": 0, "height": 0},
     "desc": "Views (in IDE) and passes the object."
 },
 {
@@ -144,6 +144,14 @@
     "desc": "If condition pass to true otherwise to false."
 },
 {
+    "name": "limit",
+    "code": "stdlib.structures.limit",
+    "inputs": {"in": "Object"},
+    "outputs": {"out": "Object"},
+    "args": {"Hz": 1.0},
+    "desc": "Only pass once per timelimit."
+},
+{
     "name": "Parse Json",
     "code": "stdlib.json.parse",
     "inputs": {"val": "String"},
@@ -182,6 +190,14 @@
     "outputs": {"result": "Number"},
     "args": "",
     "desc": "Sum left and right."
+},
+{
+    "name": "Increase Trigger Number",
+    "code": "stdlib.number.increasetrigger",
+    "inputs": {},
+    "outputs": {"result": "Number"},
+    "args": {"start": 0, "stop": 100, "time": 1.0},
+    "desc": "Trigger value every time seconds."
 },
 {
     "name": "Divide",
@@ -569,6 +585,14 @@
     "desc": "Set an output arg."
 },
 {
+    "name": "Get Image",
+    "code": "privatelib.torchwood.getimage",
+    "inputs": {"id": "Number"},
+    "outputs": {"labeled": "Image", "remaining_imgs": "Number", "img": "Image"},
+    "args": {"positive_label": "drivable", "torchwood_path": "/home/michael/checkout/ML/torchwood-ai-lab", "negative_label": "not drivable", "neutral_label": "unknown", "dataset": "Robotour 2016"},
+    "desc": "Get an image and the labeled version."
+},
+{
     "name": "Split Topic",
     "code": "privatelib.bla.splittopic",
     "inputs": {"val": "Object"},
@@ -855,6 +879,14 @@
     "outputs": {"result": "Image"},
     "args": 4,
     "desc": "Apply gaussian blur on image."
+},
+{
+    "name": "Color Quantization",
+    "code": "extlib.computervision.colorquantization",
+    "inputs": {"img": "Image"},
+    "outputs": {"img": "Image"},
+    "args": {"k": 4},
+    "desc": "Reduce the number of colors"
 },
 {
     "name": "Median Blur",

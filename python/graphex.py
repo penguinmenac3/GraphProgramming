@@ -19,6 +19,7 @@ except ImportError:
     import __builtin__ as builtins
 
 builtins.registry = {}
+builtins.graph = None
 builtins.registry_output = {}
 builtins.shutdown_hook = []
 
@@ -40,6 +41,7 @@ class GraphEx(object):
     def findAndCreateNodes(self, nodelist):
         # Empty nodes and input nodes list.
         self.nodes = {}
+        builtins.graph = self.nodes
         self.input_nodes = {}
 
         # Load all nodes.
