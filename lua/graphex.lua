@@ -105,6 +105,6 @@ function runGraph(graph, inputNodes)
   end
 end
 
-local tmp = loadGraph("../grapheditor/data/Default.graph.json")
+local tmp = loadGraph(arg[1])
 local graph, inputNodes = buildGraph(tmp)
 runGraph(graph, inputNodes)
