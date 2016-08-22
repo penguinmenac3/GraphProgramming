@@ -8,4 +8,11 @@ function myNode.init(node)
   end
 end
 
+function myNode.spec(node)
+  node.name = "String Const"
+  node.outputs.result = "String"
+  node.args = "Hello"
+  node.desc = "Returns the arg on the output."
+end
+
 return myNode

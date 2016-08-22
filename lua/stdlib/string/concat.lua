@@ -8,4 +8,12 @@ function myNode.init(node)
   end
 end
 
+function myNode.spec(nod)
+  node.name = "String Concat"
+  node.inputs.left = "String"
+  node.inputs.right = "String"
+  node.outputs.result = "Object"
+  node.desc = "Concat left and right."
+end
+
 return myNode

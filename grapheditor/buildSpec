@@ -1,5 +1,13 @@
 #!/bin/bash
 
-cd ../python
+if [ "Python" = $1 ]; then
+  cd ../python
 
-python buildNodespec.py $@
+  python buildNodespec.py $@
+elif [ "Lua" = $1 ]; then
+  cd ../lua
+
+  lua buildNodespec.lua $@
+else
+  echo "Unknown language."
+fi

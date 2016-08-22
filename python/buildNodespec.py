@@ -45,7 +45,7 @@ if __name__ == "__main__":
             print("-h   --help      shows this help")
 
     if len(sys.argv) > 1 and not sys.argv[-1] == "-v" and not sys.argv[-1] == "--verbose" and not sys.argv[
-        -1] == "-h" and not sys.argv[-1] == "--help":
+        -1] == "-h" and not sys.argv[-1] == "--help" and not sys.argv[-1] == "Python":
         filename = sys.argv[-1]
 
     files = [f for f in files_by_pattern('.', lambda fn: fn.endswith('.py'))]

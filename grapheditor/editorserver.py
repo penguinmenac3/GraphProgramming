@@ -292,7 +292,7 @@ class myHandler(BaseHTTPRequestHandler):
             self.wfile.write("".encode("utf-8"))
             return
         if "getnodes" in data:
-            subprocess.call(["bash", "buildSpec"])
+            subprocess.call(["bash", "buildSpec", data["getnodes"]])
             path = "data/" + data["getnodes"] + ".nodes.json"
         if "getsrc" in data:
             node = data["getsrc"].decode("utf-8").replace(".", "/")
