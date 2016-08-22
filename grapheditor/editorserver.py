@@ -125,7 +125,7 @@ class MyServerProtocol(WebSocketServerProtocol):
 
 
 def debugWS():
-    factory = WebSocketServerFactory(u"ws://127.0.0.1:9000")
+    factory = WebSocketServerFactory(u"ws://192.168.43.157:9000")
     factory.protocol = MyServerProtocol
     # factory.setProtocolOptions(maxConnections=2)
 

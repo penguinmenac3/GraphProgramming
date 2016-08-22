@@ -837,8 +837,8 @@ class Node(base.Node):
         that.startDebug(true);
     }
     
-    this.startDebug = function(forceSave=false) {
-        startup = function() {
+    this.startDebug = function(forceSave) {
+        var startup = function() {
             that.graphRunning = true;
             document.getElementById("killbtn").style.display = "inline-block";
             document.getElementById("restartbtn").style.display = "inline-block";

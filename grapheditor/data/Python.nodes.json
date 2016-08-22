@@ -1,42 +1,59 @@
 [{
-    "name": "View",
-    "code": "stdlib.debug.view",
+    "name": "Function",
+    "code": "stdlib.default.function",
     "inputs": {"val": "Object"},
     "outputs": {"result": "Object"},
-    "args": {"width": 0, "height": 0},
-    "desc": "Views (in IDE) and passes the object."
+    "args": {"code": "result = value[\"val\"]"},
+    "desc": "Executes the argument as pyton code."
 },
 {
-    "name": "Breakpoint",
-    "code": "stdlib.debug.breakpoint",
-    "inputs": {"val": "Object"},
-    "outputs": {"result": "Object"},
+    "name": "Pass",
+    "code": "stdlib.default.pass",
+    "inputs": {"in": "Object"},
+    "outputs": {"out": "Object"},
     "args": {},
-    "desc": "Stops the execution until it's signaled to continue."
+    "desc": "Pass the input to out."
 },
 {
-    "name": "Starts with",
-    "code": "stdlib.string.startswith",
-    "inputs": {"ref": "String", "str": "String"},
-    "outputs": {"result": "Boolean"},
+    "name": "Splitflow 2",
+    "code": "stdlib.default.splitflow",
+    "inputs": {"val": "Object"},
+    "outputs": {"right": "Object", "left": "Object"},
     "args": "",
-    "desc": "String starts with ref."
+    "desc": "Splits the flow."
 },
 {
-    "name": "String Argument Trigger",
-    "code": "stdlib.string.argtrigger",
+    "name": "Splitflow 5",
+    "code": "stdlib.default.splitflow5",
+    "inputs": {"val": "Object"},
+    "outputs": {"1": "Object", "3": "Object", "2": "Object", "5": "Object", "4": "Object"},
+    "args": "",
+    "desc": "Splits the flow."
+},
+{
+    "name": "Accept any input",
+    "code": "stdlib.default.any",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "Object"},
+    "args": "",
+    "desc": "If any input is present pass it.",
+"loopback": "val"
+},
+{
+    "name": "String Constant",
+    "code": "stdlib.string.const",
     "inputs": {},
     "outputs": {"result": "String"},
-    "args": {"val": "arg", "time": 1.0},
-    "desc": "Pass the argument of the program."
+    "args": "Hello World!",
+    "desc": "Pass the string arg as output."
 },
 {
-    "name": "Ends with",
-    "code": "stdlib.string.endswith",
-    "inputs": {"ref": "String", "str": "String"},
-    "outputs": {"result": "Boolean"},
+    "name": "Index of",
+    "code": "stdlib.string.indexof",
+    "inputs": {"ref": "String", "str": "String", "offset": "Number"},
+    "outputs": {"result": "Number"},
     "args": "",
-    "desc": "Check if a string ends with the reference."
+    "desc": "Get the index of a ref in a string."
 },
 {
     "name": "Trigger string",
@@ -55,12 +72,20 @@
     "desc": "Split a string by a splitter."
 },
 {
-    "name": "String Argument",
-    "code": "stdlib.string.argconst",
-    "inputs": {},
-    "outputs": {"result": "String"},
-    "args": "arg",
-    "desc": "Pass the argument of the program."
+    "name": "Starts with",
+    "code": "stdlib.string.startswith",
+    "inputs": {"ref": "String", "str": "String"},
+    "outputs": {"result": "Boolean"},
+    "args": "",
+    "desc": "String starts with ref."
+},
+{
+    "name": "Ends with",
+    "code": "stdlib.string.endswith",
+    "inputs": {"ref": "String", "str": "String"},
+    "outputs": {"result": "Boolean"},
+    "args": "",
+    "desc": "Check if a string ends with the reference."
 },
 {
     "name": "Equal",
@@ -71,12 +96,20 @@
     "desc": "Check if values are equal."
 },
 {
-    "name": "Index of",
-    "code": "stdlib.string.indexof",
-    "inputs": {"ref": "String", "str": "String", "offset": "Number"},
-    "outputs": {"result": "Number"},
-    "args": "",
-    "desc": "Get the index of a ref in a string."
+    "name": "String Argument Trigger",
+    "code": "stdlib.string.argtrigger",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": {"val": "arg", "time": 1.0},
+    "desc": "Pass the argument of the program."
+},
+{
+    "name": "String Argument",
+    "code": "stdlib.string.argconst",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": "arg",
+    "desc": "Pass the argument of the program."
 },
 {
     "name": "String Concat",
@@ -87,12 +120,76 @@
     "desc": "Concat the two strings."
 },
 {
-    "name": "String Constant",
-    "code": "stdlib.string.const",
+    "name": "Const",
+    "code": "stdlib.boolean.const",
     "inputs": {},
-    "outputs": {"result": "String"},
-    "args": "Hello World!",
-    "desc": "Pass the string arg as output."
+    "outputs": {"result": "Boolean"},
+    "args": true,
+    "desc": "Output the arg."
+},
+{
+    "name": "Trigger",
+    "code": "stdlib.boolean.trigger",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args": {"val": true, "time": 1.0},
+    "desc": "Trigger arg.val every arg.time s."
+},
+{
+    "name": "Or",
+    "code": "stdlib.boolean.or",
+    "inputs": {"right": "Boolean", "left": "Boolean"},
+    "outputs": {"result": "Boolean"},
+    "args": "",
+    "desc": "Output the or of the inputs."
+},
+{
+    "name": "Equal",
+    "code": "stdlib.boolean.equal",
+    "inputs": {"1": "Boolean", "3": "Boolean", "2": "Boolean", "5": "Boolean", "4": "Boolean"},
+    "outputs": {"result": "Boolean"},
+    "args": 5,
+    "desc": "Checks if the first arg inputs are equal."
+},
+{
+    "name": "Arg trigger",
+    "code": "stdlib.boolean.argconst",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args": {"val": "arg", "time": 1.0},
+    "desc": "Get input from arguments."
+},
+{
+    "name": "And",
+    "code": "stdlib.boolean.and",
+    "inputs": {"right": "Boolean", "left": "Boolean"},
+    "outputs": {"result": "Boolean"},
+    "args": "",
+    "desc": "Combine inputs with and."
+},
+{
+    "name": "Arg const",
+    "code": "stdlib.boolean.argconst",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args": "arg",
+    "desc": "Get input from arguments."
+},
+{
+    "name": "Not",
+    "code": "stdlib.boolean.not",
+    "inputs": {"val": "Boolean"},
+    "outputs": {"result": "Boolean"},
+    "args": "",
+    "desc": "Output the inverted input."
+},
+{
+    "name": "While less",
+    "code": "stdlib.structures.whileless",
+    "inputs": {"initial": "Number", "val": "Number"},
+    "outputs": {"leave": "Number", "loop": "Number"},
+    "args": "",
+    "desc": "Loop while initial is less than val."
 },
 {
     "name": "While greater",
@@ -103,28 +200,12 @@
     "desc": "Loop while initial is greater than val."
 },
 {
-    "name": "Leaky Integrator",
-    "code": "stdlib.structures.leakyintegrator",
-    "inputs": {"val": "Number"},
-    "outputs": {"result": "Boolean"},
-    "args": {"decay": 1.0, "time": 1.0},
-    "desc": "Leaky integrator."
-},
-{
-    "name": "Sync",
-    "code": "stdlib.structures.sync",
-    "inputs": {"a": "Object", "b": "Object"},
-    "outputs": {"a": "Object", "b": "Object"},
-    "args": {},
-    "desc": "Only pass if both are there."
-},
-{
-    "name": "While less",
-    "code": "stdlib.structures.whileless",
-    "inputs": {"initial": "Number", "val": "Number"},
-    "outputs": {"leave": "Number", "loop": "Number"},
+    "name": "If",
+    "code": "stdlib.structures.if",
+    "inputs": {"val": "Object", "condition": "Boolean"},
+    "outputs": {"false": "Object", "true": "Object"},
     "args": "",
-    "desc": "Loop while initial is less than val."
+    "desc": "If condition pass to true otherwise to false."
 },
 {
     "name": "For",
@@ -136,12 +217,12 @@
 "loopback": "trigger"
 },
 {
-    "name": "If",
-    "code": "stdlib.structures.if",
-    "inputs": {"val": "Object", "condition": "Boolean"},
-    "outputs": {"false": "Object", "true": "Object"},
-    "args": "",
-    "desc": "If condition pass to true otherwise to false."
+    "name": "Leaky Integrator",
+    "code": "stdlib.structures.leakyintegrator",
+    "inputs": {"val": "Number"},
+    "outputs": {"result": "Boolean"},
+    "args": {"decay": 1.0, "time": 1.0},
+    "desc": "Leaky integrator."
 },
 {
     "name": "limit",
@@ -152,12 +233,28 @@
     "desc": "Only pass once per timelimit."
 },
 {
-    "name": "Parse Json",
-    "code": "stdlib.json.parse",
-    "inputs": {"val": "String"},
+    "name": "Sync",
+    "code": "stdlib.structures.sync",
+    "inputs": {"a": "Object", "b": "Object"},
+    "outputs": {"a": "Object", "b": "Object"},
+    "args": {},
+    "desc": "Only pass if both are there."
+},
+{
+    "name": "Breakpoint",
+    "code": "stdlib.debug.breakpoint",
+    "inputs": {"val": "Object"},
     "outputs": {"result": "Object"},
-    "args": "",
-    "desc": "Parse a json string into an object."
+    "args": {},
+    "desc": "Stops the execution until it's signaled to continue."
+},
+{
+    "name": "View",
+    "code": "stdlib.debug.view",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "Object"},
+    "args": {"width": 0, "height": 0},
+    "desc": "Views (in IDE) and passes the object."
 },
 {
     "name": "Stringify Json",
@@ -168,205 +265,20 @@
     "desc": "Makes a json string out of an object."
 },
 {
-    "name": "Number Argument Trigger",
-    "code": "stdlib.number.argtrigger",
-    "inputs": {},
-    "outputs": {"result": "Number"},
-    "args": {"val": "arg", "time": 1.0},
-    "desc": "Pass the argument of the program."
-},
-{
-    "name": "Trigger Number",
-    "code": "stdlib.number.trigger",
-    "inputs": {},
-    "outputs": {"result": "Number"},
-    "args": {"val": 42, "time": 1.0},
-    "desc": "Trigger value every time seconds."
-},
-{
-    "name": "Sum",
-    "code": "stdlib.number.sum",
-    "inputs": {"right": "Number", "left": "Number"},
-    "outputs": {"result": "Number"},
-    "args": "",
-    "desc": "Sum left and right."
-},
-{
-    "name": "Increase Trigger Number",
-    "code": "stdlib.number.increasetrigger",
-    "inputs": {},
-    "outputs": {"result": "Number"},
-    "args": {"start": 0, "stop": 100, "time": 1.0},
-    "desc": "Trigger value every time seconds."
-},
-{
-    "name": "Divide",
-    "code": "stdlib.number.div",
-    "inputs": {"right": "Number", "left": "Number"},
-    "outputs": {"result": "Number"},
-    "args": "",
-    "desc": "Divide left by right."
-},
-{
-    "name": "Number Argument",
-    "code": "stdlib.number.argconst",
-    "inputs": {},
-    "outputs": {"result": "Number"},
-    "args": "arg",
-    "desc": "Pass the argument of the program."
-},
-{
-    "name": "Equal",
-    "code": "stdlib.number.equal",
-    "inputs": {"1": "Number", "3": "Number", "2": "Number", "5": "Number", "4": "Number"},
-    "outputs": {"result": "Boolean"},
-    "args": 5,
-    "desc": "Check if values are equal."
-},
-{
-    "name": "Greater than",
-    "code": "stdlib.number.greater",
-    "inputs": {"right": "Number", "left": "Number"},
-    "outputs": {"result": "Number"},
-    "args": "",
-    "desc": "Check if left > right."
-},
-{
-    "name": "Multiply",
-    "code": "stdlib.number.mult",
-    "inputs": {"right": "Number", "left": "Number"},
-    "outputs": {"result": "Number"},
-    "args": "",
-    "desc": "Multiply values with each other."
-},
-{
-    "name": "Less than",
-    "code": "stdlib.number.less",
-    "inputs": {"right": "Number", "left": "Number"},
-    "outputs": {"result": "Number"},
-    "args": "",
-    "desc": "Check if left < right."
-},
-{
-    "name": "Subtract",
-    "code": "stdlib.number.subtract",
-    "inputs": {"right": "Number", "left": "Number"},
-    "outputs": {"result": "Number"},
-    "args": "",
-    "desc": "Subtract right from left."
-},
-{
-    "name": "Number Constant",
-    "code": "stdlib.number.const",
-    "inputs": {},
-    "outputs": {"result": "Number"},
-    "args": 1.0,
-    "desc": "Pass the number arg as output."
-},
-{
-    "name": "Arg trigger",
-    "code": "stdlib.boolean.argconst",
-    "inputs": {},
-    "outputs": {"result": "Boolean"},
-    "args": {"val": "arg", "time": 1.0},
-    "desc": "Get input from arguments."
-},
-{
-    "name": "Trigger",
-    "code": "stdlib.boolean.trigger",
-    "inputs": {},
-    "outputs": {"result": "Boolean"},
-    "args": {"val": true, "time": 1.0},
-    "desc": "Trigger arg.val every arg.time s."
-},
-{
-    "name": "Not",
-    "code": "stdlib.boolean.not",
-    "inputs": {"val": "Boolean"},
-    "outputs": {"result": "Boolean"},
-    "args": "",
-    "desc": "Output the inverted input."
-},
-{
-    "name": "Arg const",
-    "code": "stdlib.boolean.argconst",
-    "inputs": {},
-    "outputs": {"result": "Boolean"},
-    "args": "arg",
-    "desc": "Get input from arguments."
-},
-{
-    "name": "Equal",
-    "code": "stdlib.boolean.equal",
-    "inputs": {"1": "Boolean", "3": "Boolean", "2": "Boolean", "5": "Boolean", "4": "Boolean"},
-    "outputs": {"result": "Boolean"},
-    "args": 5,
-    "desc": "Checks if the first arg inputs are equal."
-},
-{
-    "name": "Or",
-    "code": "stdlib.boolean.or",
-    "inputs": {"right": "Boolean", "left": "Boolean"},
-    "outputs": {"result": "Boolean"},
-    "args": "",
-    "desc": "Output the or of the inputs."
-},
-{
-    "name": "And",
-    "code": "stdlib.boolean.and",
-    "inputs": {"right": "Boolean", "left": "Boolean"},
-    "outputs": {"result": "Boolean"},
-    "args": "",
-    "desc": "Combine inputs with and."
-},
-{
-    "name": "Const",
-    "code": "stdlib.boolean.const",
-    "inputs": {},
-    "outputs": {"result": "Boolean"},
-    "args": true,
-    "desc": "Output the arg."
-},
-{
-    "name": "Function",
-    "code": "stdlib.default.function",
-    "inputs": {"val": "Object"},
-    "outputs": {"result": "Object"},
-    "args": {"code": "result = value[\"val\"]"},
-    "desc": "Executes the argument as pyton code."
-},
-{
-    "name": "Accept any input",
-    "code": "stdlib.default.any",
-    "inputs": {"val": "Object"},
+    "name": "Parse Json",
+    "code": "stdlib.json.parse",
+    "inputs": {"val": "String"},
     "outputs": {"result": "Object"},
     "args": "",
-    "desc": "If any input is present pass it.",
-"loopback": "val"
+    "desc": "Parse a json string into an object."
 },
 {
-    "name": "Pass",
-    "code": "stdlib.default.pass",
-    "inputs": {"in": "Object"},
-    "outputs": {"out": "Object"},
-    "args": {},
-    "desc": "Pass the input to out."
-},
-{
-    "name": "Splitflow 5",
-    "code": "stdlib.default.splitflow5",
-    "inputs": {"val": "Object"},
-    "outputs": {"1": "Object", "3": "Object", "2": "Object", "5": "Object", "4": "Object"},
-    "args": "",
-    "desc": "Splits the flow."
-},
-{
-    "name": "Splitflow 2",
-    "code": "stdlib.default.splitflow",
-    "inputs": {"val": "Object"},
-    "outputs": {"right": "Object", "left": "Object"},
-    "args": "",
-    "desc": "Splits the flow."
+    "name": "Array const",
+    "code": "stdlib.arrays.const",
+    "inputs": {},
+    "outputs": {"result": "Array"},
+    "args": {"vals": [0, 1, 2, 3, 4, 5]},
+    "desc": "A constant input array."
 },
 {
     "name": "Derive",
@@ -377,68 +289,12 @@
     "desc": "Derive the array."
 },
 {
-    "name": "Arg trigger",
-    "code": "stdlib.arrays.argtrigger",
-    "inputs": {},
-    "outputs": {"result": "String"},
-    "args": {"val": "arg", "time": 1.0},
-    "desc": "Get triggers from commandline."
-},
-{
-    "name": "Convolute",
-    "code": "stdlib.arrays.convolute",
-    "inputs": {"kernel": "Array", "data": "Array"},
-    "outputs": {"result": "Array"},
-    "args": {},
-    "desc": "Convolute two arrays."
-},
-{
-    "name": "Divide Componentwise",
-    "code": "stdlib.arrays.divcomp",
-    "inputs": {"a": "Array", "b": "Array"},
-    "outputs": {"result": "Double"},
-    "args": {},
-    "desc": "Divide a componentwise by b."
-},
-{
-    "name": "Array trigger",
-    "code": "stdlib.arrays.trigger",
+    "name": "Gaussian Generator",
+    "code": "stdlib.arrays.gaussian",
     "inputs": {},
     "outputs": {"result": "Array"},
-    "args": {"vals": [0, 1, 2, 3, 4, 5], "time": 1.0},
-    "desc": "A constant input array."
-},
-{
-    "name": "Join",
-    "code": "stdlib.arrays.join",
-    "inputs": {"a": "Array", "b": "Array"},
-    "outputs": {"result": "Array"},
-    "args": {},
-    "desc": "Executes the argument as pyton code."
-},
-{
-    "name": "Crop Values",
-    "code": "stdlib.arrays.crop",
-    "inputs": {"val": "Array"},
-    "outputs": {"result": "Array"},
-    "args": {"map_to_max": 1, "map_to_zero": 0},
-    "desc": "Crop the array by value."
-},
-{
-    "name": "Multiply (:Matrix)",
-    "code": "stdlib.arrays.multInflate",
-    "inputs": {"right": "Array", "left": "Array"},
-    "outputs": {"result": "Matrix"},
-    "args": {},
-    "desc": "Multiply two values as product resulting in a matrix."
-},
-{
-    "name": "Arg const",
-    "code": "stdlib.arrays.argconst",
-    "inputs": {},
-    "outputs": {"result": "String"},
-    "args": "arg",
-    "desc": "Get triggers from commandline."
+    "args": {"range": 100, "sigma": 1},
+    "desc": "Executes the argument function as python code."
 },
 {
     "name": "Array Generator",
@@ -457,12 +313,28 @@
     "desc": "A constant input array."
 },
 {
-    "name": "Gaussian Generator",
-    "code": "stdlib.arrays.gaussian",
+    "name": "Array trigger",
+    "code": "stdlib.arrays.trigger",
     "inputs": {},
     "outputs": {"result": "Array"},
-    "args": {"range": 100, "sigma": 1},
-    "desc": "Executes the argument function as python code."
+    "args": {"vals": [0, 1, 2, 3, 4, 5], "time": 1.0},
+    "desc": "A constant input array."
+},
+{
+    "name": "Convolute",
+    "code": "stdlib.arrays.convolute",
+    "inputs": {"kernel": "Array", "data": "Array"},
+    "outputs": {"result": "Array"},
+    "args": {},
+    "desc": "Convolute two arrays."
+},
+{
+    "name": "Crop Values",
+    "code": "stdlib.arrays.crop",
+    "inputs": {"val": "Array"},
+    "outputs": {"result": "Array"},
+    "args": {"map_to_max": 1, "map_to_zero": 0},
+    "desc": "Crop the array by value."
 },
 {
     "name": "Multiply",
@@ -473,6 +345,22 @@
     "desc": "Multiply two values as scalar product."
 },
 {
+    "name": "Arg trigger",
+    "code": "stdlib.arrays.argtrigger",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": {"val": "arg", "time": 1.0},
+    "desc": "Get triggers from commandline."
+},
+{
+    "name": "Join",
+    "code": "stdlib.arrays.join",
+    "inputs": {"a": "Array", "b": "Array"},
+    "outputs": {"result": "Array"},
+    "args": {},
+    "desc": "Executes the argument as pyton code."
+},
+{
     "name": "Subtract",
     "code": "stdlib.arrays.subtract",
     "inputs": {"right": "Array", "left": "Array"},
@@ -481,68 +369,124 @@
     "desc": "Left minus right."
 },
 {
-    "name": "Array const",
-    "code": "stdlib.arrays.const",
-    "inputs": {},
-    "outputs": {"result": "Array"},
-    "args": {"vals": [0, 1, 2, 3, 4, 5]},
-    "desc": "A constant input array."
-},
-{
-    "name": "Execute",
-    "code": "stdlib.system.executable",
-    "inputs": {"arg": "String"},
-    "outputs": {"result": "String"},
-    "args": {"escapeArgs": false, "executable": "python graphex.py"},
-    "desc": "Execute executable with given args."
-},
-{
-    "name": "[WIP] HTTP Output",
-    "code": "stdlib.system.httpoutput",
-    "inputs": {"val": "String"},
-    "outputs": {},
+    "name": "Divide Componentwise",
+    "code": "stdlib.arrays.divcomp",
+    "inputs": {"a": "Array", "b": "Array"},
+    "outputs": {"result": "Double"},
     "args": {},
-    "desc": "Output value to http connection."
+    "desc": "Divide a componentwise by b."
 },
 {
-    "name": "[WIP] HTTP Request",
-    "code": "stdlib.system.httprequest",
-    "inputs": {"val": "Object"},
-    "outputs": {"result": "Object"},
-    "args": {"host": "localhost", "port": 80, "method": "get"},
-    "desc": "Execute an http request on a host."
+    "name": "Arg const",
+    "code": "stdlib.arrays.argconst",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": "arg",
+    "desc": "Get triggers from commandline."
 },
 {
-    "name": "[WIP] WebSocket",
-    "code": "stdlib.system.websocketoutput",
-    "inputs": {"val": "Object"},
-    "outputs": {},
+    "name": "Multiply (:Matrix)",
+    "code": "stdlib.arrays.multInflate",
+    "inputs": {"right": "Array", "left": "Array"},
+    "outputs": {"result": "Matrix"},
     "args": {},
-    "desc": "Output on a websocket."
+    "desc": "Multiply two values as product resulting in a matrix."
 },
 {
-    "name": "TCP Network",
-    "code": "stdlib.system.tcpnetwork",
-    "inputs": {"msg": "String"},
-    "outputs": {"result": "String"},
-    "args": {"host": "127.0.0.1", "password": null, "port": 25555},
-    "desc": "Send input over network and wait for result."
-},
-{
-    "name": "[WIP] HTTP Input",
-    "code": "stdlib.system.httpinput",
+    "name": "Number Constant",
+    "code": "stdlib.number.const",
     "inputs": {},
-    "outputs": {"put": "Object", "post": "Object", "delete": "Object", "get": "Object"},
-    "args": {"port": 80},
-    "desc": "Wait for http requests."
+    "outputs": {"result": "Number"},
+    "args": 1.0,
+    "desc": "Pass the number arg as output."
 },
 {
-    "name": "TCP Network",
-    "code": "stdlib.system.tcpnetworkin",
+    "name": "Greater than",
+    "code": "stdlib.number.greater",
+    "inputs": {"right": "Number", "left": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Check if left > right."
+},
+{
+    "name": "Trigger Number",
+    "code": "stdlib.number.trigger",
     "inputs": {},
-    "outputs": {"result": "String"},
-    "args": {"server": true, "host": "127.0.0.1", "passDummy": null, "passSocketAsTag": true, "password": null, "port": 25555},
-    "desc": "Wait for input over network."
+    "outputs": {"result": "Number"},
+    "args": {"val": 42, "time": 1.0},
+    "desc": "Trigger value every time seconds."
+},
+{
+    "name": "Multiply",
+    "code": "stdlib.number.mult",
+    "inputs": {"right": "Number", "left": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Multiply values with each other."
+},
+{
+    "name": "Sum",
+    "code": "stdlib.number.sum",
+    "inputs": {"right": "Number", "left": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Sum left and right."
+},
+{
+    "name": "Equal",
+    "code": "stdlib.number.equal",
+    "inputs": {"1": "Number", "3": "Number", "2": "Number", "5": "Number", "4": "Number"},
+    "outputs": {"result": "Boolean"},
+    "args": 5,
+    "desc": "Check if values are equal."
+},
+{
+    "name": "Number Argument Trigger",
+    "code": "stdlib.number.argtrigger",
+    "inputs": {},
+    "outputs": {"result": "Number"},
+    "args": {"val": "arg", "time": 1.0},
+    "desc": "Pass the argument of the program."
+},
+{
+    "name": "Increase Trigger Number",
+    "code": "stdlib.number.increasetrigger",
+    "inputs": {},
+    "outputs": {"result": "Number"},
+    "args": {"start": 0, "stop": 100, "time": 1.0},
+    "desc": "Trigger value every time seconds."
+},
+{
+    "name": "Subtract",
+    "code": "stdlib.number.subtract",
+    "inputs": {"right": "Number", "left": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Subtract right from left."
+},
+{
+    "name": "Number Argument",
+    "code": "stdlib.number.argconst",
+    "inputs": {},
+    "outputs": {"result": "Number"},
+    "args": "arg",
+    "desc": "Pass the argument of the program."
+},
+{
+    "name": "Divide",
+    "code": "stdlib.number.div",
+    "inputs": {"right": "Number", "left": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Divide left by right."
+},
+{
+    "name": "Less than",
+    "code": "stdlib.number.less",
+    "inputs": {"right": "Number", "left": "Number"},
+    "outputs": {"result": "Number"},
+    "args": "",
+    "desc": "Check if left < right."
 },
 {
     "name": "[WIP] WebSocket",
@@ -553,12 +497,44 @@
     "desc": "Wait for websocket inputs."
 },
 {
+    "name": "File (Read as Str)",
+    "code": "stdlib.system.fileread",
+    "inputs": {},
+    "outputs": {"result": "String"},
+    "args": {"filename": "test.txt"},
+    "desc": "Read the content of a file as a string."
+},
+{
     "name": "Subgraph",
     "code": "stdlib.system.subgraph",
     "inputs": {"arg": "Object"},
     "outputs": {"result": "Object"},
     "args": "DefaultGraph",
     "desc": "Execute a subgraph."
+},
+{
+    "name": "[WIP] HTTP Request",
+    "code": "stdlib.system.httprequest",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "Object"},
+    "args": {"host": "localhost", "port": 80, "method": "get"},
+    "desc": "Execute an http request on a host."
+},
+{
+    "name": "File (Write as str)",
+    "code": "stdlib.system.filewrite",
+    "inputs": {"val": "String"},
+    "outputs": {},
+    "args": {"filename": "../test.txt"},
+    "desc": "Write string to file (OVERWRITE)."
+},
+{
+    "name": "Execute",
+    "code": "stdlib.system.executable",
+    "inputs": {"arg": "String"},
+    "outputs": {"result": "String"},
+    "args": {"escapeArgs": false, "executable": "python graphex.py"},
+    "desc": "Execute executable with given args."
 },
 {
     "name": "[WIP] WebSocket",
@@ -577,12 +553,28 @@
     "desc": "Send message over tcp network."
 },
 {
-    "name": "Print",
-    "code": "stdlib.system.print",
+    "name": "[WIP] HTTP Input",
+    "code": "stdlib.system.httpinput",
+    "inputs": {},
+    "outputs": {"put": "Object", "post": "Object", "delete": "Object", "get": "Object"},
+    "args": {"port": 80},
+    "desc": "Wait for http requests."
+},
+{
+    "name": "[WIP] HTTP Output",
+    "code": "stdlib.system.httpoutput",
     "inputs": {"val": "String"},
     "outputs": {},
-    "args": "",
-    "desc": "Print input to console."
+    "args": {},
+    "desc": "Output value to http connection."
+},
+{
+    "name": "[WIP] WebSocket",
+    "code": "stdlib.system.websocketoutput",
+    "inputs": {"val": "Object"},
+    "outputs": {},
+    "args": {},
+    "desc": "Output on a websocket."
 },
 {
     "name": "Output",
@@ -593,68 +585,28 @@
     "desc": "Set an output arg."
 },
 {
-    "name": "Get Image",
-    "code": "privatelib.torchwood.getimage",
-    "inputs": {"id": "Number"},
-    "outputs": {"labeled": "Image", "remaining_imgs": "Number", "img": "Image"},
-    "args": {"positive_label": "drivable", "torchwood_path": "/home/michael/checkout/ML/torchwood-ai-lab", "negative_label": "not drivable", "neutral_label": "unknown", "dataset": "Robotour 2016"},
-    "desc": "Get an image and the labeled version."
-},
-{
-    "name": "Split Topic",
-    "code": "privatelib.bla.splittopic",
-    "inputs": {"val": "Object"},
-    "outputs": {"put": "Object", "none": "Object", "event": "Object", "get": "Object"},
-    "args": {},
-    "desc": "Split the flow by topic"
-},
-{
-    "name": "Authenticate",
-    "code": "privatelib.bla.authenticate",
-    "inputs": {"val": "Object"},
-    "outputs": {"false": "Object", "true": "Object"},
-    "args": {"code": "result = value[\"val\"]\nerror = None"},
-    "desc": "Authenticates a connection."
-},
-{
-    "name": "Query Database",
-    "code": "extlib.database.query",
-    "inputs": {"val": "Object"},
-    "outputs": {"result": "Object"},
-    "args": {"code": "c = db.cursor()\nresult = value[\"val\"]", "db_id": "bla"},
-    "desc": "Interact with a db."
-},
-{
-    "name": "Database SQL",
-    "code": "extlib.database.databasesql",
-    "inputs": {},
+    "name": "Print",
+    "code": "stdlib.system.print",
+    "inputs": {"val": "String"},
     "outputs": {},
-    "args": {"host": "localhost", "password": "bla", "db_id": "bla", "db": "bla", "user": "bla"},
-    "desc": "Creates a connection to a database."
+    "args": "",
+    "desc": "Print input to console."
 },
 {
-    "name": "Database SQLite",
-    "code": "extlib.database.databasesqlite",
+    "name": "TCP Network",
+    "code": "stdlib.system.tcpnetwork",
+    "inputs": {"msg": "String"},
+    "outputs": {"result": "String"},
+    "args": {"host": "127.0.0.1", "password": null, "port": 25555},
+    "desc": "Send input over network and wait for result."
+},
+{
+    "name": "TCP Network",
+    "code": "stdlib.system.tcpnetworkin",
     "inputs": {},
-    "outputs": {},
-    "args": {"db_id": "bla", "file": "bla.db"},
-    "desc": "Setup the database as SQLite."
-},
-{
-    "name": "Track",
-    "code": "extlib.geometry.track",
-    "inputs": {"val": "PointArray"},
-    "outputs": {"result": "PolygonArray"},
-    "args": {"max_length": 0, "forget_after": 0, "threshold_y": 10, "threshold_x": 10},
-    "desc": "Track points."
-},
-{
-    "name": "Polar 2 Euler",
-    "code": "extlib.geometry.polartoeuler",
-    "inputs": {"val": "PointArray"},
-    "outputs": {"result": "PointArray"},
-    "args": {},
-    "desc": "Convert display style."
+    "outputs": {"result": "String"},
+    "args": {"server": true, "host": "127.0.0.1", "passDummy": null, "passSocketAsTag": true, "password": null, "port": 25555},
+    "desc": "Wait for input over network."
 },
 {
     "name": "Euler 2 Image",
@@ -665,20 +617,20 @@
     "desc": "Plot to cv_image."
 },
 {
-    "name": "Create Point",
-    "code": "extlib.geometry.createpoint",
-    "inputs": {"y": "Number", "x": "Number"},
-    "outputs": {"point": "Point"},
+    "name": "Polar 2 Euler",
+    "code": "extlib.geometry.polartoeuler",
+    "inputs": {"val": "PointArray"},
+    "outputs": {"result": "PointArray"},
     "args": {},
-    "desc": "Create a point from x and y."
+    "desc": "Convert display style."
 },
 {
-    "name": "Array 2 Polar",
-    "code": "extlib.geometry.arraytopolar",
-    "inputs": {"val": "Array"},
-    "outputs": {"result": "PointArray"},
-    "args": {"total_degree": 270, "center": 0},
-    "desc": "Transpose points."
+    "name": "Centerpoint",
+    "code": "extlib.geometry.centerpoint",
+    "inputs": {"val": "Polygon"},
+    "outputs": {"result": "Point"},
+    "args": {},
+    "desc": "Calculates average for polygon."
 },
 {
     "name": "Accumulate",
@@ -697,14 +649,6 @@
     "desc": "Calculates average per polygon."
 },
 {
-    "name": "Centerpoint",
-    "code": "extlib.geometry.centerpoint",
-    "inputs": {"val": "Polygon"},
-    "outputs": {"result": "Point"},
-    "args": {},
-    "desc": "Calculates average for polygon."
-},
-{
     "name": "Transpose",
     "code": "extlib.geometry.transpose",
     "inputs": {"val": "PointArray"},
@@ -713,444 +657,28 @@
     "desc": "Transpose points."
 },
 {
-    "name": "Listen",
-    "code": "extlib.ros.input",
-    "inputs": {},
-    "outputs": {"result": "Object"},
-    "args": {"topic": "/test", "rate": 10, "code": "from std_msgs.msg import String as topic_type"},
-    "desc": "Listen on topic."
-},
-{
-    "name": "Ros Node",
-    "code": "extlib.ros.rosnode",
-    "inputs": {},
-    "outputs": {},
-    "args": {"name": "graphex"},
-    "desc": "Create a ros node."
-},
-{
-    "name": "Publish",
-    "code": "extlib.ros.output",
-    "inputs": {"val": "Object"},
-    "outputs": {},
-    "args": {"topic": "/test", "code": "from std_msgs.msg import String as topic_type"},
-    "desc": "Publish on topic."
-},
-{
-    "name": "[WIP] Record",
-    "code": "extlib.computervision.record",
-    "inputs": {"img": "Image"},
-    "outputs": {},
-    "args": {"resource": "~/Videos/test.avi"},
-    "desc": "Record video."
-},
-{
-    "name": "Dilate",
-    "code": "extlib.computervision.dilate",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": {"iterations": 1, "size": 5},
-    "desc": "Dilate an image."
-},
-{
-    "name": "Gray to BGR",
-    "code": "extlib.computervision.gray2bgr",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": "",
-    "desc": "Convert Gray image to BGR image."
-},
-{
-    "name": "Render Boxes",
-    "code": "extlib.computervision.renderboxes",
-    "inputs": {"boxes": "PolygonArray", "img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": {"r": 255, "b": 0, "g": 0},
-    "desc": "Render boxes in image."
-},
-{
-    "name": "BGR to XYZ",
-    "code": "extlib.computervision.bgr2xyz",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": "",
-    "desc": "Convert BGR image to XYZ image."
-},
-{
-    "name": "Fixed Saturisation",
-    "code": "extlib.computervision.fixedsaturisation",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": 127,
-    "desc": "Set the saturisation to a fixed value."
-},
-{
-    "name": "BGR to Gray",
-    "code": "extlib.computervision.bgr2gray",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": "",
-    "desc": "Convert BGR image to Gray image."
-},
-{
-    "name": "BGR to HSV",
-    "code": "extlib.computervision.bgr2hsv",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": "",
-    "desc": "Convert BGR image to HSV image."
-},
-{
-    "name": "Adaptive Thresh",
-    "code": "extlib.computervision.adathresh",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": {"blockSize": 11, "C": 2, "gaussian": false, "inverted": false},
-    "desc": "Adaptive threshold."
-},
-{
-    "name": "Mask",
-    "code": "extlib.computervision.mask",
-    "inputs": {"mask": "Image", "img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": "",
-    "desc": "Apply a mask."
-},
-{
-    "name": "Show",
-    "code": "extlib.computervision.show",
-    "inputs": {"img": "Image"},
-    "outputs": {},
-    "args": {"fullscreen": true, "title": "Debug View"},
-    "desc": "Show an image."
-},
-{
-    "name": "Crop Image",
-    "code": "extlib.computervision.crop",
-    "inputs": {"val": "Image"},
-    "outputs": {"result": "Image"},
-    "args": {"y": 0, "x": 0, "height": 240, "width": 320},
-    "desc": "Crop the image"
-},
-{
-    "name": "HLS to BGR",
-    "code": "extlib.computervision.hls2bgr",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": "",
-    "desc": "Convert HLS image to BGR image."
-},
-{
-    "name": "Fixed Hue",
-    "code": "extlib.computervision.fixedhue",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": 127,
-    "desc": "Set the hue to a fixed value."
-},
-{
-    "name": "Invert Mask",
-    "code": "extlib.computervision.invertmask",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
+    "name": "Create Point",
+    "code": "extlib.geometry.createpoint",
+    "inputs": {"y": "Number", "x": "Number"},
+    "outputs": {"point": "Point"},
     "args": {},
-    "desc": "Invert the mask white and black."
+    "desc": "Create a point from x and y."
 },
 {
-    "name": "HSV to BGR",
-    "code": "extlib.computervision.hsv2bgr",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": "",
-    "desc": "Convert HSV image to BGR image."
+    "name": "Array 2 Polar",
+    "code": "extlib.geometry.arraytopolar",
+    "inputs": {"val": "Array"},
+    "outputs": {"result": "PointArray"},
+    "args": {"total_degree": 270, "center": 0},
+    "desc": "Transpose points."
 },
 {
-    "name": "In Range",
-    "code": "extlib.computervision.inrange",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": {"lower-value": 0, "upper-value": 255, "lower-saturisation": 0, "upper-hue": 255, "lower-hue": 0, "upper-saturisation": 255},
-    "desc": "Apply an inRange operation on the image."
-},
-{
-    "name": "2 Colors to Bin",
-    "code": "extlib.computervision.color2bin",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": {"imgSize": 80},
-    "desc": "Adaptive threshold."
-},
-{
-    "name": "Image to distribution",
-    "code": "extlib.computervision.img2distribution",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Array"},
-    "args": "",
-    "desc": "Convert an image to a distribution."
-},
-{
-    "name": "Bounding Boxes",
-    "code": "extlib.computervision.boundingbox",
-    "inputs": {"cnts": "PolygonArray"},
+    "name": "Track",
+    "code": "extlib.geometry.track",
+    "inputs": {"val": "PointArray"},
     "outputs": {"result": "PolygonArray"},
-    "args": {},
-    "desc": "Calc bounding boxes for contour."
-},
-{
-    "name": "BGR to Lab",
-    "code": "extlib.computervision.bgr2lab",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": "",
-    "desc": "Convert BGR image to Lab image."
-},
-{
-    "name": "BGR to HLS",
-    "code": "extlib.computervision.bgr2hls",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": "",
-    "desc": "Convert BGR image to HLS image."
-},
-{
-    "name": "Sift",
-    "code": "extlib.computervision.sift",
-    "inputs": {"img": "Image"},
-    "outputs": {"features": "Array", "img": "Image", "descs": "Array"},
-    "args": "",
-    "desc": "Detect sift features."
-},
-{
-    "name": "Resize",
-    "code": "extlib.computervision.resize",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": {"width": 320, "height": 240},
-    "desc": "Resize an image."
-},
-{
-    "name": "Find Contours",
-    "code": "extlib.computervision.findcontours",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "PolygonArray"},
-    "args": {},
-    "desc": "Contours in an image."
-},
-{
-    "name": "Errode",
-    "code": "extlib.computervision.errode",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": {"iterations": 1, "size": 5},
-    "desc": "Errode an image."
-},
-{
-    "name": "Surf",
-    "code": "extlib.computervision.surf",
-    "inputs": {"img": "Image"},
-    "outputs": {"features": "Array", "img": "Image", "descs": "Array"},
-    "args": "",
-    "desc": "Detect surf features."
-},
-{
-    "name": "Gaussian Blur",
-    "code": "extlib.computervision.gaussianblur",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": 4,
-    "desc": "Apply gaussian blur on image."
-},
-{
-    "name": "Color Quantization",
-    "code": "extlib.computervision.colorquantization",
-    "inputs": {"img": "Image"},
-    "outputs": {"img": "Image"},
-    "args": {"k": 4},
-    "desc": "Reduce the number of colors"
-},
-{
-    "name": "Median Blur",
-    "code": "extlib.computervision.medianblur",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": 4,
-    "desc": "Apply median blur on image."
-},
-{
-    "name": "XYZ to BGR",
-    "code": "extlib.computervision.xyz2bgr",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": "",
-    "desc": "Convert XYZ image to BGR image."
-},
-{
-    "name": "Add Weighted",
-    "code": "extlib.computervision.addweighted",
-    "inputs": {"right": "Image", "left": "Image"},
-    "outputs": {"result": "Image"},
-    "args": {"right": 0.5, "left": 0.5},
-    "desc": "Add the two images weighted."
-},
-{
-    "name": "Video",
-    "code": "extlib.computervision.video",
-    "inputs": {},
-    "outputs": {"result": "Image"},
-    "args": {"resource": 0, "fps": 30, "exposure": 0.1},
-    "desc": "Capture video."
-},
-{
-    "name": "Plot features",
-    "code": "extlib.computervision.plotfeatures",
-    "inputs": {"features": "Array", "img": "Image"},
-    "outputs": {"img": "Image"},
-    "args": {"mode": "advanced"},
-    "desc": "Plot features into an image."
-},
-{
-    "name": "Lab to BGR",
-    "code": "extlib.computervision.lab2bgr",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": "",
-    "desc": "Convert Lab image to BGR image."
-},
-{
-    "name": "Fixed Intensity",
-    "code": "extlib.computervision.fixedintensity",
-    "inputs": {"img": "Image"},
-    "outputs": {"result": "Image"},
-    "args": 127,
-    "desc": "Set the intensity to a fixed value."
-},
-{
-    "name": "Softmax",
-    "code": "extlib.tensorflow.softmax",
-    "inputs": {"val": "Tensor"},
-    "outputs": {"result": "Tensor"},
-    "args": {},
-    "desc": "Tensorflow softmax node."
-},
-{
-    "name": "Complete Linear Layer",
-    "code": "extlib.tensorflow.linearcomplete",
-    "inputs": {"graph": "Tensor", "session": "TFSession"},
-    "outputs": {"graph": "Tensor", "session": "TFSession"},
-    "args": {"in_dimension": 100, "out_dimension": 10, "stddev": 0.1},
-    "desc": "A linear + ReLU layer in a net."
-},
-{
-    "name": "GD Optimizer",
-    "code": "extlib.tensorflow.gradientdescentoptimizer",
-    "inputs": {"val": "Tensor"},
-    "outputs": {"train_step": "Tensor"},
-    "args": {"step_length": 0.01},
-    "desc": "Gradient Descent Optimizer"
-},
-{
-    "name": "Train (dropout)",
-    "code": "extlib.tensorflow.traindropout",
-    "inputs": {"keep_prob": "Tensor", "batch": "Tensor", "session": "TFSession", "y_": "Tensor", "x": "Tensor", "train_step": "Tensor"},
-    "outputs": {"result": "TFSession"},
-    "args": {},
-    "desc": "Executes a train step"
-},
-{
-    "name": "Complete Conv Layer",
-    "code": "extlib.tensorflow.convcomplete",
-    "inputs": {"graph": "Tensor", "session": "TFSession"},
-    "outputs": {"graph": "Tensor", "session": "TFSession"},
-    "args": {"output_channels": 32, "patch_x": 5, "patch_y": 5, "stddev": 0.1, "input_channels": 1},
-    "desc": "A conv + relu + maxpool layer in a net."
-},
-{
-    "name": "Max Pool Layer",
-    "code": "extlib.tensorflow.maxpool",
-    "inputs": {"graph": "Tensor", "session": "TFSession"},
-    "outputs": {"graph": "Tensor", "session": "TFSession"},
-    "args": {},
-    "desc": "A max pooling layer in a net."
-},
-{
-    "name": "Initialize Variables",
-    "code": "extlib.tensorflow.initializevars",
-    "inputs": {"session": "TFSession"},
-    "outputs": {"session": "TFSession"},
-    "args": {},
-    "desc": "Initialize vars in session."
-},
-{
-    "name": "Relu Layer",
-    "code": "extlib.tensorflow.relu",
-    "inputs": {"graph": "Tensor", "session": "TFSession"},
-    "outputs": {"graph": "Tensor", "session": "TFSession"},
-    "args": {},
-    "desc": "A ReLU layer in a net."
-},
-{
-    "name": "Mnist Batch",
-    "code": "extlib.tensorflow.mnistbatch",
-    "inputs": {"trigger": "Object", "mnist": "MNIST"},
-    "outputs": {"batch": "Tensor"},
-    "args": {},
-    "desc": "Get the next batch from mnist"
-},
-{
-    "name": "Reduce Sum",
-    "code": "extlib.tensorflow.reducesum",
-    "inputs": {"val": "Tensor"},
-    "outputs": {"result": "Tensor"},
-    "args": {"code": "result = value[\"val\"]"},
-    "desc": "Reduce the sum"
-},
-{
-    "name": "Train MNIST (dropout)",
-    "code": "extlib.tensorflow.trainmnistdropout",
-    "inputs": {"keep_prob": "Tensor", "session": "TFSession", "y_": "Tensor", "y": "Tensor", "x": "Tensor", "train_step": "Tensor"},
-    "outputs": {"session": "TFSession", "iteration": "Number", "accuracy": "Number"},
-    "args": {},
-    "desc": "Trains the net on mnist."
-},
-{
-    "name": "Conv Layer",
-    "code": "extlib.tensorflow.conv",
-    "inputs": {"graph": "Tensor", "session": "TFSession"},
-    "outputs": {"graph": "Tensor", "session": "TFSession"},
-    "args": {"output_channels": 32, "patch_x": 5, "patch_y": 5, "stddev": 0.1, "input_channels": 1},
-    "desc": "A convolution layer in a net."
-},
-{
-    "name": "ADAM Optimizer",
-    "code": "extlib.tensorflow.adamoptimizer",
-    "inputs": {"graph": "Tensor", "session": "TFSession"},
-    "outputs": {"session": "TFSession", "train_step": "Tensor"},
-    "args": {"step_length": 0.001},
-    "desc": "ADAM Descent Optimizer"
-},
-{
-    "name": "Reshape 2 Conv Layer",
-    "code": "extlib.tensorflow.reshape2conv",
-    "inputs": {"graph": "Tensor", "session": "TFSession"},
-    "outputs": {"graph": "Tensor", "session": "TFSession"},
-    "args": {"img_height": 28, "img_width": 28, "output_channels": 1},
-    "desc": "Reshape for convolution."
-},
-{
-    "name": "MNIST Test",
-    "code": "extlib.tensorflow.mnisttest",
-    "inputs": {"mnist": "MNIST"},
-    "outputs": {"images": "Tensor", "labels": "Tensor"},
-    "args": {"code": "result = value[\"val\"]"},
-    "desc": "Get test data from mnist."
-},
-{
-    "name": "Equal",
-    "code": "extlib.tensorflow.equal",
-    "inputs": {"a": "Tensor", "b": "Tensor"},
-    "outputs": {"result": "Tensor"},
-    "args": {},
-    "desc": "Check for each position if a equals b."
+    "args": {"max_length": 0, "forget_after": 0, "threshold_y": 10, "threshold_x": 10},
+    "desc": "Track points."
 },
 {
     "name": "Add",
@@ -1161,76 +689,12 @@
     "desc": "Calculate a + b."
 },
 {
-    "name": "Accuracy",
-    "code": "extlib.tensorflow.accuracy",
-    "inputs": {"y": "Tensor", "y_": "Tensor"},
-    "outputs": {"y_": "Tensor", "accuracy": "Tensor"},
-    "args": {},
-    "desc": "Accuracy model."
-},
-{
-    "name": "Cross entropy",
-    "code": "extlib.tensorflow.crossentropy",
-    "inputs": {"y": "Tensor", "y_": "Tensor"},
-    "outputs": {"y": "Tensor", "entropy": "Tensor", "y_": "Tensor"},
-    "args": {"code": "result = value[\"val\"]"},
-    "desc": "Calculate the cross entropy"
-},
-{
-    "name": "Mult",
-    "code": "extlib.tensorflow.mult",
-    "inputs": {"a": "Tensor", "b": "Tensor"},
-    "outputs": {"result": "Tensor"},
-    "args": {},
-    "desc": "Calculate a * b"
-},
-{
-    "name": "Log",
-    "code": "extlib.tensorflow.log",
-    "inputs": {"val": "Tensor"},
-    "outputs": {"result": "Tensor"},
-    "args": {},
-    "desc": "Calculate log(val)"
-},
-{
-    "name": "Reshape 2 FC Layer",
-    "code": "extlib.tensorflow.reshape2fc",
-    "inputs": {"graph": "Tensor", "session": "TFSession"},
-    "outputs": {"graph": "Tensor", "session": "TFSession"},
-    "args": {"img_height": 7, "img_width": 7, "input_channels": 64},
-    "desc": "Reshape for fully connected."
-},
-{
-    "name": "Session",
-    "code": "extlib.tensorflow.session",
-    "inputs": {},
+    "name": "Train",
+    "code": "extlib.tensorflow.train",
+    "inputs": {"x": "Tensor", "session": "TFSession", "train_step": "Tensor", "y_": "Tensor", "batch": "Tensor"},
     "outputs": {"result": "TFSession"},
     "args": {},
-    "desc": "A tensorflow session."
-},
-{
-    "name": "Variable",
-    "code": "extlib.tensorflow.variable",
-    "inputs": {"session": "TFSession"},
-    "outputs": {"session": "TFSession", "result": "Tensor"},
-    "args": {"dimensions": [2, 2]},
-    "desc": "A tensorflow variable."
-},
-{
-    "name": "Argmax",
-    "code": "extlib.tensorflow.argmax",
-    "inputs": {"val": "Tensor"},
-    "outputs": {"result": "Tensor"},
-    "args": {"param": 1},
-    "desc": "tf.argmax(val, param)"
-},
-{
-    "name": "Placeholder",
-    "code": "extlib.tensorflow.placeholder",
-    "inputs": {},
-    "outputs": {"result": "Object"},
-    "args": {"dimension": 0, "batch_size": null},
-    "desc": "A tensorflow placeholder."
+    "desc": "Executes a train step"
 },
 {
     "name": "Negate",
@@ -1249,58 +713,362 @@
     "desc": "eval the accuracy."
 },
 {
-    "name": "Train",
-    "code": "extlib.tensorflow.train",
-    "inputs": {"x": "Tensor", "session": "TFSession", "train_step": "Tensor", "y_": "Tensor", "batch": "Tensor"},
-    "outputs": {"result": "TFSession"},
-    "args": {},
-    "desc": "Executes a train step"
-},
-{
-    "name": "Dropout Layer",
-    "code": "extlib.tensorflow.dropout",
-    "inputs": {"graph": "Tensor", "keep_prob": "Tensor", "session": "TFSession"},
-    "outputs": {"graph": "Tensor", "session": "TFSession"},
-    "args": {},
-    "desc": "A linear layer in a net."
-},
-{
-    "name": "Matrix Mult",
-    "code": "extlib.tensorflow.matmul",
+    "name": "Mult",
+    "code": "extlib.tensorflow.mult",
     "inputs": {"a": "Tensor", "b": "Tensor"},
     "outputs": {"result": "Tensor"},
     "args": {},
     "desc": "Calculate a * b"
 },
 {
-    "name": "MNIST",
-    "code": "extlib.tensorflow.mnist",
-    "inputs": {},
-    "outputs": {"mnist": "MNIST"},
+    "name": "Train (dropout)",
+    "code": "extlib.tensorflow.traindropout",
+    "inputs": {"keep_prob": "Tensor", "batch": "Tensor", "session": "TFSession", "y_": "Tensor", "x": "Tensor", "train_step": "Tensor"},
+    "outputs": {"result": "TFSession"},
     "args": {},
-    "desc": "Loads the mnist dataset"
+    "desc": "Executes a train step"
 },
 {
-    "name": "Linear Layer",
-    "code": "extlib.tensorflow.linear",
-    "inputs": {"graph": "Tensor", "session": "TFSession"},
-    "outputs": {"graph": "Tensor", "session": "TFSession"},
-    "args": {"in_dimension": 100, "out_dimension": 10, "stddev": 0.1},
-    "desc": "A linear layer in a net."
+    "name": "MNIST Test",
+    "code": "extlib.tensorflow.mnisttest",
+    "inputs": {"mnist": "MNIST"},
+    "outputs": {"images": "Tensor", "labels": "Tensor"},
+    "args": {"code": "result = value[\"val\"]"},
+    "desc": "Get test data from mnist."
 },
 {
-    "name": "[WIP] Plot Array",
-    "code": "extlib.matplotlib.plotarray",
-    "inputs": {"data": "Array"},
+    "name": "Mnist Batch",
+    "code": "extlib.tensorflow.mnistbatch",
+    "inputs": {"trigger": "Object", "mnist": "MNIST"},
+    "outputs": {"batch": "Tensor"},
+    "args": {},
+    "desc": "Get the next batch from mnist"
+},
+{
+    "name": "Database SQLite",
+    "code": "extlib.database.databasesqlite",
+    "inputs": {},
     "outputs": {},
-    "args": {"subplot": 111, "ion": true, "clear": true, "title": "Debug"},
-    "desc": "Plot an array."
+    "args": {"db_id": "bla", "file": "bla.db"},
+    "desc": "Setup the database as SQLite."
 },
 {
-    "name": "[WIP] Plot Image",
-    "code": "extlib.matplotlib.plotimg",
-    "inputs": {"data": "Image"},
+    "name": "Database SQL",
+    "code": "extlib.database.databasesql",
+    "inputs": {},
     "outputs": {},
-    "args": {"subplot": 111, "ion": true, "clear": true, "title": "Debug"},
-    "desc": "Plot an image."
+    "args": {"host": "localhost", "password": "bla", "db_id": "bla", "db": "bla", "user": "bla"},
+    "desc": "Creates a connection to a database."
+},
+{
+    "name": "Query Database",
+    "code": "extlib.database.query",
+    "inputs": {"val": "Object"},
+    "outputs": {"result": "Object"},
+    "args": {"code": "c = db.cursor()\nresult = value[\"val\"]", "db_id": "bla"},
+    "desc": "Interact with a db."
+},
+{
+    "name": "BGR to XYZ",
+    "code": "extlib.computervision.bgr2xyz",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert BGR image to XYZ image."
+},
+{
+    "name": "Errode",
+    "code": "extlib.computervision.errode",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"iterations": 1, "size": 5},
+    "desc": "Errode an image."
+},
+{
+    "name": "Color Quantization",
+    "code": "extlib.computervision.colorquantization",
+    "inputs": {"img": "Image"},
+    "outputs": {"img": "Image"},
+    "args": {"k": 4},
+    "desc": "Reduce the number of colors"
+},
+{
+    "name": "Add Weighted",
+    "code": "extlib.computervision.addweighted",
+    "inputs": {"right": "Image", "left": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"right": 0.5, "left": 0.5},
+    "desc": "Add the two images weighted."
+},
+{
+    "name": "Image to distribution",
+    "code": "extlib.computervision.img2distribution",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Array"},
+    "args": "",
+    "desc": "Convert an image to a distribution."
+},
+{
+    "name": "Gray to BGR",
+    "code": "extlib.computervision.gray2bgr",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert Gray image to BGR image."
+},
+{
+    "name": "HLS to BGR",
+    "code": "extlib.computervision.hls2bgr",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert HLS image to BGR image."
+},
+{
+    "name": "[WIP] Record",
+    "code": "extlib.computervision.record",
+    "inputs": {"img": "Image"},
+    "outputs": {},
+    "args": {"resource": "~/Videos/test.avi"},
+    "desc": "Record video."
+},
+{
+    "name": "Lab to BGR",
+    "code": "extlib.computervision.lab2bgr",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert Lab image to BGR image."
+},
+{
+    "name": "Fixed Hue",
+    "code": "extlib.computervision.fixedhue",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": 127,
+    "desc": "Set the hue to a fixed value."
+},
+{
+    "name": "Median Blur",
+    "code": "extlib.computervision.medianblur",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": 4,
+    "desc": "Apply median blur on image."
+},
+{
+    "name": "Render Boxes",
+    "code": "extlib.computervision.renderboxes",
+    "inputs": {"boxes": "PolygonArray", "img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"r": 255, "b": 0, "g": 0},
+    "desc": "Render boxes in image."
+},
+{
+    "name": "In Range",
+    "code": "extlib.computervision.inrange",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"lower-value": 0, "upper-value": 255, "lower-saturisation": 0, "upper-hue": 255, "lower-hue": 0, "upper-saturisation": 255},
+    "desc": "Apply an inRange operation on the image."
+},
+{
+    "name": "BGR to Gray",
+    "code": "extlib.computervision.bgr2gray",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert BGR image to Gray image."
+},
+{
+    "name": "Fixed Saturisation",
+    "code": "extlib.computervision.fixedsaturisation",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": 127,
+    "desc": "Set the saturisation to a fixed value."
+},
+{
+    "name": "Resize",
+    "code": "extlib.computervision.resize",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"width": 320, "height": 240},
+    "desc": "Resize an image."
+},
+{
+    "name": "Sift",
+    "code": "extlib.computervision.sift",
+    "inputs": {"img": "Image"},
+    "outputs": {"features": "Array", "img": "Image", "descs": "Array"},
+    "args": "",
+    "desc": "Detect sift features."
+},
+{
+    "name": "Crop Image",
+    "code": "extlib.computervision.crop",
+    "inputs": {"val": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"y": 0, "x": 0, "height": 240, "width": 320},
+    "desc": "Crop the image"
+},
+{
+    "name": "BGR to HLS",
+    "code": "extlib.computervision.bgr2hls",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert BGR image to HLS image."
+},
+{
+    "name": "Mask",
+    "code": "extlib.computervision.mask",
+    "inputs": {"mask": "Image", "img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Apply a mask."
+},
+{
+    "name": "Plot features",
+    "code": "extlib.computervision.plotfeatures",
+    "inputs": {"features": "Array", "img": "Image"},
+    "outputs": {"img": "Image"},
+    "args": {"mode": "advanced"},
+    "desc": "Plot features into an image."
+},
+{
+    "name": "Invert Mask",
+    "code": "extlib.computervision.invertmask",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {},
+    "desc": "Invert the mask white and black."
+},
+{
+    "name": "Surf",
+    "code": "extlib.computervision.surf",
+    "inputs": {"img": "Image"},
+    "outputs": {"features": "Array", "img": "Image", "descs": "Array"},
+    "args": "",
+    "desc": "Detect surf features."
+},
+{
+    "name": "BGR to Lab",
+    "code": "extlib.computervision.bgr2lab",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert BGR image to Lab image."
+},
+{
+    "name": "Show",
+    "code": "extlib.computervision.show",
+    "inputs": {"img": "Image"},
+    "outputs": {},
+    "args": {"fullscreen": true, "title": "Debug View"},
+    "desc": "Show an image."
+},
+{
+    "name": "Video",
+    "code": "extlib.computervision.video",
+    "inputs": {},
+    "outputs": {"result": "Image"},
+    "args": {"resource": 0, "fps": 30, "exposure": 0.1},
+    "desc": "Capture video."
+},
+{
+    "name": "Gaussian Blur",
+    "code": "extlib.computervision.gaussianblur",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": 4,
+    "desc": "Apply gaussian blur on image."
+},
+{
+    "name": "2 Colors to Bin",
+    "code": "extlib.computervision.color2bin",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"imgSize": 80},
+    "desc": "Adaptive threshold."
+},
+{
+    "name": "Fixed Intensity",
+    "code": "extlib.computervision.fixedintensity",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": 127,
+    "desc": "Set the intensity to a fixed value."
+},
+{
+    "name": "Find Contours",
+    "code": "extlib.computervision.findcontours",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "PolygonArray"},
+    "args": {},
+    "desc": "Contours in an image."
+},
+{
+    "name": "HSV to BGR",
+    "code": "extlib.computervision.hsv2bgr",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert HSV image to BGR image."
+},
+{
+    "name": "Dilate",
+    "code": "extlib.computervision.dilate",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"iterations": 1, "size": 5},
+    "desc": "Dilate an image."
+},
+{
+    "name": "Adaptive Thresh",
+    "code": "extlib.computervision.adathresh",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": {"blockSize": 11, "C": 2, "gaussian": false, "inverted": false},
+    "desc": "Adaptive threshold."
+},
+{
+    "name": "XYZ to BGR",
+    "code": "extlib.computervision.xyz2bgr",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert XYZ image to BGR image."
+},
+{
+    "name": "BGR to HSV",
+    "code": "extlib.computervision.bgr2hsv",
+    "inputs": {"img": "Image"},
+    "outputs": {"result": "Image"},
+    "args": "",
+    "desc": "Convert BGR image to HSV image."
+},
+{
+    "name": "Bounding Boxes",
+    "code": "extlib.computervision.boundingbox",
+    "inputs": {"cnts": "PolygonArray"},
+    "outputs": {"result": "PolygonArray"},
+    "args": {},
+    "desc": "Calc bounding boxes for contour."
+},
+{
+    "name": "GPIO In",
+    "code": "extlib.raspberrypi.gpioin",
+    "inputs": {},
+    "outputs": {"result": "Boolean"},
+    "args": 10,
+    "desc": "Read if a gpio has a signal."
+},
+{
+    "name": "GPIO Out",
+    "code": "extlib.raspberrypi.gpioout",
+    "inputs": {"val": "Boolean"},
+    "outputs": {},
+    "args": 8,
+    "desc": "Set the gpio pin to the input value"
 }]

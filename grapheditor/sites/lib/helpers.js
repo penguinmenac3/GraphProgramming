@@ -1,3 +1,20 @@
+onerror = handleErr;
+
+function handleErr(msg, url, l) {
+
+var txt = "There was an error on this page.\n\n";
+txt += "Error: " + msg + "\n";
+txt += "URL: " + url + "\n";
+txt += "Line: " + l + "\n\n";
+txt += "Reload site?\n";
+
+if (confirm(txt)){
+  
+}
+
+return true;
+}
+
 
 function attachEvent(obj, event, callback) {
 	/*

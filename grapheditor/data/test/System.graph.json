@@ -1,0 +1,66 @@
+{
+	"nodes": [
+		{
+			"name": "0Vmxf",
+			"code": "stdlib.system.executable",
+			"inputs": {
+				"arg": "String"
+			},
+			"outputs": {
+				"result": "String"
+			},
+			"args": {
+				"escapeArgs": false,
+				"executable": "sudo "
+			},
+			"desc": "Execute the arg with sudo.",
+			"displayname": "sudo execute",
+			"heat": 0,
+			"running": 0,
+			"x": 0,
+			"y": 0
+		},
+		{
+			"name": "vfhke",
+			"code": "stdlib.string.const",
+			"inputs": {},
+			"outputs": {
+				"result": "String"
+			},
+			"args": "shutdown now",
+			"desc": "Pass the string arg as output.",
+			"displayname": "Shutdown",
+			"heat": 0,
+			"running": 0,
+			"x": -69,
+			"y": -210
+		},
+		{
+			"name": "oelGQ",
+			"code": "stdlib.string.const",
+			"inputs": {},
+			"outputs": {
+				"result": "String"
+			},
+			"args": "reboot now",
+			"desc": "Pass the string arg as output.",
+			"displayname": "Reboot",
+			"heat": 0,
+			"running": 0,
+			"x": 150,
+			"y": -209
+		}
+	],
+	"connections": [
+		{
+			"input": {
+				"node": "vfhke",
+				"output": "result"
+			},
+			"output": {
+				"node": "0Vmxf",
+				"input": "arg"
+			}
+		}
+	]
+}

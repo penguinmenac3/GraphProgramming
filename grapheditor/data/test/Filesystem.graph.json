@@ -1,0 +1,90 @@
+{
+	"nodes": [
+		{
+			"name": "bAAYd",
+			"code": "stdlib.system.print",
+			"inputs": {
+				"val": "String"
+			},
+			"outputs": {},
+			"args": "",
+			"desc": "Print input to console.",
+			"displayname": "Print",
+			"heat": 1,
+			"x": -51,
+			"y": 95,
+			"running": 18
+		},
+		{
+			"name": "KarVk",
+			"code": "stdlib.system.fileread",
+			"inputs": {},
+			"outputs": {
+				"result": "String"
+			},
+			"args": {
+				"filename": "../test.txt"
+			},
+			"desc": "Read the content of a file as a string.",
+			"displayname": "File (Read as Str)",
+			"heat": 1,
+			"running": 12,
+			"x": -50,
+			"y": -66
+		},
+		{
+			"name": "jEyMv",
+			"code": "stdlib.system.filewrite",
+			"inputs": {
+				"val": "String"
+			},
+			"outputs": {},
+			"args": {
+				"filename": "../test.txt"
+			},
+			"desc": "Write string to file (OVERWRITE).",
+			"displayname": "File (Write as str)",
+			"heat": 1,
+			"running": 14,
+			"x": 235,
+			"y": -92
+		},
+		{
+			"name": "63Yt5",
+			"code": "stdlib.string.const",
+			"inputs": {},
+			"outputs": {
+				"result": "String"
+			},
+			"args": "Hello World!",
+			"desc": "Pass the string arg as output.",
+			"displayname": "String Constant",
+			"heat": 1,
+			"running": 6,
+			"x": 237,
+			"y": -216
+		}
+	],
+	"connections": [
+		{
+			"input": {
+				"node": "KarVk",
+				"output": "result"
+			},
+			"output": {
+				"node": "bAAYd",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "63Yt5",
+				"output": "result"
+			},
+			"output": {
+				"node": "jEyMv",
+				"input": "val"
+			}
+		}
+	]
+}
