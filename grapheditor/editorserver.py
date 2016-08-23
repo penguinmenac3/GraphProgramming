@@ -241,12 +241,19 @@ class myHandler(BaseHTTPRequestHandler):
                 return
             cmd = "data/" + data["startGraph"] + ".graph.json"
             preex = None
-            try:
-                preex = os.setsid
-                cmd = ["python ../python/graphex.py " + cmd + " debug"]
-            except AttributeError:
-                print("Windows: Feature not availible.")
-                cmd = ["python2", "../python/graphex.py ", cmd, "debug"]
+            if "execEnv" in data and data["execEnv"] == "Lua":
+                try:
+                    preex = os.setsid
+                except AttributeError:
+                    print("Windows: Feature not availible.")
+                cmd = ["../lua/graphex ../grapheditor/" + cmd + " debug"]
+            else:
+                try:
+                    preex = os.setsid
+                    cmd = ["python ../python/graphex.py " + cmd + " debug"]
+                except AttributeError:
+                    print("Windows: Feature not availible.")
+                    cmd = ["python2", "../python/graphex.py ", cmd, "debug"]
             execProcess = subprocess.Popen(
                 cmd,
                  stdout=subprocess.PIPE, stderr=subprocess.PIPE,
@@ -295,11 +302,12 @@ class myHandler(BaseHTTPRequestHandler):
             subprocess.call(["bash", "buildSpec", data["getnodes"]])
             path = "data/" + data["getnodes"] + ".nodes.json"
         if "getsrc" in data:
-            node = data["getsrc"].decode("utf-8").replace(".", "/")
-            path = "../python/" + node + ".py"
+            node = data["getsrc"].decode("utf-8").replace(".", "/").replace("/lua", ".lua").replace("/py", ".py")
+            path = "../" + node
+            print(path)
         if "setsrc" in data:
-            node = data["setsrc"].decode("utf-8").replace(".", "/")
-            path = "../python/" + node + ".py"
+            node = data["setsrc"].decode("utf-8").replace(".", "/").replace("/lua", ".lua").replace("/py", ".py")
+            path = "../" + node
             print(os.path.dirname(path))
             if not os.path.exists(os.path.dirname(path)):
                 try:

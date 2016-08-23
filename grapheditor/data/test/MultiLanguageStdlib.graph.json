@@ -1,0 +1,178 @@
+{
+	"nodes": [
+		{
+			"name": "bAAYd",
+			"code": "stdlib.system.print",
+			"inputs": {
+				"val": "String"
+			},
+			"outputs": {},
+			"args": "",
+			"desc": "Print input to console.",
+			"displayname": "Print",
+			"heat": 0,
+			"x": -153,
+			"y": 320,
+			"running": 0
+		},
+		{
+			"name": "s6iIH",
+			"code": "stdlib.string.const",
+			"inputs": {},
+			"outputs": {
+				"result": "String"
+			},
+			"args": "Hello ",
+			"desc": "Pass the string arg as output.",
+			"displayname": "Hello",
+			"heat": 0,
+			"x": -77,
+			"y": -262,
+			"running": 0
+		},
+		{
+			"name": "z14te",
+			"code": "stdlib.string.const",
+			"inputs": {},
+			"outputs": {
+				"result": "String"
+			},
+			"args": "World!",
+			"desc": "Pass the string arg as output.",
+			"displayname": "World!",
+			"heat": 0,
+			"x": 103,
+			"y": -177,
+			"running": 0
+		},
+		{
+			"name": "Cmjdr",
+			"code": "stdlib.string.concat",
+			"inputs": {
+				"right": "String",
+				"left": "String"
+			},
+			"outputs": {
+				"result": "String"
+			},
+			"args": "",
+			"desc": "Concat the two strings.",
+			"displayname": "String Concat",
+			"heat": 0,
+			"x": 18,
+			"y": 81,
+			"running": 0
+		},
+		{
+			"inputs": {
+				"condition": "Boolean",
+				"val": "Object"
+			},
+			"name": "DxT19",
+			"code": "stdlib.structures.if",
+			"desc": "Pass val based on condition.",
+			"args": [],
+			"outputs": {
+				"true": "Object",
+				"false": "Object"
+			},
+			"displayname": "If",
+			"heat": 0,
+			"running": 0,
+			"x": -125,
+			"y": -45
+		},
+		{
+			"inputs": {
+				"val": "Object"
+			},
+			"name": "j2q4b",
+			"code": "stdlib.system.print",
+			"desc": "Print on the screen.",
+			"args": [],
+			"outputs": [],
+			"displayname": "Print",
+			"heat": 0,
+			"running": 0,
+			"x": -246,
+			"y": 193
+		},
+		{
+			"inputs": [],
+			"name": "isPKD",
+			"code": "stdlib.boolean.const",
+			"desc": "Return a const boolean",
+			"args": false,
+			"outputs": {
+				"result": "Boolean"
+			},
+			"displayname": "Const",
+			"heat": 0,
+			"running": 0,
+			"x": -269,
+			"y": -171
+		}
+	],
+	"connections": [
+		{
+			"input": {
+				"node": "Cmjdr",
+				"output": "result"
+			},
+			"output": {
+				"node": "bAAYd",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "z14te",
+				"output": "result"
+			},
+			"output": {
+				"node": "Cmjdr",
+				"input": "right"
+			}
+		},
+		{
+			"input": {
+				"node": "DxT19",
+				"output": "true"
+			},
+			"output": {
+				"node": "j2q4b",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "DxT19",
+				"output": "false"
+			},
+			"output": {
+				"node": "Cmjdr",
+				"input": "left"
+			}
+		},
+		{
+			"input": {
+				"node": "s6iIH",
+				"output": "result"
+			},
+			"output": {
+				"node": "DxT19",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "isPKD",
+				"output": "result"
+			},
+			"output": {
+				"node": "DxT19",
+				"input": "condition"
+			}
+		}
+	]
+}

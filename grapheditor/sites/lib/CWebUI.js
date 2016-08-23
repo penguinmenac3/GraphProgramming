@@ -18,6 +18,7 @@ function WebUI_CWebUI() {
 	this.graph = null;
     this.graphStack = new Array();
     this.graphNameStack = new Array();
+    this.currentLanguage = "Python";
 	this.nodes = null;
 	this.selectedNode = null;
 	this.graphName = "Default";
@@ -46,7 +47,7 @@ function WebUI_CWebUI() {
 
         RenderEngine.setHasParent(false);
 		getGraph(that.graphName, that.setGraph, that.printError);
-		getNodes("Python", that.setNodes, that.printError);
+		getNodes(that.currentLanguage, that.setNodes, that.printError);
         showInfo();
 		return true;
 	};
@@ -235,6 +236,9 @@ function WebUI_CWebUI() {
     };
     
     this.changeLanguage = function(language) {
+        that.currentLanguage = language;
+        localStorage.currentLanguage = language;
+        document.getElementById("current_language").innerHTML = language;
         that.hideLanguageSelector();
         getNodes(language, that.setNodes, WebUI.printError);
     };
@@ -490,7 +494,25 @@ class Node(base.Node):
             return {"result": result, "tags":{"result":tag}}
         else:
             return {"result": result}
-`
+`;
+        if (that.currentLanguage == "Lua") {
+          sampleSrc = `local myNode = {}
+function myNode.init(node)
+  node.tick = function(value)
+    print("Not implemented yet.")
+    return {}
+  end
+end
+
+function myNode.spec(node)
+  node.name = "Unnamed Node"
+  node.inputs.val = "Object"
+  node.desc = "Print a not implemented msg"
+end
+
+return myNode
+`;
+        }
         var srcEdit = "<textarea id='src' class='src'>" + sampleSrc + "</textarea>";
         var savebtn = "<button class='node inputnode right' onclick='WebUI.saveNewNode()'>Create</button>";
         var cancelbtn = "<button class='node outputnode right' onclick='WebUI.hideCodeEditor()'>Cancel</button>"
@@ -504,7 +526,11 @@ class Node(base.Node):
         codeMirror.toTextArea();
         nodeCode = document.getElementById("nodeCode").value;
         src = document.getElementById("src").value;
-        setSrc(nodeCode, src, that.printError);
+        var fileending = ".py";
+        if (that.currentLanguage == "Lua") {
+          fileending = ".lua";
+        }
+        setSrc(that.currentLanguage.toLowerCase() + "/" + nodeCode + fileending, src, that.printError);
         WebUI.hideCodeEditor();
     }
     
@@ -531,7 +557,11 @@ class Node(base.Node):
     
     function showCode(src) {
         var srcEdit = "<textarea id='src' class='src'>" + src + "</textarea>";
-        var savebtn = "<button class='node inputnode right' onclick='WebUI.saveCodePeek(\"" + that.currentNode.code + "\")'>Save</button>";
+        var fileending = ".py";
+        if (that.currentLanguage == "Lua") {
+            fileending = ".lua";
+        }
+        var savebtn = "<button class='node inputnode right' onclick='WebUI.saveCodePeek(\"" + that.currentLanguage.toLowerCase() + "/" + that.currentNode.code + fileending + "\")'>Save</button>";
         if (localStorage.devmode != "true") {
             savebtn = "";
         }
@@ -546,8 +576,13 @@ class Node(base.Node):
     
     
     this.codePeek = function(property) {
-        showCode("Downloading code.");
-        getSrc(property, showCode, that.printError);
+        var fileending = ".py";
+        if (that.currentLanguage == "Lua") {
+            fileending = ".lua"
+        }
+        var code = that.currentLanguage.toLowerCase() + "." + property + fileending;
+        showCode("Downloading code: " + code);
+        getSrc(code, showCode, that.printError);
     }
 
 	function tryFindInput(node, x, y) {
@@ -844,7 +879,7 @@ class Node(base.Node):
             document.getElementById("restartbtn").style.display = "inline-block";
             document.getElementById("startbtn").style.display = "none";
             that.setDebug("Started Graph: " + that.graphName);
-	        start(that.graphName, that.setDebug, that.setDebug, that.killDebug);
+	        start(that.graphName, that.currentLanguage, that.setDebug, that.setDebug, that.killDebug);
             that.debugger = new CDebugger(location.host.split(":")[0], "wasd", that, RenderEngine);
         };
         

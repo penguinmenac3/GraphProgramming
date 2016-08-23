@@ -4,6 +4,7 @@ local json = require('json')
 local utils = require('utils')
 
 function createSpecForNode(code)
+  print("Create spec for " .. code)
   -- Create and prepopulate node spec
   node = {}
   node.name = "Specify Node Name"
@@ -37,6 +38,22 @@ function writeNodeSpecList(nodeSpecList, filename)
   file:close()
 end
 
-local tmp = {"stdlib.system.print", "stdlib.string.const", "stdlib.string.concat"}
+function findNodesIn(directory)
+  nodeList = {}
+  i = 0
+  tmp = utils.scandir(directory)
+  for x in pairs(tmp)
+  do
+    res = utils.scandir(directory.."/"..tmp[x])
+    for y in pairs(res)
+    do
+      i = i + 1
+      nodeList[i] = directory.."."..tmp[x].."."..res[y].gsub(res[y], ".lua", "")
+    end
+  end
+  return nodeList
+end
+
+local tmp = findNodesIn("stdlib")
 local nodeSpecList = createNodeSpecList(tmp)
 writeNodeSpecList(nodeSpecList, "../grapheditor/data/Lua.nodes.json")

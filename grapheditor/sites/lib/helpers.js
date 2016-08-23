@@ -144,7 +144,7 @@ function execute(graph, callback, callbackFailure) {
     xmlhttp.send(params);
 }
 
-function start(graph, callback, callbackFailure, callbackError) {
+function start(graph, language, callback, callbackFailure, callbackError) {
     var xmlhttp;
     if (window.XMLHttpRequest) {
         xmlhttp = new XMLHttpRequest();
@@ -167,7 +167,7 @@ function start(graph, callback, callbackFailure, callbackError) {
             return;
         }
     }
-    var params = "startGraph=" + graph;
+    var params = "startGraph=" + graph + "&execEnv=" + language;
     xmlhttp.open("POST", "###REPLACE###api",true);
     //Send the proper header information along with the request
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

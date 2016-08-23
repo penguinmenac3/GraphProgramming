@@ -36,6 +36,9 @@
         if (localStorage.theme) {
             swapTheme(localStorage.theme);
         }
+        if (localStorage.currentLanguage) {
+            WebUI.changeLanguage(localStorage.currentLanguage);
+        }
     }
     function toggleDev() {
         if (localStorage.devmode == "true") {
@@ -55,6 +58,7 @@
         <a class="buttondev newnode" onclick="toggleDev()">Toggle Dev. Mode</a>
         <div id="startup" class="tab">
             <h2>Startup</h2>
+            <p>Language: <span id="current_language">Python</span></p>
             <p>Server: <input class='hinput' id='debug_server' value='localhost:8088' /></p>
             <button id="deploybtn" class='button inputnode right' style="display:none" onclick='WebUI.startDebug()'>DEPLOY</button>
             <button id="startbtn" class='button algorithmnode right' onclick='WebUI.startDebug()'>DEBUG</button>
@@ -97,8 +101,8 @@
      <div id="languageselector" style="display:none" class="overlay" onclick="WebUI.hideLanguageSelector()">
         <div id="innerlanguageselector" class="inneroverlay" onclick="event.cancelBubble=true;">
          <h2>Select A Language</h2>
-         <button class="node languagenode" onclick="WebUI.changeLanguage('Python')">PYTHON</button>
-         <button class="node languagenode" onclick="WebUI.changeLanguage('Lua')">[WIP] LUA</button>
+         <button class="node languagenode" onclick="WebUI.changeLanguage('Python')">PYTHON (Paralell)</button>
+         <button class="node languagenode" onclick="WebUI.changeLanguage('Lua')">[WIP] LUA (Serial)</button>
          <button class="node languagenode" onclick="WebUI.changeLanguage('Java')">[TODO] JAVA</button>
          <button class="node languagenode" onclick="WebUI.changeLanguage('Csharp')">[TODO] C SHARP</button>
          <button class="node languagenode" onclick="WebUI.changeLanguage('Cpp')">[TODO] C++</button>

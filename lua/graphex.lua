@@ -8,6 +8,32 @@
 local json = require("json")
 local utils = require("utils")
 
+debug = nil
+global_args = {}
+offset = 2
+
+if not (arg[2] == nil) then
+  if arg[2] == "debug" then
+    debug = require("debugger")
+    offset = 3
+  end
+end
+
+local tmp_args = ""
+local tmp_args_bool = false
+while not (arg[offset] == nil)
+do
+  tmp_args_bool = true
+  tmp_args = tmp_args .. arg[offset] .. " "
+  offset = offset + 1
+end
+
+if tmp_args_bool then
+  global_args = json.decode(tmp_args)
+end
+
+global_result = {}
+
 -- Load the graph as a table.
 function loadGraph(filename)
   file = io.open(filename, "r")
@@ -50,8 +76,6 @@ function buildGraph(graph)
   do
     nodes[value.input.node].outputs[value.input.output] = value.output
   end
-
-  --print(json.encode(nodes))
 
   return nodes, inputNodes
 end
@@ -98,8 +122,10 @@ function runGraph(graph, inputNodes)
       local result = current.tick(value)
       for output in pairs(current.outputs)
       do
-        utils.List.pushright(graph[current.outputs[output].node].inputs[current.outputs[output].input], result[output])
-        utils.List.pushright(pendingForSchedule, current.outputs[output].node)
+        if not (result[output] == nil) then
+          utils.List.pushright(graph[current.outputs[output].node].inputs[current.outputs[output].input], result[output])
+          utils.List.pushright(pendingForSchedule, current.outputs[output].node)
+        end
       end
     end
   end
@@ -108,3 +134,4 @@ end
 local tmp = loadGraph(arg[1])
 local graph, inputNodes = buildGraph(tmp)
 runGraph(graph, inputNodes)
+print(json.encode(global_result))
