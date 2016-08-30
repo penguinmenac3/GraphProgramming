@@ -11,8 +11,8 @@
 			"desc": "Print input to console.",
 			"displayname": "Print",
 			"heat": 0,
-			"x": -153,
-			"y": 320,
+			"x": 93,
+			"y": 270,
 			"running": 0
 		},
 		{
@@ -94,8 +94,8 @@
 			"displayname": "Print",
 			"heat": 0,
 			"running": 0,
-			"x": -246,
-			"y": 193
+			"x": -215,
+			"y": 161
 		},
 		{
 			"inputs": [],
@@ -106,24 +106,48 @@
 			"outputs": {
 				"result": "Boolean"
 			},
-			"displayname": "Const",
+			"displayname": "False",
 			"heat": 0,
 			"running": 0,
 			"x": -269,
 			"y": -171
+		},
+		{
+			"inputs": {
+				"in": "Object"
+			},
+			"name": "Na9ik",
+			"code": "stdlib.default.pass",
+			"desc": "Pass an object. Does nothing.",
+			"args": [],
+			"outputs": {
+				"out": "Object"
+			},
+			"displayname": "Pass",
+			"heat": 0,
+			"running": 0,
+			"x": -184,
+			"y": 63
+		},
+		{
+			"inputs": {
+				"val": "Object"
+			},
+			"name": "Iokt8",
+			"code": "stdlib.default.any",
+			"desc": "Accept any input.",
+			"args": [],
+			"outputs": {
+				"result": "Object"
+			},
+			"displayname": "Accept any inputs",
+			"heat": 0,
+			"running": 0,
+			"x": 59,
+			"y": 173
 		}
 	],
 	"connections": [
-		{
-			"input": {
-				"node": "Cmjdr",
-				"output": "result"
-			},
-			"output": {
-				"node": "bAAYd",
-				"input": "val"
-			}
-		},
 		{
 			"input": {
 				"node": "z14te",
@@ -132,16 +156,6 @@
 			"output": {
 				"node": "Cmjdr",
 				"input": "right"
-			}
-		},
-		{
-			"input": {
-				"node": "DxT19",
-				"output": "true"
-			},
-			"output": {
-				"node": "j2q4b",
-				"input": "val"
 			}
 		},
 		{
@@ -172,6 +186,46 @@
 			"output": {
 				"node": "DxT19",
 				"input": "condition"
+			}
+		},
+		{
+			"input": {
+				"node": "Na9ik",
+				"output": "out"
+			},
+			"output": {
+				"node": "j2q4b",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "Iokt8",
+				"output": "result"
+			},
+			"output": {
+				"node": "bAAYd",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "Cmjdr",
+				"output": "result"
+			},
+			"output": {
+				"node": "Iokt8",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "DxT19",
+				"output": "true"
+			},
+			"output": {
+				"node": "Na9ik",
+				"input": "in"
 			}
 		}
 	]

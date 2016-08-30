@@ -56,8 +56,8 @@ function buildGraph(graph)
     nodes[value.name] = value
     value.running = false
     value.heat = 0
-    if value["queue_enabled"] == nil then
-      value.queue_enabled = true
+    if value["queue_size"] == nil then
+      value.queue_size = 100
     end
 
     value.is_input = true
@@ -104,17 +104,13 @@ function runGraph(graph, inputNodes)
         break
       end
     end
-    if value == nil then
-      --utils.List.pushright(pendingForSchedule, current_id)
-    else
+    if not (value == nil) then
       -- Gather inputs from queue
       for k in pairs(current.inputs)
       do
-        if current.queue_enabled == false then
-          while utils.List.length(current.inputs[k]) > 1
-          do
-            utils.List.popleft(current.inputs[k])
-          end
+        while utils.List.length(current.inputs[k]) > 1 + current.queue_size
+        do
+          utils.List.popleft(current.inputs[k])
         end
         value[k] = utils.List.popleft(current.inputs[k])
       end
