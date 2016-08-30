@@ -7,7 +7,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="###REPLACE###css/bootstrap.min.css">
+  <script type="text/javascript" src="###REPLACE###lib/jquery.min.js"></script>
   <script type="text/javascript" src="###REPLACE###lib/helpers.js"></script>
   <script type="text/javascript" src="###REPLACE###lib/vars.js"></script>
   <script type="text/javascript" src="###REPLACE###lib/CDebugger.js"></script>
@@ -51,20 +52,37 @@
  </head>
  <!-- Use the Script inside the body onload to create the webui -->
  <body onload="window.setTimeout(initialize, 1000);" onresize="">
-     <div id="graphview" class="graphview"></div>
-     <div id="rightside" class="rightSide">
-        <a class="buttonlight" onclick="swapTheme('light')">Switch Theme (Light)</a>
-        <a class="buttondark" onclick="swapTheme('dark')">Switch Theme (Dark)</a>
-        <a class="buttondev newnode" onclick="toggleDev()">Toggle Dev. Mode</a>
-        <div id="startup" class="tab">
-            <h2>Startup</h2>
-            <p>Language: <span id="current_language">Python</span></p>
-            <p>Server: <input class='hinput' id='debug_server' value='localhost:8088' /></p>
+   <nav class="navbar-fluid navbar-default navbar-fixed-top">
+     <div class="container">
+       <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" area-expanded="false" area-controls="navbar" >
+            <span class="sr-only">Navbar Toggle</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+         </button>
+         <p class="navbar-brand">Graph Prog.</p>
+         <p class="navbar-text">
+           <span id="current_graph">Default</span>
+            <button id="startbtn" class='button algorithmnode right' onclick='WebUI.startDebug()'>RUN (<span id="current_language">Python</span>)</button>
             <button id="deploybtn" class='button inputnode right' style="display:none" onclick='WebUI.startDebug()'>DEPLOY</button>
-            <button id="startbtn" class='button algorithmnode right' onclick='WebUI.startDebug()'>DEBUG</button>
             <button id="restartbtn" class='button algorithmnode right' style="display:none" onclick='WebUI.restartDebug()'>RESTART</button>
             <button id="killbtn" class='button outputnode right' style="display:none" onclick='WebUI.killDebug()'>KILL</button>
-        </div>
+         </p>
+       </div>
+       <div id="navbar" data-role="panel" data-position="left" data-display="overlay" data-theme="b" class="menu navbar-collapse collapse">
+         <button id="load_btn" class="button-lg structurenode" onclick="WebUI.loadBtn();">LOAD</button>
+         <button id="save_btn" class="button-lg structurenode" onclick="WebUI.saveBtn();">SAVE</button>
+         <button id="language_btn" class="button-lg structurenode" onclick="WebUI.languageBtn();">LANGUAGE</button>
+         <button id="light_btn" class="buttonlight button-lg" onclick="swapTheme('light');">Switch Theme (light)</button>
+         <button id="dark_btn"  class="buttondark button-lg" onclick="swapTheme('dark');">Switch Theme (dark)</button>
+         <button id="dev_btn" class="buttondev button-lg" onclick="toggleDev();">DEV MODE</button>
+       </div>
+     </div>
+   </nav>
+   <div id="content" class="content-div">
+     <div id="graphview" class="graphview"></div>
+     <div id="rightside" class="rightSide">
          <div id="info" class="tab">
             <h2>Info</h2>
             <div id="infocontent" class="info">
@@ -113,5 +131,7 @@
             An error occured.
         </div>
      </div>
+     </div>
  </body>
+ <script src="###REPLACE###lib/bootstrap.min.js"></script>
 </html>

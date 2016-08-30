@@ -254,7 +254,21 @@ function WebUI_CWebUI() {
         document.getElementById("codeeditor").style.display = "none";
     };
 
-	this.trySelect = function(x, y) {		
+    this.loadBtn = function() {
+        listGraphs(that.openGraph, that.printError);
+    };
+
+    this.saveBtn = function() {
+        if (that.changed == true) {
+            WebUI.prompt("Save: Please enter graph name", WebUI.graphName, function(name) {if (name == null) {console.log("Abortion");return;}WebUI.graphName = name;WebUI.saveGraph(WebUI.graphName);that.changed = false;});
+        }
+    };
+
+    this.languageBtn = function() {
+        document.getElementById("languageselector").style.display = "";
+    };
+
+    this.trySelect = function(x, y) {		
         var scale = RenderEngine.getScale();
 		var absX = x + RenderEngine.getOffsetX() * scale + RenderEngine.getSize().width / 2;
 		var absY = y + RenderEngine.getOffsetY() * scale + RenderEngine.getSize().height / 2;
@@ -287,29 +301,15 @@ function WebUI_CWebUI() {
             }
         }
 		if (absX > 10 && absX < 90) {
-			if (absY > 10 && absY < 40) {
-			    listGraphs(that.openGraph, that.printError);
-				return;
-			}
-			if (absY > 50 && absY < 80) {
-				if (that.changed == true) {
-					WebUI.prompt("Save: Please enter graph name", WebUI.graphName,
-                        function(name) {
-					        if (name == null) {
-						        console.log("Abortion");
-						        return;
-					        }
-					        WebUI.graphName = name;
-					        WebUI.saveGraph(WebUI.graphName);
-					        that.changed = false;
-                        });
-				}
-				return;
-			}
-			if (absY > 90 && absY < 120) {
-                document.getElementById("languageselector").style.display = "";
-				return;
-			}
+			//if (absY > 10 && absY < 40) {
+			//	return;
+			//}
+			//if (absY > 50 && absY < 80) {
+			//	return;
+			//}
+			//if (absY > 90 && absY < 120) {
+			//	return;
+			//}
 
 			if (absY > 130 && absY < 160) {
 				var classes = {};

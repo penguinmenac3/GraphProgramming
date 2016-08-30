@@ -104,9 +104,6 @@ function WebUI_CKeyListener() {
 			pos.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
 			pos.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 		}
-		var canv_pos = RenderEngine.getCanvasPosition();
-		pos.x -= canv_pos.x;
-		pos.y -= canv_pos.y;
         
         if (typeof(pos.x) === "undefined" || typeof(pos.y) === "undefined" || pos.x == 0 || pos.y == 0 || isNaN(pos.x) || isNaN(pos.y)) {
             for (var i = 0; i < e.touches.length; i++) {
@@ -122,6 +119,9 @@ function WebUI_CKeyListener() {
             lastPos.x = pos.x;
             lastPos.y = pos.y;
         }
+		var canv_pos = RenderEngine.getCanvasPosition();
+		pos.x -= canv_pos.x;
+		pos.y -= canv_pos.y;
 		return pos;
 	}
 

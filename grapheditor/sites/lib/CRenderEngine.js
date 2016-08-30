@@ -680,9 +680,9 @@ function WebUI_CRenderEngine() {
 	}
 
 	function renderActionButtons() {
-		renderButton("LOAD", 50, 25, colorStructureNode);
-		renderButton("SAVE", 50, 65, colorStructureNode);
-		renderButton("LANGUAGE", 50, 105, colorStructureNode);
+		//renderButton("LOAD", 50, 25, colorStructureNode);
+		//renderButton("SAVE", 50, 65, colorStructureNode);
+		//renderButton("LANGUAGE", 50, 105, colorStructureNode);
 		renderButton("NEW NODE", 50, 145, colorAlgorithmNode);
 		renderButton("DELETE", 50, 185, colorOutputNode);
 		//renderButton("RUN", 50, 225, "dimgray");
