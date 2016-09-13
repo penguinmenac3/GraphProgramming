@@ -273,7 +273,7 @@ function WebUI_CWebUI() {
 		var absX = x + RenderEngine.getOffsetX() * scale + RenderEngine.getSize().width / 2;
 		var absY = y + RenderEngine.getOffsetY() * scale + RenderEngine.getSize().height / 2;
         var canvasSize = RenderEngine.getSize();
-        if (absX < canvasSize.width - 10 && absX > canvasSize.width - 90) {
+        if (absX < canvasSize.width - 10 && absX > canvasSize.width - 50) {
             if (absY > 10 && absY < 40) {
 				RenderEngine.changeScale(-0.2);
 				return;
@@ -282,15 +282,6 @@ function WebUI_CWebUI() {
 				RenderEngine.changeScale(0.2);
 				return;
 			}
-            if (absY > 90 && absY < 120) {
-                RenderEngine.resetScale();
-                return;
-            }
-            if (absY > 130 && absY < 160) {
-                RenderEngine.resetScale();
-                RenderEngine.resetOffset();
-                return;
-            }
             if (absY > RenderEngine.getSize().height / 2 - 15 && absY < RenderEngine.getSize().height / 2 + 15) {
                 if (RenderEngine.showInfo) {
                     showInfo();
@@ -300,7 +291,7 @@ function WebUI_CWebUI() {
                 return;
             }
         }
-		if (absX > 10 && absX < 90) {
+		if (absX > 10 && absX < 50) {
 			//if (absY > 10 && absY < 40) {
 			//	return;
 			//}
@@ -311,7 +302,7 @@ function WebUI_CWebUI() {
 			//	return;
 			//}
 
-			if (absY > 130 && absY < 160) {
+			if (absY > 10 && absY < 40) {
 				var classes = {};
 
 				that.nodes.forEach(function(node) {
@@ -357,7 +348,7 @@ function WebUI_CWebUI() {
                 document.getElementById("nodeselector").style.display = "";
 				return;
 			}
-			if (absY > 170 && absY < 200) {
+			if (absY > 50 && absY < 80) {
                 that.printErrorTitled("Hint","Drop a node here to delete it.");
 				return;
 			}
@@ -756,7 +747,7 @@ return myNode
 		    	that.selectedNode.y = y / scale + moveOffsetY / scale;
                 RenderEngine.setDirty();
 
-			    if (absX > 10 && absX < 90 && absY > 170 && absY < 200) {
+			    if (absX > 10 && absX < 50 && absY > 50 && absY < 80) {
 			    	for (var connection in that.selectedNode.inputs) {
   			    		if (that.selectedNode.inputs.hasOwnProperty(connection)) {
 			    			updateGraph(that.selectedNode, null, connection, null, true);

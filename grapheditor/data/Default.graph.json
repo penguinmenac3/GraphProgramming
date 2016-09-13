@@ -13,7 +13,7 @@
 			"heat": 1,
 			"x": 0,
 			"y": 102,
-			"running": false
+			"running": 18
 		},
 		{
 			"name": "s6iIH",
@@ -28,7 +28,7 @@
 			"heat": 1,
 			"x": -134,
 			"y": -126,
-			"running": false
+			"running": 6
 		},
 		{
 			"name": "z14te",
@@ -43,7 +43,7 @@
 			"heat": 1,
 			"x": 117,
 			"y": -128,
-			"running": false
+			"running": 10
 		},
 		{
 			"name": "Cmjdr",
@@ -61,7 +61,7 @@
 			"heat": 1,
 			"x": 0,
 			"y": -13,
-			"running": false
+			"running": 14
 		}
 	],
 	"connections": [

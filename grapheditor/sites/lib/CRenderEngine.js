@@ -680,35 +680,27 @@ function WebUI_CRenderEngine() {
 	}
 
 	function renderActionButtons() {
-		//renderButton("LOAD", 50, 25, colorStructureNode);
-		//renderButton("SAVE", 50, 65, colorStructureNode);
-		//renderButton("LANGUAGE", 50, 105, colorStructureNode);
-		renderButton("NEW NODE", 50, 145, colorAlgorithmNode);
-		renderButton("DELETE", 50, 185, colorOutputNode);
-		//renderButton("RUN", 50, 225, "dimgray");
-		//renderButton("START", 50, 265, colorInputNode);
-		//renderButton("KILL", 50, 305, colorOutputNode);
+		renderButton("NEW", 30, 25, colorAlgorithmNode);
+		renderButton("DEL", 30, 65, colorOutputNode);
         
-		renderButton("ZOOM OUT", canvas.width - 50, 25, colorStructureNode);
-		renderButton("ZOOM IN", canvas.width - 50, 65, colorStructureNode);
-		renderButton("RESET ZOOM", canvas.width - 50, 105, colorOutputNode);
-		renderButton("RESET VIEW", canvas.width - 50, 145, colorOutputNode);
+		renderButton("-", canvas.width - 30, 25, colorStructureNode);
+		renderButton("+", canvas.width - 30, 65, colorStructureNode);
         
         if (that.showInfo) {
-		  renderButton("< SHOW", canvas.width - 50, canvas.height / 2, colorInputNode);
+		  renderButton("<", canvas.width - 30, canvas.height / 2, colorInputNode);
         } else {
-		  renderButton("> HIDE", canvas.width - 50, canvas.height / 2, colorOutputNode);
+		  renderButton(">", canvas.width - 30, canvas.height / 2, colorOutputNode);
         }
         
         if (hasParent) {
-            renderButton("BACK", 50, 385, "dimgray");
+            renderButton("BACK", 30, 385, "dimgray");
         }
 	}
 
 	function renderButton(text, x, y, color) {
 		ctx.beginPath();
 		ctx.fillStyle = color;
-		ctx.rect(x - 40, y -15, 80, 30);
+		ctx.rect(x - 20, y -15, 40, 30);
 		ctx.fill();
 
 		ctx.font = "12px 'Helvetica'";
