@@ -27,6 +27,16 @@
 	    document.getElementById('pagestyle').setAttribute('href', "###REPLACE###" + theme + ".css");
         WebUI.setTheme(theme);
         localStorage.theme = theme;
+        if (theme == "dark") {
+          document.getElementById('navbar-container').className += " navbar-inverse";
+          document.getElementById('dark_btn').style.display = "none";
+          document.getElementById('light_btn').style.display = "";
+        }
+        if (theme == "light") {
+          document.getElementById("navbar-container").className = document.getElementById("navbar-container").className.replace( /(?:^|\s)navbar-inverse(?!\S)/g , '' );
+          document.getElementById('light_btn').style.display = "none";
+          document.getElementById('dark_btn').style.display = "";
+        }
     }
     function initialize() {
         if (localStorage.graph) {
@@ -52,7 +62,7 @@
  </head>
  <!-- Use the Script inside the body onload to create the webui -->
  <body onload="window.setTimeout(initialize, 1000);" onresize="">
-   <nav class="navbar-fluid navbar-default navbar-fixed-top">
+   <nav id="navbar-container" class="navbar-fluid navbar-default navbar-fixed-top">
      <div class="container">
        <div class="navbar-header">
          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" area-expanded="false" area-controls="navbar" >
@@ -61,22 +71,26 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
          </button>
-         <p class="navbar-brand">Graph Prog.</p>
-         <p class="navbar-text">
-           <span id="current_graph">Default</span>
-            <button id="startbtn" class='button algorithmnode right' onclick='WebUI.startDebug()'>RUN (<span id="current_language">Python</span>)</button>
-            <button id="deploybtn" class='button inputnode right' style="display:none" onclick='WebUI.startDebug()'>DEPLOY</button>
-            <button id="restartbtn" class='button algorithmnode right' style="display:none" onclick='WebUI.restartDebug()'>RESTART</button>
-            <button id="killbtn" class='button outputnode right' style="display:none" onclick='WebUI.killDebug()'>KILL</button>
-         </p>
+         <p class="navbar-brand">Graph Programming</p>
        </div>
-       <div id="navbar" data-role="panel" data-position="left" data-display="overlay" data-theme="b" class="menu navbar-collapse collapse">
-         <button id="load_btn" class="button-lg structurenode" onclick="WebUI.loadBtn();">LOAD</button>
-         <button id="save_btn" class="button-lg structurenode" onclick="WebUI.saveBtn();">SAVE</button>
-         <button id="language_btn" class="button-lg structurenode" onclick="WebUI.languageBtn();">LANGUAGE</button>
-         <button id="light_btn" class="buttonlight button-lg" onclick="swapTheme('light');">Switch Theme (light)</button>
-         <button id="dark_btn"  class="buttondark button-lg" onclick="swapTheme('dark');">Switch Theme (dark)</button>
-         <button id="dev_btn" class="buttondev button-lg" onclick="toggleDev();">DEV MODE</button>
+       <div id="navbar" data-role="panel" data-position="left" data-display="overlay" data-theme="b" class="menu navbar-collapse collapse right">
+         <ul class="nav navbar-nav">
+           <li class="dropdown">
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Graph: <span id="current_graph">Default</span><span class="caret"></span></a>
+             <ul class="dropdown-menu">
+               <li><a id="load_btn" onclick="WebUI.loadBtn();">LOAD</a></li>
+               <li><a id="save_btn" onclick="WebUI.saveBtn();">SAVE</a></li>
+             </ul>
+           </li>
+           <li><a id="startbtn" class='algorithmnode' onclick='WebUI.startDebug()'>RUN (<span id="current_language">Python</span>)</a></li>
+           <li><a id="deploybtn" class='inputnode' style="display:none" onclick='WebUI.startDebug()'>DEPLOY</a></li>
+           <li><a id="restartbtn" class='algorithmnode' style="display:none" onclick='WebUI.restartDebug()'>RESTART</a></li>
+           <li><a id="killbtn" class='outputnode' style="display:none" onclick='WebUI.killDebug()'>KILL</a></li>
+           <li><a id="language_btn" class="structurenode" onclick="WebUI.languageBtn();">LANGUAGE</a></li>
+           <li><a id="light_btn" class="buttonlight" onclick="swapTheme('light');">Switch Theme (light)</a></li>
+           <li><a id="dark_btn"  class="buttondark" onclick="swapTheme('dark');">Switch Theme (dark)</a></li>
+           <li><a id="dev_btn" class="buttondev" onclick="toggleDev();">DEV MODE</a></li>
+         </ul>
        </div>
      </div>
    </nav>

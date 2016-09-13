@@ -23,6 +23,8 @@ import json
 # or: from autobahn.asyncio.websocket import WebSocketServerProtocol
 
 PORT_NUMBER = 8088
+WS_PORT_NUMBER = 23352
+HOST = "127.0.0.1"
 execProcess = None
 result = None
 SERVER_URL = sys.argv[1] if len(sys.argv) == 2 else ""
@@ -125,11 +127,11 @@ class MyServerProtocol(WebSocketServerProtocol):
 
 
 def debugWS():
-    factory = WebSocketServerFactory(u"ws://192.168.43.157:9000")
+    factory = WebSocketServerFactory(u"ws://"+HOST+":"+str(WS_PORT_NUMBER))
     factory.protocol = MyServerProtocol
     # factory.setProtocolOptions(maxConnections=2)
 
-    reactor.listenTCP(9000, factory)
+    reactor.listenTCP(WS_PORT_NUMBER, factory)
     reactor.run()
 
 
