@@ -35,11 +35,14 @@ function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600})
 
-  // and load the index.html of the app.
-  mainWindow.loadURL("http://127.0.0.1:8088")
-  
   // Hide menu
   mainWindow.setMenu(null);
+
+  // Maximize the window
+  mainWindow.maximize();
+  
+  // and load the index.html of the app.
+  mainWindow.loadURL("http://127.0.0.1:8088")
 
   // Open the DevTools.
   //mainWindow.webContents.openDevTools()

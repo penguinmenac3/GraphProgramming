@@ -8,18 +8,9 @@
   <meta name="mobile-web-app-capable" content="yes">
   
   <link rel="stylesheet" href="###REPLACE###css/bootstrap.min.css">
-  <script type="text/javascript" src="###REPLACE###lib/jquery.min.js"></script>
-  <script type="text/javascript" src="###REPLACE###lib/helpers.js"></script>
-  <script type="text/javascript" src="###REPLACE###lib/vars.js"></script>
-  <script type="text/javascript" src="###REPLACE###lib/CDebugger.js"></script>
-  <script type="text/javascript" src="###REPLACE###lib/CRenderEngine.js"></script>
-  <script type="text/javascript" src="###REPLACE###lib/CKeyListener.js"></script>
-  <script type="text/javascript" src="###REPLACE###lib/CWebUI.js"></script>
   
   <link rel="stylesheet" href="###REPLACE###lib/codemirror-5.13.2/lib/codemirror.css">
   <link rel="stylesheet" href="###REPLACE###lib/codemirror-5.13.2/theme/lesser-dark.css">
-  <script src="###REPLACE###lib/codemirror-5.13.2/lib/codemirror.js"></script>
-  <script src="###REPLACE###lib/codemirror-5.13.2/mode/python/python.js"></script>
   <link id="pagestyle" rel="stylesheet" type="text/css" href="###REPLACE###light.css">
   
   <script type="text/javascript">
@@ -147,5 +138,20 @@
      </div>
      </div>
  </body>
- <script src="###REPLACE###lib/bootstrap.min.js"></script>
+ <!-- Insert this line above script imports  -->
+ <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+ <script type="text/javascript" src="###REPLACE###lib/jquery.min.js"></script>
+ <script type="text/javascript" src="###REPLACE###lib/codemirror-5.13.2/lib/codemirror.js"></script>
+ <script type="text/javascript" src="###REPLACE###lib/codemirror-5.13.2/mode/python/python.js"></script>
+ <script type="text/javascript" src="###REPLACE###lib/bootstrap.min.js"></script>
+ <script type="text/javascript" src="###REPLACE###lib/helpers.js"></script>
+ <script type="text/javascript" src="###REPLACE###lib/vars.js"></script>
+ <script type="text/javascript" src="###REPLACE###lib/CDebugger.js"></script>
+ <script type="text/javascript" src="###REPLACE###lib/CRenderEngine.js"></script>
+ <script type="text/javascript" src="###REPLACE###lib/CKeyListener.js"></script>
+ <script type="text/javascript" src="###REPLACE###lib/CWebUI.js"></script>
+
+ <!-- Insert this line after script imports -->
+ <script>if (window.module) module = window.module;</script>
 </html>
