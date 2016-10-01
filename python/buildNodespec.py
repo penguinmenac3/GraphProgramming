@@ -23,6 +23,11 @@ def try_load(name, verbose, i, total):
             print("Syntax or import error at: " + name)
             print(e)
         return False, (name, e)
+    except:
+        e = sys.exc_info()[0]
+        print("Unknown Error")
+        print(e)
+        return False, (name, e)
     try:
         return True, module.Node(False, []).toJson()
     except (AttributeError, TypeError) as e:
