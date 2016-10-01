@@ -291,7 +291,10 @@ function WebUI_CRenderEngine() {
         that.setDirty();
 	};*/
 
-	function renderDot(px, py, marked, fillStyle, name, heat, min_heat, max_heat, output) {        
+	function renderDot(px, py, marked, fillStyle, name, heat, min_heat, max_heat, output) {
+		if (WebUI.isConMode()) {
+			return;
+		}
 		ctx.beginPath();
 		ctx.fillStyle = fillStyle;
 		if (heat > 0) {
@@ -337,12 +340,26 @@ function WebUI_CRenderEngine() {
 	}
 
 	function renderDotConnection(px1, py1, px2, py2) {
-		ctx.beginPath();
-		ctx.lineWidth="2";
-		ctx.strokeStyle=colorConnector;
-		ctx.moveTo(renderOffsetX * scale + px1 * scale + width/2,renderOffsetY * scale + py1 * scale + height/2);
-		ctx.lineTo(renderOffsetX * scale + px2 * scale + width/2,renderOffsetY * scale + py2 * scale + height/2);
-		ctx.stroke();
+		if (WebUI.isConMode()) {
+			ctx.beginPath();
+			ctx.strokeStyle = colorConnector;
+			ctx.moveTo(renderOffsetX * scale + px1 * scale + width / 2, renderOffsetY * scale + py1 * scale + height / 2);
+
+			var maxArrowWidth = Math.max(2, Math.floor(10 * scale));
+			for (var i = 0; i < maxArrowWidth; i++) {
+				ctx.lineWidth = String(maxArrowWidth+1-i);
+				t = i / (maxArrowWidth-1.0);
+				ctx.lineTo(renderOffsetX * scale + (1-t) * px1 * scale + t * px2 * scale + width / 2, renderOffsetY * scale + (1-t) * py1 * scale + t * py2 * scale + height / 2);
+				ctx.stroke();
+			}
+		} else {
+			ctx.beginPath();
+			ctx.lineWidth="2";
+			ctx.strokeStyle=colorConnector;
+			ctx.moveTo(renderOffsetX * scale + px1 * scale + width/2,renderOffsetY * scale + py1 * scale + height/2);
+			ctx.lineTo(renderOffsetX * scale + px2 * scale + width/2,renderOffsetY * scale + py2 * scale + height/2);
+			ctx.stroke();
+		}
 	}
 
 	function renderNodeText(text, x, y, offsetX, offsetY, color, size) {
@@ -577,6 +594,10 @@ function WebUI_CRenderEngine() {
 	function renderConnection(graph, connection) {
 		pos1 = that.getNodeOutputPosition(graph, connection.input.node, connection.input.output);
 		pos2 = that.getNodeInputPosition(graph, connection.output.node, connection.output.input);
+		if (WebUI.isConMode()) {
+			pos1 = that.getNodePosition(graph, connection.input.node);
+			pos2 = that.getNodePosition(graph, connection.output.node);
+		}
 		renderDotConnection(pos1.x, pos1.y, pos2.x, pos2.y);
 	}
 
@@ -682,6 +703,11 @@ function WebUI_CRenderEngine() {
 	function renderActionButtons() {
 		renderButton("NEW", 30, 25, colorAlgorithmNode);
 		renderButton("DEL", 30, 65, colorOutputNode);
+		if (WebUI.isConMode()) {
+			renderButton("EDIT", 30, 105, colorOutputNode);
+		} else {
+			renderButton("EDIT", 30, 105, colorInputNode);
+		}
         
 		renderButton("-", canvas.width - 30, 25, colorStructureNode);
 		renderButton("+", canvas.width - 30, 65, colorStructureNode);

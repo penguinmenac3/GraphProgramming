@@ -10,6 +10,7 @@ function WebUI_CWebUI() {
     var codeMirror = null;
     var codeTheme = "default";
     var promptCallback = null;
+    var conMode = true;
     this.debugger = null;
     this.currentNode = null;
 	this.keyboard_input_state = true;
@@ -26,6 +27,10 @@ function WebUI_CWebUI() {
 	this.startPos = null;
 	this.clickNode = null;
     this.graphRunning = false;
+
+    this.isConMode = function() {
+        return conMode;
+    };
 	
 	this.start = function(fullscreen, container, initialGraph) {
 		/* check if dependencies are already existing */
@@ -298,9 +303,11 @@ function WebUI_CWebUI() {
 			//if (absY > 50 && absY < 80) {
 			//	return;
 			//}
-			//if (absY > 90 && absY < 120) {
-			//	return;
-			//}
+			if (absY > 90 && absY < 120) {
+				conMode = !conMode;
+				RenderEngine.setDirty();
+				return;
+			}
 
 			if (absY > 10 && absY < 40) {
 				var classes = {};
@@ -399,19 +406,21 @@ function WebUI_CWebUI() {
                 moved = false;
 				return;
 			}
-			var input = tryFindInput(node, x, y);
-			if (input != null) {
-				that.selectedNode = node;
-				that.selectedInputConnection = input;
-				updateGraph(that.selectedNode, null, that.selectedInputConnection, null);
-				return;
-			}
-			var output = tryFindOutput(node, x, y);
-			if (output != null) {
-				that.selectedNode = node;
-				that.selectedOutputConnection = output;
-				updateGraph(null, that.selectedNode, null, that.selectedOutputConnection);
-				return;
+			if (!that.isConMode()) {
+				var input = tryFindInput(node, x, y);
+				if (input != null) {
+					that.selectedNode = node;
+					that.selectedInputConnection = input;
+					updateGraph(that.selectedNode, null, that.selectedInputConnection, null);
+					return;
+				}
+				var output = tryFindOutput(node, x, y);
+				if (output != null) {
+					that.selectedNode = node;
+					that.selectedOutputConnection = output;
+					updateGraph(null, that.selectedNode, null, that.selectedOutputConnection);
+					return;
+				}
 			}
 		});
 	};
