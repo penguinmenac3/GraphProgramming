@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=GraphEditor
+Comment=Graph Programming IDE
+Icon=/home/<USER>/checkout/GraphProgramming/images/icon.png
+Exec=/home/<USER>/checkout/GraphProgramming/editor.sh
+Terminal=false
+Categories=Development;IDE;Python;C++;Lua
