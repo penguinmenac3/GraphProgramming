@@ -1,12 +1,4 @@
 [{
-    "name": "RcCar",
-    "code": "privatelib.raspberrypi.rccar",
-    "inputs": {"turn": "Number", "speed": "Number"},
-    "outputs": {},
-    "args": {"maxSpeed": 0.5},
-    "desc": "Set turn and speed of rccar."
-},
-{
     "name": "Ultrasonic Sensor",
     "code": "privatelib.raspberrypi.ultrasonicsensor",
     "inputs": {"trigger": "Double"},
