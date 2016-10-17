@@ -25,7 +25,11 @@ class Node(base.Node):
             #print(cnt)
             #sys.stdout.flush()
             rect = cv2.minAreaRect(cnt)
-            box = cv2.boxPoints(rect)
+            box = None
+            if cv2.__version__.startswith("2.4"):
+            	box = cv2.cv.BoxPoints(rect)
+            else:
+            	box = cv2.boxPoints(rect)
             box = np.int0(box)
             result.append(box)
 

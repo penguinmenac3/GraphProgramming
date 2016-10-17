@@ -20,7 +20,9 @@ class Node(base.Node):
 
         img = value["img"]
         #gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        #(cnts, _) = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        im2, cnts, hierarchy = cv2.findContours(img,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+        if cv2.__version__.startswith("2.4"):
+        	(cnts, _) = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        else:
+        	im2, cnts, hierarchy = cv2.findContours(img,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 
         return {"result": cnts}

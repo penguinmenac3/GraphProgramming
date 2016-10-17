@@ -1,3 +1,4 @@
+import sys
 import cv2
 
 try:
@@ -18,11 +19,15 @@ class Node(base.Node):
 
     def tick(self, value):
         if self.sift is None:
-            self.sift = cv2.xfeatures2d.SIFT_create()
-            #self.sift = cv2.xfeatures2d.SURF_create()
+        	if cv2.__version__.startswith("2.4"):
+        		print("Using fallback ORB instead of SIFT")
+        		sys.stdout.flush()
+        		self.sift = cv2.ORB()
+        	else:
+        		self.sift = cv2.xfeatures2d.SIFT_create()
+        	#self.sift = cv2.xfeatures2d.SURF_create()
         img = value["img"]
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
         (kps, descs) = self.sift.detectAndCompute(gray, None)
 
         return {"img": img, "features": kps, "descs": descs}

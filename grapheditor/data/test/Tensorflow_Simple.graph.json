@@ -1,0 +1,753 @@
+{
+	"connections": [
+		{
+			"input": {
+				"node": "WgF50",
+				"output": "result"
+			},
+			"output": {
+				"input": "val",
+				"node": "cPfzT"
+			}
+		},
+		{
+			"input": {
+				"node": "cPfzT",
+				"output": "1"
+			},
+			"output": {
+				"input": "y_",
+				"node": "7Ffys"
+			}
+		},
+		{
+			"input": {
+				"node": "oEC9E",
+				"output": "result"
+			},
+			"output": {
+				"input": "val",
+				"node": "YQEUu"
+			}
+		},
+		{
+			"input": {
+				"node": "YQEUu",
+				"output": "right"
+			},
+			"output": {
+				"input": "y",
+				"node": "7Ffys"
+			}
+		},
+		{
+			"input": {
+				"node": "apxKZ",
+				"output": "2"
+			},
+			"output": {
+				"input": "x",
+				"node": "biLps"
+			}
+		},
+		{
+			"input": {
+				"node": "Gz2n7",
+				"output": "session"
+			},
+			"output": {
+				"node": "jiuUZ",
+				"input": "trigger"
+			}
+		},
+		{
+			"input": {
+				"node": "7Ffys",
+				"output": "result"
+			},
+			"output": {
+				"node": "f4F2E",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "apxKZ",
+				"output": "1"
+			},
+			"output": {
+				"node": "K5loZ",
+				"input": "x"
+			}
+		},
+		{
+			"input": {
+				"node": "f4F2E",
+				"output": "train_step"
+			},
+			"output": {
+				"node": "K5loZ",
+				"input": "train_step"
+			}
+		},
+		{
+			"input": {
+				"node": "cPfzT",
+				"output": "2"
+			},
+			"output": {
+				"node": "K5loZ",
+				"input": "y_"
+			}
+		},
+		{
+			"input": {
+				"node": "jiuUZ",
+				"output": "loop"
+			},
+			"output": {
+				"node": "DMKcw",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "DMKcw",
+				"output": "left"
+			},
+			"output": {
+				"node": "K5loZ",
+				"input": "session"
+			}
+		},
+		{
+			"input": {
+				"node": "K5loZ",
+				"output": "result"
+			},
+			"output": {
+				"node": "jiuUZ",
+				"input": "trigger"
+			}
+		},
+		{
+			"input": {
+				"node": "biLps",
+				"output": "result"
+			},
+			"output": {
+				"node": "0rLzI",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "jiuUZ",
+				"output": "done"
+			},
+			"output": {
+				"node": "wbQmp",
+				"input": "a"
+			}
+		},
+		{
+			"input": {
+				"node": "wbQmp",
+				"output": "a"
+			},
+			"output": {
+				"node": "biLps",
+				"input": "trigger"
+			}
+		},
+		{
+			"input": {
+				"node": "YQEUu",
+				"output": "left"
+			},
+			"output": {
+				"node": "wbQmp",
+				"input": "b"
+			}
+		},
+		{
+			"input": {
+				"node": "vQxFu",
+				"output": "mnist"
+			},
+			"output": {
+				"node": "84WHZ",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "84WHZ",
+				"output": "right"
+			},
+			"output": {
+				"node": "paEfY",
+				"input": "mnist"
+			}
+		},
+		{
+			"input": {
+				"node": "paEfY",
+				"output": "images"
+			},
+			"output": {
+				"node": "biLps",
+				"input": "x_values"
+			}
+		},
+		{
+			"input": {
+				"node": "paEfY",
+				"output": "labels"
+			},
+			"output": {
+				"node": "biLps",
+				"input": "y_values"
+			}
+		},
+		{
+			"input": {
+				"node": "CpGzA",
+				"output": "batch"
+			},
+			"output": {
+				"node": "K5loZ",
+				"input": "batch"
+			}
+		},
+		{
+			"input": {
+				"node": "DMKcw",
+				"output": "right"
+			},
+			"output": {
+				"node": "CpGzA",
+				"input": "trigger"
+			}
+		},
+		{
+			"input": {
+				"node": "84WHZ",
+				"output": "left"
+			},
+			"output": {
+				"node": "CpGzA",
+				"input": "mnist"
+			}
+		},
+		{
+			"input": {
+				"node": "cPfzT",
+				"output": "3"
+			},
+			"output": {
+				"node": "9dvgD",
+				"input": "y_"
+			}
+		},
+		{
+			"input": {
+				"node": "wbQmp",
+				"output": "b"
+			},
+			"output": {
+				"node": "9dvgD",
+				"input": "y"
+			}
+		},
+		{
+			"input": {
+				"node": "9dvgD",
+				"output": "y_"
+			},
+			"output": {
+				"node": "biLps",
+				"input": "y_"
+			}
+		},
+		{
+			"input": {
+				"node": "9dvgD",
+				"output": "accuracy"
+			},
+			"output": {
+				"node": "biLps",
+				"input": "accuracy"
+			}
+		},
+		{
+			"input": {
+				"node": "Nzym2",
+				"output": "result"
+			},
+			"output": {
+				"node": "8vkEp",
+				"input": "session"
+			}
+		},
+		{
+			"input": {
+				"node": "8vkEp",
+				"output": "graph"
+			},
+			"output": {
+				"node": "oEC9E",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "8vkEp",
+				"output": "session"
+			},
+			"output": {
+				"node": "Gz2n7",
+				"input": "session"
+			}
+		},
+		{
+			"input": {
+				"node": "IZ7uj",
+				"output": "result"
+			},
+			"output": {
+				"node": "apxKZ",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "apxKZ",
+				"output": "3"
+			},
+			"output": {
+				"node": "8vkEp",
+				"input": "graph"
+			}
+		}
+	],
+	"nodes": [
+		{
+			"args": {},
+			"code": "extlib.tensorflow.softmax",
+			"desc": "Tensorflow softmax node.",
+			"displayname": "softmax",
+			"inputs": {
+				"val": "Tensor"
+			},
+			"name": "oEC9E",
+			"outputs": {
+				"result": "Tensor"
+			},
+			"x": 272,
+			"y": -65,
+			"heat": 1,
+			"running": 0
+		},
+		{
+			"args": {
+				"batch_size": null,
+				"dimension": 10
+			},
+			"code": "extlib.tensorflow.placeholder",
+			"desc": "Output placeholder",
+			"displayname": "y_",
+			"inputs": {},
+			"name": "WgF50",
+			"outputs": {
+				"result": "Object"
+			},
+			"running": 0,
+			"x": 805,
+			"y": 301,
+			"heat": 1
+		},
+		{
+			"args": {},
+			"code": "extlib.tensorflow.session",
+			"desc": "A tensorflow session.",
+			"displayname": "Session",
+			"inputs": {},
+			"name": "Nzym2",
+			"outputs": {
+				"result": "TFSession"
+			},
+			"running": 0,
+			"x": 419.3959252628279,
+			"y": -330.5656075183256,
+			"heat": 1
+		},
+		{
+			"args": {
+				"code": "result = value[\"val\"]"
+			},
+			"code": "extlib.tensorflow.initializevars",
+			"desc": "Initialize vars in session.",
+			"displayname": "Initialize Variables",
+			"inputs": {
+				"session": "TFSession"
+			},
+			"name": "Gz2n7",
+			"outputs": {
+				"session": "TFSession"
+			},
+			"running": 0,
+			"x": 33,
+			"y": -104,
+			"heat": 1
+		},
+		{
+			"args": {
+				"code": "result = value[\"val\"]"
+			},
+			"code": "extlib.tensorflow.crossentropy",
+			"desc": "Calculate the cross entropy",
+			"displayname": "Cross entropy",
+			"inputs": {
+				"y": "Tensor",
+				"y_": "Tensor"
+			},
+			"name": "7Ffys",
+			"outputs": {
+				"result": "Tensor"
+			},
+			"x": 595,
+			"y": 140,
+			"heat": 1,
+			"running": 0
+		},
+		{
+			"args": {
+				"step_length": 0.01
+			},
+			"code": "extlib.tensorflow.gradientdescentoptimizer",
+			"desc": "Gradient Descent Optimizer",
+			"displayname": "GD Optimizer",
+			"inputs": {
+				"val": "Tensor"
+			},
+			"name": "f4F2E",
+			"outputs": {
+				"train_step": "Tensor"
+			},
+			"x": 413,
+			"y": 296,
+			"heat": 1,
+			"running": 0
+		},
+		{
+			"args": {
+				"n": 1000
+			},
+			"code": "stdlib.structures.for",
+			"desc": "Do n times.",
+			"displayname": "For",
+			"inputs": {
+				"trigger": "Object"
+			},
+			"loopback": "trigger",
+			"name": "jiuUZ",
+			"outputs": {
+				"done": "Object",
+				"loop": "Object"
+			},
+			"x": -108,
+			"y": 35,
+			"heat": 1004,
+			"running": 0
+		},
+		{
+			"args": "",
+			"code": "stdlib.default.splitflow5",
+			"desc": "Splits the flow.",
+			"displayname": "Splitflow 5",
+			"inputs": {
+				"val": "Object"
+			},
+			"name": "apxKZ",
+			"outputs": {
+				"1": "Object",
+				"2": "Object",
+				"3": "Object",
+				"4": "Object",
+				"5": "Object"
+			},
+			"running": 0,
+			"x": -7,
+			"y": -382,
+			"heat": 1
+		},
+		{
+			"args": "",
+			"code": "stdlib.default.splitflow5",
+			"desc": "Splits the flow.",
+			"displayname": "Splitflow 5",
+			"inputs": {
+				"val": "Object"
+			},
+			"name": "cPfzT",
+			"outputs": {
+				"1": "Object",
+				"2": "Object",
+				"3": "Object",
+				"4": "Object",
+				"5": "Object"
+			},
+			"running": 0,
+			"x": 617,
+			"y": 480,
+			"heat": 1
+		},
+		{
+			"args": "",
+			"code": "stdlib.default.splitflow",
+			"desc": "Splits the flow.",
+			"displayname": "Splitflow 2",
+			"inputs": {
+				"val": "Object"
+			},
+			"name": "YQEUu",
+			"outputs": {
+				"left": "Object",
+				"right": "Object"
+			},
+			"x": 355,
+			"y": 87,
+			"heat": 1,
+			"running": 0
+		},
+		{
+			"args": {
+				"code": "result = value[\"val\"]"
+			},
+			"code": "extlib.tensorflow.evalaccuracy",
+			"desc": "eval the accuracy.",
+			"displayname": "eval accuracy",
+			"inputs": {
+				"accuracy": "Tensor",
+				"trigger": "Object",
+				"x": "Tensor",
+				"x_values": "Tensor",
+				"y_": "Tensor",
+				"y_values": "Tensor"
+			},
+			"name": "biLps",
+			"outputs": {
+				"result": "Number"
+			},
+			"x": -3.0465931833526056,
+			"y": 738.9794492368346,
+			"heat": 3,
+			"running": 14
+		},
+		{
+			"args": "",
+			"code": "stdlib.default.splitflow",
+			"desc": "Splits the flow.",
+			"displayname": "Splitflow 2",
+			"inputs": {
+				"val": "Object"
+			},
+			"name": "84WHZ",
+			"outputs": {
+				"left": "Object",
+				"right": "Object"
+			},
+			"running": 0,
+			"x": -274.1405469611576,
+			"y": 138.796109500628,
+			"heat": 1
+		},
+		{
+			"name": "IZ7uj",
+			"code": "extlib.tensorflow.placeholder",
+			"inputs": {},
+			"outputs": {
+				"result": "Object"
+			},
+			"args": {
+				"dimension": 784,
+				"batch_size": null
+			},
+			"desc": "Input Placeholder",
+			"displayname": "x",
+			"heat": 1,
+			"running": 0,
+			"x": -26,
+			"y": -587
+		},
+		{
+			"name": "K5loZ",
+			"code": "extlib.tensorflow.train",
+			"inputs": {
+				"x": "Tensor",
+				"session": "TFSession",
+				"train_step": "Tensor",
+				"y_": "Tensor",
+				"batch": "Tensor"
+			},
+			"outputs": {
+				"result": "Object"
+			},
+			"args": {},
+			"desc": "Executes a train step",
+			"displayname": "Train",
+			"heat": 1004,
+			"running": 0,
+			"x": 360.6794704861111,
+			"y": 446.3485966435185
+		},
+		{
+			"name": "DMKcw",
+			"code": "stdlib.default.splitflow",
+			"inputs": {
+				"val": "Object"
+			},
+			"outputs": {
+				"right": "Object",
+				"left": "Object"
+			},
+			"args": "",
+			"desc": "Splits the flow.",
+			"displayname": "Splitflow 2",
+			"heat": 1000,
+			"running": 0,
+			"x": 115.66257282807067,
+			"y": 89.94811491973226
+		},
+		{
+			"name": "0rLzI",
+			"code": "stdlib.system.print",
+			"inputs": {
+				"val": "String"
+			},
+			"outputs": {},
+			"args": "",
+			"desc": "Print input to console.",
+			"displayname": "Print",
+			"heat": 3,
+			"running": 18,
+			"x": 2.362958481688782,
+			"y": 888.5688271195932
+		},
+		{
+			"name": "wbQmp",
+			"code": "stdlib.structures.sync",
+			"inputs": {
+				"a": "Object",
+				"b": "Object"
+			},
+			"outputs": {
+				"a": "Object",
+				"b": "Object"
+			},
+			"args": {},
+			"desc": "Only pass if both are there.",
+			"displayname": "Sync",
+			"heat": 4,
+			"running": 0,
+			"x": -76,
+			"y": 410
+		},
+		{
+			"name": "vQxFu",
+			"code": "extlib.tensorflow.mnist",
+			"inputs": {},
+			"outputs": {
+				"mnist": "MNIST"
+			},
+			"args": {},
+			"desc": "Loads the mnist dataset",
+			"displayname": "MNIST",
+			"heat": 1,
+			"running": 0,
+			"x": -341,
+			"y": -44
+		},
+		{
+			"name": "paEfY",
+			"code": "extlib.tensorflow.mnisttest",
+			"inputs": {
+				"mnist": "MNIST"
+			},
+			"outputs": {
+				"images": "Tensor",
+				"labels": "Tensor"
+			},
+			"args": {
+				"code": "result = value[\"val\"]"
+			},
+			"desc": "Get test data from mnist.",
+			"displayname": "MNIST Test",
+			"heat": 1,
+			"running": 0,
+			"x": -276,
+			"y": 423
+		},
+		{
+			"name": "CpGzA",
+			"code": "extlib.tensorflow.mnistbatch",
+			"inputs": {
+				"trigger": "Object",
+				"mnist": "MNIST"
+			},
+			"outputs": {
+				"batch": "Tensor"
+			},
+			"args": {},
+			"desc": "Get the next batch from mnist",
+			"displayname": "Mnist Batch",
+			"heat": 670,
+			"running": 0,
+			"x": 122,
+			"y": 317
+		},
+		{
+			"name": "8vkEp",
+			"code": "extlib.tensorflow.linear",
+			"inputs": {
+				"graph": "Tensor",
+				"session": "TFSession"
+			},
+			"outputs": {
+				"graph": "Tensor",
+				"session": "TFSession"
+			},
+			"args": {
+				"in_dimension": 784,
+				"out_dimension": 10,
+				"stddev": 0.1
+			},
+			"desc": "A linear layer in a net.",
+			"displayname": "Linear Layer",
+			"heat": 1,
+			"running": 0,
+			"x": 189,
+			"y": -204
+		},
+		{
+			"name": "9dvgD",
+			"code": "extlib.tensorflow.accuracy",
+			"inputs": {
+				"y": "Tensor",
+				"y_": "Tensor"
+			},
+			"outputs": {
+				"y_": "Tensor",
+				"accuracy": "Tensor"
+			},
+			"args": {},
+			"desc": "Accuracy model.",
+			"displayname": "Accuracy",
+			"heat": 2,
+			"running": 0,
+			"x": 123,
+			"y": 578
+		}
+	]
+}

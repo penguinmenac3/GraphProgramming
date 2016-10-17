@@ -23,5 +23,9 @@ class Node(base.Node):
                 ind = x - rl/2 + y
                 if 0 <= ind < len(l):
                     result[x] += l[ind] * r[y]
+                if ind < 0:
+                  	result[x] += l[0] * r[y]
+                if ind >= len(l):
+                  	result[x] += l[len(l)-1] * r[y]
 
         return {"result": result}
