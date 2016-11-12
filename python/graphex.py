@@ -22,6 +22,7 @@ builtins.registry = {}
 builtins.graph = None
 builtins.registry_output = {}
 builtins.shutdown_hook = []
+builtins.is_cluster_server = False
 
 class GraphEx(object):
     def __init__(self, graph_path, verbose = False):
@@ -261,11 +262,14 @@ class GraphEx(object):
 if __name__ == "__main__":
     # Execute all graph paths passed as parameters.
     if len(sys.argv) < 2:
-        print("Usage: Pass graph json files to execute as parameters.")
+        print("Usage: python graphex.py <file.graph.json> [debug] [cluster] [args]")
     else:
         offset = 2
         if len(sys.argv) > offset and sys.argv[offset] == "debug":
             builtins.registry["debugger"] = debugger.Debugger()
+            offset += 1
+        if len(sys.argv) > offset and sys.argv[offset] == "cluster":
+            builtins.is_cluster_server = True
             offset += 1
         if len(sys.argv) > offset:
             builtins.registry = json.loads(" ".join(sys.argv[offset:]))

@@ -11,11 +11,19 @@ local utils = require("utils")
 debug = nil
 global_args = {}
 offset = 2
+is_cluster_server = false
 
-if not (arg[2] == nil) then
-  if arg[2] == "debug" then
+if not (arg[offset] == nil) then
+  if arg[offset] == "debug" then
     debug = require("debugger")
     offset = 3
+  end
+end
+
+if not(arg[offset] == nil) then
+  if arg[offset] == "cluster" then
+    is_cluster_server = true
+    offset = 4
   end
 end
 
