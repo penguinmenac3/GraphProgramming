@@ -8,11 +8,11 @@ function myNode.init(node)
   end
 end
 
-function myNode.spec(nod)
+function myNode.spec(node)
   node.name = "String Concat"
   node.inputs.left = "String"
   node.inputs.right = "String"
-  node.outputs.result = "Object"
+  node.outputs.result = "String"
   node.desc = "Concat left and right."
 end
 

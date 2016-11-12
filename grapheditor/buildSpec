@@ -7,7 +7,7 @@ if [ "Python" = $1 ]; then
 elif [ "Lua" = $1 ]; then
   cd ../lua
 
-  lua buildNodespec.lua $@
+  luajit buildNodespec.lua $@
 else
   echo "Unknown language."
 fi

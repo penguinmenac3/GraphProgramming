@@ -1,26 +1,10 @@
-try:
-    from ...stdlib import Node as base
-except ValueError:
-    from stdlib import Node as base
+def init(node, global_spec):
+    def tick(value):
+        return {}
+    node["tick"] = tick
 
-
-class Node(base.Node):
-    def __init__(self, verbose, args):
-        super(Node, self).__init__("Pass", "stdlib.default.pass", {},
-                                   {"in": "Object"},
-                                   {"out": "Object"},
-                                   "Pass the input to out.", verbose)
-        self.args = args
-
-    def tick(self, value):
-        result = {}
-        tag = None
-        if "tags" in value and "in" in value["tags"]:
-            tag = value["tags"]["in"]
-        
-        result = value["in"]
-        
-        if tag:
-            return {"out": result, "tags":{"out":tag}}
-        else:
-            return {"out": result}
+def spec(node):
+    node["name"] = "Pass"
+    node["inputs"]["in"] = "Object"
+    node["outputs"]["out"] = "Object"
+    node["desc"] = "Pass an object. Does nothing."

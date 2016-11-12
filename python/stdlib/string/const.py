@@ -1,15 +1,11 @@
-try:
-    from ...stdlib import Node as base
-except ValueError:
-    from stdlib import Node as base
+def init(node, global_state):
+    def tick(value):
+        return {"result": node["args"]}
 
+    node["tick"] = tick
 
-class Node(base.Node):
-    def __init__(self, verbose, args):
-        super(Node, self).__init__("String Constant", "stdlib.string.const", "Hello World!", {},
-                                   {"result": "String"},
-                                   "Pass the string arg as output.", verbose, True, False)
-        self.args = args
-
-    def tick(self, value):
-        return {"result": self.args}
+def spec(node):
+    node["name"] = "String Const"
+    node["outputs"]["result"] = "String"
+    node["args"] = "Hello"
+    node["desc"] = "Returns the arg on the output."

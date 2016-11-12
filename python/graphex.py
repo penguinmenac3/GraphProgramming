@@ -18,17 +18,27 @@ try:
 except ImportError:
     import __builtin__ as builtins
 
-builtins.registry = {}
-builtins.graph = None
-builtins.registry_output = {}
-builtins.shutdown_hook = []
-builtins.is_cluster_server = False
+class GraphExState(object):
+    def __init__(self):
+        self.shared_dict = {}
+        self.restricted_mode = False
+        self.graph = None
+        self.pubish = None
+        self.output = None
+        self.shutdown_hooks = []
 
 class GraphEx(object):
-    def __init__(self, graph_path, verbose = False):
+    def __init__(self, graph_path, state, verbose = False):
+        self.running = True
+        self.state = state
+        self.serial_mode = False
         self.nodes = {}
-        self.input_nodes = {}
+        self.queue_parallel = Queue()
+        self.queue_serial = Queue()
+        self.in_execution = {}
         self.lock = Lock()
+        self.input_nodes = {}
+        self.thread_pool = None
 
         # Open the graph and parse it as json.
         data = open(graph_path, 'r').read()
@@ -42,7 +52,7 @@ class GraphEx(object):
     def findAndCreateNodes(self, nodelist):
         # Empty nodes and input nodes list.
         self.nodes = {}
-        builtins.graph = self.nodes
+        self.state.graph = self.nodes
         self.input_nodes = {}
 
         # Load all nodes.
@@ -55,24 +65,25 @@ class GraphEx(object):
                 codeName = node["code"]
                 if self.verbose:
                     print("Importing %s" % codeName)
-                module = __import__("%s" % codeName, fromlist=["Node"])
+                module = __import__("%s" % codeName, fromlist=["init"])
             except ImportError:
                 module = None
                 raise ImportError("Cannot find implementation for node: " + node["code"])
 
             # Create node and add lists for connecting them.
-            currentNode = module.Node(self.verbose, node["args"])
-            currentNode.node_uid = node["name"]
-            currentNode.heat = 0
-            currentNode.nextNodes = []
-            currentNode.prevNodes = []
-            currentNode.ins = {}
-            currentNode.outs = {}
-            currentNode.inputBuffer = {"tags":{}}
+            module.init(node, state)
+            node["node_uid"] = node["name"]
+            node["heat"] = 0
+            node["main_thread"] = False
+            node["nextNodes"] = []
+            node["prevNodes"] = []
+            node["ins"] = {}
+            node["outs"] = {}
+            node["input_buffer"] = {}
 
             # Add the node to the internal lists for inputs and all nodes.
-            self.nodes[node["name"]] = currentNode
-            if self.nodes[node["name"]].isInput():
+            self.nodes[node["name"]] = node
+            if len(self.nodes[node["name"]]["inputs"]) == 0:
                 self.input_nodes[node["name"]] = self.nodes[node["name"]]
 
     def findAndCreateConnections(self, connectionlist):
@@ -85,198 +96,132 @@ class GraphEx(object):
             inputQualifier = conn["output"]["input"]
 
             # Link the nodes together
-            inputNode.nextNodes.append(outputNode)
-            if outputQualifier not in inputNode.outs:
-                inputNode.outs[outputQualifier] = []
-            inputNode.outs[outputQualifier].append({"node":outputNode,"var":inputQualifier});
-            outputNode.prevNodes.append(inputNode)
-            outputNode.ins[inputQualifier] = {"var":outputQualifier}
+            inputNode["nextNodes"].append(outputNode)
+            if outputQualifier not in inputNode["outs"]:
+                inputNode["outs"][outputQualifier] = []
+            inputNode["outs"][outputQualifier].append({"node":outputNode,"var":inputQualifier});
+            outputNode["prevNodes"].append(inputNode)
+            outputNode["ins"][inputQualifier] = {"var":outputQualifier}
 
-
-    def prepareExecution(self):
-        # Initialize all lists.
-        self.toCalculate = []
-        self.toCalculateMainThread = []
-        self.activeCalculations = []
-        self.ops = 0
-        self.done_tasks = Queue()
-
-        # add the input nodes to the nodes that should be calculated.
-        self.toCalculate.extend(self.input_nodes.values())
-
-    def executeThreaded(self):        
-        t = Thread(target=self.execute)
-        t.setDaemon(True)
-        t.start()
-        
-        # Execute nodes until there is no more nodes to calculate and no nodes in calculation.
-        while self.shouldStillRun():
-            # When there are only active calculations and nothing new, wait.
-            if not self.toCalculateMainThread:
-                time.sleep(0.01)
-                continue
-
-            self.lock.acquire()
-            # Select the node to execute and check if it can be executed.
-            node = self.toCalculateMainThread[0]
-            self.toCalculateMainThread = [value for value in self.toCalculateMainThread if value != node]
-            if node in self.activeCalculations:
-                self.toCalculateMainThread.append(node)
-                self.lock.release()
-                continue
-            
-            if self.checkIfReady(node):
-                # Prepare the input value set for the node.
-                abort = False
-                for key in node.inputBuffer:
-                    if node.inputBuffer[key] is None:
-                        abort = True
-                        break
-
-                if not abort:
-                    # Add the node to the active calculations list and start a calculation thread.
-                    self.activeCalculations.append(node)
-                    self.lock.release()
-                    self.executeNode(node, node.inputBuffer)
-            else:
-                self.lock.release()
-                    
-    def execute(self):
-        # create a thread pool executor
-        n = multiprocessing.cpu_count()
-        executor = ThreadPoolExecutor(n*16)
-
-        # Execute nodes until there is no more nodes to calculate and no nodes in calculation.
-        while self.shouldStillRun():
-            if not self.done_tasks.empty():
-                node = self.done_tasks.get()
-                self.lock.acquire()
-                # Add the nodes that follow in the graph to the to calculate list and remove self from active nodes.
-                #debug_str = "["
-                #for x in node.nextNodes:
-                #    debug_str += x.name + ","
-                #print(debug_str + "]")
-                #sys.stdout.flush()
-                self.toCalculate.extend(node.nextNodes)
-                if node in self.activeCalculations:
-                    self.activeCalculations.remove(node)
-                if node.isRepeating():
-                    self.toCalculate.append(node)
-                self.lock.release()
-                self.done_tasks.task_done()
-                continue
-
-            # When there are only active calculations and nothing new, wait.
-            if not self.toCalculate:
-                time.sleep(0.01)
-                continue
-
-            self.lock.acquire()
-            # Select the node to execute and check if it can be executed.
-            node = self.toCalculate[0]
-            self.toCalculate = [value for value in self.toCalculate if value != node]
-            if node in self.activeCalculations:
-                self.toCalculate.append(node)
-                self.lock.release()
-                continue
-            
-            # Check if node needs main thread if so cannot be started in this thread.    
-            if node.needsForeground():
-                #print("Needs foreground: "+ node.name)
-                #sys.stdout.flush()
-                self.toCalculateMainThread.append(node)
-                self.lock.release()
-                continue
-                
-            if self.checkIfReady(node):
-                # Prepare the input value set for the node.
-                abort = False
-                for key in node.inputBuffer:
-                    if node.inputBuffer[key] is None:
-                        abort = True
-                        break
-
-                if not abort:
-                    # Add the node to the active calculations list and start a calculation thread.
-                    self.activeCalculations.append(node)
-                    executor.submit(self.executeNode, node, node.inputBuffer)
-            self.lock.release()
-
-
-    def executeNode(self, node, value):
-        try:
-            # Tick the node and then add the result to calculated.
-            if self.verbose:
-                print(node.name)
-                sys.stdout.flush()
-            if "debugger" in builtins.registry:
-                node.heat += 1
-                dat = {"state": True, "heat": node.heat}
-                data_str = "running:" + json.dumps(dat)
-                builtins.registry["debugger"].send("data_" + node.node_uid + ":" + data_str)
-            result = node.tick(value)
-
-            if "debugger" in builtins.registry:
-                dat = {"state": False, "heat": node.heat}
-                data_str = "running:" + json.dumps(dat)
-                builtins.registry["debugger"].send("data_" + node.node_uid + ":" + data_str)
-
-            for key in node.outs:
-                for elem in node.outs[key]:
-                    resultNode = elem["node"]
-                    resultNode.inputBuffer[elem["var"]] = result[key]
-                    if "tags" in result and key in result["tags"]:
-                        resultNode.inputBuffer["tags"][elem["var"]] = result["tags"][key]
-                    #print(resultNode.inputBuffer)
-            self.done_tasks.put(node)
-        except:
-        #except Exception as e:
-            tb = traceback.format_exc()
-            print("***************************")
-            print(node.name)
-            print(tb)
-            print("***************************")
-            sys.stdout.flush()
-        if self.verbose:
-            print("Finished: " + node.name)
-            sys.stdout.flush()
-
-    def shouldStillRun(self):
+    def shedule(self, node, queue):
         self.lock.acquire()
-        should_run = (self.toCalculate or self.toCalculateMainThread or self.activeCalculations) and not builtins.registry["kill"]
+        queue.put(node)
         self.lock.release()
 
-        try:
-            should_run = should_run and not rospy.is_shutdown()
-        except:
-            pass
-        return should_run
+    def publish(self, node, topic, msg):
+        if topic in node["outs"]:
+            for next_node in node["nextNodes"]:
+                for conn in node["outs"][topic]:
+                    if next_node["name"] == conn["node"]["name"]:
+                        # TODO check is there really a lock required?
+                        self.lock.acquire()
+                        if not conn["var"] in next_node["input_buffer"]:
+                            next_node["input_buffer"][conn["var"]] = Queue()
+                        next_node["input_buffer"][conn["var"]].put(msg)
+                        self.lock.release()
+                        queue = self.queue_parallel
+                        if node["main_thread"] or self.serial_mode:
+                            queue = self.queue_serial
+                        self.shedule(next_node, queue)
+        else:
+            print("ERROR: Topic '" + str(topic) + "' is not an output of the node.")
 
-    def checkIfReady(self, node):
-        # Check if all nodes are calculated.
-        for key in node.ins:
-            if key not in node.inputBuffer:
-                return False
-        return True
+    def tryGetFromQueue(self, queue):
+        elem = None
+        self.lock.acquire()
+        if not queue.empty():
+            elem = queue.get()
+            # Check if element can be executed
+            if elem["name"] in self.in_execution:
+                queue.put(elem)
+                elem = None
+            else:
+                for x in elem["ins"]:
+                    if (not x in elem["input_buffer"]) or elem["input_buffer"][x].empty():
+                        elem = None
+                        break
+        if not elem is None:
+            self.in_execution[elem["name"]] = elem
+        self.lock.release()
+        return elem
+
+    def executeThreaded(self, initialization_required=True):
+        # Initialisation
+        if initialization_required:
+            self.state.publish = self.publish
+            n = multiprocessing.cpu_count()
+            self.thread_pool = ThreadPoolExecutor(n * 16)
+            for x in self.input_nodes:
+                queue = self.queue_parallel
+                if self.input_nodes[x]["main_thread"]:
+                    queue = self.queue_serial
+                self.shedule(self.input_nodes[x], queue)
+
+        # Execution
+        t = Thread(target=self.dispatchLoop, args=(self.queue_parallel, True))
+        t.setDaemon(True)
+        t.start()
+        self.executeSerial(initialization_required=False)
+
+    def executeSerial(self, initialization_required=True):
+        # Initialisation
+        if initialization_required:
+            self.serial_mode = True
+            self.state.publish = self.publish
+            for x in self.input_nodes:
+                self.shedule(self.input_nodes[x], self.queue_serial)
+
+        # Execution
+        self.dispatchLoop(self.queue_serial, False)
+
+    def dispatchLoop(self, queue, start_threaded):
+        while self.running:
+            elem = self.tryGetFromQueue(queue)
+            if elem is None:
+                time.sleep(0.01)
+                continue
+
+            inputs = {}
+            for x in elem["input_buffer"]:
+                # TODO correctly manage input buffer! (buffer policy implementation)
+                inputs[x] = elem["input_buffer"][x].get()
+            if start_threaded:
+                self.thread_pool.submit(self.tickNode, elem, inputs)
+            else:
+                self.tickNode(elem, inputs)
+
+    def tickNode(self, node, inputs):
+        result = node["tick"](inputs)
+        if result is not None:
+            for x in result:
+                self.publish(node, x, result[x])
+        self.lock.acquire()
+        del self.in_execution[node["name"]]
+        self.lock.release()
 
 if __name__ == "__main__":
     # Execute all graph paths passed as parameters.
     if len(sys.argv) < 2:
         print("Usage: python graphex.py <file.graph.json> [debug] [cluster] [args]")
     else:
+        state = GraphExState()
         offset = 2
         if len(sys.argv) > offset and sys.argv[offset] == "debug":
-            builtins.registry["debugger"] = debugger.Debugger()
+            state.shared_dict["debugger"] = debugger.Debugger()
             offset += 1
         if len(sys.argv) > offset and sys.argv[offset] == "cluster":
-            builtins.is_cluster_server = True
+            state.restricted_mode = True
             offset += 1
         if len(sys.argv) > offset:
-            builtins.registry = json.loads(" ".join(sys.argv[offset:]))
-        builtins.registry["kill"] = False
-        gex = GraphEx(sys.argv[1])
-        gex.prepareExecution()
+            dbg = None
+            if "debugger" in state.shared_dict:
+                dbg = state.shared_dict["debugger"]
+            state.shared_dict = json.loads(" ".join(sys.argv[offset:]))
+            if dbg is not None:
+                state.shared_dict["debugger"] = dbg
+        state.shared_dict["kill"] = False
+        gex = GraphEx(sys.argv[1], state)
         gex.executeThreaded()
-        for hook in builtins.shutdown_hook:
+        for hook in state.shutdown_hooks:
             hook()
-        print(json.dumps(builtins.registry_output))
+        print(json.dumps(state.output_dict))

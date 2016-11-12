@@ -1,14 +1,11 @@
-try:
-    from ...stdlib import Node as base
-except ValueError:
-    from stdlib import Node as base
-
-
-class Node(base.Node):
-    def __init__(self, verbose, args):
-        super(Node, self).__init__("String Concat", "stdlib.string.concat", "", {"left": "String", "right": "String"},
-                                   {"result": "String"},
-                                   "Concat the two strings.", verbose)
-
-    def tick(self, value):
+def init(node, global_state):
+    def tick(value):
         return {"result": value["left"] + value["right"]}
+    node["tick"] = tick
+
+def spec(node):
+    node["name"] = "String Concat"
+    node["inputs"]["left"] = "String"
+    node["inputs"]["right"] = "String"
+    node["outputs"]["result"] = "String"
+    node["desc"] = "Concat left and right."

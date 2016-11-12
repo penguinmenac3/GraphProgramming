@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 
 
 def files_by_pattern(directory, matchFunc):
@@ -12,12 +13,12 @@ def try_load(name, verbose, i, total):
     name = name.replace("/", ".")[2:-3]
     if verbose:
         print("[" + str(i) + "/" + str(total) + "] Parsing: " + name)
-    if name == "stdlib.Node" or name == "graphex" or name == "buildNodespec" or name.endswith(
+    if name == "graphex" or name == "buildNodespec" or name == "debugger" or name.endswith(
             "__init__") or name.endswith("_Lib"):
         return False, None
     try:
         print(name)
-        module = __import__(name, fromlist=["Node"])
+        module = __import__(name, fromlist=["spec"])
     except (ImportError, SyntaxError) as e:
         if verbose:
             print("Syntax or import error at: " + name)
@@ -29,7 +30,15 @@ def try_load(name, verbose, i, total):
         print(e)
         return False, (name, e)
     try:
-        return True, module.Node(False, []).toJson()
+        node = {}
+        node["name"] = "Specify a node name (name)"
+        node["code"] = name
+        node["inputs"] = {}
+        node["outputs"] = {}
+        node["args"] = {}
+        node["desc"] = "Specify a node description (desc)"
+        module.spec(node)
+        return True, json.dumps(node, sort_keys=True, indent=4)
     except (AttributeError, TypeError) as e:
         if verbose:
             print("Failed parsing " + name + "!")
