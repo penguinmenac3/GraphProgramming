@@ -23,7 +23,7 @@ class GraphExState(object):
         self.shared_dict = {}
         self.restricted_mode = False
         self.graph = None
-        self.pubish = None
+        self.publish = None
         self.output = None
         self.shutdown_hooks = []
 
