@@ -10,40 +10,10 @@
 			"args": "",
 			"desc": "Print input to console.",
 			"displayname": "Print",
-			"heat": 1,
-			"x": 0,
-			"y": 102,
-			"running": 18
-		},
-		{
-			"name": "s6iIH",
-			"code": "stdlib.string.const",
-			"inputs": {},
-			"outputs": {
-				"result": "String"
-			},
-			"args": "Hello ",
-			"desc": "Pass the string arg as output.",
-			"displayname": "Hello",
-			"heat": 1,
-			"x": -134,
-			"y": -126,
-			"running": 6
-		},
-		{
-			"name": "z14te",
-			"code": "stdlib.string.const",
-			"inputs": {},
-			"outputs": {
-				"result": "String"
-			},
-			"args": "World!",
-			"desc": "Pass the string arg as output.",
-			"displayname": "World!",
-			"heat": 1,
-			"x": 117,
-			"y": -128,
-			"running": 10
+			"heat": 0,
+			"x": 182.72870852623456,
+			"y": 353.4874493634259,
+			"running": 0
 		},
 		{
 			"name": "Cmjdr",
@@ -58,16 +28,193 @@
 			"args": "",
 			"desc": "Concat the two strings.",
 			"displayname": "String Concat",
-			"heat": 1,
+			"heat": 0,
 			"x": 0,
 			"y": -13,
-			"running": 14
+			"running": 0
+		},
+		{
+			"args": {
+				"value": "Hello"
+			},
+			"code": "stdlib.string.const",
+			"desc": "Returns the arg on the output.",
+			"inputs": {},
+			"name": "bd5t7",
+			"outputs": {
+				"result": "String"
+			},
+			"displayname": "Hello",
+			"heat": 0,
+			"running": 0,
+			"x": -115,
+			"y": -140
+		},
+		{
+			"args": {
+				"value": " World! "
+			},
+			"code": "stdlib.string.const",
+			"desc": "Returns the arg on the output.",
+			"inputs": {},
+			"name": "JOXmp",
+			"outputs": {
+				"result": "String"
+			},
+			"displayname": "World!",
+			"heat": 0,
+			"running": 0,
+			"x": 226,
+			"y": -275
+		},
+		{
+			"args": {},
+			"code": "stdlib.structures.if",
+			"desc": "Pass val based on condition.",
+			"inputs": {
+				"condition": "Boolean",
+				"val": "Object"
+			},
+			"name": "ZN4BH",
+			"outputs": {
+				"false": "Object",
+				"true": "Object"
+			},
+			"displayname": "If",
+			"heat": 0,
+			"running": 0,
+			"x": 118,
+			"y": -105
+		},
+		{
+			"args": {
+				"value": true
+			},
+			"code": "stdlib.boolean.const",
+			"desc": "Return a const boolean",
+			"inputs": {},
+			"name": "UmoS0",
+			"outputs": {
+				"result": "Boolean"
+			},
+			"displayname": "Const",
+			"heat": 0,
+			"running": 0,
+			"x": 0,
+			"y": -228
+		},
+		{
+			"args": {
+				"value": 6
+			},
+			"code": "stdlib.number.const",
+			"desc": "A constant number",
+			"inputs": {},
+			"name": "u1v7Y",
+			"outputs": {
+				"result": "Number"
+			},
+			"displayname": "6",
+			"heat": 0,
+			"running": 0,
+			"x": 385.07525952388863,
+			"y": -183.89698835991157
+		},
+		{
+			"args": {
+				"value": 7
+			},
+			"code": "stdlib.number.const",
+			"desc": "A constant number",
+			"inputs": {},
+			"name": "5uE0h",
+			"outputs": {
+				"result": "Number"
+			},
+			"displayname": "7",
+			"heat": 0,
+			"running": 0,
+			"x": 619.6084988178701,
+			"y": -186.72269003815234
+		},
+		{
+			"args": {},
+			"code": "stdlib.number.mult",
+			"desc": "a * b",
+			"inputs": {
+				"a": "Number",
+				"b": "Number"
+			},
+			"name": "MI8Yu",
+			"outputs": {
+				"result": "Number"
+			},
+			"displayname": "Mult",
+			"heat": 0,
+			"running": 0,
+			"x": 500.929028331759,
+			"y": -61.44991563614617
+		},
+		{
+			"args": {},
+			"code": "stdlib.string.tostr",
+			"desc": "Converts to string",
+			"inputs": {
+				"val": "Object"
+			},
+			"name": "mokHI",
+			"outputs": {
+				"result": "String"
+			},
+			"displayname": "toString",
+			"heat": 0,
+			"running": 0,
+			"x": 348.34135872826954,
+			"y": 87.37037270854884
+		},
+		{
+			"args": {},
+			"code": "stdlib.string.concat",
+			"desc": "Concat left and right.",
+			"inputs": {
+				"left": "String",
+				"right": "String"
+			},
+			"name": "O89Pv",
+			"outputs": {
+				"result": "String"
+			},
+			"displayname": "String Concat",
+			"heat": 0,
+			"running": 0,
+			"x": 183.50876083089298,
+			"y": 229.59735717999942
 		}
 	],
 	"connections": [
 		{
 			"input": {
-				"node": "s6iIH",
+				"node": "UmoS0",
+				"output": "result"
+			},
+			"output": {
+				"node": "ZN4BH",
+				"input": "condition"
+			}
+		},
+		{
+			"input": {
+				"node": "JOXmp",
+				"output": "result"
+			},
+			"output": {
+				"node": "ZN4BH",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "bd5t7",
 				"output": "result"
 			},
 			"output": {
@@ -77,8 +224,8 @@
 		},
 		{
 			"input": {
-				"node": "z14te",
-				"output": "result"
+				"node": "ZN4BH",
+				"output": "true"
 			},
 			"output": {
 				"node": "Cmjdr",
@@ -87,11 +234,61 @@
 		},
 		{
 			"input": {
+				"node": "u1v7Y",
+				"output": "result"
+			},
+			"output": {
+				"node": "MI8Yu",
+				"input": "a"
+			}
+		},
+		{
+			"input": {
+				"node": "5uE0h",
+				"output": "result"
+			},
+			"output": {
+				"node": "MI8Yu",
+				"input": "b"
+			}
+		},
+		{
+			"input": {
 				"node": "Cmjdr",
 				"output": "result"
 			},
 			"output": {
+				"node": "O89Pv",
+				"input": "left"
+			}
+		},
+		{
+			"input": {
+				"node": "mokHI",
+				"output": "result"
+			},
+			"output": {
+				"node": "O89Pv",
+				"input": "right"
+			}
+		},
+		{
+			"input": {
+				"node": "O89Pv",
+				"output": "result"
+			},
+			"output": {
 				"node": "bAAYd",
+				"input": "val"
+			}
+		},
+		{
+			"input": {
+				"node": "MI8Yu",
+				"output": "result"
+			},
+			"output": {
+				"node": "mokHI",
 				"input": "val"
 			}
 		}

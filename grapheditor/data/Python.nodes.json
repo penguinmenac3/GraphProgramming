@@ -1,5 +1,33 @@
 [{
     "args": {}, 
+    "code": "stdlib.default.splitflow5", 
+    "desc": "Split the flow into five.", 
+    "inputs": {
+        "val": "Object"
+    }, 
+    "name": "Splitflow 5", 
+    "outputs": {
+        "1": "Object", 
+        "2": "Object", 
+        "3": "Object", 
+        "4": "Object", 
+        "5": "Object"
+    }
+},
+{
+    "args": {}, 
+    "code": "stdlib.default.any", 
+    "desc": "Accept any input", 
+    "inputs": {
+        "val": "Object"
+    }, 
+    "name": "Accept any inputs", 
+    "outputs": {
+        "result": "Object"
+    }
+},
+{
+    "args": {}, 
     "code": "stdlib.default.pass", 
     "desc": "Pass an object. Does nothing.", 
     "inputs": {
@@ -8,6 +36,35 @@
     "name": "Pass", 
     "outputs": {
         "out": "Object"
+    }
+},
+{
+    "args": {}, 
+    "code": "stdlib.default.splitflow", 
+    "desc": "Split the flow into two.", 
+    "inputs": {
+        "val": "Object"
+    }, 
+    "name": "Splitflow 2", 
+    "outputs": {
+        "left": "Object", 
+        "right": "Object"
+    }
+},
+{
+    "args": {
+        "value": [
+            1, 
+            0, 
+            0
+        ]
+    }, 
+    "code": "stdlib.linearalgebra.vector", 
+    "desc": "A simple vector", 
+    "inputs": {}, 
+    "name": "Vector", 
+    "outputs": {
+        "result": "Vector"
     }
 },
 {
@@ -24,13 +81,78 @@
     }
 },
 {
-    "args": "Hello", 
+    "args": {}, 
+    "code": "stdlib.string.tostr", 
+    "desc": "Converts to string", 
+    "inputs": {
+        "val": "Object"
+    }, 
+    "name": "toString", 
+    "outputs": {
+        "result": "String"
+    }
+},
+{
+    "args": {
+        "value": "Hello World!"
+    }, 
     "code": "stdlib.string.const", 
     "desc": "Returns the arg on the output.", 
     "inputs": {}, 
     "name": "String Const", 
     "outputs": {
         "result": "String"
+    }
+},
+{
+    "args": {
+        "value": true
+    }, 
+    "code": "stdlib.boolean.const", 
+    "desc": "Return a const boolean", 
+    "inputs": {}, 
+    "name": "Const", 
+    "outputs": {
+        "result": "Boolean"
+    }
+},
+{
+    "args": {}, 
+    "code": "stdlib.structures.if", 
+    "desc": "Pass val based on condition.", 
+    "inputs": {
+        "condition": "Boolean", 
+        "val": "Object"
+    }, 
+    "name": "If", 
+    "outputs": {
+        "false": "Object", 
+        "true": "Object"
+    }
+},
+{
+    "args": {}, 
+    "code": "stdlib.number.mult", 
+    "desc": "a * b", 
+    "inputs": {
+        "a": "Number", 
+        "b": "Number"
+    }, 
+    "name": "Mult", 
+    "outputs": {
+        "result": "Number"
+    }
+},
+{
+    "args": {
+        "value": 0
+    }, 
+    "code": "stdlib.number.const", 
+    "desc": "A constant number", 
+    "inputs": {}, 
+    "name": "Const", 
+    "outputs": {
+        "result": "Number"
     }
 },
 {
