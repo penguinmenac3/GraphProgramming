@@ -21,11 +21,13 @@ except ImportError:
 class GraphExState(object):
     def __init__(self):
         self.shared_dict = {}
+        self.output_dict = {}
         self.restricted_mode = False
         self.graph = None
         self.publish = None
         self.output = None
         self.shutdown_hooks = []
+        self.shutdown_blockers = 0
 
 class GraphEx(object):
     def __init__(self, graph_path, state, verbose = False):
@@ -175,7 +177,7 @@ class GraphEx(object):
         self.dispatchLoop(self.queue_serial, False)
 
     def dispatchLoop(self, queue, start_threaded):
-        while self.running:
+        while self.running and ((not queue.empty()) or self.state.shutdown_blockers > 2):
             elem = self.tryGetFromQueue(queue)
             if elem is None:
                 time.sleep(0.01)
