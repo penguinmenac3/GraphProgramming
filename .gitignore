@@ -4,3 +4,4 @@
 grapheditor/MNIST_data
 *.pyc
 *.swp
+*.log
